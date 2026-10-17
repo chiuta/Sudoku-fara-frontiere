@@ -1827,7 +1827,19 @@ var PRESETS = {
 };
 var DIFF = { easy: 0.52, medium: 0.4, hard: 0 };
 
+function checkSpec(spec) {
+  var own = Object.prototype.hasOwnProperty, bad = function (m) { throw new Error('specificație invalidă: ' + m); };
+  if (!spec || typeof spec !== 'object') bad('lipsește');
+  if (spec.preset !== undefined && spec.preset !== null && !own.call(PRESETS, spec.preset)) bad('variantă necunoscută');
+  var pr = spec.preset ? PRESETS[spec.preset] : null;
+  if (spec.n !== undefined && !(Number.isInteger(spec.n) && spec.n >= 2 && spec.n <= 25)) bad('mărime');
+  if (pr && spec.n !== undefined && pr.sizes.indexOf(spec.n) < 0) bad('mărime nepermisă pentru această variantă');
+  if (spec.difficulty !== undefined && !own.call(DIFF, spec.difficulty)) bad('dificultate');
+  if (spec.seed !== undefined && !(typeof spec.seed === 'number' && isFinite(spec.seed))) bad('sămânță');
+  (spec.clues || []).forEach(function (c) { if (!own.call(CLUES, c) && !own.call(PRE, c)) bad('regulă necunoscută: ' + c); });
+}
 function generate(spec) {
+  checkSpec(spec);
   var preset = spec.preset ? PRESETS[spec.preset] : null;
   var def = {
     mods: (spec.mods || (preset && preset.mods) || []).slice(),

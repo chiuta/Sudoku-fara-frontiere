@@ -1,20 +1,20 @@
 /* SPDX-License-Identifier: MIT · Copyright (c) 2026 Alexandru-Ionuț Chiuță (Alexio) */
 :root{
-  --bg:#f6f4ee;--fg:#1d2230;--muted:#667085;--card:#ffffff;--line:#d9d5c7;--accent:#0f766e;--accent-fg:#ffffff;
-  --given:#111827;--user:#0b5fd3;--sel:#bfe3df;--peer:#eef2ef;--same:#d6ecc9;--bad:#f8c9c4;--wrong:#f3a39b;--why:#fde7a8;--grp:#ffe9b8;--stepc:#9fdc9a;
+  --bg:#f6f4ee;--fg:#1d2230;--muted:#667085;--note:#475467;--card:#ffffff;--line:#d9d5c7;--accent:#0f766e;--accent-fg:#ffffff;
+  --given:#111827;--user:#0b5fd3;--sel:#cde9e5;--peer:#eef2ef;--same:#d6ecc9;--bad:#f8c9c4;--wrong:#f6bdb7;--why:#fde7a8;--grp:#ffe9b8;--stepc:#b9e8b5;
   --cell:#fffefb;--cell2:#faf8f1;--tint1:#f2efe3;--tint2:#e7efe9;--cage:#9a3412;--thick:#1d2230;--deco:#7b8394;
   --shadow:0 1px 2px rgba(20,24,40,.08),0 6px 18px rgba(20,24,40,.06);--r:12px;--fs:16px;
 }
 :root[data-theme=dark]{
-  --bg:#0f1218;--fg:#e6e8ee;--muted:#98a2b3;--card:#171b24;--line:#2b3140;--accent:#2dd4bf;--accent-fg:#06201d;
-  --given:#f3f4f6;--user:#7db4ff;--sel:#16524d;--peer:#1b2129;--same:#244a2a;--bad:#5a2420;--wrong:#7f2a22;--why:#5a4a16;--grp:#4f4214;--stepc:#2d6a2d;
+  --bg:#0f1218;--fg:#e6e8ee;--muted:#98a2b3;--note:#c4cbd8;--card:#171b24;--line:#2b3140;--accent:#2dd4bf;--accent-fg:#06201d;
+  --given:#f3f4f6;--user:#8fc0ff;--sel:#123f3b;--peer:#1b2129;--same:#244a2a;--bad:#5a2420;--wrong:#6b241d;--why:#4a3d10;--grp:#4f4214;--stepc:#1d4a1f;
   --cell:#141922;--cell2:#10141b;--tint1:#1c2230;--tint2:#14281f;--cage:#fb923c;--thick:#d5d9e4;--deco:#7e879a;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3);
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme=light]){
-    --bg:#0f1218;--fg:#e6e8ee;--muted:#98a2b3;--card:#171b24;--line:#2b3140;--accent:#2dd4bf;--accent-fg:#06201d;
-    --given:#f3f4f6;--user:#7db4ff;--sel:#16524d;--peer:#1b2129;--same:#244a2a;--bad:#5a2420;--wrong:#7f2a22;--why:#5a4a16;--grp:#4f4214;--stepc:#2d6a2d;
+    --bg:#0f1218;--fg:#e6e8ee;--muted:#98a2b3;--note:#c4cbd8;--card:#171b24;--line:#2b3140;--accent:#2dd4bf;--accent-fg:#06201d;
+    --given:#f3f4f6;--user:#8fc0ff;--sel:#123f3b;--peer:#1b2129;--same:#244a2a;--bad:#5a2420;--wrong:#6b241d;--why:#4a3d10;--grp:#4f4214;--stepc:#1d4a1f;
     --cell:#141922;--cell2:#10141b;--tint1:#1c2230;--tint2:#14281f;--cage:#fb923c;--thick:#d5d9e4;--deco:#7e879a;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3);
   }
@@ -110,7 +110,7 @@ footer{max-width:1100px;margin:1.5rem auto;padding:0 1rem 2rem;color:var(--muted
 svg#board text{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-anchor:middle;dominant-baseline:central;pointer-events:none}
 svg#board .dg{fill:var(--given);font-weight:700}
 svg#board .du{fill:var(--user);font-weight:600}
-svg#board .nt{fill:var(--muted)}
+svg#board .nt{fill:var(--note)}
 svg#board .lbl{fill:var(--cage)}
 
 [hidden]{display:none!important}

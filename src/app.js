@@ -12,7 +12,7 @@ var lang = LS.get('lang', (navigator.language || 'ro').slice(0, 2) === 'ro' ? 'r
 function t(k) { return (U[lang] && U[lang][k]) || U.ro[k] || k; }
 function L2(ro, en) { return lang === 'ro' ? ro : en; }
 var PRE = SFF.PRESETS;
-var VBY = {}; VINFO.forEach(function (v) { VBY[v[0]] = v; });
+var VBY = Object.create(null); VINFO.forEach(function (v) { VBY[v[0]] = v; });
 function vname(v) { return lang === 'ro' ? v[2] : v[5]; }
 function vshort(v) { return lang === 'ro' ? v[3] : v[6]; }
 function vrules(v) { return lang === 'ro' ? v[4] : v[7]; }
@@ -22,10 +22,12 @@ function sizesOf(id) { return PRE[id].sizes.slice().sort(function (a, b) { retur
 var BASE_SYMS = '123456789ABCDEFGHIJKLMNOP';
 
 /* ---------- tema, mărime text, limbă ---------- */
+if (window.matchMedia) { try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { if (typeof game !== 'undefined' && game) renderDyn(); }); } catch (e) {} }
 function applyTheme() {
   var th = LS.get('theme', 'auto');
   if (th === 'auto') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', th);
   document.documentElement.setAttribute('data-size', LS.get('size', 'normal'));
+  if (typeof game !== 'undefined' && game && typeof renderDyn === 'function') renderDyn();
 }
 $('b-theme').onclick = function () { var th = LS.get('theme', 'auto'); LS.set('theme', th === 'auto' ? 'dark' : th === 'dark' ? 'light' : 'auto'); applyTheme(); };
 $('b-size').onclick = function () { LS.set('size', LS.get('size', 'normal') === 'normal' ? 'big' : 'normal'); applyTheme(); };
@@ -147,7 +149,7 @@ $('sel-size').onchange = function () { $('wordbox').hidden = !($('sel-var').valu
 $('custom').onchange = refreshSizes;
 
 /* ---------- generare (Worker, cu rezervă pe firul principal) ---------- */
-var worker = null, slowTimer = null, degraded = '';
+var maraTimer = 0, worker = null, slowTimer = null, degraded = '';
 function cancelGen() { if (slowTimer) { clearTimeout(slowTimer); slowTimer = null; } if (worker) { try { worker.terminate(); URL.revokeObjectURL(worker._url); } catch (e) {} worker = null; } $('spin').hidden = true; }
 function makeWorker() {
   try {
@@ -183,7 +185,7 @@ $('b-cancel').onclick = function () { degraded = ''; cancelGen(); };
 var MARA = ['easy', 'easy', 'medium', 'medium', 'hard'];
 function dailySpec() {
   var d = Math.floor(Date.now() / 86400000), id = VINFO[d % VINFO.length][0];
-  if (!PRE[id]) id = 'clasic';
+  if (!OWN.call(PRE, id)) id = 'clasic';
   var sizes = PRE[id].sizes, n = sizes.indexOf(9) >= 0 ? 9 : sizes[0];
   return { v: id, spec: { preset: id, n: n, difficulty: 'medium', seed: (20000000 + d) >>> 0, _noDegrade: true }, date: new Date(d * 86400000).toISOString().slice(0, 10) };
 }
@@ -199,6 +201,7 @@ function newFromUI(seed) {
   startSpec(spec, v, mode, mx);
 }
 function startSpec(spec, v, mode, mx) {
+  clearTimeout(maraTimer); degraded = '';
   runGen(spec, function (r, ms) {
     if (!r.ok) { degraded = ''; setMsg(t('genfail') + ' (' + r.err + ')', 'bad'); return; }
     var P = r.P; P.mode = mode || 'normal'; P.ucode = codeOf(spec, P) + (P.mode !== 'normal' && P.mode !== 'daily' ? '@' + P.mode : ''); P.ms = ms; P.vid = v || spec.preset || 'custom';
@@ -209,19 +212,29 @@ function codeOf(spec, P) {
   if (spec.preset) return spec.preset + '-' + P.n + '-' + P.difficulty + '-' + P.seed;
   return ['c', P.n, P.difficulty, P.seed, (P.mods || []).join('.'), (P.clues || []).join('.'), spec.jigsaw ? 1 : 0].join('~');
 }
+var OWN = Object.prototype.hasOwnProperty;
+var DIFFS = ['easy', 'medium', 'hard'], MODE_IDS = ['orb', 'memory', 'duel', 'hardcore', 'sound', 'marathon'];
+function okSeed(x) { return /^\d{1,10}$/.test(x) && +x <= 4294967295; }
 function parseCode(s) {
-  s = s.trim();
-  var p, at = s.indexOf('@'), md = null;
-  if (at > 0) { md = s.slice(at + 1); s = s.slice(0, at); if (['orb', 'memory', 'duel', 'hardcore', 'sound'].indexOf(md) < 0) md = null; }
+  s = String(s || '').trim();
+  if (s.length > 400) return null;
+  var at = s.indexOf('@'), md = null;
+  if (at > 0) { md = s.slice(at + 1); s = s.slice(0, at); if (MODE_IDS.indexOf(md) < 0) return null; if (md === 'marathon') md = null; }
   var res = parseCode0(s); if (res) res._mode = md; return res;
 }
+/* validare strictă: un cod primit de la altcineva nu poate cere variante, mărimi, reguli sau moduri inexistente */
 function parseCode0(s) {
-  var p;
+  var p, i;
   if (s.indexOf('c~') === 0) {
-    p = s.split('~'); if (p.length < 7) return null;
-    return { n: +p[1], difficulty: p[2], seed: +p[3] >>> 0, mods: p[4] ? p[4].split('.') : [], clues: p[5] ? p[5].split('.') : [], jigsaw: p[6] === '1', hard: 0.7, preset: null, _v: 'custom' };
+    p = s.split('~'); if (p.length !== 7) return null;
+    if (!/^\d{1,2}$/.test(p[1]) || [4, 6, 9].indexOf(+p[1]) < 0 || DIFFS.indexOf(p[2]) < 0 || !okSeed(p[3]) || (p[6] !== '0' && p[6] !== '1')) return null;
+    var mods = p[4] ? p[4].split('.') : [], clues = p[5] ? p[5].split('.') : [];
+    for (i = 0; i < mods.length; i++) if (!MODS.some(function (m) { return m[0] === mods[i] && m[0] !== 'jigsaw'; })) return null;
+    for (i = 0; i < clues.length; i++) if (!CLUEMODS.some(function (m) { return m[0] === clues[i]; })) return null;
+    return { n: +p[1], difficulty: p[2], seed: +p[3] >>> 0, mods: mods, clues: clues, jigsaw: p[6] === '1', hard: 0.7, preset: null, _v: 'custom' };
   }
-  p = s.split('-'); if (p.length < 4 || !PRE[p[0]]) return null;
+  p = s.split('-'); if (p.length !== 4 || !OWN.call(PRE, p[0])) return null;
+  if (!/^\d{1,2}$/.test(p[1]) || PRE[p[0]].sizes.indexOf(+p[1]) < 0 || DIFFS.indexOf(p[2]) < 0 || !okSeed(p[3])) return null;
   return { preset: p[0], n: +p[1], difficulty: p[2], seed: +p[3] >>> 0, _v: p[0] };
 }
 $('b-new').onclick = function () { newFromUI(); };
@@ -235,6 +248,7 @@ $('b-open').onclick = function () {
       if ($('sel-size').querySelector('option[value="' + sp.n + '"]')) $('sel-size').value = String(sp.n);
       if ($('sel-diff').querySelector('option[value="' + sp.difficulty + '"]')) $('sel-diff').value = sp.difficulty;
       if (md && $('sel-mode').querySelector('option[value="' + md + '"]')) $('sel-mode').value = md; else if (!md) $('sel-mode').value = 'normal';
+      $('sel-diff').disabled = $('sel-mode').value === 'daily';
     }
   } catch (e) {}
   startSpec(sp, v, md || 'normal', null);
@@ -251,11 +265,28 @@ function setMsg(text, cls) { var m = $('msg'); m.textContent = text; m.className
 function symsFor(P) {
   var N = P.n, v = P.vid;
   if (v === 'wordoku') {
-    if (N === 9) { var w = ($('word').value || '').toUpperCase().replace(/[^A-ZĂÂÎȘȚ]/g, ''); var seen = {}, ok = w.length === 9; for (var i = 0; i < w.length; i++) { if (seen[w[i]]) ok = false; seen[w[i]] = 1; } return (ok ? w : 'ECOULSTRI').split(''); }
+    if (N === 9) { var w = ($('word').value || '').toUpperCase().replace(/Ş/g, 'Ș').replace(/Ţ/g, 'Ț').replace(/[^A-ZĂÂÎȘȚ]/g, ''); var seen = {}, ok = w.length === 9; for (var i = 0; i < w.length; i++) { if (seen[w[i]]) ok = false; seen[w[i]] = 1; } if (!ok) setTimeout(function () { setMsg(L2('Cuvântul trebuie să aibă 9 litere diferite; am folosit ECOULSTRI.', 'The word needs 9 different letters; ECOULSTRI was used.'), 'bad'); }, 0); return (ok ? w : 'ECOULSTRI').split(''); }
     return 'ABCDEFGHIJKLMNOPQRSTUVWXY'.slice(0, N).split('');
   }
   if (P.zero) return '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.slice(0, N).split('');
   return BASE_SYMS.slice(0, N).split('');
+}
+var MX_IDS = ['normal', 'orb', 'memory', 'marathon', 'duel', 'hardcore', 'daily', 'sound'];
+function cleanSaved(sv, N) {
+  var o = { vals: sv.vals, notes: sv.notes, elapsed: +sv.elapsed || 0, solved: !!sv.solved, revealed: !!sv.revealed, lost: !!sv.lost, syms: null, mx: null };
+  if (!sv.notes || sv.notes.length !== sv.vals.length) o.notes = new Array(sv.vals.length).fill(0);
+  if (Array.isArray(sv.syms) && sv.syms.length === N && sv.syms.every(function (x) { return typeof x === 'string' && /^[0-9A-ZĂÂÎȘȚ]{1,2}$/.test(x); })) o.syms = sv.syms.slice();
+  var m = sv.mx;
+  if (m && typeof m === 'object' && MX_IDS.indexOf(m.id) >= 0) {
+    var x = { id: m.id };
+    ['step', 'of', 'total', 'left', 'peeks', 'done', 'acc', 'per', 'lives'].forEach(function (k) { if (m[k] !== undefined) x[k] = +m[k] || 0; });
+    if (m.phase === 'show' || m.phase === 'peek' || m.phase === 'hide') x.phase = m.phase;
+    if (typeof m.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(m.date)) x.date = m.date; else if (m.id === 'daily') x.date = new Date().toISOString().slice(0, 10);
+    if (typeof m.v === 'string' && /^[a-z0-9_]{1,30}$/.test(m.v)) x.v = m.v;
+    if (m.base && typeof m.base === 'object') x.base = JSON.parse(JSON.stringify(m.base));
+    o.mx = x;
+  }
+  return o;
 }
 function loadGame(P, saved, mxInit) {
   if (typeof stopPlay === 'function') stopPlay();
@@ -265,7 +296,7 @@ function loadGame(P, saved, mxInit) {
     vals: new Int32Array(cnt), notes: new Int32Array(cnt), sel: new Set(), undo: [], redo: [], mode: 'val',
     elapsed: 0, solved: false, revealed: false, wrong: new Set(), syms: null
   };
-  if (saved) { game.vals = Int32Array.from(saved.vals); game.notes = Int32Array.from(saved.notes); game.elapsed = saved.elapsed || 0; game.solved = !!saved.solved; game.revealed = !!saved.revealed; game.syms = saved.syms; }
+  if (saved) { saved = cleanSaved(saved, S.N); game.vals = Int32Array.from(saved.vals); game.notes = Int32Array.from(saved.notes); game.elapsed = saved.elapsed || 0; game.solved = !!saved.solved; game.revealed = !!saved.revealed; game.syms = saved.syms; }
   if (!game.syms) game.syms = symsFor(P);
   game.lost = !!(saved && saved.lost); game.mx = (saved && saved.mx) || mxInit || freshMx(P);
   game.v3d = false; game.rot = [-0.5, 0.6]; show3dUI();
@@ -312,7 +343,7 @@ function updateStatus() {
   renderModebar();
 }
 setInterval(function () {
-  if (!game || game.solved || curTab !== 'play' || document.hidden) { timerLast = Date.now(); return; }
+  if (!game || game.solved || game.lost || curTab !== 'play' || document.hidden) { timerLast = Date.now(); return; }
   var now = Date.now(), dt = now - timerLast; game.elapsed += dt; timerLast = now; modeTick(dt); updateStatus();
 }, 1000);
 function save() {
@@ -729,8 +760,8 @@ function eraseSel() {
   var cells = Array.from(g.sel).filter(function (i) { return !g.P.givens[i] && (g.vals[i] || g.notes[i]); }); if (!cells.length) return;
   pushUndo(); cells.forEach(function (i) { g.vals[i] = 0; g.notes[i] = 0; }); afterChange();
 }
-function doUndo() { var g = game; if (!g || g.lost || !g.undo.length) return; g.redo.push({ v: Int32Array.from(g.vals), n: Int32Array.from(g.notes) }); var s = g.undo.pop(); g.vals = s.v; g.notes = s.n; g.solved = false; afterChange(); }
-function doRedo() { var g = game; if (!g || g.lost || !g.redo.length) return; g.undo.push({ v: Int32Array.from(g.vals), n: Int32Array.from(g.notes) }); var s = g.redo.pop(); g.vals = s.v; g.notes = s.n; afterChange(); }
+function doUndo() { var g = game; if (!g || g.lost || !g.undo.length) return; g.redo.push({ v: Int32Array.from(g.vals), n: Int32Array.from(g.notes) }); var s = g.undo.pop(); g.vals = s.v; g.notes = s.n; g.solved = false; g.revealed = false; if (g.step) { g.step = null; setMsg('', ''); } afterChange(); }
+function doRedo() { var g = game; if (!g || g.lost || !g.redo.length) return; g.undo.push({ v: Int32Array.from(g.vals), n: Int32Array.from(g.notes) }); var s = g.redo.pop(); g.vals = s.v; g.notes = s.n; if (g.step) { g.step = null; setMsg('', ''); } afterChange(); }
 function toggleNote() { if (!game) return; game.mode = game.mode === 'note' ? 'val' : 'note'; $('a-note').setAttribute('aria-pressed', game.mode === 'note' ? 'true' : 'false'); }
 $('a-note').onclick = toggleNote; $('a-erase').onclick = eraseSel; $('a-undo').onclick = doUndo; $('a-redo').onclick = doRedo;
 $('a-auto').onclick = function () {
@@ -847,7 +878,7 @@ $('a-solve').onclick = function () {
   g.solved = true; g.revealed = true; g.wrong.clear(); renderDyn(); save(); setMsg(t('solved_app'), 'good');
 };
 $('a-clear').onclick = function () {
-  var g = game; if (!g || !confirm(t('confirm_clear'))) return; pushUndo(); g.vals.fill(0); g.notes.fill(0); g.solved = false; g.revealed = false; g.elapsed = 0; g.lost = false; g.wrong.clear();
+  var g = game; if (!g || !confirm(t('confirm_clear'))) return; pushUndo(); if (['hardcore', 'duel', 'memory', 'marathon'].indexOf(g.mx && g.mx.id) >= 0) { g.undo = []; g.redo = []; } g.vals.fill(0); g.notes.fill(0); g.solved = false; g.revealed = false; g.elapsed = 0; g.lost = false; g.wrong.clear();
   if (g.mx && ['duel', 'hardcore', 'memory'].indexOf(g.mx.id) >= 0) g.mx = freshMx(g.P);
   afterChange(); setMsg('', '');
 };
@@ -859,8 +890,8 @@ document.addEventListener('keydown', function (e) {
   if ((e.ctrlKey || e.metaKey) && k.toLowerCase() === 'z') { e.shiftKey ? doRedo() : doUndo(); e.preventDefault(); return; }
   if ((e.ctrlKey || e.metaKey) && k.toLowerCase() === 'y') { doRedo(); e.preventDefault(); return; }
   if (e.ctrlKey || e.metaKey || e.altKey) return;
-  if (k === 'Backspace' || k === 'Delete' || k === '0') { eraseSel(); e.preventDefault(); return; }
-  if (k === 'n' || k === 'N') { if (!game.symMap.N || game.N <= 9) { toggleNote(); e.preventDefault(); return; } }
+  if (k === 'Backspace' || k === 'Delete' || (k === '0' && !game.symMap['0'])) { eraseSel(); e.preventDefault(); return; }
+  if (k === 'n' || k === 'N') { if (!game.symMap.N) { toggleNote(); e.preventDefault(); return; } }
   if (k.indexOf('Arrow') === 0) {
     var sel = Array.from(game.sel), last = sel.length ? sel[sel.length - 1] : 0, L = game.L;
     var dr = k === 'ArrowUp' ? -1 : k === 'ArrowDown' ? 1 : 0, dc = k === 'ArrowLeft' ? -1 : k === 'ArrowRight' ? 1 : 0;
@@ -885,6 +916,7 @@ $('sv-ex').onclick = function () { $('sv-in').value = '5300700006001950000980000
 $('sv-go').onclick = function () {
   var s = $('sv-in').value.replace(/\s+/g, '').replace(/[._-]/g, '0');
   $('sv-play').hidden = true; $('sv-out').innerHTML = '';
+  if (s.length === 81 && /[^0-9]/.test(s)) { $('sv-msg').textContent = L2('Sunt permise doar cifrele 0–9 (și . _ - pentru gol).', 'Only digits 0–9 (and . _ - for blank) are allowed.'); $('sv-msg').className = 'msg bad'; return; }
   if (s.length !== 81 || /[^0-9]/.test(s)) { $('sv-msg').textContent = t('sv_len') + s.length + ')'; $('sv-msg').className = 'msg bad'; return; }
   var mods = []; Array.prototype.forEach.call($('sv-mods').querySelectorAll('input:checked'), function (i) { mods.push(i.dataset.m); });
   var P = { layout: { kind: 'std', n: 9 }, mods: mods, cons: [] }, S = SFF.makeSolver(P), giv = new Int32Array(81);
@@ -936,6 +968,9 @@ function i18n() {
   $('custom-h').textContent = t('custom_h'); $('custom-h2').textContent = t('custom_h2'); $('l-word').textContent = t('word');
   $('b-new').textContent = t('newgame'); $('b-print').textContent = t('print'); $('l-code').textContent = t('code'); $('b-copy').textContent = t('copy'); $('b-open').textContent = t('open');
   [['a-note', 'note'], ['a-erase', 'erase'], ['a-undo', 'undo'], ['a-redo', 'redo'], ['a-hint', 'hint'], ['a-step', 'step'], ['a-play', 'autoplay'], ['a-auto', 'auto'], ['a-check', 'check'], ['a-solve', 'solve'], ['a-clear', 'clear']].forEach(function (p) { $(p[0]).textContent = t(p[1]); });
+  if (playTimer) $('a-play').textContent = t('pause');
+  $('q').setAttribute('aria-label', t('search')); $('word').setAttribute('aria-label', t('word')); $('sv-in').setAttribute('aria-label', t('sv_h'));
+  $('v3d').textContent = L2('Vedere 3D', '3D view');
   $('l-conf').textContent = t('o_conf'); $('l-same').textContent = t('o_same'); $('l-peer').textContent = t('o_peer'); $('l-clean').textContent = t('o_clean');
   $('sv-h').textContent = t('sv_h'); $('sv-lead').textContent = t('sv_lead'); $('sv-go').textContent = t('sv_go'); $('sv-play').textContent = t('sv_play'); $('sv-ex').textContent = t('sv_ex');
   var checked = {};
@@ -1020,7 +1055,7 @@ function renderModebar() {
   };
 }
 function fmtT(ms) { var s = Math.floor(ms / 1000); return Math.floor(s / 60) + ':' + (s % 60 < 10 ? '0' : '') + (s % 60); }
-function dailyInfo() { try { var d = JSON.parse(LS.get('daily', '{}')); return { last: d.last || '', streak: d.streak || 0, best: d.best || 0 }; } catch (e) { return { last: '', streak: 0, best: 0 }; } }
+function dailyInfo() { try { var d = JSON.parse(LS.get('daily', '{}')); return { last: typeof d.last === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d.last) ? d.last : '', streak: +d.streak || 0, best: +d.best || 0 }; } catch (e) { return { last: '', streak: 0, best: 0 }; } }
 function onDigit(d, cells) {
   var g = game, x = g.mx;
   if (x.id === 'sound') {
@@ -1056,15 +1091,16 @@ function onSolved() {
     x.total += g.elapsed; g.elapsed = 0;
     if (x.step < x.of) {
       setMsg(L2('Puzzle ' + x.step + '/' + x.of + ' rezolvat. Următorul pornește imediat…', 'Puzzle ' + x.step + '/' + x.of + ' solved. The next one starts now…'), 'good');
-      setTimeout(function () {
-        if (game !== g) return;
-        var nx = { id: 'marathon', step: x.step + 1, of: x.of, total: x.total, base: x.base, v: x.v };
-        var sp = JSON.parse(JSON.stringify(x.base)); sp.seed = (sp.seed + nx.step * 7919) >>> 0; sp.difficulty = MARA[nx.step - 1];
-        startSpec(sp, x.v, 'marathon', nx);
-      }, 1800);
+      maraTimer = setTimeout(function () { maraNext(g, x); }, 1800);
     } else setMsg(L2('Maraton terminat! Timp total: ', 'Marathon finished! Total time: ') + fmtT(x.total), 'good');
   }
   renderModebar();
+}
+function maraNext(g, x) {
+  if (game !== g || !x.base) return;
+  var nx = { id: 'marathon', step: x.step + 1, of: x.of, total: x.total, base: x.base, v: x.v };
+  var sp = JSON.parse(JSON.stringify(x.base)); sp.seed = (sp.seed + nx.step * 7919) >>> 0; sp.difficulty = MARA[nx.step - 1];
+  startSpec(sp, x.v, 'marathon', nx);
 }
 $('sel-mode').onchange = function () { $('sel-diff').disabled = $('sel-mode').value === 'daily'; };
 
@@ -1126,7 +1162,7 @@ try {
   var sv = LS.get('game', null);
   if (sv) {
     var sd = JSON.parse(sv), okv = sd && sd.P && (sd.sv === undefined || sd.sv === 2) && sd.vals && sd.vals.length === sd.P.givens.length && sd.P.solution && sd.P.solution.length === sd.P.givens.length;
-    if (okv) loadGame(sd.P, sd); else LS.set('game_bad', sv);   /* format necunoscut: nu-l ștergem, îl punem deoparte */
+    if (okv) { loadGame(sd.P, sd); var gx = game && game.mx; if (gx && gx.id === 'marathon' && game.solved && gx.step < gx.of) maraTimer = setTimeout(function () { maraNext(game, gx); }, 1800); } else LS.set('game_bad', sv);   /* format necunoscut: nu-l ștergem, îl punem deoparte */
   }
 } catch (e) { game = null; }
 window.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('dlg').open) $('dlg').close(); });

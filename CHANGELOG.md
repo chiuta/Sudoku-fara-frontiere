@@ -9,6 +9,7 @@
 - **Girandola** corectată după descrierea din Regexp::Sudoku; dispunerea veche rămâne ca „Nouă dispersate” (`sparse9`). Codurile `girandola-…` generate înainte produc acum alt puzzle.
 - Fișe precizate: Linii cu sume pe regiuni, Rossini, Little Unique Killer.
 - Reparat: „Deschide” cu un cod sincronizează listele; mesajul „Celule greșite” dispare după anulare; eticheta tabului „Joacă”.
+- Audit adversarial: coduri de partajare validate strict (variantă, mărime, dificultate, mod, sămânță); starea salvată din `localStorage` este curățată înainte de afișare (nu mai poate injecta HTML); Maraton: pasul următor nu mai anulează un joc nou și continuă după reîncărcare; mesajul „dificultate coborâtă” nu mai apare la alte jocuri; tasta `0` la Zero și litera `N` la Wordoku; Anulează șterge evidențierea de la „Pas cu pas”; Hardcore/Duel: Șterge tot nu mai poate fi anulat; ceasul se oprește după înfrângere; contrast mărit la notițe și la culorile de evidențiere; cuvântul Wordoku cu ş/ţ este normalizat, iar înlocuirea este anunțată; etichete corecte după schimbarea limbii.
 - Licență MIT. README cu ghid de utilizare și capturi pentru toate variantele (`docs/`).
 - 136 de intrări; 3144 de verificări în `test.js`.
 
