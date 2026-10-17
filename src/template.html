@@ -1,0 +1,147 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: MIT · Copyright (c) 2026 Alexandru-Ionuț Chiuță (Alexio) -->
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Sudoku fără frontiere</title>
+<meta name="description" content="Atlas de variante Sudoku cu generator și rezolvator local, într-un singur fișier HTML, offline, fără cont și fără urmărire.">
+<style>
+/*CSS*/
+</style>
+</head>
+<body>
+<header class="top"><div class="bar">
+  <div class="brand">Sudoku fără frontiere <small id="ver"></small></div>
+  <nav class="tabs" role="tablist" id="tabs">
+    <button role="tab" data-tab="atlas" id="t-atlas"></button>
+    <button role="tab" data-tab="play" id="t-play"></button>
+    <button role="tab" data-tab="solver" id="t-solver"></button>
+    <button role="tab" data-tab="about" id="t-about"></button>
+  </nav>
+  <div class="tools">
+    <button class="ibtn" id="b-lang" title="Limba / Language">RO</button>
+    <button class="ibtn" id="b-theme" title="Temă / Theme">🌓</button>
+    <button class="ibtn" id="b-size" title="Mărime text">A</button>
+  </div>
+</div></header>
+<div id="sr" class="sr" role="status" aria-live="polite"></div>
+<main>
+  <section id="s-atlas" role="tabpanel">
+    <h2 id="atlas-h"></h2>
+    <p class="lead" id="atlas-lead"></p>
+    <div class="filters">
+      <input type="search" id="q" aria-label="Căutare">
+      <select id="sortby"></select>
+      <button class="chip" id="f-play" aria-pressed="false"></button>
+      <button class="btn alt" id="b-today"></button>
+      <button class="btn alt" id="b-rand"></button>
+    </div>
+    <div class="filters" id="cats"></div>
+    <div class="grid" id="cards"></div>
+    <div class="row" style="margin-top:1rem">
+      <button class="btn alt" id="b-csv"></button>
+      <button class="btn alt" id="b-bib"></button>
+    </div>
+    <h2 style="margin-top:1.6rem" id="lex-h"></h2>
+    <div class="lex" id="lex"></div>
+  </section>
+
+  <section id="s-play" role="tabpanel" hidden>
+    <div class="play">
+      <div>
+        <div class="status"><span id="st-name"></span><span id="st-info"></span><span id="st-time"></span></div>
+        <div class="modebar small" id="modebar" hidden></div>
+        <div class="boardwrap">
+          <svg id="board" viewBox="0 0 10 10" role="grid" aria-label="Sudoku" tabindex="0"></svg>
+          <svg id="board3d" viewBox="-100 -100 200 200" hidden aria-label="Sudoku 3D"></svg>
+          <div id="v3dbar" class="modebar small" hidden><button id="v3d">3D</button><label>⟲ <input type="range" id="s3d" min="1" max="6" value="6"></label></div>
+          <div class="spin" id="spin" hidden><div class="loader"></div><div id="spin-t"></div><button class="btn alt" id="b-cancel"></button></div>
+        </div>
+        <div class="msg" id="msg" role="status" aria-live="polite"></div>
+      </div>
+      <div class="panel">
+        <div class="box">
+          <h3 id="h-new"></h3>
+          <div class="row">
+            <label class="field"><span id="l-var"></span><select id="sel-var"></select></label>
+            <label class="field"><span id="l-size"></span><select id="sel-size"></select></label>
+            <label class="field"><span id="l-diff"></span><select id="sel-diff"></select></label>
+            <label class="field"><span id="l-mode"></span><select id="sel-mode"></select></label>
+          </div>
+          <div id="custom" hidden style="margin-top:.6rem">
+            <div class="small" id="custom-h"></div>
+            <div class="checks" id="custom-mods"></div>
+            <div class="small" style="margin-top:.4rem" id="custom-h2"></div>
+            <div class="checks" id="custom-clues"></div>
+          </div>
+          <div class="field" id="wordbox" hidden style="margin-top:.6rem"><span id="l-word"></span><input type="text" id="word" maxlength="9" value="ECOULSTRI"></div>
+          <div class="row" style="margin-top:.6rem">
+            <button class="btn" id="b-new"></button>
+            <button class="btn alt" id="b-print"></button>
+          </div>
+          <div class="row" style="margin-top:.6rem">
+            <label class="field"><span id="l-code"></span><input type="text" id="code" spellcheck="false"></label>
+            <button class="btn alt" id="b-copy" style="align-self:flex-end"></button>
+            <button class="btn alt" id="b-open" style="align-self:flex-end"></button>
+          </div>
+        </div>
+        <div class="box">
+          <div class="numpad" id="numpad"></div>
+          <div class="actions" style="margin-top:.5rem">
+            <button id="a-note" aria-pressed="false"></button>
+            <button id="a-erase"></button>
+            <button id="a-undo"></button>
+            <button id="a-redo"></button>
+            <button id="a-hint"></button>
+            <button id="a-step"></button>
+            <button id="a-play" aria-pressed="false"></button>
+            <button id="a-auto"></button>
+            <button id="a-check"></button>
+            <button id="a-solve"></button>
+            <button id="a-clear"></button>
+          </div>
+        </div>
+        <div class="box">
+          <div class="checks">
+            <label><input type="checkbox" id="o-conf" checked><span id="l-conf"></span></label>
+            <label><input type="checkbox" id="o-same" checked><span id="l-same"></span></label>
+            <label><input type="checkbox" id="o-peer" checked><span id="l-peer"></span></label>
+            <label><input type="checkbox" id="o-clean" checked><span id="l-clean"></span></label>
+          </div>
+        </div>
+        <div class="box small" id="rules"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="s-solver" role="tabpanel" hidden>
+    <h2 id="sv-h"></h2>
+    <p class="lead" id="sv-lead"></p>
+    <textarea class="grid81" id="sv-in" spellcheck="false" placeholder="530070000600195000098000060800060003400803001700020006060000280000419005000080079"></textarea>
+    <div class="checks" id="sv-mods" style="margin:.6rem 0"></div>
+    <div class="row">
+      <button class="btn" id="sv-go"></button>
+      <button class="btn alt" id="sv-play" hidden></button>
+      <button class="btn alt" id="sv-ex"></button>
+    </div>
+    <div class="msg" id="sv-msg" role="status" aria-live="polite"></div>
+    <div id="sv-out"></div>
+  </section>
+
+  <section id="s-about" role="tabpanel" hidden>
+    <h2 id="ab-h"></h2>
+    <div id="ab-body"></div>
+  </section>
+</main>
+<footer id="foot"></footer>
+<dialog id="dlg"></dialog>
+<script id="engine">
+/*ENGINE*/
+</script>
+<script>
+/*APP*/
+</script>
+</body>
+</html>

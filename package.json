@@ -1,0 +1,16 @@
+{
+  "name": "sudoku-fara-frontiere",
+  "version": "1.4.0",
+  "description": "Atlas de variante Sudoku cu generator și rezolvator, într-un singur fișier HTML, offline.",
+  "license": "MIT",
+  "author": "Alexandru-Ionuț Chiuță (Alexio) <alexio@trom.tf>",
+  "homepage": "https://chiuta.github.io/Sudoku-fara-frontiere/",
+  "repository": { "type": "git", "url": "git+https://github.com/chiuta/Sudoku-fara-frontiere.git" },
+  "private": true,
+  "scripts": {
+    "build": "python3 build.py",
+    "test": "node test.js",
+    "check": "python3 build.py && git diff --exit-code index.html"
+  },
+  "engines": { "node": ">=18" }
+}
