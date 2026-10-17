@@ -2,7 +2,7 @@
 
 Atlas de variante Sudoku, cu generator și rezolvator care rulează local — într-un singur fișier HTML.
 
-**Licență:** [MIT](LICENSE) · **Live:** <https://chiuta.github.io/Sudoku-fara-frontiere/> (după publicare)
+**Licență:** [MIT](LICENSE) · **Live:** <https://chiuta.github.io/Sudoku-fara-frontiere/>
 
 ![Câteva variante, după „Pas cu pas”](docs/screenshot.png)
 
@@ -41,10 +41,10 @@ Un atlas interactiv de 136 de intrări (≈130 cu reguli distincte: Subsol, Sudo
 
 ### Moduri de joc
 
-Se aleg la „Joc nou → Mod de joc”; codul primește sufixul `@mod`.
+Se aleg la „Joc nou → Mod de joc”; codul primește sufixul `@mod` (excepții: „Puzzle-ul zilei” și Maraton nu au sufix; un cod de Maraton deschide un puzzle obișnuit).
 
 - **Orb:** se văd doar celulele la cel mult 2 pași de selecție.
-- **Memorie:** indiciile se văd câteva secunde, apoi se ascund; butonul de privire costă 30 s. Fără indicii și fără evidențierea conflictelor.
+- **Memorie:** indiciile se văd câteva secunde, apoi se ascund; butonul de privire costă 30 s. Fără indicii, verificare, auto-notițe, „Pas cu pas” și evidențierea conflictelor.
 - **Maraton:** 5 puzzle-uri la rând (ușor, ușor, mediu, mediu, greu) cu timp total.
 - **Duel:** un adversar-cronometru completează câte o celulă la câteva secunde, din soluția cunoscută (fără logică); dacă termină primul, pierzi.
 - **Hardcore:** 3 vieți, fiecare cifră greșită costă una; fără indiciu, verificare sau auto-notițe.
@@ -95,7 +95,7 @@ Interfața se adaptează la ecrane înguste; temă luminoasă/întunecată/autom
 
 ## Catalogul variantelor (136)
 
-Fiecare variantă are mai jos: regulile din fișă, o captură cu un puzzle real generat de aplicație (mărimea 9×9 unde există, altfel cea mai mică; nivel „mediu”), o a doua captură după 4 pași „Pas cu pas”, explicația reală a ultimului pas și un cod cu care regenerezi exact același puzzle. Sub fiecare variantă, o „Galerie completă” (desfășurabilă) are celelalte tipuri de capturi: cardul din Atlas și fișa, toate mărimile, ușor/mediu/greu, auto-notițe, verificare cu o cifră greșită, soluția completă, tema întunecată, telefonul, interfața în engleză și panoul de reguli. Capturile sunt în `docs/screens/`. Capturile sunt făcute automat din versiunea 1.4.0, în temă luminoasă.
+Fiecare variantă are mai jos: regulile din fișă, o captură cu un puzzle real generat de aplicație (mărimea implicită a variantei (9×9 unde există, altfel de ex. 5×5 sau 4×4); nivel „mediu”), o a doua captură după 4 pași „Pas cu pas”, explicația reală a ultimului pas și un cod cu care regenerezi exact același puzzle. Sub fiecare variantă, o „Galerie completă” (desfășurabilă) are celelalte tipuri de capturi: cardul din Atlas și fișa, toate mărimile, ușor/mediu/greu, auto-notițe, verificare cu o cifră greșită, soluția completă, tema întunecată, telefonul, interfața în engleză și panoul de reguli. Capturile sunt în `docs/screens/`. Capturile sunt făcute automat din versiunea 1.4.0, în temă luminoasă.
 
 
 | Categorie | Variante |
@@ -118,7 +118,7 @@ Fiecare categorie are propria pagină în [`docs/catalog/`](docs/catalog/README.
 
 ## Funcții
 
-- **Variante din versiunile 1.0–1.2 (65):** clasic (4×4, 6×6, 8×8, 9×9, 12×12, 16×16, 25×25), wordoku, pătrat latin, Sudoku X, Hyper (Windoku), Jigsaw, grupuri disjuncte, puncte centrale, anti-cal, anti-rege, fără consecutive, Miracol, par–impar, Kropki, consecutiv, XV, comparații, Battenburg, cvadruple, Killer, Little Killer, Sandwich, X-Sums, Frame, zgârie-nori, termometre, săgeți, Renban, șoapte germane, palindrom, între linii, linii entropice, linii modulare, Samurai, Twodoku, Gattai-3, Futoshiki, KenKen.
+- **Variante din versiunea 1.0 (38):** clasic (4×4, 6×6, 8×8, 9×9, 12×12, 16×16, 25×25), wordoku, pătrat latin, Sudoku X, Hyper (Windoku), Jigsaw, grupuri disjuncte, puncte centrale, anti-cal, anti-rege, fără consecutive, Miracol, par–impar, Kropki, consecutiv, XV, comparații, Battenburg, cvadruple, Killer, Little Killer, Sandwich, X-Sums, Frame, zgârie-nori, termometre, săgeți, Renban, șoapte germane, palindrom, între linii, linii entropice, linii modulare, Samurai, Twodoku, Gattai-3, Futoshiki, KenKen.
 - **Adăugate în versiunea 1.1 (24):** Girandola (corectată în 1.4), Asterisk, diagonală simplă, șoapte olandeze, Nabner, termometru lent, linie de paritate (alternantă), linie de aceeași paritate, doar pare marcate, doar impare marcate, Little Killer unic, Fortăreață, Minim/Maxim, Lockout, săgeată dublă, Zipper, Rossini, Outside, Clone, linii cu sume pe regiuni, săgeată medie, săgeată produs, săgeată „pilulă”, Strimko.
 - **Adăugate în versiunea 1.2 (nivelul 3, 3):** Indexare (prima cifră din rând arată coloana lui 1), Raport ×3 (cercuri pentru perechi 3:1), Ceață (indiciile apar pe măsură ce rezolvi; puzzle-ul e construit astfel încât propagarea simplă să poată continua doar cu ce se vede).
 - **Adăugate în versiunea 1.3 (70):**
@@ -130,7 +130,7 @@ Fiecare categorie are propria pagină în [`docs/catalog/`](docs/catalog/README.
   - *Linii (11):* Legato, Consonanță, Pas fix, Linie complementară, Zigzag, Fibonacci, Trepte, Progresie aritmetică, Ecou, Linie divizibilă, Linie primă.
   - *Grile compuse (4):* Sohei, Kazaguruma, Cruce, Tripledoku (V).
   - *Dimensiuni superioare (5):* Cub latin 3D, Cub cu casete 2×2, Hipercub 4D, Hipercub 5D, Greco-Latin.
-- **Moduri de joc (7):** Orb, Memorie, Maraton, Duel, Hardcore, Puzzle-ul zilei, Sonor. Se aleg la „Joc nou”; codul de partajare primește sufixul `@mod`.
+- **Moduri de joc (7):** Orb, Memorie, Maraton, Duel, Hardcore, Puzzle-ul zilei, Sonor. Se aleg la „Joc nou”; codul de partajare primește sufixul `@mod` (nu și la Puzzle-ul zilei și la Maraton).
 - **Combinație proprie:** orice set compatibil de reguli de grilă + indicii (de ex. Killer + diagonale, termometre + săgeți).
 - **Joc:** selecție multiplă, notițe, anulează/refă, indiciu (logică pe candidați), auto-notițe, verificare, conflicte evidențiate, cronometru, salvare automată, tipărire.
 - **Cod de partajare:** `variantă-mărime-dificultate-sămânță` regenerează același puzzle în aceeași versiune.
@@ -162,7 +162,7 @@ Motorul alege o grilă rezolvată care respectă regulile, deduce din ea indicii
 
 ## Confidențialitate și rețea
 
-- **Stocare locală:** `localStorage`, chei `sff_lang`, `sff_theme`, `sff_size`, `sff_game`, `sff_daily` (limbă, temă, mărime text, jocul curent, seria Puzzle-ului zilei).
+- **Stocare locală:** `localStorage`, chei `sff_lang`, `sff_theme`, `sff_size`, `sff_game`, `sff_daily` (limbă, temă, mărime text, jocul curent, seria Puzzle-ului zilei) și `sff_game_bad` (starea salvată într-un format necunoscut, păstrată).
 - **Rețea:** în cod nu există `fetch`, `XMLHttpRequest`, CDN sau resurse externe. Singurul URL din fișier este spațiul de nume SVG (`http://www.w3.org/2000/svg`), care nu generează nicio cerere.
 
 ## Structura depozitului
@@ -196,7 +196,7 @@ node test.js            # toate variantele și mărimile
 node test.js killer     # o singură variantă
 ```
 
-Pentru fiecare variantă și mărime, la nivel ușor și greu, verifică: soluția respectă regulile, puzzle-ul are soluție unică (numărare independentă, cu buget mare), soluția supraviețuiește propagării din subseturi aleatoare de indicii (*soundness*). În plus, la 4×4 numărul de soluții fără indicii e comparat cu o enumerare exhaustivă (de ex. 288 pentru clasic), iar câteva combinații proprii sunt verificate. Din versiunea 1.1, fiecare puzzle este verificat și de un validator al semanticii regulilor scris separat de motor, direct din textul fișelor (verifică, de pildă, Zipper, Lockout, săgețile medie/produs/pilulă, Clone, lanțurile Strimko). Din versiunea 1.3, validatorul independent acoperă și topologiile, salturile fairy, regulile globale, indicii pe margine, în celule, cuști, linii și puncte (formule rescrise separat de motor), iar pentru cuburi, hipercuburi și Greco-Latin numărul de soluții fără indicii e comparat cu o enumerare DFS separată (de ex. 21888 la cubul 4×4×4 cu casete 2×2, 72 și 6912 la Greco-Latin 3 și 4). Ultima rulare: 3144 de verificări, toate trecute; validatorul independent acoperă acum și tipurile din 1.0–1.2, iar un test de mutanți (16.506 redenumiri de cifre) arată acord total între motor și validator; 660 de puzzle-uri 4×4 au fost confirmate unice de o enumerare separată; stres suplimentar pe 12 seed-uri per variantă (5652 de puzzle-uri, zero erori); în plus, o probă de stres cu 5 puzzle-uri pe fiecare variantă, mărime minimă și maximă, fără nicio eroare (cea mai lentă generare, la „Greu” pe unele variante cu reguli globale, a durat circa 21 s). Limită: verificarea încrucișată prin enumerare exhaustivă există doar pentru variantele care au mărimea 4×4 (și pentru cuburi/Greco-Latin mici, cum se arată mai sus).
+Pentru fiecare variantă și mărime, la nivel ușor și greu, verifică: soluția respectă regulile, puzzle-ul are soluție unică (numărare cu același solver ca generatorul, cu buget mare; enumerările 4×4 și validatorul semanticii sunt scrise separat), soluția supraviețuiește propagării din subseturi aleatoare de indicii (*soundness*). În plus, la 4×4 numărul de soluții fără indicii e comparat cu o enumerare exhaustivă (de ex. 288 pentru clasic), iar câteva combinații proprii sunt verificate. Din versiunea 1.1, fiecare puzzle este verificat și de un validator al semanticii regulilor scris separat de motor, direct din textul fișelor (verifică, de pildă, Zipper, Lockout, săgețile medie/produs/pilulă, Clone, lanțurile Strimko). Din versiunea 1.3, validatorul independent acoperă și topologiile, salturile fairy, regulile globale, indicii pe margine, în celule, cuști, linii și puncte (formule rescrise separat de motor), iar pentru cuburi, hipercuburi și Greco-Latin numărul de soluții fără indicii e comparat cu o enumerare DFS separată (de ex. 21888 la cubul 4×4×4 cu casete 2×2, 72 și 6912 la Greco-Latin 3 și 4). Ultima rulare: 3144 de verificări, toate trecute; validatorul independent acoperă acum și tipurile din 1.0–1.2, iar un test de mutanți (16.506 redenumiri de cifre) arată acord total între motor și validator; 660 de puzzle-uri 4×4 au fost confirmate unice de o enumerare separată; stres suplimentar pe 12 seed-uri per variantă (5652 de puzzle-uri, zero erori); în plus, o probă de stres cu 5 puzzle-uri pe fiecare variantă, mărime minimă și maximă, fără nicio eroare (cea mai lentă generare, la „Greu” pe unele variante cu reguli globale, a durat circa 21 s). Limită: verificarea încrucișată prin enumerare exhaustivă există doar pentru variantele care au mărimea 4×4 (și pentru cuburi/Greco-Latin mici, cum se arată mai sus).
 
 ## Ce nu e implementat din nivelul 3
 
@@ -204,7 +204,7 @@ Nu sunt incluse: Chaos Construction, Deconstruction, hibrizii cu alte puzzle-uri
 
 ## Licență
 
-**MIT** — vezi [`LICENSE`](LICENSE). Se aplică întregului depozit: codul (`engine.js`, `src/`, `build.py`, `test.js`, `index.html`), textele (README, fișele) și capturile din `screens/`. Poți folosi, copia, modifica, publica și vinde, cu condiția să păstrezi nota de drepturi de autor și textul licenței. Programul e oferit „ca atare”, fără garanții.
+**MIT** — vezi [`LICENSE`](LICENSE). Se aplică întregului depozit: codul (`engine.js`, `src/`, `build.py`, `test.js`, `index.html`), textele (README, fișele) și capturile din `docs/screens/`. Poți folosi, copia, modifica, publica și vinde, cu condiția să păstrezi nota de drepturi de autor și textul licenței. Programul e oferit „ca atare”, fără garanții.
 
 Note:
 - Aplicația nu include biblioteci sau resurse externe, deci nu există licențe de terți de respectat.
@@ -224,5 +224,5 @@ The README (in Romanian) contains a usage guide with screenshots of the interfac
 
 - **Girandola** a fost corectată după descrierea din Regexp::Sudoku (colțuri, centru, r2c5, r5c2, r5c8, r8c5). Dispunerea veche (colțuri, mijloace de laturi, centru) rămâne ca „Nouă dispersate” (`sparse9`). Codurile `girandola-…` generate înainte de 1.4 produc acum alt puzzle.
 - Reparat în 1.4 după capturi: eticheta tabului „Joacă” (cheie de text duplicată), listele rămase pe valori vechi după „Deschide” cu un cod și mesajul „Celule greșite” rămas după anulare.
-- Verificări 1.4: validator scris orb din textul fișelor (135/135 variantele existente atunci au trecut; „Nouă dispersate” a fost adăugată după și are validator în `test.js`), confruntare cu surse publicate pe 56 de variante (fișele Regionsum, Rossini și Little Unique Killer au primit precizări), 1818 puzzle-uri pe toate variantele și dimensiunile ≤12 fără erori, „Pas cu pas” testat pe toate cele 136 de variante.
+- Verificări 1.4: validator scris orb din textul fișelor (135/135 variantele existente atunci au trecut; „Nouă dispersate” a fost adăugată după și are validator în `test.js`), confruntare cu surse publicate pe 56 de variante (fișele Regionsum, Rossini și Little Unique Killer au primit precizări), o rulare unică de 1818 puzzle-uri pe toate variantele și dimensiunile ≤12 fără erori (scriptul nu face parte din depozit), „Pas cu pas” testat pe toate cele 136 de variante.
 - Încă neconfirmate de surse: dispunerea Sohei, Kazaguruma, Cross, Tripledoku V; tratamentul cifrelor repetate la Quad și Doublers; conectivitatea diagonală la Strimko.

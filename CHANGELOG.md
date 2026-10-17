@@ -23,4 +23,4 @@
 - 24 de variante noi (Girandola, Asterisk, Fortăreață, Zipper, Rossini, Clone, Strimko etc.).
 
 ## 1.0.0
-- Prima versiune: 65 de variante, generator cu soluție unică, rezolvator clasic 9×9, atlas, lexicon.
+- Prima versiune: 38 de variante, generator cu soluție unică, rezolvator clasic 9×9, atlas, lexicon.

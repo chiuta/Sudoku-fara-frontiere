@@ -3,15 +3,21 @@ on:
   push:
     branches: [main]
   pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   test:
-    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - name: index.html corespunde sursei (build reproductibil)
@@ -22,4 +28,4 @@ jobs:
         run: node test.js
       - name: Fără resurse externe în index.html
         run: |
-          if grep -E "(src|href)=\"https?://|fetch\(|XMLHttpRequest|importScripts" index.html; then echo "resursă externă găsită"; exit 1; fi
+          if grep -nE "https?://|[\"'(= ]//[a-z]|fetch|XMLHttpRequest|WebSocket|sendBeacon|importScripts|@import" index.html | grep -v "http://www.w3.org/2000/svg"; then echo "resursă externă găsită"; exit 1; fi
