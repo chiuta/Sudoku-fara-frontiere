@@ -1,6 +1,7 @@
 # Istoric versiuni
 
 ## 1.4.0
+- Politică CSP (meta) generată de `build.py`, cu hash-uri pentru scripturile inline; Worker doar din `blob:`, fără rețea.
 - **Pas cu pas** și **▶ Auto**: completează soluția cifră cu cifră, evidențiind motivul fiecărui pas (unica cifră din celulă, unica celulă dintr-un rând/coloană/regiune, deducție din regulile variantei, sau cifra din soluție când nu există deducție directă).
 - Dificultate măsurată: fiecare puzzle arată câte ramificări cere solverului după propagare.
 - Generare lentă: peste 12 s, dificultatea coboară automat (nu la „Puzzle-ul zilei” și nu la coduri partajate).
