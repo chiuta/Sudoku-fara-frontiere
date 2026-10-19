@@ -186,7 +186,7 @@ CONTRIBUTING.md     cum contribui
 LICENSE             MIT
 ```
 
-Publishing on GitHub Pages: Settings → Pages → Branch `main`, folder `/ (root)`; `index.html` is at the root and uses only relative paths, so it also works under `https://<user>.github.io/<repository>/`. See [`CHANGELOG.md`](CHANGELOG.md) and [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Publishing on GitHub Pages: Settings → Pages → Branch `main`, folder `/ (root)`; `index.html` is at the root and uses only relative paths, so it also works under `https://<user>.github.io/<repository>/`. See [`CHANGELOG.md`](CHANGELOG.md) and [`CONTRIBUTING.en.md`](CONTRIBUTING.en.md).
 
 ## Running locally / offline
 

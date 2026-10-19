@@ -186,7 +186,7 @@ CONTRIBUTING.md     cum contribui
 LICENSE             MIT
 ```
 
-Pubblicazione su GitHub Pages: Settings → Pages → Branch `main`, cartella `/ (root)`; `index.html` è nella radice e usa solo percorsi relativi, quindi funziona anche sotto `https://<utente>.github.io/<repository>/`. Vedi [`CHANGELOG.md`](CHANGELOG.md) e [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Pubblicazione su GitHub Pages: Settings → Pages → Branch `main`, cartella `/ (root)`; `index.html` è nella radice e usa solo percorsi relativi, quindi funziona anche sotto `https://<utente>.github.io/<repository>/`. Vedi [`CHANGELOG.md`](CHANGELOG.md) e [`CONTRIBUTING.it.md`](CONTRIBUTING.it.md).
 
 ## Esecuzione locale / offline
 

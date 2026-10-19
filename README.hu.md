@@ -186,7 +186,7 @@ CONTRIBUTING.md     cum contribui
 LICENSE             MIT
 ```
 
-Közzététel a GitHub Pages-en: Settings → Pages → Branch `main`, mappa `/ (root)`; az `index.html` a gyökérben van, és csak relatív útvonalakat használ, ezért a `https://<felhasználó>.github.io/<tároló>/` cím alatt is működik. Lásd a [`CHANGELOG.md`](CHANGELOG.md) és a [`CONTRIBUTING.md`](CONTRIBUTING.md) fájlt.
+Közzététel a GitHub Pages-en: Settings → Pages → Branch `main`, mappa `/ (root)`; az `index.html` a gyökérben van, és csak relatív útvonalakat használ, ezért a `https://<felhasználó>.github.io/<tároló>/` cím alatt is működik. Lásd a [`CHANGELOG.md`](CHANGELOG.md) és a [`CONTRIBUTING.hu.md`](CONTRIBUTING.hu.md) fájlt.
 
 ## Helyi / offline futtatás
 

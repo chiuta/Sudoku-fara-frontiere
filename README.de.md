@@ -186,7 +186,7 @@ CONTRIBUTING.md     cum contribui
 LICENSE             MIT
 ```
 
-Veröffentlichung auf GitHub Pages: Settings → Pages → Branch `main`, Ordner `/ (root)`; `index.html` liegt im Stammverzeichnis und verwendet nur relative Pfade, funktioniert also auch unter `https://<Benutzer>.github.io/<Repository>/`. Siehe [`CHANGELOG.md`](CHANGELOG.md) und [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Veröffentlichung auf GitHub Pages: Settings → Pages → Branch `main`, Ordner `/ (root)`; `index.html` liegt im Stammverzeichnis und verwendet nur relative Pfade, funktioniert also auch unter `https://<Benutzer>.github.io/<Repository>/`. Siehe [`CHANGELOG.md`](CHANGELOG.md) und [`CONTRIBUTING.de.md`](CONTRIBUTING.de.md).
 
 ## Lokal / offline ausführen
 
