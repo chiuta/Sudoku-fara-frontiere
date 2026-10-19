@@ -135,3 +135,4 @@ svg#board3d text{font-family:inherit;text-anchor:middle;dominant-baseline:centra
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (prefers-contrast: more){:root{--thick:#000;--line:#333}[data-theme=dark]{--thick:#fff;--line:#ddd}}
 #board:focus-visible{outline:3px solid var(--accent,#2563eb);outline-offset:2px}
+.ibtn{font:inherit;color:inherit}select.ibtn{max-width:4.2rem;padding:.3rem .25rem}

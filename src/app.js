@@ -8,15 +8,26 @@ var LS = {
   get: function (k, d) { try { var v = localStorage.getItem('sff_' + k); return v === null ? d : v; } catch (e) { return d; } },
   set: function (k, v) { try { localStorage.setItem('sff_' + k, v); } catch (e) {} }
 };
-var lang = LS.get('lang', (navigator.language || 'ro').slice(0, 2) === 'ro' ? 'ro' : 'en');
-function t(k) { return (U[lang] && U[lang][k]) || U.ro[k] || k; }
-function L2(ro, en) { return lang === 'ro' ? ro : en; }
+var LANGS = ['ro', 'en', 'fr', 'it', 'es', 'pt', 'de', 'hu'];
+function pickLang() {
+  var s = LS.get('lang', ''); if (LANGS.indexOf(s) >= 0) return s;
+  var nl = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || 'en'];
+  for (var i = 0; i < nl.length; i++) { var c = String(nl[i] || '').slice(0, 2).toLowerCase(); if (LANGS.indexOf(c) >= 0) return c; }
+  return 'en';
+}
+var lang = pickLang();
+function t(k) { return (U[lang] && U[lang][k]) || U.en[k] || U.ro[k] || k; }
+/* ro/en sunt perechi pozitionale; celelalte limbi: al treilea argument [fr,it,es,pt,de,hu], cu revenire la en */
+function L2(ro, en, x) { if (lang === 'ro') return ro; if (lang === 'en' || !x) return en; var v = x[LANGS.indexOf(lang) - 2]; return v == null ? en : v; }
+function lblOf(tab, id, fb) { var p = tab[id]; if (!p) return fb; var v = p.split('|')[LANGS.indexOf(lang) - 2]; return v || fb; }
+function mlabel(m) { return lang === 'ro' ? m[1] : lang === 'en' ? m[2] : lblOf(LBL, m[0], m[2]); }
+function clabel(c) { return lang === 'ro' ? c[1] : lang === 'en' ? c[2] : lblOf(LBLC, c[0], c[2]); }
 var PRE = SFF.PRESETS;
 var VBY = Object.create(null); VINFO.forEach(function (v) { VBY[v[0]] = v; });
 function vname(v) { return lang === 'ro' ? v[2] : v[5]; }
 function vshort(v) { return lang === 'ro' ? v[3] : v[6]; }
 function vrules(v) { return lang === 'ro' ? v[4] : v[7]; }
-function catName(id) { for (var i = 0; i < CATS.length; i++) if (CATS[i][0] === id) return lang === 'ro' ? CATS[i][1] : CATS[i][2]; return id; }
+function catName(id) { for (var i = 0; i < CATS.length; i++) if (CATS[i][0] === id) return clabel(CATS[i]); return id; }
 function sizeLabel(n, id) { if (PRE[id] && PRE[id].layout === 'cube') { var dd = PRE[id].dim; return dd === 3 ? n + '×' + n + '×' + n : n + ['', '', '²', '³', '⁴', '⁵'][dd]; } if (PRE[id] && PRE[id].layout === 'greco') return n + '×' + n + ' ×2'; if (PRE[id] && PRE[id].layout) return '9×9 ×' + ({ samurai: 5, twodoku: 2, gattai3: 3, sohei: 4, kazaguruma: 5, tripledoku: 3, cross: 5 })[id]; return n + '×' + n; }
 function sizesOf(id) { return PRE[id].sizes.slice().sort(function (a, b) { return a - b; }); }
 var BASE_SYMS = '123456789ABCDEFGHIJKLMNOP';
@@ -31,7 +42,8 @@ function applyTheme() {
 }
 $('b-theme').onclick = function () { var th = LS.get('theme', 'auto'); LS.set('theme', th === 'auto' ? 'dark' : th === 'dark' ? 'light' : 'auto'); applyTheme(); };
 $('b-size').onclick = function () { LS.set('size', LS.get('size', 'normal') === 'normal' ? 'big' : 'normal'); applyTheme(); };
-$('b-lang').onclick = function () { lang = lang === 'ro' ? 'en' : 'ro'; LS.set('lang', lang); document.documentElement.lang = lang; i18n(); };
+(function () { var sl = $('b-lang'); sl.innerHTML = LANGS.map(function (c) { return '<option value="' + c + '">' + c.toUpperCase() + '</option>'; }).join(''); sl.value = lang; })();
+$('b-lang').onchange = function () { lang = LANGS.indexOf(this.value) >= 0 ? this.value : 'en'; LS.set('lang', lang); document.documentElement.lang = lang; i18n(); };
 
 /* ---------- tab-uri ---------- */
 var curTab = 'atlas';
@@ -49,7 +61,7 @@ $('tabs').onclick = function (e) { var b = e.target.closest('button'); if (b) sh
 var atlasCat = 'all';
 function renderCats() {
   var h = '<button class="chip" data-c="all" aria-pressed="' + (atlasCat === 'all') + '">' + t('all') + '</button>';
-  CATS.forEach(function (c) { h += '<button class="chip" data-c="' + c[0] + '" aria-pressed="' + (atlasCat === c[0]) + '">' + (lang === 'ro' ? c[1] : c[2]) + '</button>'; });
+  CATS.forEach(function (c) { h += '<button class="chip" data-c="' + c[0] + '" aria-pressed="' + (atlasCat === c[0]) + '">' + clabel(c) + '</button>'; });
   $('cats').innerHTML = h;
 }
 $('cats').onclick = function (e) { var b = e.target.closest('.chip'); if (!b) return; atlasCat = b.dataset.c; renderCats(); renderCards(); };
@@ -112,8 +124,8 @@ function fillVariantSelect() {
 }
 function buildCustom() {
   var mh = '', ch = '';
-  MODS.forEach(function (m) { mh += '<label><input type="checkbox" data-m="' + m[0] + '"> ' + (lang === 'ro' ? m[1] : m[2]) + '</label>'; });
-  CLUEMODS.forEach(function (m) { ch += '<label><input type="checkbox" data-c="' + m[0] + '"> ' + (lang === 'ro' ? m[1] : m[2]) + '</label>'; });
+  MODS.forEach(function (m) { mh += '<label><input type="checkbox" data-m="' + m[0] + '"> ' + mlabel(m) + '</label>'; });
+  CLUEMODS.forEach(function (m) { ch += '<label><input type="checkbox" data-c="' + m[0] + '"> ' + mlabel(m) + '</label>'; });
   $('custom-mods').innerHTML = mh; $('custom-clues').innerHTML = ch;
 }
 function customSel() {
@@ -265,7 +277,7 @@ function setMsg(text, cls) { var m = $('msg'); m.textContent = text; m.className
 function symsFor(P) {
   var N = P.n, v = P.vid;
   if (v === 'wordoku') {
-    if (N === 9) { var w = ($('word').value || '').toUpperCase().replace(/Ş/g, 'Ș').replace(/Ţ/g, 'Ț').replace(/[^A-ZĂÂÎȘȚ]/g, ''); var seen = {}, ok = w.length === 9; for (var i = 0; i < w.length; i++) { if (seen[w[i]]) ok = false; seen[w[i]] = 1; } if (!ok) setTimeout(function () { setMsg(L2('Cuvântul trebuie să aibă 9 litere diferite; am folosit ECOULSTRI.', 'The word needs 9 different letters; ECOULSTRI was used.'), 'bad'); }, 0); return (ok ? w : 'ECOULSTRI').split(''); }
+    if (N === 9) { var w = ($('word').value || '').toUpperCase().replace(/Ş/g, 'Ș').replace(/Ţ/g, 'Ț').replace(/[^A-ZĂÂÎȘȚ]/g, ''); var seen = {}, ok = w.length === 9; for (var i = 0; i < w.length; i++) { if (seen[w[i]]) ok = false; seen[w[i]] = 1; } if (!ok) setTimeout(function () { setMsg(L2('Cuvântul trebuie să aibă 9 litere diferite; am folosit ECOULSTRI.', 'The word needs 9 different letters; ECOULSTRI was used.', ["Le mot doit comporter 9 lettres différentes ; ECOULSTRI a été utilisé.", "La parola deve avere 9 lettere diverse; è stato usato ECOULSTRI.", "La palabra necesita 9 letras distintas; se usó ECOULSTRI.", "A palavra precisa de 9 letras diferentes; foi usada ECOULSTRI.", "Das Wort braucht 9 verschiedene Buchstaben; es wurde ECOULSTRI verwendet.", "A szónak 9 különböző betűből kell állnia; az ECOULSTRI lett használva."]), 'bad'); }, 0); return (ok ? w : 'ECOULSTRI').split(''); }
     return 'ABCDEFGHIJKLMNOPQRSTUVWXY'.slice(0, N).split('');
   }
   if (P.zero) return '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.slice(0, N).split('');
@@ -316,8 +328,8 @@ function renderRules() {
   if (v) h = '<b>' + vname(v) + '</b><br>' + vrules(v);
   else {
     var names = [];
-    MODS.forEach(function (m) { if ((m[0] === 'jigsaw' ? game.P.regions : game.P.mods.indexOf(m[0]) >= 0)) names.push(VBY[m[3]] ? vname(VBY[m[3]]) : m[1]); });
-    CLUEMODS.forEach(function (m) { if (game.P.clues.indexOf(m[0]) >= 0) names.push(VBY[m[3]] ? vname(VBY[m[3]]) : m[1]); });
+    MODS.forEach(function (m) { if ((m[0] === 'jigsaw' ? game.P.regions : game.P.mods.indexOf(m[0]) >= 0)) names.push(VBY[m[3]] ? vname(VBY[m[3]]) : mlabel(m)); });
+    CLUEMODS.forEach(function (m) { if (game.P.clues.indexOf(m[0]) >= 0) names.push(VBY[m[3]] ? vname(VBY[m[3]]) : mlabel(m)); });
     h = '<b>' + t('custom') + '</b><br>' + names.join(' + ');
     var seen = {};
     names.forEach(function () {});
@@ -766,7 +778,7 @@ function toggleNote() { if (!game) return; game.mode = game.mode === 'note' ? 'v
 $('a-note').onclick = toggleNote; $('a-erase').onclick = eraseSel; $('a-undo').onclick = doUndo; $('a-redo').onclick = doRedo;
 $('a-auto').onclick = function () {
   var g = game; if (!g || g.solved || g.lost) return;
-  if (noHelp()) { setMsg(L2('Notițele automate sunt dezactivate în acest mod.', 'Auto-notes are disabled in this mode.'), 'bad'); return; }
+  if (noHelp()) { setMsg(L2('Notițele automate sunt dezactivate în acest mod.', 'Auto-notes are disabled in this mode.', ["Les notes automatiques sont désactivées dans ce mode.", "Gli appunti automatici sono disattivati in questa modalità.", "Las notas automáticas están desactivadas en este modo.", "As notas automáticas estão desativadas neste modo.", "Automatische Notizen sind in diesem Modus deaktiviert.", "Az automatikus jegyzetek ebben a módban ki vannak kapcsolva."]), 'bad'); return; }
   pushUndo();
   for (var i = 0; i < g.cnt; i++) {
     if (curVal(i)) { g.notes[i] = 0; continue; }
@@ -777,7 +789,7 @@ $('a-auto').onclick = function () {
 };
 $('a-check').onclick = function () {
   var g = game; if (!g || g.solved || g.lost) return;
-  if (noHelp()) { setMsg(L2('Verificarea este dezactivată în acest mod.', 'Checking is disabled in this mode.'), 'bad'); return; }
+  if (noHelp()) { setMsg(L2('Verificarea este dezactivată în acest mod.', 'Checking is disabled in this mode.', ["La vérification est désactivée dans ce mode.", "La verifica è disattivata in questa modalità.", "La comprobación está desactivada en este modo.", "A verificação está desativada neste modo.", "Die Prüfung ist in diesem Modus deaktiviert.", "Az ellenőrzés ebben a módban ki van kapcsolva."]), 'bad'); return; }
   g.wrong.clear();
   for (var i = 0; i < g.cnt; i++) if (g.vals[i] && g.vals[i] !== g.P.solution[i]) g.wrong.add(i);
   renderDyn();
@@ -788,7 +800,7 @@ $('a-check').onclick = function () {
 function groupName(g, grp) {
   var L = g.L, r0 = L.pos[grp[0]][0], c0 = L.pos[grp[0]][1], sr = true, sc = true;
   grp.forEach(function (i) { if (L.pos[i][0] !== r0) sr = false; if (L.pos[i][1] !== c0) sc = false; });
-  return sr ? L2('rândul marcat', 'row') : sc ? L2('coloana marcată', 'column') : L2('regiunea marcată', 'region');
+  return sr ? L2('rândul marcat', 'row', ["de la ligne marquée", "della riga indicata", "de la fila marcada", "da linha marcada", "der markierten Zeile", "a megjelölt sorban"]) : sc ? L2('coloana marcată', 'column', ["de la colonne marquée", "della colonna indicata", "de la columna marcada", "da coluna marcada", "der markierten Spalte", "a megjelölt oszlopban"]) : L2('regiunea marcată', 'region', ["de la région marquée", "della regione indicata", "de la región marcada", "da região marcada", "des markierten Gebiets", "a megjelölt tartományban"]);
 }
 function nextStep() {
   var g = game, S = g.Sc || g.S, N = g.N, cnt = g.cnt, i, d, vec = curVec(), sol = g.P.solution, pm = new Int32Array(cnt), FULL = S.FULL;
@@ -831,15 +843,15 @@ function nextStep() {
 }
 function doStep() {
   var g = game; if (!g || g.solved || g.lost) return false;
-  if (noHelp()) { setMsg(L2('Pașii sunt dezactivați în acest mod.', 'Steps are disabled in this mode.'), 'bad'); return false; }
+  if (noHelp()) { setMsg(L2('Pașii sunt dezactivați în acest mod.', 'Steps are disabled in this mode.', ["Le pas à pas est désactivé dans ce mode.", "Il passo passo è disattivato in questa modalità.", "El paso a paso está desactivado en este modo.", "O passo a passo está desativado neste modo.", "Schritt für Schritt ist in diesem Modus deaktiviert.", "A lépésről lépésre mód ebben a módban ki van kapcsolva."]), 'bad'); return false; }
   var st = nextStep(); if (!st) return false;
   pushUndo(); g.vals[st.cell] = st.digit; g.notes[st.cell] = 0; g.sel = new Set([st.cell]);
-  var p = g.L.pos[st.cell], at = L2('(rând ' + (p[0] + 1) + ', col. ' + (p[1] + 1) + ')', '(row ' + (p[0] + 1) + ', col. ' + (p[1] + 1) + ')'), dg = sym(st.digit, st.cell), msg;
-  if (st.kind === 'fix') msg = L2('Corecție ' + at + ': cifra introdusă era greșită; corect este ', 'Fix ' + at + ': the digit entered was wrong; correct is ') + dg + '.';
-  else if (st.kind === 'naked') msg = dg + ' ' + at + L2(': toate celelalte cifre apar deja printre celulele marcate (rând, coloană, regiune sau regulă de vecinătate).', ': every other digit already appears among the marked cells (row, column, region or adjacency rule).');
-  else if (st.kind === 'hidden') msg = dg + ' ' + at + L2(': este singura celulă din ' + st.grpName + ' unde poate sta ' + dg + '.', ': it is the only cell in the marked ' + st.grpName + ' where ' + dg + ' can go.');
-  else if (st.kind === 'rule') msg = dg + ' ' + at + L2(': rezultă din regulile specifice variantei (indicii, sume, relații), combinate cu celelalte cifre.', ': follows from the variant’s specific rules (clues, sums, relations) combined with the other digits.');
-  else msg = dg + ' ' + at + L2(': nicio deducție directă; cifra este luată din soluția unică (ar fi nevoie de o ipoteză).', ': no direct deduction; the digit comes from the unique solution (a guess would be needed).');
+  var p = g.L.pos[st.cell], at = L2('(rând ' + (p[0] + 1) + ', col. ' + (p[1] + 1) + ')', '(row ' + (p[0] + 1) + ', col. ' + (p[1] + 1) + ')', ["(ligne " + (p[0] + 1) + ", col. " + (p[1] + 1) + ")", "(riga " + (p[0] + 1) + ", col. " + (p[1] + 1) + ")", "(fila " + (p[0] + 1) + ", col. " + (p[1] + 1) + ")", "(linha " + (p[0] + 1) + ", col. " + (p[1] + 1) + ")", "(Zeile " + (p[0] + 1) + ", Sp. " + (p[1] + 1) + ")", "(" + (p[0] + 1) + ". sor, " + (p[1] + 1) + ". oszlop)"]), dg = sym(st.digit, st.cell), msg;
+  if (st.kind === 'fix') msg = L2('Corecție ' + at + ': cifra introdusă era greșită; corect este ', 'Fix ' + at + ': the digit entered was wrong; correct is ', ["Correction " + at + " : le chiffre saisi était faux ; le bon chiffre est ", "Correzione " + at + ": la cifra inserita era sbagliata; quella corretta è ", "Corrección " + at + ": el dígito introducido era erróneo; el correcto es ", "Correção " + at + ": o algarismo introduzido estava errado; o correto é ", "Korrektur " + at + ": Die eingegebene Ziffer war falsch; richtig ist ", "Javítás " + at + ": a beírt számjegy hibás volt; a helyes: "]) + dg + '.';
+  else if (st.kind === 'naked') msg = dg + ' ' + at + L2(': toate celelalte cifre apar deja printre celulele marcate (rând, coloană, regiune sau regulă de vecinătate).', ': every other digit already appears among the marked cells (row, column, region or adjacency rule).', [" : tous les autres chiffres figurent déjà parmi les cases marquées (ligne, colonne, région ou règle de voisinage).", ": tutte le altre cifre compaiono già tra le celle indicate (riga, colonna, regione o regola di adiacenza).", ": todos los demás dígitos ya aparecen entre las celdas marcadas (fila, columna, región o regla de adyacencia).", ": todos os outros algarismos já aparecem entre as células marcadas (linha, coluna, região ou regra de adjacência).", ": Alle anderen Ziffern kommen bereits in den markierten Feldern vor (Zeile, Spalte, Gebiet oder Nachbarschaftsregel).", ": az összes többi számjegy már szerepel a megjelölt cellák között (sor, oszlop, tartomány vagy szomszédsági szabály)."]);
+  else if (st.kind === 'hidden') msg = dg + ' ' + at + L2(': este singura celulă din ' + st.grpName + ' unde poate sta ' + dg + '.', ': it is the only cell in the marked ' + st.grpName + ' where ' + dg + ' can go.', [" : c’est la seule case " + st.grpName + " où " + dg + " peut se placer.", ": è l’unica cella " + st.grpName + " dove può stare " + dg + ".", ": es la única celda " + st.grpName + " donde puede ir " + dg + ".", ": é a única célula " + st.grpName + " onde pode ficar " + dg + ".", ": Es ist das einzige Feld " + st.grpName + ", in das " + dg + " passt.", ": ez az egyetlen cella " + st.grpName + ", ahová " + dg + " kerülhet."]);
+  else if (st.kind === 'rule') msg = dg + ' ' + at + L2(': rezultă din regulile specifice variantei (indicii, sume, relații), combinate cu celelalte cifre.', ': follows from the variant’s specific rules (clues, sums, relations) combined with the other digits.', [" : découle des règles propres à la variante (indices, sommes, relations), combinées aux autres chiffres.", ": deriva dalle regole specifiche della variante (indizi, somme, relazioni), combinate con le altre cifre.", ": se deduce de las reglas propias de la variante (pistas, sumas, relaciones), combinadas con los demás dígitos.", ": resulta das regras específicas da variante (pistas, somas, relações), combinadas com os outros algarismos.", ": ergibt sich aus den besonderen Regeln der Variante (Hinweise, Summen, Beziehungen) zusammen mit den übrigen Ziffern.", ": a változat sajátos szabályaiból (támpontok, összegek, kapcsolatok) és a többi számjegyből következik."]);
+  else msg = dg + ' ' + at + L2(': nicio deducție directă; cifra este luată din soluția unică (ar fi nevoie de o ipoteză).', ': no direct deduction; the digit comes from the unique solution (a guess would be needed).', [" : aucune déduction directe ; le chiffre provient de la solution unique (une hypothèse serait nécessaire).", ": nessuna deduzione diretta; la cifra è presa dalla soluzione unica (servirebbe un tentativo).", ": ninguna deducción directa; el dígito se toma de la solución única (haría falta una suposición).", ": nenhuma dedução direta; o algarismo vem da solução única (seria preciso uma hipótese).", ": keine direkte Folgerung; die Ziffer stammt aus der eindeutigen Lösung (man müsste raten).", ": nincs közvetlen következtetés; a számjegy az egyértelmű megoldásból származik (találgatásra lenne szükség)."]);
   afterChange(); if (!g.solved) { g.step = st; renderDyn(); setMsg(msg, ''); $('sr').textContent = msg; } else stopPlay();
   return true;
 }
@@ -848,14 +860,14 @@ function stopPlay() { if (playTimer) { clearInterval(playTimer); playTimer = nul
 $('a-step').onclick = function () { stopPlay(); doStep(); };
 $('a-play').onclick = function () {
   if (playTimer) { stopPlay(); return; }
-  if (!game || game.solved || game.lost || noHelp()) { if (game && noHelp()) setMsg(L2('Pașii sunt dezactivați în acest mod.', 'Steps are disabled in this mode.'), 'bad'); return; }
+  if (!game || game.solved || game.lost || noHelp()) { if (game && noHelp()) setMsg(L2('Pașii sunt dezactivați în acest mod.', 'Steps are disabled in this mode.', ["Le pas à pas est désactivé dans ce mode.", "Il passo passo è disattivato in questa modalità.", "El paso a paso está desactivado en este modo.", "O passo a passo está desativado neste modo.", "Schritt für Schritt ist in diesem Modus deaktiviert.", "A lépésről lépésre mód ebben a módban ki van kapcsolva."]), 'bad'); return; }
   $('a-play').textContent = t('pause'); $('a-play').setAttribute('aria-pressed', 'true');
   if (!doStep()) { stopPlay(); return; }
   playTimer = setInterval(function () { if (!game || game.solved || game.lost || curTab !== 'play' || !doStep()) stopPlay(); }, 1600);
 };
 $('a-hint').onclick = function () {
   var g = game; if (!g || g.solved || g.lost) return;
-  if (noHelp()) { setMsg(L2('Indiciul este dezactivat în acest mod.', 'Hints are disabled in this mode.'), 'bad'); return; }
+  if (noHelp()) { setMsg(L2('Indiciul este dezactivat în acest mod.', 'Hints are disabled in this mode.', ["Les indices sont désactivés dans ce mode.", "I suggerimenti sono disattivati in questa modalità.", "Las pistas están desactivadas en este modo.", "As dicas estão desativadas neste modo.", "Tipps sind in diesem Modus deaktiviert.", "A tippek ebben a módban ki vannak kapcsolva."]), 'bad'); return; }
   var vec = curVec(), dom = (g.Sc || g.S).candidates(vec), target = -1, logic = false, i;
   var wrongAny = false; for (i = 0; i < g.cnt; i++) if (g.vals[i] && g.vals[i] !== g.P.solution[i]) wrongAny = true;
   if (dom && !wrongAny) {
@@ -907,7 +919,7 @@ function buildSvMods() {
   var h = '';
   ['diag', 'hyper', 'center', 'dg', 'antiknight', 'antiking', 'nonconsec'].forEach(function (m) {
     var mm = MODS.filter(function (x) { return x[0] === m; })[0];
-    h += '<label><input type="checkbox" data-m="' + m + '"> ' + (lang === 'ro' ? mm[1] : mm[2]) + '</label>';
+    h += '<label><input type="checkbox" data-m="' + m + '"> ' + mlabel(mm) + '</label>';
   });
   $('sv-mods').innerHTML = h;
 }
@@ -916,7 +928,7 @@ $('sv-ex').onclick = function () { $('sv-in').value = '5300700006001950000980000
 $('sv-go').onclick = function () {
   var s = $('sv-in').value.replace(/\s+/g, '').replace(/[._-]/g, '0');
   $('sv-play').hidden = true; $('sv-out').innerHTML = '';
-  if (s.length === 81 && /[^0-9]/.test(s)) { $('sv-msg').textContent = L2('Sunt permise doar cifrele 0–9 (și . _ - pentru gol).', 'Only digits 0–9 (and . _ - for blank) are allowed.'); $('sv-msg').className = 'msg bad'; return; }
+  if (s.length === 81 && /[^0-9]/.test(s)) { $('sv-msg').textContent = L2('Sunt permise doar cifrele 0–9 (și . _ - pentru gol).', 'Only digits 0–9 (and . _ - for blank) are allowed.', ["Seuls les chiffres 0–9 sont autorisés (et . _ - pour une case vide).", "Sono ammesse solo le cifre 0–9 (e . _ - per le caselle vuote).", "Solo se permiten los dígitos 0–9 (y . _ - para las vacías).", "Só são permitidos os algarismos 0–9 (e . _ - para as vazias).", "Erlaubt sind nur die Ziffern 0–9 (und . _ - für leere Felder).", "Csak a 0–9 számjegyek megengedettek (üres cellához . _ -)."]); $('sv-msg').className = 'msg bad'; return; }
   if (s.length !== 81 || /[^0-9]/.test(s)) { $('sv-msg').textContent = t('sv_len') + s.length + ')'; $('sv-msg').className = 'msg bad'; return; }
   var mods = []; Array.prototype.forEach.call($('sv-mods').querySelectorAll('input:checked'), function (i) { mods.push(i.dataset.m); });
   var P = { layout: { kind: 'std', n: 9 }, mods: mods, cons: [] }, S = SFF.makeSolver(P), giv = new Int32Array(81);
@@ -949,13 +961,13 @@ function renderAbout() {
     '<h3>Game modes</h3><ul><li><b>Orb</b>: only cells within 2 steps of the selection are visible.</li><li><b>Memory</b>: the givens are shown for a few seconds, then hidden; “Peek” costs 30 s. No hints and no conflict highlighting.</li><li><b>Marathon</b>: 5 puzzles in a row (easy, easy, medium, medium, hard) with a total time.</li><li><b>Duel</b>: a clock opponent fills one cell every few seconds (it copies the known solution, no logic); if it finishes first, you lose.</li><li><b>Hardcore</b>: 3 lives, each wrong digit costs one; no hint, check or auto-notes.</li><li><b>Puzzle of the day</b>: the same puzzle for everyone on a given day (UTC date), with a streak of consecutive days kept locally.</li><li><b>Sound</b>: every digit has a note; a completed row, column or box plays an arpeggio.</li></ul>' +
     '<h3>Shortcuts</h3><p>Digits/letters: fill in · <kbd>N</kbd>: notes · <kbd>Backspace</kbd>: erase · arrows: move · <kbd>Shift</kbd>/<kbd>Ctrl</kbd>+click: multi-select · <kbd>Ctrl</kbd>+<kbd>Z</kbd>/<kbd>Y</kbd>: undo/redo.</p>' +
     '<p class="small">A personal project, not an official service. Licence: MIT (code, texts and screenshots), © 2026 Alexandru-Ionuț Chiuță. Full text in the LICENSE file.</p>';
-  $('ab-body').innerHTML = lang === 'ro' ? ro : en;
+  $('ab-body').innerHTML = lang === 'ro' ? ro : lang === 'en' ? en : (ABOUT[lang] || en);
 }
 
 /* ---------- i18n ---------- */
 function i18n() {
   ['atlas', 'play', 'solver', 'about'].forEach(function (n) { $('t-' + n).textContent = t(n); });
-  $('b-lang').textContent = t('lang_name');
+  $('b-lang').value = lang; $('b-lang').title = t('tt_lang'); $('b-lang').setAttribute('aria-label', t('tt_lang')); $('b-theme').title = t('tt_theme'); $('b-theme').setAttribute('aria-label', t('tt_theme')); $('b-size').title = t('tt_size'); $('b-size').setAttribute('aria-label', t('tt_size'));
   $('atlas-h').textContent = t('atlas_h'); $('atlas-lead').textContent = t('atlas_lead');
   $('q').placeholder = t('search');
   $('sortby').innerHTML = '<option value="rec">' + t('sort_rec') + '</option><option value="az">' + t('sort_az') + '</option><option value="za">' + t('sort_za') + '</option>';
@@ -970,7 +982,7 @@ function i18n() {
   [['a-note', 'note'], ['a-erase', 'erase'], ['a-undo', 'undo'], ['a-redo', 'redo'], ['a-hint', 'hint'], ['a-step', 'step'], ['a-play', 'autoplay'], ['a-auto', 'auto'], ['a-check', 'check'], ['a-solve', 'solve'], ['a-clear', 'clear']].forEach(function (p) { $(p[0]).textContent = t(p[1]); });
   if (playTimer) $('a-play').textContent = t('pause');
   $('q').setAttribute('aria-label', t('search')); $('word').setAttribute('aria-label', t('word')); $('sv-in').setAttribute('aria-label', t('sv_h'));
-  $('v3d').textContent = L2('Vedere 3D', '3D view');
+  $('v3d').textContent = L2('Vedere 3D', '3D view', ["Vue 3D", "Vista 3D", "Vista 3D", "Vista 3D", "3D-Ansicht", "3D nézet"]);
   $('l-conf').textContent = t('o_conf'); $('l-same').textContent = t('o_same'); $('l-peer').textContent = t('o_peer'); $('l-clean').textContent = t('o_clean');
   $('sv-h').textContent = t('sv_h'); $('sv-lead').textContent = t('sv_lead'); $('sv-go').textContent = t('sv_go'); $('sv-play').textContent = t('sv_play'); $('sv-ex').textContent = t('sv_ex');
   var checked = {};
@@ -978,7 +990,7 @@ function i18n() {
   fillVariantSelect(); buildCustom();
   Array.prototype.forEach.call($('custom').querySelectorAll('input'), function (i) { if (checked[i.dataset.m || ('c:' + i.dataset.c)]) i.checked = true; });
   buildSvMods(); renderCats(); renderCards(); renderLex(); renderAbout();
-  $('foot').textContent = 'Sudoku fără frontiere v' + SFF.VERSION + ' · ' + L2('un singur fișier, offline, fără urmărire · licență MIT', 'single file, offline, no tracking · MIT licence');
+  $('foot').textContent = 'Sudoku fără frontiere v' + SFF.VERSION + ' · ' + L2('un singur fișier, offline, fără urmărire · licență MIT', 'single file, offline, no tracking · MIT licence', ["un seul fichier, hors ligne, sans traçage · licence MIT", "un solo file, offline, senza tracciamento · licenza MIT", "un solo archivo, sin conexión, sin rastreo · licencia MIT", "um só ficheiro, offline, sem rastreamento · licença MIT", "eine einzige Datei, offline, ohne Tracking · MIT-Lizenz", "egyetlen fájl, offline, követés nélkül · MIT-licenc"]);
   $('ver').textContent = 'v' + SFF.VERSION;
   if (game) { updateStatus(); renderRules(); }
 }
@@ -1024,7 +1036,7 @@ function modeTick(dt) {
   if (x.id === 'duel') {
     x.acc += dt;
     while (x.acc >= x.per && x.done < x.total) { x.acc -= x.per; x.done++; }
-    if (x.done >= x.total) { g.lost = true; setMsg(L2('Adversarul a terminat primul. Pornește un joc nou ca să te revanșezi.', 'The opponent finished first. Start a new game for a rematch.'), 'bad'); save(); }
+    if (x.done >= x.total) { g.lost = true; setMsg(L2('Adversarul a terminat primul. Pornește un joc nou ca să te revanșezi.', 'The opponent finished first. Start a new game for a rematch.', ["L’adversaire a fini le premier. Lancez une nouvelle partie pour prendre votre revanche.", "L’avversario ha finito per primo. Inizia una nuova partita per la rivincita.", "El adversario terminó primero. Empieza una partida nueva para la revancha.", "O adversário terminou primeiro. Inicie um novo jogo para a desforra.", "Der Gegner war zuerst fertig. Starten Sie ein neues Spiel für die Revanche.", "Az ellenfél végzett elsőként. Indíts új játékot a visszavágóhoz."]), 'bad'); save(); }
   }
 }
 function renderModebar() {
@@ -1033,23 +1045,23 @@ function renderModebar() {
   el.hidden = false;
   var nm = t('mode_' + x.id);
   h = '<b>' + nm + '</b>';
-  if (x.id === 'orb') h += ' ' + L2('se văd doar celulele de la cel mult 2 pași de selecție', 'only cells within 2 steps of the selection are visible');
+  if (x.id === 'orb') h += ' ' + L2('se văd doar celulele de la cel mult 2 pași de selecție', 'only cells within 2 steps of the selection are visible', ["seules les cases à 2 pas au plus de la sélection sont visibles", "si vedono solo le celle a non più di 2 passi dalla selezione", "solo se ven las celdas a 2 pasos como máximo de la selección", "só se veem as células a, no máximo, 2 passos da seleção", "sichtbar sind nur Felder höchstens 2 Schritte von der Auswahl entfernt", "csak a kijelöléstől legfeljebb 2 lépésre lévő cellák láthatók"]);
   if (x.id === 'memory') {
-    if (x.phase === 'show') h += ' ' + L2('memorizează cifrele: ', 'memorise the digits: ') + Math.ceil(x.left) + ' s <button id="mb-go">' + L2('Gata', 'Ready') + '</button>';
-    else if (x.phase === 'peek') h += ' ' + L2('privești: ', 'peeking: ') + Math.ceil(x.left) + ' s';
-    else h += ' ' + L2('cifrele date sunt ascunse', 'the given digits are hidden') + ' <button id="mb-peek">' + L2('Privește 4 s (+30 s)', 'Peek 4 s (+30 s)') + '</button>';
+    if (x.phase === 'show') h += ' ' + L2('memorizează cifrele: ', 'memorise the digits: ', ["mémorisez les chiffres : ", "memorizza le cifre: ", "memoriza los dígitos: ", "memorize os algarismos: ", "Ziffern merken: ", "jegyezd meg a számjegyeket: "]) + Math.ceil(x.left) + ' s <button id="mb-go">' + L2('Gata', 'Ready', ["Prêt", "Pronto", "Listo", "Pronto", "Bereit", "Kész"]) + '</button>';
+    else if (x.phase === 'peek') h += ' ' + L2('privești: ', 'peeking: ', ["vous regardez : ", "stai guardando: ", "estás mirando: ", "está a espreitar: ", "Sie spähen: ", "nézed: "]) + Math.ceil(x.left) + ' s';
+    else h += ' ' + L2('cifrele date sunt ascunse', 'the given digits are hidden', ["les chiffres donnés sont cachés", "le cifre date sono nascoste", "los dígitos dados están ocultos", "os algarismos dados estão ocultos", "die vorgegebenen Ziffern sind verborgen", "az adott számjegyek el vannak rejtve"]) + ' <button id="mb-peek">' + L2('Privește 4 s (+30 s)', 'Peek 4 s (+30 s)', ["Regarder 4 s (+30 s)", "Sbircia 4 s (+30 s)", "Mirar 4 s (+30 s)", "Espreitar 4 s (+30 s)", "4 s spähen (+30 s)", "Nézd 4 mp-ig (+30 mp)"]) + '</button>';
   }
-  if (x.id === 'duel') h += ' ' + L2('adversar: ', 'opponent: ') + x.done + '/' + x.total + ' <span class="bar2"><i style="width:' + Math.round(100 * x.done / Math.max(1, x.total)) + '%"></i></span>';
-  if (x.id === 'hardcore') h += ' ' + L2('vieți: ', 'lives: ') + new Array(Math.max(0, x.lives) + 1).join('♥');
-  if (x.id === 'marathon') h += ' ' + x.step + '/' + x.of + ' · ' + L2('timp total ', 'total time ') + fmtT(x.total + g.elapsed);
-  if (x.id === 'daily') { var ds = dailyInfo(); h += ' ' + x.date + ' · ' + L2('serie: ', 'streak: ') + ds.streak + ' · ' + L2('record: ', 'best: ') + ds.best; }
-  if (x.id === 'sound') h += ' <button id="mb-row">▶ ' + L2('Ascultă rândul', 'Play the row') + '</button>';
+  if (x.id === 'duel') h += ' ' + L2('adversar: ', 'opponent: ', ["adversaire : ", "avversario: ", "adversario: ", "adversário: ", "Gegner: ", "ellenfél: "]) + x.done + '/' + x.total + ' <span class="bar2"><i style="width:' + Math.round(100 * x.done / Math.max(1, x.total)) + '%"></i></span>';
+  if (x.id === 'hardcore') h += ' ' + L2('vieți: ', 'lives: ', ["vies : ", "vite: ", "vidas: ", "vidas: ", "Leben: ", "életek: "]) + new Array(Math.max(0, x.lives) + 1).join('♥');
+  if (x.id === 'marathon') h += ' ' + x.step + '/' + x.of + ' · ' + L2('timp total ', 'total time ', ["temps total ", "tempo totale ", "tiempo total ", "tempo total ", "Gesamtzeit ", "összidő "]) + fmtT(x.total + g.elapsed);
+  if (x.id === 'daily') { var ds = dailyInfo(); h += ' ' + x.date + ' · ' + L2('serie: ', 'streak: ', ["série : ", "serie: ", "racha: ", "sequência: ", "Serie: ", "sorozat: "]) + ds.streak + ' · ' + L2('record: ', 'best: ', ["record : ", "record: ", "récord: ", "recorde: ", "Rekord: ", "rekord: "]) + ds.best; }
+  if (x.id === 'sound') h += ' <button id="mb-row">▶ ' + L2('Ascultă rândul', 'Play the row', ["Écouter la ligne", "Ascolta la riga", "Escuchar la fila", "Ouvir a linha", "Zeile abspielen", "A sor lejátszása"]) + '</button>';
   if (el._h === h) return; el._h = h; el.innerHTML = h;
   var b;
   if ((b = $('mb-go'))) b.onclick = function () { x.phase = 'hide'; renderDyn(); renderModebar(); };
   if ((b = $('mb-peek'))) b.onclick = function () { x.phase = 'peek'; x.left = 4; x.peeks++; g.elapsed += 30000; renderDyn(); renderModebar(); };
   if ((b = $('mb-row'))) b.onclick = function () {
-    var s = Array.from(g.sel)[0]; if (s === undefined) { setMsg(L2('Selectează o celulă.', 'Select a cell.'), ''); return; }
+    var s = Array.from(g.sel)[0]; if (s === undefined) { setMsg(L2('Selectează o celulă.', 'Select a cell.', ["Sélectionnez une case.", "Seleziona una cella.", "Selecciona una celda.", "Selecione uma célula.", "Wählen Sie ein Feld aus.", "Válassz ki egy cellát."]), ''); return; }
     var grp = g.L.rows.filter(function (q) { return q.indexOf(s) >= 0; })[0] || [];
     playSeq(grp.map(curVal).filter(Boolean));
   };
@@ -1073,8 +1085,8 @@ function onDigit(d, cells) {
     cells.forEach(function (i) {
       if (g.vals[i] && g.vals[i] !== g.P.solution[i]) { x.lives--; wrongNow.push(i); }
     });
-    if (x.lives <= 0) { g.lost = true; setMsg(L2('Ai pierdut toate vietile. Pornește un joc nou.', 'You lost all lives. Start a new game.'), 'bad'); }
-    else if (wrongNow.length) setMsg(L2('Greșeală! Vieți rămase: ', 'Mistake! Lives left: ') + x.lives, 'bad');
+    if (x.lives <= 0) { g.lost = true; setMsg(L2('Ai pierdut toate vietile. Pornește un joc nou.', 'You lost all lives. Start a new game.', ["Vous avez perdu toutes vos vies. Lancez une nouvelle partie.", "Hai perso tutte le vite. Inizia una nuova partita.", "Has perdido todas las vidas. Empieza una partida nueva.", "Perdeu todas as vidas. Inicie um novo jogo.", "Sie haben alle Leben verloren. Starten Sie ein neues Spiel.", "Elvesztetted az összes életed. Indíts új játékot."]), 'bad'); }
+    else if (wrongNow.length) setMsg(L2('Greșeală! Vieți rămase: ', 'Mistake! Lives left: ', ["Erreur ! Vies restantes : ", "Errore! Vite rimaste: ", "¡Error! Vidas restantes: ", "Erro! Vidas restantes: ", "Fehler! Verbleibende Leben: ", "Hiba! Hátralévő életek: "]) + x.lives, 'bad');
   }
   return wrongNow;
 }
@@ -1084,15 +1096,15 @@ function onSolved() {
   if (x.id === 'daily') {
     var d = dailyInfo(), today = x.date, prev = new Date(new Date(today).getTime() - 86400000).toISOString().slice(0, 10);
     if (d.last !== today) { d.streak = d.last === prev ? d.streak + 1 : 1; d.last = today; d.best = Math.max(d.best, d.streak); LS.set('daily', JSON.stringify(d)); }
-    setMsg(t('solved') + ' ' + L2('Serie: ', 'Streak: ') + d.streak, 'good');
+    setMsg(t('solved') + ' ' + L2('Serie: ', 'Streak: ', ["Série : ", "Serie: ", "Racha: ", "Sequência: ", "Serie: ", "Sorozat: "]) + d.streak, 'good');
   }
-  if (x.id === 'duel') setMsg(L2('Ai câștigat duelul! Adversarul avea ', 'You won the duel! The opponent had ') + x.done + '/' + x.total + '.', 'good');
+  if (x.id === 'duel') setMsg(L2('Ai câștigat duelul! Adversarul avea ', 'You won the duel! The opponent had ', ["Vous avez gagné le duel ! L’adversaire en était à ", "Hai vinto il duello! L’avversario era a ", "¡Has ganado el duelo! El adversario llevaba ", "Ganhou o duelo! O adversário tinha ", "Sie haben das Duell gewonnen! Der Gegner hatte ", "Megnyerted a párbajt! Az ellenfélnek ennyi volt: "]) + x.done + '/' + x.total + '.', 'good');
   if (x.id === 'marathon') {
     x.total += g.elapsed; g.elapsed = 0;
     if (x.step < x.of) {
-      setMsg(L2('Puzzle ' + x.step + '/' + x.of + ' rezolvat. Următorul pornește imediat…', 'Puzzle ' + x.step + '/' + x.of + ' solved. The next one starts now…'), 'good');
+      setMsg(L2('Puzzle ' + x.step + '/' + x.of + ' rezolvat. Următorul pornește imediat…', 'Puzzle ' + x.step + '/' + x.of + ' solved. The next one starts now…', ["Grille " + x.step + "/" + x.of + " résolue. La suivante démarre tout de suite…", "Schema " + x.step + "/" + x.of + " risolto. Il prossimo parte subito…", "Puzle " + x.step + "/" + x.of + " resuelto. El siguiente empieza ahora…", "Puzzle " + x.step + "/" + x.of + " resolvido. O próximo começa já…", "Rätsel " + x.step + "/" + x.of + " gelöst. Das nächste startet sofort…", "" + x.step + "/" + x.of + ". rejtvény megoldva. A következő azonnal indul…"]), 'good');
       maraTimer = setTimeout(function () { maraNext(g, x); }, 1800);
-    } else setMsg(L2('Maraton terminat! Timp total: ', 'Marathon finished! Total time: ') + fmtT(x.total), 'good');
+    } else setMsg(L2('Maraton terminat! Timp total: ', 'Marathon finished! Total time: ', ["Marathon terminé ! Temps total : ", "Maratona finita! Tempo totale: ", "¡Maratón terminado! Tiempo total: ", "Maratona concluída! Tempo total: ", "Marathon beendet! Gesamtzeit: ", "A maraton véget ért! Összidő: "]) + fmtT(x.total), 'good');
   }
   renderModebar();
 }
@@ -1110,7 +1122,7 @@ function setHid(e, h) { if (h) e.setAttribute('hidden', ''); else e.removeAttrib
 function is3d() { return game && game.L.cube && game.L.dim === 3; }
 function show3dUI() {
   var on = is3d(); $('v3dbar').hidden = !on; setHid($('board3d'), true); setHid($('board'), false);
-  if (on) { $('s3d').max = game.N; $('s3d').value = game.N; $('v3d').textContent = L2('Vedere 3D', '3D view'); }
+  if (on) { $('s3d').max = game.N; $('s3d').value = game.N; $('v3d').textContent = L2('Vedere 3D', '3D view', ["Vue 3D", "Vista 3D", "Vista 3D", "Vista 3D", "3D-Ansicht", "3D nézet"]); }
 }
 function render3d() {
   var g = game, N = g.N, L = g.L, sp = 118 / N, rx = g.rot[0], ry = g.rot[1], keep = +$('s3d').value, pts = [], i;

@@ -287,3 +287,320 @@ var CLUEMODS = [
   ['divisible','Linie divizibilă','Divisible line','divisible'],
   ['primeline','Linie primă','Prime line','primeline']
 ];
+U.fr = {
+  mode:"Mode de jeu", mode_normal:"Normal", mode_orb:"Orbe (vue limitée)", mode_memory:"Mémoire", mode_marathon:"Marathon (5 grilles)", mode_duel:"Duel contre un adversaire", mode_hardcore:"Hardcore (3 vies)", mode_daily:"Grille du jour", mode_sound:"Sonore",
+  atlas:"Atlas", play:"Jouer", solver:"Résolveur", about:"À propos",
+  atlas_h:"Atlas des variantes de Sudoku", atlas_lead:"Chaque variante a une fiche de règles et peut être jouée localement : les grilles sont générées dans votre navigateur, avec une solution unique démontrée. Vous pouvez aussi combiner des règles dans « Combinaison libre ».",
+  search:"Rechercher une variante…", sort_rec:"Ordre recommandé", sort_az:"Titre A→Z", sort_za:"Titre Z→A",
+  custom_btn:"🧩 Combinaison libre", today:"Variante du jour", rand:"Surprenez-moi",
+  csv:"⤓ Exporter en CSV", bib:"⤓ Citer (BibTeX)", lex_h:"Glossaire",
+  sizes:"Tailles", category:"Catégorie", diffs:"Difficulté", play_btn:"▶ Jouer en local", close:"Fermer", all:"Toutes",
+  new_h:"Nouvelle partie", variant:"Variante", size:"Taille", diff:"Difficulté", easy:"Facile", medium:"Moyen", hard:"Difficile",
+  custom:"Combinaison libre", custom_h:"Règles de la grille (au choix) :", custom_h2:"Indices (au choix) :", word:"Mot (9 lettres distinctes)",
+  newgame:"Nouvelle partie", print:"Imprimer", code:"Code", copy:"Copier", open:"Ouvrir",
+  note:"Notes", erase:"Effacer", undo:"Annuler", redo:"Rétablir", hint:"Indice", step:"Pas à pas", autoplay:"▶ Auto", pause:"⏸ Pause", auto:"Notes auto", check:"Vérifier", solve:"Afficher la solution", clear:"Tout effacer",
+  o_conf:"Afficher les conflits", o_same:"Surligner le même chiffre", o_peer:"Surligner les cases liées", o_clean:"Nettoyer les notes automatiquement",
+  generating:"Génération de la grille…", sr_row:"ligne", sr_col:"colonne", sr_giv:"donné", sr_empty:"vide", rate0:"sans embranchement", rateN:"% embranchements", degraded:"La génération prenait trop de temps ; difficulté réduite : %.", cancel:"Annuler", genfail:"Impossible de générer cette combinaison. Essayez une autre taille ou d’autres règles.",
+  clues:"donnés", solved:"Résolu ! Bravo.", solved_app:"La solution a été révélée par l’application.",
+  check_ok:"Tout est correct jusqu’ici.", check_bad:"Cases erronées : ", hint_logic:"Cette case n’admet qu’un seul chiffre (logique).", hint_rev:"Le chiffre a été révélé à partir de la solution.", hint_none:"Sélectionnez une case vide ou remplissez-en davantage.",
+  copied:"Code copié.", badcode:"Code inconnu.", confirm_clear:"Effacer toutes les cases remplies ?", confirm_solve:"Afficher la solution ?",
+  sv_h:"Résolveur 9×9 classique", sv_lead:"Collez une grille (81 caractères : 1–9, cases vides en 0 ou .) et choisissez éventuellement des règles supplémentaires. Le résolveur indique combien de solutions existent.",
+  sv_go:"Résoudre", sv_play:"Jouer cette grille", sv_ex:"Exemple",
+  sv_len:"Il faut exactement 81 caractères (actuellement : ", sv_none:"Il n’y a aucune solution.", sv_one:"Solution unique.", sv_many:"Plusieurs solutions (la première est affichée).", sv_abort:"Trop complexe pour la limite de recherche.",
+  about_h:"À propos de cet atlas",
+  custom_none:"Aucune taille n’est compatible avec les règles choisies.",
+  rules:"Règles", rules_h:"Règles",
+  gen_ms:"généré en", lang_name:"FR"
+};
+U.it = {
+  mode:"Modalità di gioco", mode_normal:"Normale", mode_orb:"Orbe (vista limitata)", mode_memory:"Memoria", mode_marathon:"Maratona (5 schemi)", mode_duel:"Duello con un avversario", mode_hardcore:"Hardcore (3 vite)", mode_daily:"Schema del giorno", mode_sound:"Sonoro",
+  atlas:"Atlante", play:"Gioca", solver:"Risolutore", about:"Info",
+  atlas_h:"Atlante delle varianti del Sudoku", atlas_lead:"Ogni variante ha una scheda con le regole e si può giocare in locale: gli schemi vengono generati nel browser, con soluzione unica dimostrata. Puoi anche combinare le regole in «Combinazione personalizzata».",
+  search:"Cerca una variante…", sort_rec:"Ordine consigliato", sort_az:"Titolo A→Z", sort_za:"Titolo Z→A",
+  custom_btn:"🧩 Combinazione personalizzata", today:"Variante del giorno", rand:"Sorprendimi",
+  csv:"⤓ Esporta CSV", bib:"⤓ Cita (BibTeX)", lex_h:"Glossario",
+  sizes:"Dimensioni", category:"Categoria", diffs:"Difficoltà", play_btn:"▶ Gioca in locale", close:"Chiudi", all:"Tutte",
+  new_h:"Nuova partita", variant:"Variante", size:"Dimensione", diff:"Difficoltà", easy:"Facile", medium:"Media", hard:"Difficile",
+  custom:"Combinazione personalizzata", custom_h:"Regole della griglia (a scelta):", custom_h2:"Indizi (a scelta):", word:"Parola (9 lettere diverse)",
+  newgame:"Nuova partita", print:"Stampa", code:"Codice", copy:"Copia", open:"Apri",
+  note:"Appunti", erase:"Cancella", undo:"Annulla", redo:"Ripeti", hint:"Suggerimento", step:"Passo passo", autoplay:"▶ Auto", pause:"⏸ Pausa", auto:"Appunti automatici", check:"Verifica", solve:"Mostra la soluzione", clear:"Svuota",
+  o_conf:"Mostra i conflitti", o_same:"Evidenzia la stessa cifra", o_peer:"Evidenzia le celle collegate", o_clean:"Pulisci gli appunti automaticamente",
+  generating:"Generazione dello schema…", sr_row:"riga", sr_col:"colonna", sr_giv:"dato", sr_empty:"vuota", rate0:"nessuna ramificazione", rateN:"% ramificazioni", degraded:"La generazione richiedeva troppo tempo; difficoltà ridotta: %.", cancel:"Annulla", genfail:"Impossibile generare questa combinazione. Prova un’altra dimensione o altre regole.",
+  clues:"dati", solved:"Risolto! Ottimo lavoro.", solved_app:"La soluzione è stata rivelata dall’app.",
+  check_ok:"Finora è tutto corretto.", check_bad:"Celle errate: ", hint_logic:"Questa cella ha una sola cifra possibile (logica).", hint_rev:"La cifra è stata rivelata dalla soluzione.", hint_none:"Seleziona una cella vuota o compilane di più.",
+  copied:"Codice copiato.", badcode:"Codice sconosciuto.", confirm_clear:"Svuotare tutte le celle compilate?", confirm_solve:"Mostrare la soluzione?",
+  sv_h:"Risolutore 9×9 classico", sv_lead:"Incolla uno schema (81 caratteri: 1–9, vuoti come 0 o .) e, se vuoi, scegli regole aggiuntive. Il risolutore indica quante soluzioni esistono.",
+  sv_go:"Risolvi", sv_play:"Gioca questo schema", sv_ex:"Esempio",
+  sv_len:"Servono esattamente 81 caratteri (ora: ", sv_none:"Non esiste alcuna soluzione.", sv_one:"Soluzione unica.", sv_many:"Più soluzioni (viene mostrata la prima).", sv_abort:"Troppo complesso per il limite di ricerca.",
+  about_h:"Informazioni su questo atlante",
+  custom_none:"Nessuna dimensione è compatibile con le regole scelte.",
+  rules:"Regole", rules_h:"Regole",
+  gen_ms:"generato in", lang_name:"IT"
+};
+U.es = {
+  mode:"Modo de juego", mode_normal:"Normal", mode_orb:"Orbe (vista limitada)", mode_memory:"Memoria", mode_marathon:"Maratón (5 puzles)", mode_duel:"Duelo contra un adversario", mode_hardcore:"Hardcore (3 vidas)", mode_daily:"Puzle del día", mode_sound:"Sonoro",
+  atlas:"Atlas", play:"Jugar", solver:"Resolutor", about:"Acerca de",
+  atlas_h:"Atlas de variantes de Sudoku", atlas_lead:"Cada variante tiene una ficha con sus reglas y se puede jugar en local: los puzles se generan en tu navegador, con solución única demostrada. También puedes combinar reglas en «Combinación propia».",
+  search:"Buscar una variante…", sort_rec:"Orden recomendado", sort_az:"Título A→Z", sort_za:"Título Z→A",
+  custom_btn:"🧩 Combinación propia", today:"Variante de hoy", rand:"Sorpréndeme",
+  csv:"⤓ Exportar CSV", bib:"⤓ Citar (BibTeX)", lex_h:"Glosario",
+  sizes:"Tamaños", category:"Categoría", diffs:"Dificultad", play_btn:"▶ Jugar en local", close:"Cerrar", all:"Todas",
+  new_h:"Partida nueva", variant:"Variante", size:"Tamaño", diff:"Dificultad", easy:"Fácil", medium:"Media", hard:"Difícil",
+  custom:"Combinación propia", custom_h:"Reglas de la cuadrícula (a elegir):", custom_h2:"Pistas (a elegir):", word:"Palabra (9 letras distintas)",
+  newgame:"Partida nueva", print:"Imprimir", code:"Código", copy:"Copiar", open:"Abrir",
+  note:"Notas", erase:"Borrar", undo:"Deshacer", redo:"Rehacer", hint:"Pista", step:"Paso a paso", autoplay:"▶ Auto", pause:"⏸ Pausa", auto:"Notas automáticas", check:"Comprobar", solve:"Mostrar la solución", clear:"Vaciar",
+  o_conf:"Mostrar conflictos", o_same:"Resaltar el mismo dígito", o_peer:"Resaltar celdas relacionadas", o_clean:"Limpiar las notas automáticamente",
+  generating:"Generando el puzle…", sr_row:"fila", sr_col:"columna", sr_giv:"dado", sr_empty:"vacía", rate0:"sin ramificaciones", rateN:"% ramificaciones", degraded:"La generación tardaba demasiado; dificultad reducida: %.", cancel:"Cancelar", genfail:"No se pudo generar esta combinación. Prueba otro tamaño u otras reglas.",
+  clues:"dados", solved:"¡Resuelto! Bien hecho.", solved_app:"La aplicación reveló la solución.",
+  check_ok:"Todo es correcto por ahora.", check_bad:"Celdas erróneas: ", hint_logic:"Esta celda solo admite un dígito (lógica).", hint_rev:"El dígito se reveló a partir de la solución.", hint_none:"Selecciona una celda vacía o rellena más.",
+  copied:"Código copiado.", badcode:"Código desconocido.", confirm_clear:"¿Vaciar todas las celdas rellenadas?", confirm_solve:"¿Mostrar la solución?",
+  sv_h:"Resolutor clásico 9×9", sv_lead:"Pega un puzle (81 caracteres: 1–9, vacíos como 0 o .) y, si quieres, elige reglas adicionales. El resolutor indica cuántas soluciones existen.",
+  sv_go:"Resolver", sv_play:"Jugar este puzle", sv_ex:"Ejemplo",
+  sv_len:"Se necesitan exactamente 81 caracteres (ahora: ", sv_none:"No hay ninguna solución.", sv_one:"Solución única.", sv_many:"Varias soluciones (se muestra la primera).", sv_abort:"Demasiado complejo para el límite de búsqueda.",
+  about_h:"Acerca de este atlas",
+  custom_none:"Ningún tamaño es compatible con las reglas elegidas.",
+  rules:"Reglas", rules_h:"Reglas",
+  gen_ms:"generado en", lang_name:"ES"
+};
+U.pt = {
+  mode:"Modo de jogo", mode_normal:"Normal", mode_orb:"Orbe (visão limitada)", mode_memory:"Memória", mode_marathon:"Maratona (5 puzzles)", mode_duel:"Duelo contra um adversário", mode_hardcore:"Hardcore (3 vidas)", mode_daily:"Puzzle do dia", mode_sound:"Sonoro",
+  atlas:"Atlas", play:"Jogar", solver:"Resolvedor", about:"Sobre",
+  atlas_h:"Atlas de variantes de Sudoku", atlas_lead:"Cada variante tem uma ficha com as regras e pode ser jogada localmente: os puzzles são gerados no seu navegador, com solução única demonstrada. Também pode combinar regras em «Combinação própria».",
+  search:"Procurar uma variante…", sort_rec:"Ordem recomendada", sort_az:"Título A→Z", sort_za:"Título Z→A",
+  custom_btn:"🧩 Combinação própria", today:"Variante de hoje", rand:"Surpreenda-me",
+  csv:"⤓ Exportar CSV", bib:"⤓ Citar (BibTeX)", lex_h:"Glossário",
+  sizes:"Tamanhos", category:"Categoria", diffs:"Dificuldade", play_btn:"▶ Jogar localmente", close:"Fechar", all:"Todas",
+  new_h:"Novo jogo", variant:"Variante", size:"Tamanho", diff:"Dificuldade", easy:"Fácil", medium:"Média", hard:"Difícil",
+  custom:"Combinação própria", custom_h:"Regras da grelha (à escolha):", custom_h2:"Pistas (à escolha):", word:"Palavra (9 letras distintas)",
+  newgame:"Novo jogo", print:"Imprimir", code:"Código", copy:"Copiar", open:"Abrir",
+  note:"Notas", erase:"Apagar", undo:"Anular", redo:"Refazer", hint:"Dica", step:"Passo a passo", autoplay:"▶ Auto", pause:"⏸ Pausa", auto:"Notas automáticas", check:"Verificar", solve:"Mostrar a solução", clear:"Limpar tudo",
+  o_conf:"Mostrar conflitos", o_same:"Realçar o mesmo algarismo", o_peer:"Realçar células relacionadas", o_clean:"Limpar as notas automaticamente",
+  generating:"A gerar o puzzle…", sr_row:"linha", sr_col:"coluna", sr_giv:"dado", sr_empty:"vazia", rate0:"sem ramificações", rateN:"% ramificações", degraded:"A geração estava a demorar demasiado; dificuldade reduzida: %.", cancel:"Cancelar", genfail:"Não foi possível gerar esta combinação. Tente outro tamanho ou outras regras.",
+  clues:"dados", solved:"Resolvido! Muito bem.", solved_app:"A solução foi revelada pela aplicação.",
+  check_ok:"Está tudo correto até agora.", check_bad:"Células erradas: ", hint_logic:"Esta célula só admite um algarismo (lógica).", hint_rev:"O algarismo foi revelado a partir da solução.", hint_none:"Selecione uma célula vazia ou preencha mais.",
+  copied:"Código copiado.", badcode:"Código desconhecido.", confirm_clear:"Limpar todas as células preenchidas?", confirm_solve:"Mostrar a solução?",
+  sv_h:"Resolvedor clássico 9×9", sv_lead:"Cole um puzzle (81 carateres: 1–9, vazios como 0 ou .) e, se quiser, escolha regras adicionais. O resolvedor indica quantas soluções existem.",
+  sv_go:"Resolver", sv_play:"Jogar este puzzle", sv_ex:"Exemplo",
+  sv_len:"São necessários exatamente 81 carateres (agora: ", sv_none:"Não existe solução.", sv_one:"Solução única.", sv_many:"Várias soluções (é mostrada a primeira).", sv_abort:"Demasiado complexo para o limite de pesquisa.",
+  about_h:"Sobre este atlas",
+  custom_none:"Nenhum tamanho é compatível com as regras escolhidas.",
+  rules:"Regras", rules_h:"Regras",
+  gen_ms:"gerado em", lang_name:"PT"
+};
+U.de = {
+  mode:"Spielmodus", mode_normal:"Normal", mode_orb:"Orb (eingeschränkte Sicht)", mode_memory:"Gedächtnis", mode_marathon:"Marathon (5 Rätsel)", mode_duel:"Duell gegen einen Gegner", mode_hardcore:"Hardcore (3 Leben)", mode_daily:"Rätsel des Tages", mode_sound:"Klang",
+  atlas:"Atlas", play:"Spielen", solver:"Löser", about:"Info",
+  atlas_h:"Atlas der Sudoku-Varianten", atlas_lead:"Jede Variante hat eine Regelkarte und kann lokal gespielt werden: Die Rätsel werden in Ihrem Browser erzeugt, mit nachgewiesen eindeutiger Lösung. Unter „Eigene Kombination“ können Sie auch Regeln kombinieren.",
+  search:"Variante suchen…", sort_rec:"Empfohlene Reihenfolge", sort_az:"Titel A→Z", sort_za:"Titel Z→A",
+  custom_btn:"🧩 Eigene Kombination", today:"Variante des Tages", rand:"Überrasch mich",
+  csv:"⤓ CSV exportieren", bib:"⤓ Zitieren (BibTeX)", lex_h:"Glossar",
+  sizes:"Größen", category:"Kategorie", diffs:"Schwierigkeit", play_btn:"▶ Lokal spielen", close:"Schließen", all:"Alle",
+  new_h:"Neues Spiel", variant:"Variante", size:"Größe", diff:"Schwierigkeit", easy:"Leicht", medium:"Mittel", hard:"Schwer",
+  custom:"Eigene Kombination", custom_h:"Gitterregeln (beliebig wählbar):", custom_h2:"Hinweise (beliebig wählbar):", word:"Wort (9 verschiedene Buchstaben)",
+  newgame:"Neues Spiel", print:"Drucken", code:"Code", copy:"Kopieren", open:"Öffnen",
+  note:"Notizen", erase:"Löschen", undo:"Rückgängig", redo:"Wiederholen", hint:"Tipp", step:"Schritt für Schritt", autoplay:"▶ Auto", pause:"⏸ Pause", auto:"Auto-Notizen", check:"Prüfen", solve:"Lösung anzeigen", clear:"Leeren",
+  o_conf:"Konflikte anzeigen", o_same:"Gleiche Ziffer hervorheben", o_peer:"Verwandte Felder hervorheben", o_clean:"Notizen automatisch bereinigen",
+  generating:"Rätsel wird erzeugt…", sr_row:"Zeile", sr_col:"Spalte", sr_giv:"vorgegeben", sr_empty:"leer", rate0:"keine Verzweigung", rateN:"% Verzweigungen", degraded:"Die Erzeugung dauerte zu lange; Schwierigkeit gesenkt: %.", cancel:"Abbrechen", genfail:"Diese Kombination konnte nicht erzeugt werden. Versuchen Sie eine andere Größe oder andere Regeln.",
+  clues:"Vorgaben", solved:"Gelöst! Gut gemacht.", solved_app:"Die Lösung wurde von der App aufgedeckt.",
+  check_ok:"Bis jetzt ist alles richtig.", check_bad:"Falsche Felder: ", hint_logic:"In diesem Feld ist nur eine Ziffer möglich (Logik).", hint_rev:"Die Ziffer wurde aus der Lösung aufgedeckt.", hint_none:"Wählen Sie ein leeres Feld aus oder füllen Sie mehr aus.",
+  copied:"Code kopiert.", badcode:"Unbekannter Code.", confirm_clear:"Alle ausgefüllten Felder leeren?", confirm_solve:"Die Lösung anzeigen?",
+  sv_h:"Klassischer 9×9-Löser", sv_lead:"Fügen Sie ein Rätsel ein (81 Zeichen: 1–9, Leerfelder als 0 oder .) und wählen Sie optional zusätzliche Regeln. Der Löser zeigt, wie viele Lösungen es gibt.",
+  sv_go:"Lösen", sv_play:"Dieses Rätsel spielen", sv_ex:"Beispiel",
+  sv_len:"Es werden genau 81 Zeichen benötigt (jetzt: ", sv_none:"Es gibt keine Lösung.", sv_one:"Eindeutige Lösung.", sv_many:"Mehrere Lösungen (die erste wird angezeigt).", sv_abort:"Zu komplex für das Suchlimit.",
+  about_h:"Über diesen Atlas",
+  custom_none:"Keine Größe ist mit den gewählten Regeln vereinbar.",
+  rules:"Regeln", rules_h:"Regeln",
+  gen_ms:"erzeugt in", lang_name:"DE"
+};
+U.hu = {
+  mode:"Játékmód", mode_normal:"Normál", mode_orb:"Gömb (korlátozott látótér)", mode_memory:"Memória", mode_marathon:"Maraton (5 rejtvény)", mode_duel:"Párbaj egy ellenfél ellen", mode_hardcore:"Hardcore (3 élet)", mode_daily:"A nap rejtvénye", mode_sound:"Hangalapú",
+  atlas:"Atlasz", play:"Játék", solver:"Megoldó", about:"Névjegy",
+  atlas_h:"A Sudoku-változatok atlasza", atlas_lead:"Minden változathoz tartozik egy szabálykártya, és helyben játszható: a rejtvényeket a böngésző állítja elő, bizonyítottan egyértelmű megoldással. A szabályokat az „Egyéni kombináció” alatt is összeállíthatod.",
+  search:"Változat keresése…", sort_rec:"Ajánlott sorrend", sort_az:"Cím A→Z", sort_za:"Cím Z→A",
+  custom_btn:"🧩 Egyéni kombináció", today:"A nap változata", rand:"Lepj meg",
+  csv:"⤓ CSV-exportálás", bib:"⤓ Hivatkozás (BibTeX)", lex_h:"Szószedet",
+  sizes:"Méretek", category:"Kategória", diffs:"Nehézség", play_btn:"▶ Játék helyben", close:"Bezárás", all:"Mind",
+  new_h:"Új játék", variant:"Változat", size:"Méret", diff:"Nehézség", easy:"Könnyű", medium:"Közepes", hard:"Nehéz",
+  custom:"Egyéni kombináció", custom_h:"Rácsszabályok (tetszés szerint):", custom_h2:"Támpontok (tetszés szerint):", word:"Szó (9 különböző betű)",
+  newgame:"Új játék", print:"Nyomtatás", code:"Kód", copy:"Másolás", open:"Megnyitás",
+  note:"Jegyzetek", erase:"Törlés", undo:"Visszavonás", redo:"Ismétlés", hint:"Tipp", step:"Lépésről lépésre", autoplay:"▶ Auto", pause:"⏸ Szünet", auto:"Automatikus jegyzetek", check:"Ellenőrzés", solve:"Megoldás mutatása", clear:"Ürítés",
+  o_conf:"Ütközések mutatása", o_same:"Azonos számjegy kiemelése", o_peer:"Kapcsolódó cellák kiemelése", o_clean:"Jegyzetek automatikus tisztítása",
+  generating:"A rejtvény előállítása…", sr_row:"sor", sr_col:"oszlop", sr_giv:"adott", sr_empty:"üres", rate0:"nincs elágazás", rateN:"% elágazás", degraded:"Az előállítás túl sokáig tartott; a nehézség csökkentve: %.", cancel:"Mégse", genfail:"Ezt a kombinációt nem sikerült előállítani. Próbálj másik méretet vagy más szabályokat.",
+  clues:"adott", solved:"Megoldva! Szép munka.", solved_app:"A megoldást az alkalmazás felfedte.",
+  check_ok:"Eddig minden helyes.", check_bad:"Hibás cellák: ", hint_logic:"Ebbe a cellába csak egy számjegy kerülhet (logika).", hint_rev:"A számjegyet a megoldásból tártuk fel.", hint_none:"Válassz egy üres cellát, vagy tölts ki többet.",
+  copied:"Kód másolva.", badcode:"Ismeretlen kód.", confirm_clear:"Törlöd az összes kitöltött cellát?", confirm_solve:"Megmutassuk a megoldást?",
+  sv_h:"Klasszikus 9×9-es megoldó", sv_lead:"Illessz be egy rejtvényt (81 karakter: 1–9, az üres cellák 0 vagy .), és szükség esetén válassz további szabályokat. A megoldó megmondja, hány megoldás létezik.",
+  sv_go:"Megoldás", sv_play:"Ennek a rejtvénynek a játéka", sv_ex:"Példa",
+  sv_len:"Pontosan 81 karakter kell (most: ", sv_none:"Nincs megoldás.", sv_one:"Egyértelmű megoldás.", sv_many:"Több megoldás (az elsőt mutatjuk).", sv_abort:"A keresési korláthoz túl bonyolult.",
+  about_h:"Az atlaszról",
+  custom_none:"Egyetlen méret sem egyeztethető össze a választott szabályokkal.",
+  rules:"Szabályok", rules_h:"Szabályok",
+  gen_ms:"előállítva:", lang_name:"HU"
+};
+
+var TT = {"ro": ["Limba", "Temă", "Mărime text"], "en": ["Language", "Theme", "Text size"], "fr": ["Langue", "Thème", "Taille du texte"], "it": ["Lingua", "Tema", "Dimensione del testo"], "es": ["Idioma", "Tema", "Tamaño del texto"], "pt": ["Idioma", "Tema", "Tamanho do texto"], "de": ["Sprache", "Design", "Textgröße"], "hu": ["Nyelv", "Téma", "Szövegméret"]};
+Object.keys(TT).forEach(function (k) { U[k].tt_lang = TT[k][0]; U[k].tt_theme = TT[k][1]; U[k].tt_size = TT[k][2]; });
+/* Etichete traduse pentru reguli/indicii/categorii (ordine: fr|it|es|pt|de|hu); lipsă = engleza */
+var LBL = {
+diag:"Diagonales|Diagonali|Diagonales|Diagonais|Diagonalen|Átlók",
+hyper:"Fenêtres hyper|Finestre hyper|Ventanas hyper|Janelas hyper|Hyper-Fenster|Hiperablakok",
+center:"Points centraux|Punti centrali|Puntos centrales|Pontos centrais|Mittelpunkte|Középpontok",
+dg:"Groupes disjoints|Gruppi disgiunti|Grupos disjuntos|Grupos disjuntos|Disjunkte Gruppen|Diszjunkt csoportok",
+antiknight:"Anti-cavalier|Anti-cavallo|Anti-caballo|Anti-cavalo|Anti-Springer|Anti-huszár",
+antiking:"Anti-roi|Anti-re|Anti-rey|Anti-rei|Anti-König|Anti-király",
+nonconsec:"Sans consécutifs|Senza consecutivi|Sin consecutivos|Sem consecutivos|Keine Nachbarzahlen|Nincs egymást követő",
+jigsaw:"Régions irrégulières|Regioni irregolari|Regiones irregulares|Regiões irregulares|Unregelmäßige Gebiete|Szabálytalan tartományok",
+latin:"Sans blocs|Senza riquadri|Sin cajas|Sem caixas|Ohne Blöcke|Blokkok nélkül",
+diag1:"Diagonale simple|Diagonale singola|Diagonal simple|Diagonal simples|Einzelne Diagonale|Egyetlen átló",
+asterisk:"Astérisque|Asterisco|Asterisco|Asterisco|Asterisk|Csillag",
+girandola:"Girandole|Girandola|Girandola|Girândola|Girandola|Girandola",
+sparse9:"Neuf dispersés|Nove sparsi|Nueve dispersos|Nove dispersos|Verstreute Neun|Szétszórt kilenc",
+antibishop:"Anti-fou|Anti-alfiere|Anti-alfil|Anti-bispo|Anti-Läufer|Anti-futó",
+anticamel:"Anti-chameau|Anti-cammello|Anti-camello|Anti-camelo|Anti-Kamel|Anti-teve",
+antizebra:"Anti-zèbre|Anti-zebra|Anti-cebra|Anti-zebra|Anti-Zebra|Anti-zebra",
+torusking:"Tore anti-roi|Toro anti-re|Toro anti-rey|Toro anti-rei|Torus-Anti-König|Tórusz anti-király",
+torusknight:"Tore anti-cavalier|Toro anti-cavallo|Toro anti-caballo|Toro anti-cavalo|Torus-Anti-Springer|Tórusz anti-huszár",
+cylking:"Cylindre anti-roi|Cilindro anti-re|Cilindro anti-rey|Cilindro anti-rei|Zylinder-Anti-König|Henger anti-király",
+mobiusking:"Möbius anti-roi|Möbius anti-re|Möbius anti-rey|Möbius anti-rei|Möbius-Anti-König|Möbius anti-király",
+kleinking:"Klein anti-roi|Klein anti-re|Klein anti-rey|Klein anti-rei|Klein-Anti-König|Klein anti-király",
+projking:"Plan projectif anti-roi|Piano proiettivo anti-re|Plano proyectivo anti-rey|Plano projetivo anti-rei|Projektive Ebene, Anti-König|Projektív sík anti-király",
+evenodd:"Pair–impair|Pari–dispari|Par–impar|Par–ímpar|Gerade–ungerade|Páros–páratlan",
+consec:"Consécutifs|Consecutivi|Consecutivos|Consecutivos|Aufeinanderfolgend|Egymást követő",
+lt:"Comparaisons|Confronti|Comparaciones|Comparações|Vergleiche|Összehasonlítások",
+batt:"Battenberg|Battenberg|Battenberg|Battenberg|Battenberg|Battenberg",
+quad:"Quadruplets|Quadruple|Cuádruples|Quádruplos|Quadrupel|Négyesek",
+sandwich:"Sandwich|Sandwich|Sándwich|Sanduíche|Sandwich|Szendvics",
+xsum:"Sommes X|Somme X|Sumas X|Somas X|X-Summen|X-összegek",
+osum:"Cadre|Cornice|Marco|Moldura|Rahmen|Keret",
+sky:"Gratte-ciel|Grattacieli|Rascacielos|Arranha-céus|Wolkenkratzer|Felhőkarcolók",
+thermo:"Thermomètres|Termometri|Termómetros|Termómetros|Thermometer|Hőmérők",
+arrow:"Flèches|Frecce|Flechas|Setas|Pfeile|Nyilak",
+whisper:"Murmures allemands|Sussurri tedeschi|Susurros alemanes|Sussurros alemães|Deutsche Flüsterlinien|Német suttogás",
+palin:"Palindrome|Palindromo|Palíndromo|Palíndromo|Palindrom|Palindrom",
+between:"Entre les lignes|Tra le linee|Entre líneas|Entre linhas|Zwischen Linien|Vonalak között",
+entropic:"Entropiques|Entropiche|Entrópicas|Entrópicas|Entropisch|Entrópikus",
+modular:"Modulaires|Modulari|Modulares|Modulares|Modular|Moduláris",
+whisper4:"Murmures néerlandais|Sussurri olandesi|Susurros neerlandeses|Sussurros holandeses|Holländische Flüsterlinien|Holland suttogás",
+slowthermo:"Thermomètre lent|Termometro lento|Termómetro lento|Termómetro lento|Langsames Thermometer|Lassú hőmérő",
+parityline:"Ligne de parité|Linea di parità|Línea de paridad|Linha de paridade|Paritätslinie|Paritásvonal",
+sameparity:"Ligne de même parité|Linea di stessa parità|Línea de igual paridad|Linha de mesma paridade|Linie gleicher Parität|Azonos paritású vonal",
+evenonly:"Seuls les pairs marqués|Solo i pari indicati|Solo pares marcados|Só pares marcados|Nur markierte gerade Zahlen|Csak jelölt párosak",
+oddonly:"Seuls les impairs marqués|Solo i dispari indicati|Solo impares marcados|Só ímpares marcados|Nur markierte ungerade Zahlen|Csak jelölt páratlanok",
+luk:"Little Killer unique|Little Killer unico|Little Killer único|Little Killer único|Eindeutiger Little Killer|Egyedi Little Killer",
+fortress:"Forteresse|Fortezza|Fortaleza|Fortaleza|Festung|Erőd",
+minmax:"Min / Max|Min / Max|Mín. / Máx.|Mín. / Máx.|Min / Max|Min. / Max.",
+doublearrow:"Flèche double|Freccia doppia|Flecha doble|Seta dupla|Doppelpfeil|Dupla nyíl",
+rossini:"Rossini|Rossini|Rossini|Rossini|Rossini|Rossini",
+outside:"Extérieur|Esterno|Exterior|Exterior|Außen|Külső",
+clone:"Clone|Clone|Clon|Clone|Klon|Klón",
+regionsum:"Lignes à sommes par région|Linee con somme per regione|Líneas con sumas por región|Linhas com somas por região|Linien mit Gebietssummen|Tartományösszeg-vonalak",
+avgarrow:"Flèche moyenne|Freccia media|Flecha media|Seta média|Durchschnittspfeil|Átlagnyíl",
+prodarrow:"Flèche produit|Freccia prodotto|Flecha producto|Seta produto|Produktpfeil|Szorzatnyíl",
+pillarrow:"Flèche pilule|Freccia pillola|Flecha píldora|Seta pílula|Pillenpfeil|Pirulanyíl",
+index:"Indexation|Indicizzazione|Indexación|Indexação|Indizierung|Indexelés",
+ratio:"Rapport ×3|Rapporto ×3|Razón ×3|Razão ×3|Verhältnis ×3|Arány ×3",
+symcomp:"Symétrie complémentaire|Simmetria complementare|Simetría complementaria|Simetria complementar|Komplementäre Symmetrie|Kiegészítő szimmetria",
+symparity:"Parité symétrique|Parità simmetrica|Paridad simétrica|Paridade simétrica|Symmetrische Parität|Szimmetrikus paritás",
+cgrav:"Centre de gravité|Centro di gravità|Centro de gravedad|Centro de gravidade|Schwerpunkt|Súlypont",
+lexrows:"Lignes lexicographiques|Righe lessicografiche|Filas lexicográficas|Linhas lexicográficas|Lexikografische Zeilen|Lexikografikus sorok",
+extremes:"Extrêmes adjacents|Estremi adiacenti|Extremos adyacentes|Extremos adjacentes|Benachbarte Extreme|Szomszédos szélsőértékek",
+boxbalance:"Blocs équilibrés|Riquadri bilanciati|Cajas equilibradas|Caixas equilibradas|Ausgeglichene Blöcke|Kiegyensúlyozott blokkok",
+lonely5:"Le 5 solitaire|Il 5 solitario|El 5 solitario|O 5 solitário|Die einsame 5|A magányos 5-ös",
+nolonely:"Sans cases isolées|Senza celle isolate|Sin celdas solitarias|Sem células isoladas|Keine einsamen Felder|Nincs magányos cella",
+noprog:"Sans progressions|Senza progressioni|Sin progresiones|Sem progressões|Keine Progressionen|Nincs számtani sorozat",
+semimagic:"Blocs semi-magiques|Riquadri semimagici|Cajas semimágicas|Caixas semimágicas|Halbmagische Blöcke|Félig mágikus blokkok",
+radar:"Radar|Radar|Radar|Radar|Radar|Radar",
+sandnum:"Sandwich numérique|Sandwich numerico|Sándwich numérico|Sanduíche numérico|Zählsandwich|Számláló szendvics",
+sandpar:"Sandwich de parité|Sandwich di parità|Sándwich de paridad|Sanduíche de paridade|Paritätssandwich|Paritásszendvics",
+sand2:"Double sandwich|Sandwich doppio|Sándwich doble|Sanduíche duplo|Doppelsandwich|Dupla szendvics",
+subsol:"Sous-sol|Seminterrato|Sótano|Cave|Keller|Pince",
+prodmargin:"Produit en bordure|Prodotto sul bordo|Producto en el borde|Produto na margem|Randprodukt|Szélső szorzat",
+diffmargin:"Différence en bordure|Differenza sul bordo|Diferencia en el borde|Diferença na margem|Randdifferenz|Szélső különbség",
+ascents:"Montées|Salite|Ascensos|Subidas|Anstiege|Emelkedések",
+inversions:"Inversions|Inversioni|Inversiones|Inversões|Inversionen|Inverziók",
+cycles:"Cycles|Cicli|Ciclos|Ciclos|Zyklen|Ciklusok",
+fixedpts:"Points fixes|Punti fissi|Puntos fijos|Pontos fixos|Fixpunkte|Fixpontok",
+altsum:"Somme alternée|Somma alternata|Suma alterna|Soma alternada|Alternierende Summe|Váltakozó összeg",
+dxsum:"Sommes X diagonales|Somme X diagonali|Sumas X diagonales|Somas X diagonais|Diagonale X-Summen|Átlós X-összegek",
+relief:"Relief|Rilievo|Relieve|Relevo|Relief|Dombormű",
+oddsweeper:"Démineur impair|Campo minato dispari|Buscaminas impar|Campo minado ímpar|Ungerade Minensucher|Páratlan aknakereső",
+compass:"Boussole|Bussola|Brújula|Bússola|Kompass|Iránytű",
+quadsum:"Somme de quadruplet|Somma di quadruplo|Suma de cuádruple|Soma de quádruplo|Quadrupelsumme|Négyesösszeg",
+stone:"Pierre 2×2|Pietra 2×2|Piedra 2×2|Pedra 2×2|Stein 2×2|Kő 2×2",
+domino:"Domino|Domino|Dominó|Dominó|Domino|Dominó",
+pillsq:"Pilule carré parfait|Pillola quadrato perfetto|Píldora de cuadrado perfecto|Pílula de quadrado perfeito|Pille mit Quadratzahl|Négyzetszám-pirula",
+primecage:"Cage première|Gabbia prima|Jaula prima|Gaiola prima|Primzahlkäfig|Prím ketrec",
+balcage:"Cage équilibrée|Gabbia bilanciata|Jaula equilibrada|Gaiola equilibrada|Ausgeglichener Käfig|Kiegyensúlyozott ketrec",
+doubler:"Doubleurs|Raddoppiatori|Duplicadores|Duplicadores|Verdoppler|Duplázók",
+clonemir:"Clone miroir|Clone speculare|Clon espejo|Clone espelhado|Spiegelklon|Tükörklón",
+diff:"Différence|Differenza|Diferencia|Diferença|Differenz|Különbség",
+kropkipos:"Kropki marqués seulement|Solo Kropki indicati|Solo Kropki marcados|Só Kropki marcados|Nur markierte Kropki|Csak jelölt Kropki",
+xvpos:"XV marqués seulement|Solo XV indicati|Solo XV marcados|Só XV marcados|Nur markierte XV|Csak jelölt XV",
+consecpos:"Consécutifs marqués seulement|Solo consecutivi indicati|Solo consecutivos marcados|Só consecutivos marcados|Nur markierte Nachbarzahlen|Csak jelölt egymást követők",
+legato:"Legato|Legato|Legato|Legato|Legato|Legato",
+consonant:"Ligne consonante|Linea consonante|Línea consonante|Linha consonante|Konsonante Linie|Konszonáns vonal",
+fixstep:"Ligne à pas fixe|Linea a passo fisso|Línea de paso fijo|Linha de passo fixo|Linie mit festem Schritt|Fix lépésközű vonal",
+compline:"Ligne complémentaire|Linea complementare|Línea complementaria|Linha complementar|Komplementärlinie|Kiegészítő vonal",
+zigzag:"Zigzag|Zigzag|Zigzag|Ziguezague|Zickzack|Cikkcakk",
+fibonacci:"Ligne de Fibonacci|Linea di Fibonacci|Línea de Fibonacci|Linha de Fibonacci|Fibonacci-Linie|Fibonacci-vonal",
+steps:"Marches|Gradini|Escalones|Degraus|Stufen|Lépcsők",
+progression:"Progression arithmétique|Progressione aritmetica|Progresión aritmética|Progressão aritmética|Arithmetische Folge|Számtani sorozat",
+echo:"Ligne d’écho|Linea eco|Línea de eco|Linha de eco|Echolinie|Visszhangvonal",
+divisible:"Ligne divisible|Linea divisibile|Línea divisible|Linha divisível|Teilbare Linie|Osztható vonal",
+primeline:"Ligne de nombres premiers|Linea di numeri primi|Línea de primos|Linha de primos|Primzahllinie|Prímvonal"
+};
+var LBLC = {
+size:"Taille et symboles|Dimensione e simboli|Tamaño y símbolos|Tamanho e símbolos|Größe und Symbole|Méret és jelek",
+region:"Régions et groupes|Regioni e gruppi|Regiones y grupos|Regiões e grupos|Gebiete und Gruppen|Tartományok és csoportok",
+neigh:"Voisins|Vicini|Vecinos|Vizinhos|Nachbarn|Szomszédok",
+mark:"Parité, points, signes|Parità, punti, segni|Paridad, puntos, signos|Paridade, pontos, sinais|Parität, Punkte, Zeichen|Paritás, pontok, jelek",
+sum:"Sommes|Somme|Sumas|Somas|Summen|Összegek",
+outside:"Indices en bordure|Indizi sul bordo|Pistas en el borde|Pistas na margem|Hinweise am Rand|Peremtámpontok",
+line:"Lignes|Linee|Líneas|Linhas|Linien|Vonalak",
+composite:"Grilles composées|Griglie composte|Cuadrículas compuestas|Grelhas compostas|Zusammengesetzte Gitter|Összetett rácsok",
+cousin:"Proches parents|Parenti stretti|Parientes cercanos|Parentes próximos|Nahe Verwandte|Közeli rokonok",
+topo:"Topologies et sauts féeriques|Topologie e salti fairy|Topologías y saltos fairy|Topologias e saltos fairy|Topologien und Märchenschach-Züge|Topológiák és tündér-lépések",
+global:"Règles globales|Regole globali|Reglas globales|Regras globais|Globale Regeln|Globális szabályok",
+cell:"Indices dans les cases|Indizi nelle celle|Pistas en las celdas|Pistas nas células|Hinweise in Feldern|Cellán belüli támpontok",
+dim:"Dimensions supérieures|Dimensioni superiori|Dimensiones superiores|Dimensões superiores|Höhere Dimensionen|Magasabb dimenziók"
+};
+
+var ABOUT = {
+fr: `<p><b>Sudoku sans frontières</b> est un atlas de variantes de Sudoku, avec un générateur et un résolveur qui s’exécutent en local, dans un seul fichier HTML. Il n’y a pas de compte, rien n’est envoyé sur le réseau et aucune ressource externe n’est chargée. L’état du jeu est conservé uniquement dans ce navigateur (clés <code>sff_*</code> dans <code>localStorage</code>).</p>
+<h3>Fonctionnement</h3><p>Le moteur choisit d’abord une grille résolue qui respecte les règles de la variante, en déduit les indices (cages, thermomètres, points, etc.), puis retire les chiffres donnés un à un, tant qu’un résolveur à propagation démontre que la solution reste unique. Une grille générée a donc exactement une solution. Le même code régénère la même grille dans la même version de l’application.</p>
+<h3>Limites</h3><ul><li>La difficulté est indicative : elle dépend du nombre de chiffres donnés, non des techniques logiques nécessaires.</li><li>Le niveau « difficile » retire autant de chiffres que possible ; dans les variantes à nombreux indices sur la grille, il peut rester très peu de chiffres donnés.</li><li>Les règles suivent les conventions usuelles de chaque variante ; lorsqu’il en existe plusieurs, la fiche indique laquelle a été retenue.</li><li>Les grilles 16×16 et 25×25 utilisent les symboles 1–9 et des lettres ; les grilles composées (Samurai, etc.) n’ont que les règles classiques, et les combinaisons très chargées peuvent être plus longues ou échouer.</li><li>L’indice et le « pas à pas » s’appuient sur la logique des candidats (unique dans une case, unique dans une ligne/colonne/région, règles de la variante) ; s’il n’existe pas de pas direct, ils révèlent un chiffre de la solution et le précisent.</li></ul>
+<h3>Modes de jeu</h3><ul><li><b>Orbe</b> : seules les cases à 2 pas au plus de la sélection sont visibles.</li><li><b>Mémoire</b> : les chiffres donnés sont affichés quelques secondes, puis cachés ; « Regarder » coûte 30 s. Pas d’indices ni de surlignage des conflits.</li><li><b>Marathon</b> : 5 grilles d’affilée (facile, facile, moyen, moyen, difficile) avec un temps total.</li><li><b>Duel</b> : un adversaire horloge remplit une case toutes les quelques secondes (il recopie la solution connue, sans logique) ; s’il finit le premier, vous perdez.</li><li><b>Hardcore</b> : 3 vies, chaque chiffre faux en coûte une ; ni indice, ni vérification, ni notes automatiques.</li><li><b>Grille du jour</b> : la même grille pour tous un jour donné (date UTC), avec une série de jours consécutifs conservée localement.</li><li><b>Sonore</b> : chaque chiffre a une note ; une ligne, colonne ou région complétée joue un arpège.</li></ul>
+<h3>Raccourcis</h3><p>Chiffres/lettres : remplir · <kbd>N</kbd> : notes · <kbd>Backspace</kbd> : effacer · flèches : déplacer · <kbd>Maj</kbd>/<kbd>Ctrl</kbd>+clic : sélection multiple · <kbd>Ctrl</kbd>+<kbd>Z</kbd>/<kbd>Y</kbd> : annuler/rétablir.</p>
+<p class="small">Projet personnel, pas un service officiel. Licence : MIT (code, textes et captures), © 2026 Alexandru-Ionuț Chiuță. Le texte intégral figure dans le fichier LICENSE.</p>`,
+it: `<p><b>Sudoku senza frontiere</b> è un atlante di varianti del Sudoku, con generatore e risolutore che girano in locale, in un unico file HTML. Non ha account, non invia nulla in rete e non carica alcuna risorsa esterna. Lo stato di gioco resta solo in questo browser (chiavi <code>sff_*</code> in <code>localStorage</code>).</p>
+<h3>Come funziona</h3><p>Il motore sceglie prima una griglia risolta che rispetta le regole della variante, ne ricava gli indizi (gabbie, termometri, punti ecc.) e poi toglie le cifre date una a una, finché un risolutore a propagazione dimostra che la soluzione resta unica. Uno schema generato ha quindi esattamente una soluzione. Lo stesso codice rigenera lo stesso schema nella stessa versione dell’app.</p>
+<h3>Limiti</h3><ul><li>La difficoltà è indicativa: dipende dal numero di cifre date, non dalle tecniche logiche richieste.</li><li>Il livello «difficile» toglie quante più cifre possibile; nelle varianti con molti indizi sulla griglia possono restare pochissime cifre date.</li><li>Le regole seguono le convenzioni abituali di ogni variante; dove ce n’è più di una, la scheda indica quale è stata scelta.</li><li>Le griglie 16×16 e 25×25 usano i simboli 1–9 e lettere; le griglie composte (Samurai ecc.) hanno solo le regole classiche, e le combinazioni molto cariche possono richiedere più tempo o fallire.</li><li>Il suggerimento e il «passo passo» usano la logica dei candidati (unico in una cella, unico in una riga/colonna/regione, regole della variante); se non esiste un passo diretto, rivelano una cifra della soluzione e lo dicono.</li></ul>
+<h3>Modalità di gioco</h3><ul><li><b>Orbe</b>: si vedono solo le celle a non più di 2 passi dalla selezione.</li><li><b>Memoria</b>: le cifre date restano visibili per qualche secondo, poi si nascondono; «Sbircia» costa 30 s. Niente suggerimenti né evidenziazione dei conflitti.</li><li><b>Maratona</b>: 5 schemi di fila (facile, facile, medio, medio, difficile) con un tempo totale.</li><li><b>Duello</b>: un avversario a tempo riempie una cella ogni pochi secondi (copia la soluzione nota, senza logica); se finisce prima, perdi.</li><li><b>Hardcore</b>: 3 vite, ogni cifra sbagliata ne costa una; niente suggerimenti, verifica o appunti automatici.</li><li><b>Schema del giorno</b>: lo stesso schema per tutti in un dato giorno (data UTC), con una serie di giorni consecutivi conservata in locale.</li><li><b>Sonoro</b>: ogni cifra ha una nota; una riga, colonna o regione completata suona un arpeggio.</li></ul>
+<h3>Scorciatoie</h3><p>Cifre/lettere: inserisci · <kbd>N</kbd>: appunti · <kbd>Backspace</kbd>: cancella · frecce: spostati · <kbd>Maiusc</kbd>/<kbd>Ctrl</kbd>+clic: selezione multipla · <kbd>Ctrl</kbd>+<kbd>Z</kbd>/<kbd>Y</kbd>: annulla/ripeti.</p>
+<p class="small">Progetto personale, non un servizio ufficiale. Licenza: MIT (codice, testi e schermate), © 2026 Alexandru-Ionuț Chiuță. Il testo completo è nel file LICENSE.</p>`,
+es: `<p><b>Sudoku sin fronteras</b> es un atlas de variantes de Sudoku, con generador y resolutor que se ejecutan en local, en un único archivo HTML. No tiene cuenta, no envía nada por la red y no carga ningún recurso externo. El estado de la partida se guarda solo en este navegador (claves <code>sff_*</code> en <code>localStorage</code>).</p>
+<h3>Cómo funciona</h3><p>El motor elige primero una cuadrícula resuelta que respeta las reglas de la variante, deduce de ella las pistas (jaulas, termómetros, puntos, etc.) y luego quita los dígitos dados uno a uno, mientras un resolutor con propagación demuestre que la solución sigue siendo única. Un puzle generado tiene, por tanto, exactamente una solución. El mismo código regenera el mismo puzle en la misma versión de la aplicación.</p>
+<h3>Límites</h3><ul><li>La dificultad es orientativa: depende del número de dígitos dados, no de las técnicas lógicas necesarias.</li><li>El nivel «difícil» quita tantos dígitos como puede; en variantes con muchas pistas en la cuadrícula pueden quedar muy pocos dígitos dados.</li><li>Las reglas siguen las convenciones habituales de cada variante; cuando hay varias, la ficha indica cuál se eligió.</li><li>Las cuadrículas de 16×16 y 25×25 usan los símbolos 1–9 y letras; las cuadrículas compuestas (Samurái, etc.) solo llevan las reglas clásicas, y las combinaciones muy cargadas pueden tardar más o fallar.</li><li>La pista y el «paso a paso» usan lógica de candidatos (único en una celda, único en una fila/columna/región, reglas de la variante); si no hay un paso directo, revelan un dígito de la solución y lo indican.</li></ul>
+<h3>Modos de juego</h3><ul><li><b>Orbe</b>: solo se ven las celdas a 2 pasos como máximo de la selección.</li><li><b>Memoria</b>: los dígitos dados se muestran unos segundos y luego se ocultan; «Mirar» cuesta 30 s. Sin pistas ni resaltado de conflictos.</li><li><b>Maratón</b>: 5 puzles seguidos (fácil, fácil, medio, medio, difícil) con un tiempo total.</li><li><b>Duelo</b>: un adversario con reloj rellena una celda cada pocos segundos (copia la solución conocida, sin lógica); si termina primero, pierdes.</li><li><b>Hardcore</b>: 3 vidas, cada dígito erróneo cuesta una; sin pistas, comprobación ni notas automáticas.</li><li><b>Puzle del día</b>: el mismo puzle para todos en un día dado (fecha UTC), con una racha de días consecutivos guardada en local.</li><li><b>Sonoro</b>: cada dígito tiene una nota; una fila, columna o región completada suena como un arpegio.</li></ul>
+<h3>Atajos</h3><p>Dígitos/letras: rellenar · <kbd>N</kbd>: notas · <kbd>Backspace</kbd>: borrar · flechas: mover · <kbd>Mayús</kbd>/<kbd>Ctrl</kbd>+clic: selección múltiple · <kbd>Ctrl</kbd>+<kbd>Z</kbd>/<kbd>Y</kbd>: deshacer/rehacer.</p>
+<p class="small">Proyecto personal, no un servicio oficial. Licencia: MIT (código, textos y capturas), © 2026 Alexandru-Ionuț Chiuță. El texto completo está en el archivo LICENSE.</p>`,
+pt: `<p><b>Sudoku sem fronteiras</b> é um atlas de variantes de Sudoku, com gerador e resolvedor que funcionam localmente, num único ficheiro HTML. Não tem conta, não envia nada pela rede e não carrega nenhum recurso externo. O estado do jogo fica guardado apenas neste navegador (chaves <code>sff_*</code> em <code>localStorage</code>).</p>
+<h3>Como funciona</h3><p>O motor escolhe primeiro uma grelha resolvida que respeita as regras da variante, deduz dela as pistas (gaiolas, termómetros, pontos, etc.) e depois retira os algarismos dados um a um, enquanto um resolvedor com propagação demonstrar que a solução continua única. Um puzzle gerado tem, portanto, exatamente uma solução. O mesmo código regenera o mesmo puzzle na mesma versão da aplicação.</p>
+<h3>Limites</h3><ul><li>A dificuldade é indicativa: depende do número de algarismos dados, não das técnicas lógicas necessárias.</li><li>O nível «difícil» retira tantos algarismos quanto possível; em variantes com muitas pistas na grelha podem ficar muito poucos algarismos dados.</li><li>As regras seguem as convenções habituais de cada variante; quando há várias, a ficha indica qual foi escolhida.</li><li>As grelhas 16×16 e 25×25 usam os símbolos 1–9 e letras; as grelhas compostas (Samurai, etc.) têm apenas as regras clássicas, e combinações muito carregadas podem demorar mais ou falhar.</li><li>A dica e o «passo a passo» usam lógica de candidatos (único numa célula, único numa linha/coluna/região, regras da variante); se não existir um passo direto, revelam um algarismo da solução e dizem-no.</li></ul>
+<h3>Modos de jogo</h3><ul><li><b>Orbe</b>: só se veem as células a, no máximo, 2 passos da seleção.</li><li><b>Memória</b>: os algarismos dados aparecem durante alguns segundos e depois ocultam-se; «Espreitar» custa 30 s. Sem dicas nem realce de conflitos.</li><li><b>Maratona</b>: 5 puzzles seguidos (fácil, fácil, médio, médio, difícil) com um tempo total.</li><li><b>Duelo</b>: um adversário cronometrado preenche uma célula de poucos em poucos segundos (copia a solução conhecida, sem lógica); se terminar primeiro, perde.</li><li><b>Hardcore</b>: 3 vidas, cada algarismo errado custa uma; sem dica, verificação nem notas automáticas.</li><li><b>Puzzle do dia</b>: o mesmo puzzle para todos num dado dia (data UTC), com uma sequência de dias consecutivos guardada localmente.</li><li><b>Sonoro</b>: cada algarismo tem uma nota; uma linha, coluna ou região completa toca um arpejo.</li></ul>
+<h3>Atalhos</h3><p>Algarismos/letras: preencher · <kbd>N</kbd>: notas · <kbd>Backspace</kbd>: apagar · setas: mover · <kbd>Shift</kbd>/<kbd>Ctrl</kbd>+clique: seleção múltipla · <kbd>Ctrl</kbd>+<kbd>Z</kbd>/<kbd>Y</kbd>: anular/refazer.</p>
+<p class="small">Projeto pessoal, não um serviço oficial. Licença: MIT (código, textos e capturas), © 2026 Alexandru-Ionuț Chiuță. O texto integral está no ficheiro LICENSE.</p>`,
+de: `<p><b>Sudoku ohne Grenzen</b> ist ein Atlas von Sudoku-Varianten mit Generator und Löser, die lokal in einer einzigen HTML-Datei laufen. Es gibt kein Konto, nichts wird über das Netz gesendet, und es werden keine externen Ressourcen geladen. Der Spielstand bleibt nur in diesem Browser gespeichert (Schlüssel <code>sff_*</code> in <code>localStorage</code>).</p>
+<h3>Funktionsweise</h3><p>Die Engine wählt zuerst ein gelöstes Gitter, das die Regeln der Variante erfüllt, leitet daraus die Hinweise ab (Käfige, Thermometer, Punkte usw.) und entfernt dann die Vorgaben nacheinander, solange ein propagierender Löser beweist, dass die Lösung eindeutig bleibt. Ein erzeugtes Rätsel hat also genau eine Lösung. Derselbe Code erzeugt in derselben App-Version dasselbe Rätsel.</p>
+<h3>Grenzen</h3><ul><li>Die Schwierigkeit ist nur ein Richtwert: Sie hängt von der Zahl der Vorgaben ab, nicht von den nötigen logischen Techniken.</li><li>„Schwer“ entfernt so viele Vorgaben wie möglich; bei Varianten mit vielen Gitterhinweisen können sehr wenige Ziffern übrig bleiben.</li><li>Die Regeln folgen den üblichen Konventionen jeder Variante; wo es mehrere gibt, nennt die Karte die gewählte.</li><li>Gitter mit 16×16 und 25×25 verwenden die Symbole 1–9 und Buchstaben; zusammengesetzte Gitter (Samurai usw.) tragen nur die klassischen Regeln, und sehr überladene Kombinationen können länger dauern oder scheitern.</li><li>Tipp und „Schritt für Schritt“ nutzen Kandidatenlogik (einzige Ziffer im Feld, einziges Feld in Zeile/Spalte/Gebiet, Variantenregeln); gibt es keinen direkten Schritt, decken sie eine Ziffer der Lösung auf und sagen es dazu.</li></ul>
+<h3>Spielmodi</h3><ul><li><b>Orb</b>: Sichtbar sind nur Felder höchstens 2 Schritte von der Auswahl entfernt.</li><li><b>Gedächtnis</b>: Die Vorgaben werden einige Sekunden gezeigt und dann verborgen; „Spähen“ kostet 30 s. Keine Tipps und keine Hervorhebung von Konflikten.</li><li><b>Marathon</b>: 5 Rätsel hintereinander (leicht, leicht, mittel, mittel, schwer) mit Gesamtzeit.</li><li><b>Duell</b>: Ein Uhr-Gegner füllt alle paar Sekunden ein Feld (er kopiert die bekannte Lösung, ohne Logik); ist er zuerst fertig, verlieren Sie.</li><li><b>Hardcore</b>: 3 Leben, jede falsche Ziffer kostet eines; kein Tipp, keine Prüfung, keine Auto-Notizen.</li><li><b>Rätsel des Tages</b>: dasselbe Rätsel für alle an einem Tag (UTC-Datum), mit einer lokal gespeicherten Serie aufeinanderfolgender Tage.</li><li><b>Klang</b>: Jede Ziffer hat einen Ton; eine vollständige Zeile, Spalte oder ein Block spielt ein Arpeggio.</li></ul>
+<h3>Tastenkürzel</h3><p>Ziffern/Buchstaben: eintragen · <kbd>N</kbd>: Notizen · <kbd>Backspace</kbd>: löschen · Pfeile: bewegen · <kbd>Umschalt</kbd>/<kbd>Strg</kbd>+Klick: Mehrfachauswahl · <kbd>Strg</kbd>+<kbd>Z</kbd>/<kbd>Y</kbd>: rückgängig/wiederholen.</p>
+<p class="small">Ein persönliches Projekt, kein offizieller Dienst. Lizenz: MIT (Code, Texte und Screenshots), © 2026 Alexandru-Ionuț Chiuță. Der vollständige Text steht in der Datei LICENSE.</p>`,
+hu: `<p>A <b>Sudoku határok nélkül</b> a Sudoku-változatok atlasza, helyben futó generátorral és megoldóval, egyetlen HTML-fájlban. Nincs fiók, semmit nem küld a hálózaton, és nem tölt be külső erőforrást. A játékállás csak ebben a böngészőben tárolódik (<code>sff_*</code> kulcsok a <code>localStorage</code>-ban).</p>
+<h3>Hogyan működik</h3><p>A motor először kiválaszt egy megoldott rácsot, amely megfelel a változat szabályainak, ebből levezeti a támpontokat (ketreceket, hőmérőket, pontokat stb.), majd egyenként elhagyja az adott számjegyeket, amíg egy propagáló megoldó bizonyítja, hogy a megoldás egyértelmű marad. Egy előállított rejtvénynek tehát pontosan egy megoldása van. Ugyanaz a kód az alkalmazás ugyanazon verziójában ugyanazt a rejtvényt állítja elő.</p>
+<h3>Korlátok</h3><ul><li>A nehézség tájékoztató jellegű: az adott számjegyek számától függ, nem a szükséges logikai technikáktól.</li><li>A „nehéz” szint annyi számjegyet hagy el, amennyit csak lehet; a sok rácstámpontú változatoknál nagyon kevés adott számjegy maradhat.</li><li>A szabályok az egyes változatok szokásos megállapodásait követik; ahol több is van, a kártya megmondja, melyiket választottuk.</li><li>A 16×16-os és 25×25-ös rácsok az 1–9 számjegyeket és betűket használnak; az összetett rácsok (Szamuráj stb.) csak a klasszikus szabályokat viselik, a nagyon megterhelő kombinációk tovább tarthatnak vagy sikertelenek lehetnek.</li><li>A tipp és a „Lépésről lépésre” jelöltlogikát használ (egyetlen számjegy egy cellában, egyetlen cella egy sorban/oszlopban/tartományban, változatszabályok); ha nincs közvetlen lépés, felfednek egy számjegyet a megoldásból, és ezt jelzik.</li></ul>
+<h3>Játékmódok</h3><ul><li><b>Gömb</b>: csak a kijelöléstől legfeljebb 2 lépésre lévő cellák láthatók.</li><li><b>Memória</b>: az adott számjegyek néhány másodpercig látszanak, aztán elrejtődnek; a „Nézd” 30 mp-be kerül. Nincs tipp és nincs ütközéskiemelés.</li><li><b>Maraton</b>: 5 rejtvény egymás után (könnyű, könnyű, közepes, közepes, nehéz) összidővel.</li><li><b>Párbaj</b>: egy órás ellenfél néhány másodpercenként kitölt egy cellát (az ismert megoldást másolja, logika nélkül); ha ő végez előbb, te veszítesz.</li><li><b>Hardcore</b>: 3 élet, minden hibás számjegy egyet elvesz; nincs tipp, ellenőrzés vagy automatikus jegyzet.</li><li><b>A nap rejtvénye</b>: ugyanaz a rejtvény mindenkinek egy adott napon (UTC-dátum), az egymást követő napok sorozatát helyben tároljuk.</li><li><b>Hangalapú</b>: minden számjegynek van egy hangja; egy kész sor, oszlop vagy blokk arpeggiót szólaltat meg.</li></ul>
+<h3>Billentyűparancsok</h3><p>Számjegyek/betűk: kitöltés · <kbd>N</kbd>: jegyzetek · <kbd>Backspace</kbd>: törlés · nyilak: mozgás · <kbd>Shift</kbd>/<kbd>Ctrl</kbd>+kattintás: többszörös kijelölés · <kbd>Ctrl</kbd>+<kbd>Z</kbd>/<kbd>Y</kbd>: visszavonás/ismétlés.</p>
+<p class="small">Személyes projekt, nem hivatalos szolgáltatás. Licenc: MIT (kód, szövegek és képernyőképek), © 2026 Alexandru-Ionuț Chiuță. A teljes szöveg a LICENSE fájlban található.</p>`
+};
+

@@ -1,5 +1,8 @@
 # Istoric versiuni
 
+## 1.6.0
+- Interfața în 8 limbi (ro, en, fr, it, es, pt, de, hu): selector de limbă în antet (alegerea se păstrează local; implicit din limba browserului, altfel engleză), mesaje, etichete de reguli/indicii/categorii, ajutor și pagina „Despre” traduse. Atlasul de variante și glosarul rămân în ro/en (celelalte limbi folosesc engleza).
+
 ## 1.5.0
 - Kitul comun fff 1.1.1 (eticheta „Transparență”, copie de siguranță `.fff.json`), aplicat în `src/template.html`; `app.json` și blocul `fff-info` se generează cu `fff-kit info` după `build.py`, iar CI (`check_fresh.py`) verifică reproductibilitatea ignorând doar acest bloc.
 
