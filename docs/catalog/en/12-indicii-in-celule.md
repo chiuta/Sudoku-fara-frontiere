@@ -12,7 +12,7 @@
 _Clues drawn directly in cells or on groups of cells; see the rules sheet for the meaning of each sign._
 
 <a id="relief"></a>
-#### 121. Relief · Relief (`relief`)
+#### 121. Relief (`relief`)
 
 **How many neighbours are smaller.**
 
@@ -64,7 +64,7 @@ In addition to the classic rules, a number in a marked cell shows how many of it
 </details>
 
 <a id="oddsweeper"></a>
-#### 122. Odd-sweeper · Odd-sweeper (`oddsweeper`)
+#### 122. Odd-sweeper (`oddsweeper`)
 
 **How many of the 8 neighbours are odd.**
 
@@ -116,7 +116,7 @@ In addition to the classic rules, a number in a marked cell shows how many of it
 </details>
 
 <a id="compass"></a>
-#### 123. Compass · Compass (`compass`)
+#### 123. Compass (`compass`)
 
 **The arrow points to the largest neighbour.**
 
@@ -168,7 +168,7 @@ In addition to the classic rules, an arrow in a marked cell points at the larges
 </details>
 
 <a id="quadsum"></a>
-#### 124. Quad sum · Quad sum (`quadsum`)
+#### 124. Quad sum (`quadsum`)
 
 **Sum of a 2×2 block.**
 
@@ -220,7 +220,7 @@ In addition to the classic rules, a number at the junction of four cells is the 
 </details>
 
 <a id="stone"></a>
-#### 125. Stone 2×2 · Stone 2×2 (`stone`)
+#### 125. Stone 2×2 (`stone`)
 
 **Four different digits in a block.**
 
@@ -272,7 +272,7 @@ In addition to the classic rules, in every 2×2 block marked with a square the f
 </details>
 
 <a id="domino"></a>
-#### 126. Domino · Domino (`domino`)
+#### 126. Domino (`domino`)
 
 **A two-cell tile showing its digits.**
 
@@ -324,7 +324,7 @@ In addition to the classic rules, a domino tile covers two neighbouring cells an
 </details>
 
 <a id="pillsq"></a>
-#### 127. Perfect-square pill · Perfect-square pill (`pillsq`)
+#### 127. Perfect-square pill (`pillsq`)
 
 **Two digits read form a perfect square.**
 
@@ -376,7 +376,7 @@ In addition to the classic rules, a pill covers two neighbouring cells; the two-
 </details>
 
 <a id="primecage"></a>
-#### 128. Prime cage · Prime cage (`primecage`)
+#### 128. Prime cage (`primecage`)
 
 **Distinct digits whose sum is prime.**
 
@@ -428,7 +428,7 @@ In addition to the classic rules, the digits in each dashed cage are different a
 </details>
 
 <a id="balcage"></a>
-#### 129. Balanced cage · Balanced cage (`balcage`)
+#### 129. Balanced cage (`balcage`)
 
 **Sum equals product.**
 
@@ -480,7 +480,7 @@ In addition to the classic rules, in every cage marked Σ=Π the sum of the digi
 </details>
 
 <a id="doubler"></a>
-#### 130. Doublers · Doublers (`doubler`)
+#### 130. Doublers (`doubler`)
 
 **Killer where some cells count twice.**
 
@@ -532,7 +532,7 @@ As in Killer (different digits in a cage, given sum), but a cell marked ×2 in t
 </details>
 
 <a id="clonemir"></a>
-#### 131. Mirror clone · Mirror clone (`clonemir`)
+#### 131. Mirror clone (`clonemir`)
 
 **Two same shapes, the second mirrored.**
 

@@ -180,7 +180,7 @@ engine.js           motorul: solver, generator, variantele
 src/                interfața (template.html, style.css, data.js, app.js)
 build.py            asamblează index.html din src/ + engine.js
 test.js             suita de teste (node test.js)
-docs/               capturi (docs/screens), catalogul pe categorii (docs/catalog), GHID.html (se vede pe Pages, nu în GitHub: fișierul are ~6 MB)
+docs/               capturi (docs/screens), catalogul pe categorii (docs/catalog), GHID.html + GHID.<lang>.html (ghid ilustrat; se văd pe Pages)
 CHANGELOG.md        istoric versiuni
 CONTRIBUTING.md     cum contribui
 LICENSE             MIT
@@ -221,11 +221,11 @@ Note:
 
 Alexio — Alexandru-Ionuț Chiuță, contact: <alexio@trom.tf>.
 
-## English summary
+## Rezumat
 
-An atlas of 136 Sudoku entries (≈130 with distinct rules; Subsol, Zero and Lexrows are near-duplicates of other variants and say so in their fiche) (plus 7 game modes: Orb, Memory, Marathon, Duel, Hardcore, Puzzle of the day, Sound) with a local generator and solver, in one HTML file. Puzzles are generated in the browser with a proven unique solution (givens are removed only while a propagating solver confirms uniqueness). Includes a custom rule mixer, notes/undo/hints, share codes, a classic 9×9 solver, CSV export and BibTeX citation. No network requests; state is stored in `localStorage` (`sff_*`). Difficulty (easy/medium/hard) is only the number of givens kept; each puzzle also shows a measured figure: how many branches a propagating solver needs (0 = solves by propagation alone). That is solver effort, not a human technique rating. Run `node test.js` for the engine test suite. Licence: MIT (see `LICENSE`), covering code, texts and screenshots.
+Un atlas de 136 de intrări Sudoku (≈130 cu reguli distincte; Subsol, Zero și Lexrows sunt aproape dubluri ale altor variante și o spun în fișa lor) (plus 7 moduri de joc: Orb, Memory, Marathon, Duel, Hardcore, Puzzle-ul zilei, Sound) cu generator și solver local, într-un singur fișier HTML. Puzzle-urile se generează în browser cu soluție unică demonstrată (indiciile se elimină doar cât timp un solver cu propagare confirmă unicitatea). Include un mixer de reguli personalizate, notițe/undo/indicii, coduri de partajare, un solver clasic 9×9, export CSV și citare BibTeX. Fără cereri de rețea; starea se stochează în `localStorage` (`sff_*`). Dificultatea (ușor/mediu/greu) este doar numărul de indicii păstrate; fiecare puzzle afișează și o valoare măsurată: câte ramificări are nevoie un solver cu propagare (0 = se rezolvă doar prin propagare). Aceasta este munca solverului, nu o evaluare a tehnicilor umane. Rulează `node test.js` pentru suita de teste a motorului. Licență: MIT (vezi `LICENSE`), acoperind codul, textele și capturile de ecran.
 
-The README (in Romanian) contains a usage guide with screenshots of the interface and a catalogue with two real screenshots, the rules and a reproducible code for each of the 136 variants (`screens/`).
+README-ul (în română) conține un ghid de utilizare cu capturi de ecran ale interfeței și un catalog cu două capturi de ecran reale, regulile și un cod reproductibil pentru fiecare dintre cele 136 de variante (`screens/`).
 
 ## Note v1.4
 

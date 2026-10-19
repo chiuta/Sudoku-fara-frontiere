@@ -1,0 +1,233 @@
+<!doctype html><html lang="hu"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sudoku fără frontiere</title><style>body{font:16px/1.55 system-ui,sans-serif;max-width:900px;margin:0 auto;padding:16px;color:#1d2230;background:#fbfaf6}img{max-width:100%;height:auto;border-radius:6px}table{border-collapse:collapse;max-width:100%}td,th{border:1px solid #d9d5c7;padding:6px 8px;vertical-align:top}a{color:#0b5fd3}a:visited{color:#6b3fa0}code{background:#eee9;padding:1px 4px;border-radius:4px}h4{margin-top:2em;border-top:1px solid #d9d5c7;padding-top:1em}@media(prefers-color-scheme:dark){body{background:#0f1218;color:#e6e8ee}a{color:#8fc0ff}a:visited{color:#c7a8ff}td,th,h4{border-color:#2b3140}code{background:#2b3140}}</style><body>
+<h1 id="sudoku-fără-frontiere">Sudoku fără frontiere</h1>
+<p><a href="../README.md">English</a> · <a href="../README.ro.md">Română</a> · <a href="../README.fr.md">Français</a> · <a href="../README.it.md">Italiano</a> · <a href="../README.es.md">Español</a> · <a href="../README.pt.md">Português</a> · <a href="../README.de.md">Deutsch</a> · <strong>Magyar</strong></p>
+<p><strong>Verzió:</strong> 1.6.0 · <strong>Utolsó frissítés:</strong> 2026-10-19</p>
+<p>A felület nyelvei: <strong>Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar</strong></p>
+<p>Sudoku-változatok atlasza helyben futó generátorral és megoldóval — egyetlen HTML-fájlban.</p>
+<p><strong>Licenc:</strong> <a href="../LICENSE">MIT</a> · <strong>Online alkalmazás:</strong> <a href="https://chiuta.github.io/Sudoku-fara-frontiere/">https://chiuta.github.io/Sudoku-fara-frontiere/</a> · <strong>Illusztrált útmutató (egyetlen oldal):</strong> <a href="https://chiuta.github.io/Sudoku-fara-frontiere/docs/GHID.html">https://chiuta.github.io/Sudoku-fara-frontiere/docs/GHID.html</a></p>
+<p><img src="screenshot.png" alt="Néhány változat a „Lépésről lépésre” után" /></p>
+<h2 id="mi-ez">Mi ez</h2>
+<p>136 bejegyzésből álló interaktív atlasz (≈130 külön szabályrendszerrel: a Pince, a Nullás Sudoku és a Lexikografikus sorok logikailag majdnem azonosak más változatokkal, és a lapjaikon ezt ki is mondják) (klasszikusak, speciális régiókkal, topológiákkal és tündérugrásokkal, globális szabályokkal, vonalakra, szegélyre, cellákba vagy a rácsba írt jelzésekkel, összetett rácsok, kockák és hiperkockák, görög-latin és közeli rokonok), plusz 7 játékmód. Minden változatnak van egy lapja a szabályokkal, és helyben játszható: a rejtvényeket a böngésző generálja, egy propagációs megoldó által <strong>bizonyítottan egyértelmű megoldással</strong>. A szabályokat „Saját kombinációvá” is összeválogathatod.</p>
+<h2 id="használati-útmutató">Használati útmutató</h2>
+<h3 id="gyors-indulás">Gyors indulás</h3>
+<ol type="1">
+<li>Nyisd meg az <code>index.html</code> fájlt egy böngészőben (offline is működik, telepítés nélkül).</li>
+<li>Az <strong>Atlaszban</strong> kiválasztasz egy változatot (keresés, kategóriák, „A nap változata”, „Lepj meg”); minden változatnak van egy lapja a szabályokkal.</li>
+<li>A <strong>Játék</strong> fülön kiválasztod a változatot, a méretet, a nehézséget és a módot, majd megnyomod az <strong>Új játék</strong> gombot. A rejtvényt a böngésző generálja, egyértelmű megoldással.</li>
+</ol>
+<p align="center"><img src="screens/ui_atlas.hu.webp" width="760" alt="A változatok atlasza"><br><sub>Atlasz: keresés, kategóriaszűrők és kártyák az elérhető méretekkel.</sub></p>
+
+<h3 id="a-játékképernyő">A játékképernyő</h3>
+<p align="center"><img src="screens/ui_play.hu.webp" width="760" alt="A játékképernyő"><br><sub>A tábla, az állapotsor (változat · méret · jelzések · nehézség · a megoldónak szükséges elágazások · idő), az „Új játék” panel megosztási kóddal, a számbillentyűzet és a műveletek.</sub></p>
+
+<ul>
+<li><strong>Számjegyek:</strong> kijelölsz egy cellát (vagy többet, Shift-tel/húzással), és megnyomod a számjegyet a billentyűzeten vagy a képernyő számbillentyűzetén. A már elfogyott számjegyek halványan jelennek meg.</li>
+<li><strong>Billentyűzet:</strong> nyilak = a kijelölés mozgatása, számjegyek/betűk = kitöltés, <code>Backspace</code>/<code>Delete</code>/<code>0</code> = törlés, <code>N</code> = jegyzetek, <code>Ctrl+Z</code> / <code>Ctrl+Y</code> = visszavonás / ismétlés.</li>
+<li><strong>Jegyzetek:</strong> a „Jegyzetek” gomb (vagy <code>N</code>) a cellában kis jelöltekre vált; az „Automatikus jegyzetek” a látható szabályokból számítja ki őket.</li>
+<li><strong>Ellenőrzések:</strong> a „Ütközések mutatása”, a „Azonos számjegy kiemelése”, a „Kapcsolódó cellák kiemelése” és a „Jegyzetek automatikus törlése” bejelölhető; az „Ellenőrzés” megjelöli a hibás számjegyeket.</li>
+<li><strong>Tipp</strong> kitölt egy cellát (a jelöltekre épülő logikával; ha nincs közvetlen lépés, a számjegy a megoldásból jön). A <strong>Megoldás mutatása</strong> mindent kitölt.</li>
+<li><strong>Kód:</strong> az „Új játék” melletti kód ugyanazt a rejtvényt generálja újra az alkalmazás ugyanazon verziójában; a „Megnyitás” mezőbe illeszted be.</li>
+</ul>
+<p align="center"><img src="screens/ui_notes.hu.webp" width="760" alt="Jegyzetek"><br><sub>Jegyzetek: kis jelöltek egy cellában.</sub></p>
+
+<h3 id="lépésről-lépésre-és--auto">Lépésről lépésre és ▶ Auto</h3>
+<p>A <strong>Lépésről lépésre</strong> lerak egy számjegyet, és megmutatja, miért: az indoklásul szolgáló cellák színesek (sárga), az új cella zöld, és a tábla alatt megjelenik a magyarázat. Az <strong>▶ Auto</strong> magától futtatja a lépéseket, 1,6 másodpercenként. A lehetséges indokok: a cellában megmaradt egyetlen számjegy; egy sor/oszlop/régió egyetlen cellája, ahová a számjegy kerülhet; a változat szabályaiból levont következtetés; vagy, ha nincs közvetlen következtetés, a megoldásból vett számjegy (ezt kifejezetten kimondja). Ha hibás számjegyed van, az első lépés kijavítja. Minden lépés visszavonható; Hardcore és Memória módban le van tiltva.</p>
+<p align="center"><img src="screens/ui_step.hu.webp" width="760" alt="Lépésről lépésre"><br><sub>Három lépés után: az utolsó számjegy (zöld) és az indoklásul szolgáló cellák (sárga), a magyarázat a tábla alatt.</sub></p>
+
+<h3 id="játékmódok">Játékmódok</h3>
+<p>Az „Új játék → Játékmód” alatt választhatók; a kód <code>@mód</code> utótagot kap (kivételek: „A nap rejtvénye” és a Maraton nem kap utótagot; a Maraton-kód egy szokásos rejtvényt nyit meg).</p>
+<ul>
+<li><strong>Orb:</strong> csak a kijelöléstől legfeljebb 2 lépésre lévő cellák látszanak.</li>
+<li><strong>Memória:</strong> a jelzések néhány másodpercig látszanak, aztán elrejtőznek; a belesés gomb 30 másodpercbe kerül. Jelzések, ellenőrzés, automatikus jegyzetek, „Lépésről lépésre” és az ütközések kiemelése nélkül.</li>
+<li><strong>Maraton:</strong> 5 rejtvény egymás után (könnyű, könnyű, közepes, közepes, nehéz) összesített idővel.</li>
+<li><strong>Párbaj:</strong> egy időzítő-ellenfél néhány másodpercenként kitölt egy cellát az ismert megoldásból (logika nélkül); ha ő végez először, vesztettél.</li>
+<li><strong>Hardcore:</strong> 3 élet, minden hibás számjegy egyet vesz el; tipp, ellenőrzés és automatikus jegyzetek nélkül.</li>
+<li><strong>A nap rejtvénye:</strong> ugyanaz a rejtvény mindenkinek egy adott napon (UTC-dátum), helyben megőrzött egymást követő napok sorozatával.</li>
+<li><strong>Hangos:</strong> minden számjegynek van egy hangja; egy kész sor, oszlop vagy doboz arpeggiót játszik.</li>
+</ul>
+<p align="center"><img src="screens/ui_mode_orb.hu.webp" width="760" alt="Orb mód"><br><sub>Orb mód: csak a kijelölés környezete látható.</sub></p>
+
+<h3 id="kockák-és-hiperkockák">Kockák és hiperkockák</h3>
+<p>A rétegek szeletekből álló mozaikként jelennek meg. A 3D kockáknál „3D nézet” is megjelenik: az egérrel húzva forgatod a kockát, a csúszka pedig elrejti az elülső rétegeket. A 4D/5D hiperkockák csak rétegekben látszanak.</p>
+<p align="center"><img src="screens/ui_3d.hu.webp" width="760" alt="3D nézet"><br><sub>4×4×4-es 3D latin kocka a forgatható 3D nézetben.</sub></p>
+
+<h3 id="klasszikus-99-es-megoldó">Klasszikus 9×9-es megoldó</h3>
+<p>Beilleszted a rejtvényt (81 karakter: 1–9, az üres helyek 0 vagy <code>.</code>), szükség esetén bejelölsz további szabályokat (átlók, hyper ablakok, anti-huszár stb.), és megnyomod a <strong>Megoldás</strong> gombot: az alkalmazás megmondja, hogy a megoldás egyértelmű, többszörös vagy nem létezik. A „Játék ezzel a rejtvénnyel” átviszi a játéktáblára.</p>
+<p align="center"><img src="screens/ui_solver.hu.webp" width="760" alt="Megoldó"><br><sub>A megoldó a példarejtvénnyel: „Egyértelmű megoldás”.</sub></p>
+
+<h3 id="telefon-és-sötét-téma">Telefon és sötét téma</h3>
+<p>A felület alkalmazkodik a keskeny képernyőkhöz; világos/sötét/automatikus téma (a 🌓 gomb), nagyított szöveg (az A gomb), RO/EN nyelv (az RO gomb).</p>
+<p align="center"><img src="screens/ui_mobile.hu.webp" width="260" alt="Telefon, világos téma"> &nbsp; <img src="screens/ui_dark.hu.webp" width="260" alt="Telefon, sötét téma"></p>
+
+<h3 id="saját-kombináció">Saját kombináció</h3>
+<p>Az Atlaszban a „Saját kombináció” (vagy az „Új játék” alatti „Saját kombináció” változat) lehetővé teszi a rácsszabályok és jelzések bármely összeférhető készletének bejelölését (pl. Killer + átlók, hőmérők + nyilak).</p>
+<h3 id="a-felület-galériája-minden-képernyőtípus">A felület galériája (minden képernyőtípus)</h3>
+<p><strong>Atlasz</strong></p>
+<table><tr><td align="center" valign="top"><img src="screens/ui_atlas_filter.hu.webp" width="330" alt="Szűrés egy kategóriára"><br><sub>Szűrés egy kategóriára</sub></td><td align="center" valign="top"><img src="screens/ui_atlas_search.hu.webp" width="330" alt="Keresés név szerint"><br><sub>Keresés név szerint</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_lexicon.hu.webp" width="330" alt="Lexikon"><br><sub>Lexikon</sub></td><td align="center" valign="top"><img src="screens/ui_atlas_en.webp" width="330" alt="Atlasz angolul"><br><sub>Atlasz angolul</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_atlas_dark.hu.webp" width="330" alt="Atlasz, sötét téma"><br><sub>Atlasz, sötét téma</sub></td></tr></table>
+
+<p><strong>Játékmódok</strong></p>
+<table><tr><td align="center" valign="top"><img src="screens/ui_mode_memory_show.hu.webp" width="330" alt="Memória: a jelzések látszanak"><br><sub>Memória: a jelzések látszanak</sub></td><td align="center" valign="top"><img src="screens/ui_mode_memory_hidden.hu.webp" width="330" alt="Memória: a jelzések elrejtőztek"><br><sub>Memória: a jelzések elrejtőztek</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_mode_marathon.hu.webp" width="330" alt="Maraton"><br><sub>Maraton</sub></td><td align="center" valign="top"><img src="screens/ui_mode_duel.hu.webp" width="330" alt="Párbaj (az ellenfél cellákat tölt ki)"><br><sub>Párbaj (az ellenfél cellákat tölt ki)</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_mode_hardcore.hu.webp" width="330" alt="Hardcore: egy hiba egy életbe kerül"><br><sub>Hardcore: egy hiba egy életbe kerül</sub></td><td align="center" valign="top"><img src="screens/ui_mode_daily.hu.webp" width="330" alt="A nap rejtvénye"><br><sub>A nap rejtvénye</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_mode_sound.hu.webp" width="330" alt="Hangos"><br><sub>Hangos</sub></td><td align="center" valign="top"><img src="screens/ui_mode_orb.hu.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
+
+<p><strong>Játék és eszközök</strong></p>
+<table><tr><td align="center" valign="top"><img src="screens/ui_autoplay.hu.webp" width="330" alt="▶ Auto fut"><br><sub>▶ Auto fut</sub></td><td align="center" valign="top"><img src="screens/ui_solved.hu.webp" width="330" alt="Megoldott rejtvény"><br><sub>Megoldott rejtvény</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_custom.hu.webp" width="330" alt="Saját kombináció (szabálylista)"><br><sub>Saját kombináció (szabálylista)</sub></td><td align="center" valign="top"><img src="screens/ui_3d_rotated.hu.webp" width="330" alt="Elforgatott 3D nézet"><br><sub>Elforgatott 3D nézet</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_print.webp" width="330" alt="Nyomtatási nézet"><br><sub>Nyomtatási nézet</sub></td></tr></table>
+
+<p><strong>Megoldó és Névjegy</strong></p>
+<table><tr><td align="center" valign="top"><img src="screens/ui_solver_multi.hu.webp" width="330" alt="Megoldó: üres rács (több megoldás)"><br><sub>Megoldó: üres rács (több megoldás)</sub></td><td align="center" valign="top"><img src="screens/ui_solver_none.hu.webp" width="330" alt="Megoldó: nincs megoldás"><br><sub>Megoldó: nincs megoldás</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_about.hu.webp" width="330" alt="A „Névjegy” oldal"><br><sub>A „Névjegy” oldal</sub></td></tr></table>
+
+<h2 id="a-változatok-katalógusa-136">A változatok katalógusa (136)</h2>
+<p>Minden változatnál az alábbiak találhatók: a lap szabályai, egy képernyőkép az alkalmazás által generált valódi rejtvénnyel (a változat alapértelmezett mérete (9×9, ahol van, különben pl. 5×5 vagy 4×4); „közepes” szint), egy második képernyőkép 4 „Lépésről lépésre” lépés után, az utolsó lépés valódi magyarázata és egy kód, amellyel pontosan ugyanazt a rejtvényt generálod újra. Minden változat alatt egy „Teljes galéria” (lenyitható) tartalmazza a többi képernyőkép-típust: a kártyát az Atlaszban és a lapot, az összes méretet, könnyű/közepes/nehéz, automatikus jegyzetek, ellenőrzés egy hibás számjeggyel, a teljes megoldást, a sötét témát, a telefont, az angol felületet és a szabálypanelt. A képernyőképek a <code>docs/screens/</code> könyvtárban vannak. A képernyőképeket az 1.4.0 verzió óta automatikusan készítjük, világos témában.</p>
+<p><strong>Teljes katalógus:</strong> <a href="catalog/hu/README.md">docs/catalog/hu/README.md</a></p>
+<table>
+<thead>
+<tr class="header">
+<th>Kategória</th>
+<th>Változatok</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Méret és szimbólumok</strong></td>
+<td><a href="catalog/hu/01-marime-si-simboluri.md#clasic">Klasszikus</a> · <a href="catalog/hu/01-marime-si-simboluri.md#wordoku">Wordoku</a> · <a href="catalog/hu/01-marime-si-simboluri.md#latin">Latin négyzet</a> · <a href="catalog/hu/01-marime-si-simboluri.md#zero">Nullás Sudoku</a></td>
+</tr>
+<tr class="even">
+<td><strong>Régiók és csoportok</strong></td>
+<td><a href="catalog/hu/02-regiuni-si-grupuri.md#diag">Sudoku X</a> · <a href="catalog/hu/02-regiuni-si-grupuri.md#hyper">Hyper (Windoku)</a> · <a href="catalog/hu/02-regiuni-si-grupuri.md#jigsaw">Jigsaw (szabálytalan)</a> · <a href="catalog/hu/02-regiuni-si-grupuri.md#dg">Diszjunkt csoportok</a> · <a href="catalog/hu/02-regiuni-si-grupuri.md#center">Középpontok</a> · <a href="catalog/hu/02-regiuni-si-grupuri.md#girandola">Girandola</a> · <a href="catalog/hu/02-regiuni-si-grupuri.md#sparse9">Szórt kilencesek</a> · <a href="catalog/hu/02-regiuni-si-grupuri.md#asterisk">Asterisk</a> · <a href="catalog/hu/02-regiuni-si-grupuri.md#diag1">Egyszerű átló</a> · <a href="catalog/hu/02-regiuni-si-grupuri.md#clone">Clone</a> · <a href="catalog/hu/02-regiuni-si-grupuri.md#pandiag">Pandiagonal</a></td>
+</tr>
+<tr class="odd">
+<td><strong>Szomszédok</strong></td>
+<td><a href="catalog/hu/03-vecini.md#antiknight">Anti-huszár</a> · <a href="catalog/hu/03-vecini.md#antiking">Anti-király</a> · <a href="catalog/hu/03-vecini.md#nonconsec">Nincs szomszédos számpár</a> · <a href="catalog/hu/03-vecini.md#miracle">Csoda</a></td>
+</tr>
+<tr class="even">
+<td><strong>Paritás, pontok, jelek</strong></td>
+<td><a href="catalog/hu/04-paritate-puncte-semne.md#evenodd">Páros–páratlan</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#kropki">Kropki</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#consec">Egymást követő</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#xv">XV</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#greater">Összehasonlítások</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#batt">Battenburg</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#quad">Négyesek</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#evenonly">Csak jelölt párosak</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#oddonly">Csak jelölt páratlanok</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#fortress">Erődítmény</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#minmax">Minimum / Maximum</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#indexing">Indexelés</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#ratio">Arány ×3</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#diff">Különbség</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#kropkipos">Kropki csak jelölt</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#xvpos">XV csak jelölt</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#consecpos">Egymást követő csak jelölt</a> · <a href="catalog/hu/04-paritate-puncte-semne.md#clueless">Jelzések nélkül</a></td>
+</tr>
+<tr class="odd">
+<td><strong>Összegek</strong></td>
+<td><a href="catalog/hu/05-sume.md#killer">Killer</a> · <a href="catalog/hu/05-sume.md#littlekiller">Little Killer</a> · <a href="catalog/hu/05-sume.md#luk">Egyedi Little Killer</a></td>
+</tr>
+<tr class="even">
+<td><strong>Szegélyjelzések</strong></td>
+<td><a href="catalog/hu/06-indicii-pe-margine.md#sandwich">Sandwich</a> · <a href="catalog/hu/06-indicii-pe-margine.md#xsum">X-Sums</a> · <a href="catalog/hu/06-indicii-pe-margine.md#frame">Frame (az első három)</a> · <a href="catalog/hu/06-indicii-pe-margine.md#skyscraper">Felhőkarcolók</a> · <a href="catalog/hu/06-indicii-pe-margine.md#rossini">Rossini</a> · <a href="catalog/hu/06-indicii-pe-margine.md#outside">Outside</a> · <a href="catalog/hu/06-indicii-pe-margine.md#radar">Radar</a> · <a href="catalog/hu/06-indicii-pe-margine.md#sandnum">Számoló szendvics</a> · <a href="catalog/hu/06-indicii-pe-margine.md#sandpar">Paritás-szendvics</a> · <a href="catalog/hu/06-indicii-pe-margine.md#sand2">Dupla szendvics</a> · <a href="catalog/hu/06-indicii-pe-margine.md#subsol">Pince</a> · <a href="catalog/hu/06-indicii-pe-margine.md#prodmargin">Szegélyszorzat</a> · <a href="catalog/hu/06-indicii-pe-margine.md#diffmargin">Szegélykülönbség</a> · <a href="catalog/hu/06-indicii-pe-margine.md#ascents">Emelkedések</a> · <a href="catalog/hu/06-indicii-pe-margine.md#inversions">Inverziók</a> · <a href="catalog/hu/06-indicii-pe-margine.md#cycles">Ciklusok</a> · <a href="catalog/hu/06-indicii-pe-margine.md#fixedpts">Fixpontok</a> · <a href="catalog/hu/06-indicii-pe-margine.md#altsum">Váltakozó összeg</a> · <a href="catalog/hu/06-indicii-pe-margine.md#dxsum">Átlóösszegek</a></td>
+</tr>
+<tr class="odd">
+<td><strong>Vonalak</strong></td>
+<td><a href="catalog/hu/07-linii.md#thermo">Hőmérők</a> · <a href="catalog/hu/07-linii.md#arrow">Nyilak</a> · <a href="catalog/hu/07-linii.md#renban">Renban</a> · <a href="catalog/hu/07-linii.md#whisper">Német suttogások</a> · <a href="catalog/hu/07-linii.md#palindrome">Palindrom</a> · <a href="catalog/hu/07-linii.md#between">Vonalak között</a> · <a href="catalog/hu/07-linii.md#entropic">Entropikus vonalak</a> · <a href="catalog/hu/07-linii.md#modular">Moduláris vonalak</a> · <a href="catalog/hu/07-linii.md#dutch">Holland suttogások</a> · <a href="catalog/hu/07-linii.md#nabner">Nabner</a> · <a href="catalog/hu/07-linii.md#slowthermo">Lassú hőmérő</a> · <a href="catalog/hu/07-linii.md#parityline">Paritásvonal</a> · <a href="catalog/hu/07-linii.md#sameparity">Azonos paritású vonal</a> · <a href="catalog/hu/07-linii.md#lockout">Lockout</a> · <a href="catalog/hu/07-linii.md#doublearrow">Dupla nyíl</a> · <a href="catalog/hu/07-linii.md#zipper">Zipper</a> · <a href="catalog/hu/07-linii.md#regionsum">Régióösszeg-vonalak</a> · <a href="catalog/hu/07-linii.md#avgarrow">Átlagnyíl</a> · <a href="catalog/hu/07-linii.md#prodarrow">Szorzatnyíl</a> · <a href="catalog/hu/07-linii.md#pillarrow">„Pirula” nyíl</a> · <a href="catalog/hu/07-linii.md#fog">Köd</a> · <a href="catalog/hu/07-linii.md#legato">Legato</a> · <a href="catalog/hu/07-linii.md#consonant">Konszonancia</a> · <a href="catalog/hu/07-linii.md#fixstep">Fix lépés</a> · <a href="catalog/hu/07-linii.md#compline">Komplementer vonal</a> · <a href="catalog/hu/07-linii.md#zigzag">Zigzag</a> · <a href="catalog/hu/07-linii.md#fibonacci">Fibonacci</a> · <a href="catalog/hu/07-linii.md#steps">Lépcsők</a> · <a href="catalog/hu/07-linii.md#progression">Számtani sorozat</a> · <a href="catalog/hu/07-linii.md#echo">Visszhang</a> · <a href="catalog/hu/07-linii.md#divisible">Osztható vonal</a> · <a href="catalog/hu/07-linii.md#primeline">Prímvonal</a></td>
+</tr>
+<tr class="even">
+<td><strong>Összetett rácsok</strong></td>
+<td><a href="catalog/hu/08-grile-compuse.md#samurai">Samurai</a> · <a href="catalog/hu/08-grile-compuse.md#twodoku">Twodoku</a> · <a href="catalog/hu/08-grile-compuse.md#gattai3">Gattai-3</a> · <a href="catalog/hu/08-grile-compuse.md#sohei">Sohei (négyes gyűrű)</a> · <a href="catalog/hu/08-grile-compuse.md#kazaguruma">Kazaguruma (szélmalom)</a> · <a href="catalog/hu/08-grile-compuse.md#tripledoku">Tripledoku (V)</a> · <a href="catalog/hu/08-grile-compuse.md#cross">Kereszt</a></td>
+</tr>
+<tr class="odd">
+<td><strong>Közeli rokonok</strong></td>
+<td><a href="catalog/hu/09-rude-apropiate.md#futoshiki">Futoshiki</a> · <a href="catalog/hu/09-rude-apropiate.md#kenken">KenKen (Calcudoku)</a> · <a href="catalog/hu/09-rude-apropiate.md#strimko">Strimko</a></td>
+</tr>
+<tr class="even">
+<td><strong>Topológiák és tündérmozgások</strong></td>
+<td><a href="catalog/hu/10-topologii-si-mutari-fairy.md#antibishop">Anti-futó</a> · <a href="catalog/hu/10-topologii-si-mutari-fairy.md#anticamel">Anti-teve</a> · <a href="catalog/hu/10-topologii-si-mutari-fairy.md#antizebra">Anti-zebra</a> · <a href="catalog/hu/10-topologii-si-mutari-fairy.md#torusking">Tórusz anti-király</a> · <a href="catalog/hu/10-topologii-si-mutari-fairy.md#torusknight">Tórusz anti-huszár</a> · <a href="catalog/hu/10-topologii-si-mutari-fairy.md#cylking">Henger anti-király</a> · <a href="catalog/hu/10-topologii-si-mutari-fairy.md#mobiusking">Möbius anti-király</a> · <a href="catalog/hu/10-topologii-si-mutari-fairy.md#kleinking">Klein anti-király</a> · <a href="catalog/hu/10-topologii-si-mutari-fairy.md#projking">Projektív sík anti-király</a></td>
+</tr>
+<tr class="odd">
+<td><strong>Globális szabályok</strong></td>
+<td><a href="catalog/hu/11-reguli-globale.md#symcomp">Komplementer szimmetria</a> · <a href="catalog/hu/11-reguli-globale.md#symparity">Szimmetrikus paritás</a> · <a href="catalog/hu/11-reguli-globale.md#cgrav">Súlypont</a> · <a href="catalog/hu/11-reguli-globale.md#lexrows">Lexikografikus sorok</a> · <a href="catalog/hu/11-reguli-globale.md#extremes">Szomszédos szélsőértékek</a> · <a href="catalog/hu/11-reguli-globale.md#boxbalance">Kiegyensúlyozott dobozok</a> · <a href="catalog/hu/11-reguli-globale.md#lonely5">A magányos ötös</a> · <a href="catalog/hu/11-reguli-globale.md#nolonely">Magányos cellák nélkül</a> · <a href="catalog/hu/11-reguli-globale.md#noprog">Sorozatok nélkül</a> · <a href="catalog/hu/11-reguli-globale.md#semimagic">Félvarázs dobozok</a></td>
+</tr>
+<tr class="even">
+<td><strong>Cellajelzések</strong></td>
+<td><a href="catalog/hu/12-indicii-in-celule.md#relief">Dombormű</a> · <a href="catalog/hu/12-indicii-in-celule.md#oddsweeper">Páratlan aknák</a> · <a href="catalog/hu/12-indicii-in-celule.md#compass">Iránytű</a> · <a href="catalog/hu/12-indicii-in-celule.md#quadsum">Négyzetösszeg</a> · <a href="catalog/hu/12-indicii-in-celule.md#stone">Kő 2×2</a> · <a href="catalog/hu/12-indicii-in-celule.md#domino">Dominó</a> · <a href="catalog/hu/12-indicii-in-celule.md#pillsq">Négyzetszám-pirula</a> · <a href="catalog/hu/12-indicii-in-celule.md#primecage">Prímketrec</a> · <a href="catalog/hu/12-indicii-in-celule.md#balcage">Kiegyensúlyozott ketrec</a> · <a href="catalog/hu/12-indicii-in-celule.md#doubler">Duplázók</a> · <a href="catalog/hu/12-indicii-in-celule.md#clonemir">Tükörklónok</a></td>
+</tr>
+<tr class="odd">
+<td><strong>Magasabb dimenziók</strong></td>
+<td><a href="catalog/hu/13-dimensiuni-superioare.md#cube3">3D latin kocka</a> · <a href="catalog/hu/13-dimensiuni-superioare.md#cubebox">Kocka 2×2 dobozokkal</a> · <a href="catalog/hu/13-dimensiuni-superioare.md#hyper4">4D hiperkocka</a> · <a href="catalog/hu/13-dimensiuni-superioare.md#hyper5">5D hiperkocka</a> · <a href="catalog/hu/13-dimensiuni-superioare.md#greco">Görög-latin (ortogonális négyzetek)</a></td>
+</tr>
+</tbody>
+</table>
+<p>Minden kategóriának saját oldala van a <a href="catalog/README.md"><code>docs/catalog/</code></a> könyvtárban (képernyőképek és teljes galériák).</p>
+<h2 id="funkciók">Funkciók</h2>
+<ul>
+<li><strong>Az 1.0-s verzió változatai (38):</strong> klasszikus (4×4, 6×6, 8×8, 9×9, 12×12, 16×16, 25×25), wordoku, latin négyzet, Sudoku X, Hyper (Windoku), Jigsaw, diszjunkt csoportok, középpontok, anti-huszár, anti-király, nincs szomszédos számpár, Csoda, páros–páratlan, Kropki, egymást követő, XV, összehasonlítások, Battenburg, négyesek, Killer, Little Killer, Sandwich, X-Sums, Frame, felhőkarcolók, hőmérők, nyilak, Renban, német suttogások, palindrom, vonalak között, entropikus vonalak, moduláris vonalak, Samurai, Twodoku, Gattai-3, Futoshiki, KenKen.</li>
+<li><strong>Az 1.1-es verzióban hozzáadva (24):</strong> Girandola (az 1.4-ben javítva), Asterisk, egyszerű átló, holland suttogások, Nabner, lassú hőmérő, paritásvonal (váltakozó), azonos paritású vonal, csak jelölt párosak, csak jelölt páratlanok, egyedi Little Killer, Erődítmény, Minimum/Maximum, Lockout, dupla nyíl, Zipper, Rossini, Outside, Clone, régióösszeg-vonalak, átlagnyíl, szorzatnyíl, „pirula” nyíl, Strimko.</li>
+<li><strong>Az 1.2-es verzióban hozzáadva (3. szint, 3):</strong> Indexelés (a sor első számjegye az 1-es oszlopát mutatja), Arány ×3 (körök a 3:1 arányú párokhoz), Köd (a jelzések a megoldás során jelennek meg; a rejtvény úgy épül fel, hogy az egyszerű propagáció csak a látható információval folytatódhasson).</li>
+<li><strong>Az 1.3-as verzióban hozzáadva (70):</strong>
+<ul>
+<li><em>Topológiák és tündérugrások (9):</em> Anti-futó, Anti-teve, Anti-zebra, Tórusz anti-király, Tórusz anti-huszár, Henger, Möbius, Klein és projektív sík anti-király.</li>
+<li><em>Globális szabályok (12):</em> Pandiagonális, Nullás Sudoku, Komplementer szimmetria, Szimmetrikus paritás, Súlypont, Lexikografikus sorok, Szomszédos szélsőértékek, Kiegyensúlyozott dobozok, A magányos ötös, Magányos cellák nélkül, Sorozatok nélkül, Félvarázs dobozok.</li>
+<li><em>Szegélyjelzések (13):</em> Radar, Számoló szendvics, Paritás-szendvics, Dupla szendvics, Pince, Szegélyszorzat, Szegélykülönbség, Emelkedések, Inverziók, Ciklusok, Fixpontok, Váltakozó összeg, Átlóösszegek.</li>
+<li><em>Cellajelzések és ketrecek (11):</em> Dombormű, Páratlan aknák, Iránytű, Négyzetösszeg, Kő 2×2, Dominó, Négyzetszám-pirula, Prímketrec, Kiegyensúlyozott ketrec, Duplázók, Tükörklónok.</li>
+<li><em>Pontok (5):</em> Különbség, Kropki / XV / Egymást követő csak jelölt, Jelzések nélkül (csak Kropki-pontok).</li>
+<li><em>Vonalak (11):</em> Legato, Konszonancia, Fix lépés, Komplementer vonal, Cikcakk, Fibonacci, Lépcsők, Számtani sorozat, Visszhang, Osztható vonal, Prímvonal.</li>
+<li><em>Összetett rácsok (4):</em> Sohei, Kazaguruma, Kereszt, Tripledoku (V).</li>
+<li><em>Magasabb dimenziók (5):</em> 3D latin kocka, Kocka 2×2 dobozokkal, 4D hiperkocka, 5D hiperkocka, Görög-latin.</li>
+</ul></li>
+<li><strong>Játékmódok (7):</strong> Orb, Memória, Maraton, Párbaj, Hardcore, A nap rejtvénye, Hangos. Az „Új játék” alatt választhatók; a megosztási kód <code>@mód</code> utótagot kap (A nap rejtvényénél és a Maratonnál nem).</li>
+<li><strong>Saját kombináció:</strong> a rácsszabályok + jelzések bármely összeférhető készlete (pl. Killer + átlók, hőmérők + nyilak).</li>
+<li><strong>Játék:</strong> többszörös kijelölés, jegyzetek, visszavonás/ismétlés, tipp (logika a jelölteken), automatikus jegyzetek, ellenőrzés, kiemelt ütközések, stopper, automatikus mentés, nyomtatás.</li>
+<li><strong>Megosztási kód:</strong> a <code>változat-méret-nehézség-mag</code> ugyanazt a rejtvényt generálja újra ugyanabban a verzióban.</li>
+<li><strong>Klasszikus 9×9-es megoldó</strong> opcionális kiegészítő szabályokkal; megmondja, hogy a megoldás egyértelmű, többszörös vagy nem létezik.</li>
+<li><strong>Atlasz:</strong> keresés, kategóriák, „A nap változata”, „Lepj meg”, lexikon, CSV-export, BibTeX-hivatkozás.</li>
+<li>Világos/sötét/automatikus téma, nagyított szöveg, 8 nyelvű felület (RO, EN, FR, IT, ES, PT, DE, HU).</li>
+<li><strong>A nap rejtvénye</strong> az UTC-dátumot használja; az egymást követő napok sorozata helyben marad meg (<code>sff_daily</code>).</li>
+</ul>
+<h2 id="hogyan-generál">Hogyan generál</h2>
+<p>A motor kiválaszt egy megoldott rácsot, amely megfelel a szabályoknak, ebből levezeti a jelzéseket (ketrecek, hőmérők, pontok...), majd egyenként eltávolítja a megadott számjegyeket, de csak addig, amíg a megoldó bizonyítja, hogy a megoldás egyértelmű marad. A generálás ugyanabból a fájlból létrehozott Web Workerben fut (hálózat nélkül); ha a Worker nem érhető el, a főszálon fut.</p>
+<h2 id="korlátok">Korlátok</h2>
+<ul>
+<li>A „Lépésről lépésre” kitölt egy számjegyet, és kiemeli, miért (a cellában megmaradt egyetlen számjegy; egy sor/oszlop/régió egyetlen lehetséges cellája; a változat szabályaiból levont következtetés; vagy, ha nincs közvetlen következtetés, a megoldásból vett számjegy, ennek jelölésével). Az „▶ Auto” magától futtatja a lépéseket, 1,6 másodpercenként. Hardcore és Memória módban le van tiltva; minden lépés visszavonható.</li>
+<li>A könnyű/közepes/nehéz nehézség csupán a megtartott jelzések száma. A rejtvény a megoldó erőfeszítésének mérőszámát is mutatja (0 = csak propagációval megoldható; különben az elágazások száma), amely nem az emberi technikák értékelése. Ha a generálás 12 másodpercnél tovább tart, a nehézség automatikusan csökken (de nem „A nap rejtvényénél” és a megosztott kódoknál).</li>
+<li>Chromiumban tesztelve (file:// címről megnyitva is). A Firefoxot és a Safari/iOS-t a fejlesztői környezetben nem lehetett tesztelni; ha a Blobból létrehozott Workert letiltják, az alkalmazás a főszálon való generálásra tér át (a felület a generálás alatt blokkolt).</li>
+<li>Akadálymentesség: a billentyűzet (nyilak, számjegyek, N, Ctrl+Z) és a kijelölt cella felolvasása; a tábla SVG, és nem teljes értékű eszköz képernyőolvasókhoz.</li>
+<li>A mentett állapot verziószámot tartalmaz; az ismeretlen formátumot félreteszi (<code>sff_game_bad</code>), nem törli.</li>
+<li>A „Nehéz” annyi számjegyet távolít el, amennyit csak tud; a rácsban sok jelzést tartalmazó változatoknál nagyon kevés megadott számjegy maradhat.</li>
+<li>Az összetett rácsok csak a klasszikus szabályokat tartalmazzák; a nagyon túlterhelt kombinációk tovább tarthatnak vagy sikertelenek lehetnek (az alkalmazás ezt közli).</li>
+<li>A 16×16 és a 25×25 az 1–9 szimbólumokat és betűket használ (A–G, illetve A–P).</li>
+<li><strong>Általam választott geometriák</strong> (a források eltérnek): Sohei, Kazaguruma, Kereszt, Tripledoku (V); a Domino definíciója; az élek összeragasztása a Möbius, a Klein és a projektív sík esetében; a „Szomszédos szélsőértékek” az átlós szomszédokat is magukban foglaló szomszédokkal (csak ortogonális szomszédokkal nem léteznek 9×9-es rácsok); Félvarázs dobozok sorokon és oszlopokon (a teljesen varázsdobozok, átlókkal, lehetetlenek).</li>
+<li><strong>Hiperkockák és kockák:</strong> rétegekben (szeletmozaik) jelennek meg, a 3D-sek pedig forgatható 3D nézetben is; a 3D kockáknál forgatható „3D nézet” is van (egérrel húzod, a csúszka elrejti az elülső rétegeket); a 4D/5D hiperkockák csak rétegekben maradnak. Mivel nagyon merevek, „Nehéz” szinten csak néhány megadott számjegy marad (5D-ben a 243 cellából csak néhány). Görög-latin: 3, 4, 5, 7 méretek (a 6 lehetetlen; a 8 és a 9 sebesség miatt kimaradt).</li>
+<li><strong>Anti-vezír</strong> nem létezik: ugyanazon számjegy tiltása ortogonálisan szomszédos cellákon már minden Sudoku szabálya. Az „Anti-futó” a 2×2-es ugrást jelenti, nem csúszó futót. A munkalista „Strings complementary/equal” elemei nem önálló változatok: az ötletet a Komplementer vonal és a Visszhang lefedi.</li>
+<li><strong>Logikailag közeli vagy azonos változatok (a lapokon jelezve):</strong> Nullás Sudoku (a Klasszikushoz képest csak más szimbólumok), Lexikografikus sorok (visszavezethető arra, hogy „az első oszlop 1…N”), Pince (Felhőkarcolók megfordított számjegyekkel).</li>
+<li><strong>Párbaj:</strong> az ellenfél egy időzítő, amely az ismert megoldásból tölt ki cellákat, nem logikával dolgozó megoldó.</li>
+<li>A szabályok a szokásos konvenciókat követik; a lapok megmondják, a konvenció melyik változatát választottuk. Néhány új változatnál a források eltérnek, és kifejezett konvenciót rögzítettem: Girandola (az 1.4 óta: sarkok, közép és r2c5, r5c2, r5c8, r8c5, a Regexp::Sudoku szerint; a régi elrendezés most „Szórt kilencesek”), „paritásvonal” (váltakozó, az „azonos paritás” változat külön), Rossini (a nyíl az első három számjegy legnagyobbikára mutat), Outside (a szegélyen lévő számjegyek az első három cella között szerepelnek), Zipper (minden szimmetrikus pár összege a középső), Régióösszeg-vonalak (az összeg minden átszelt dobozban azonos), Erődítmény (csak a jelöletlen szomszédok számítanak).</li>
+</ul>
+<h2 id="adatvédelem-és-hálózat">Adatvédelem és hálózat</h2>
+<ul>
+<li><strong>Helyi tárolás:</strong> <code>localStorage</code>, <code>sff_lang</code>, <code>sff_theme</code>, <code>sff_size</code>, <code>sff_game</code>, <code>sff_daily</code> kulcsok (nyelv, téma, szövegméret, az aktuális játék, A nap rejtvényének sorozata) és <code>sff_game_bad</code> (ismeretlen formátumban mentett állapot, megőrizve).</li>
+<li><strong>Hálózat:</strong> a kódban nincs <code>fetch</code>, <code>XMLHttpRequest</code>, CDN vagy külső erőforrás. A fájlban az egyetlen URL az SVG névtér (<code>http://www.w3.org/2000/svg</code>), amely nem generál kérést.</li>
+</ul>
+<h2 id="a-tároló-szerkezete">A tároló szerkezete</h2>
+<pre><code>index.html          aplicația (generat; se deschide direct în browser)
+engine.js           motorul: solver, generator, variantele
+src/                interfața (template.html, style.css, data.js, app.js)
+build.py            asamblează index.html din src/ + engine.js
+test.js             suita de teste (node test.js)
+docs/               capturi (docs/screens), catalogul pe categorii (docs/catalog), GHID.html (se vede pe Pages, nu în GitHub: fișierul are ~6 MB)
+CHANGELOG.md        istoric versiuni
+CONTRIBUTING.md     cum contribui
+LICENSE             MIT</code></pre>
+<p>Közzététel a GitHub Pages-en: Settings → Pages → Branch <code>main</code>, mappa <code>/ (root)</code>; az <code>index.html</code> a gyökérben van, és csak relatív útvonalakat használ, ezért a <code>https://&lt;felhasználó&gt;.github.io/&lt;tároló&gt;/</code> cím alatt is működik. Lásd a <a href="../CHANGELOG.md"><code>CHANGELOG.md</code></a> és a <a href="../CONTRIBUTING.md"><code>CONTRIBUTING.md</code></a> fájlt.</p>
+<h2 id="helyi--offline-futtatás">Helyi / offline futtatás</h2>
+<p>Töltsd le az <code>index.html</code> fájlt, és nyisd meg egy böngészőben; nincs szüksége internetre.</p>
+<h2 id="tesztek">Tesztek</h2>
+<p>Automatikusan a GitHubon is futnak (Actions, <code>.github/workflows/ci.yml</code>): reprodukálható build, <code>node test.js</code>, és annak ellenőrzése, hogy az <code>index.html</code>-nek nincsenek külső erőforrásai.</p>
+<p>Az <code>engine.js</code> a motor (ugyanez a forrás szerepel az <code>index.html</code>-ben). A <code>test.js</code> csomag Node-dal fut:</p>
+<pre><code>node test.js            # toate variantele și mărimile
+node test.js killer     # o singură variantă</code></pre>
+<p>Minden változatra és méretre, könnyű és nehéz szinten ellenőrzi: a megoldás megfelel a szabályoknak, a rejtvénynek egyértelmű a megoldása (számlálás ugyanazzal a megoldóval, mint a generátoré, nagy kerettel; a 4×4-es felsorolások és a szemantikavalidátor külön íródtak), a megoldás túléli a propagációt a jelzések véletlen részhalmazaiból kiindulva (<em>soundness</em>). Ezenkívül 4×4-ben a jelzések nélküli megoldások számát összevetik egy kimerítő felsorolással (pl. 288 a klasszikusnál), és néhány saját kombinációt is ellenőriznek. Az 1.1-es verzió óta minden rejtvényt a motortól külön megírt szabályszemantika-validátor is ellenőriz, közvetlenül a lapok szövegéből (ellenőrzi például a Zippert, a Lockoutot, az átlag-/szorzat-/pirulanyilakat, a Clone-t, a Strimko-láncokat). Az 1.3-as verzió óta a független validátor a topológiákat, a tündérugrásokat, a globális szabályokat, a szegély- és cellajelzéseket, a ketreceket, a vonalakat és a pontokat is lefedi (a motortól külön újraírt képletek), a kockáknál, hiperkockáknál és a görög-latinnál pedig a jelzések nélküli megoldások számát külön DFS-felsorolással vetik össze (pl. 21888 a 4×4×4-es, 2×2-es dobozokkal ellátott kockánál, 72 és 6912 a görög-latin 3 és 4 esetén). Utolsó futtatás: 3144 ellenőrzés, mind sikeres; a független validátor most már az 1.0–1.2 típusait is lefedi, és egy mutánsteszt (16 506 számjegyátnevezés) teljes egyezést mutat a motor és a validátor között; 660 darab 4×4-es rejtvényt külön felsorolás igazolt egyedinek; kiegészítő terhelés változatonként 12 maggal (5652 rejtvény, nulla hiba); ezenkívül egy terhelési próba minden változatra 5 rejtvénnyel, minimális és maximális méretben, hiba nélkül (a leglassabb generálás, „Nehéz” szinten néhány globális szabályú változatnál, körülbelül 21 másodpercig tartott). Korlát: a kimerítő felsorolással történő keresztellenőrzés csak a 4×4-es mérettel rendelkező változatokra létezik (és a kis kockákra/görög-latinra, ahogy fent látható).</p>
+<h2 id="ami-a-3-szintből-nincs-megvalósítva">Ami a 3. szintből nincs megvalósítva</h2>
+<p>Nem szerepelnek: Chaos Construction, Deconstruction, más rejtvényekkel alkotott hibridek (Loop, Snake, Yin-Yang, Nurikabe, Sudoku Mine), az egymásra rakódó Flower/Butterfly rácsok (a Sohei és a Kazaguruma az 1.3 óta léteznek, általam választott geometriával), módosító cellák, Schrödinger, „liar”, Vudoku, Capsule, Deficit. Némelyik megváltoztatja a játékmódot, vagy más fajta logikájú megoldókat igényel; másoknál a talált források nem rögzítik a szabályokat vagy a geometriát, és kitalálásuk azt jelentené, hogy ismert változatként tüntetnék fel valamit, ami nem az.</p>
+<h2 id="licenc">Licenc</h2>
+<p><strong>MIT</strong> — lásd a <a href="../LICENSE"><code>LICENSE</code></a> fájlt. Az egész tárolóra vonatkozik: a kódra (<code>engine.js</code>, <code>src/</code>, <code>build.py</code>, <code>test.js</code>, <code>index.html</code>), a szövegekre (README, a lapok) és a <code>docs/screens/</code> képernyőképeire. Használhatod, másolhatod, módosíthatod, közzéteheted és eladhatod, feltéve, hogy megtartod a szerzői jogi közleményt és a licenc szövegét. A program „ahogy van” kerül rendelkezésre, garancia nélkül.</p>
+<p>Megjegyzések:</p>
+<ul>
+<li>Az alkalmazás nem tartalmaz külső könyvtárakat vagy erőforrásokat, ezért nincsenek betartandó harmadik fél licencek.</li>
+<li>A Sudoku-változatok nevei és szabályai (Killer, Kropki, Sandwich stb.) nyilvánosan ismert rejtvénytípusokat jelölnek; a lapok szövegei ehhez az alkalmazáshoz íródtak. A nevek a létrehozó szerzőké és közösségeké maradnak.</li>
+</ul>
+<h2 id="szerző">Szerző</h2>
+<p>Alexio — Alexandru-Ionuț Chiuță, elérhetőség: <a href="mailto:alexio@trom.tf">alexio@trom.tf</a>.</p>
+<h2 id="összefoglaló">Összefoglaló</h2>
+<p>136 Sudoku-bejegyzésből álló atlasz (≈130 külön szabályrendszerrel; a Pince, a Nullás és a Lexikografikus sorok más változatok közeli másolatai, és a lapjaikon ezt kimondják) (plusz 7 játékmód: Orb, Memória, Maraton, Párbaj, Hardcore, A nap rejtvénye, Hangos) helyi generátorral és megoldóval, egyetlen HTML-fájlban. A rejtvényeket a böngésző generálja bizonyítottan egyértelmű megoldással (a megadott számjegyeket csak addig távolítja el, amíg egy propagációs megoldó megerősíti az egyértelműséget). Tartalmaz saját szabálykeverőt, jegyzeteket/visszavonást/tippeket, megosztási kódokat, klasszikus 9×9-es megoldót, CSV-exportot és BibTeX-hivatkozást. Nincsenek hálózati kérések; az állapot a <code>localStorage</code>-ban van tárolva (<code>sff_*</code>). A nehézség (könnyű/közepes/nehéz) csupán a megtartott megadott számjegyek száma; minden rejtvény mért értéket is mutat: hány elágazásra van szüksége egy propagációs megoldónak (0 = csak propagációval megoldható). Ez a megoldó erőfeszítése, nem az emberi technikák értékelése. A motor tesztcsomagjához futtasd a <code>node test.js</code> parancsot. Licenc: MIT (lásd a <code>LICENSE</code> fájlt), amely a kódra, a szövegekre és a képernyőképekre vonatkozik.</p>
+<p>Ez a README tartalmaz egy használati útmutatót a felület képernyőképeivel, valamint egy katalógust, amely a 136 változat mindegyikéhez két valódi képernyőképet, a szabályokat és egy reprodukálható kódot tartalmaz (<code>screens/</code>).</p>
+<h2 id="megjegyzések-az-14-hez">Megjegyzések az 1.4-hez</h2>
+<ul>
+<li>A <strong>Girandola</strong> a Regexp::Sudoku leírása szerint lett javítva (sarkok, közép, r2c5, r5c2, r5c8, r8c5). A régi elrendezés (sarkok, oldalfelezők, közép) „Szórt kilencesek” (<code>sparse9</code>) néven marad meg. Az 1.4 előtt generált <code>girandola-…</code> kódok most más rejtvényt adnak.</li>
+<li>Az 1.4-ben a képernyőképek alapján javítva: a „Játék” fül felirata (duplikált szövegkulcs), a kóddal végzett „Megnyitás” után a régi értékeken maradt listák, és a visszavonás után megmaradt „Hibás cellák” üzenet.</li>
+<li>1.4-es ellenőrzések: a lapok szövegéből vakon megírt validátor (az akkor létező változatok 135/135-e megfelelt; a „Szórt kilencesek” később került hozzá, és van validátora a <code>test.js</code>-ben), összevetés közzétett forrásokkal 56 változatnál (a Regionsum, a Rossini és a Little Unique Killer lapjai pontosításokat kaptak), egyszeri futtatás 1818 rejtvénnyel az összes változaton és a ≤12 méreteken hiba nélkül (a szkript nem része a tárolónak), a „Lépésről lépésre” mind a 136 változaton tesztelve.</li>
+<li>A források még nem erősítették meg: a Sohei, a Kazaguruma, a Kereszt, a Tripledoku V elrendezését; az ismétlődő számjegyek kezelését a Quadnál és a Duplázóknál; az átlós összefüggőséget a Strimkónál.</li>
+</ul>
+
+</body></html>

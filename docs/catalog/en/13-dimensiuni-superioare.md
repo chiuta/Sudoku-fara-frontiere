@@ -12,7 +12,7 @@
 _The layers are shown as slices of the grid; 3D cubes also have a rotatable “3D view” (drag with the mouse)._
 
 <a id="cube3"></a>
-#### 132. Latin cube 3D · Latin cube 3D (`cube3`)
+#### 132. Latin cube 3D (`cube3`)
 
 **Every line of the cube holds each digit once.**
 
@@ -64,7 +64,7 @@ The N×N×N cube is unfolded into N layers placed side by side (separated by a g
 </details>
 
 <a id="cubebox"></a>
-#### 133. Cube with 2×2 boxes · Cube with 2×2 boxes (`cubebox`)
+#### 133. Cube with 2×2 boxes (`cubebox`)
 
 **4×4×4 Latin cube with 2×2 boxes in every layer.**
 
@@ -116,7 +116,7 @@ As in the Latin cube 3D (4×4×4), but each layer additionally has four 2×2 box
 </details>
 
 <a id="hyper4"></a>
-#### 134. Hypercube 4D · Hypercube 4D (`hyper4`)
+#### 134. Hypercube 4D (`hyper4`)
 
 **Sudoku in four dimensions.**
 
@@ -168,7 +168,7 @@ The N×N×N×N hypercube is unfolded as an N×N mosaic of N×N layers (the first
 </details>
 
 <a id="hyper5"></a>
-#### 135. Hypercube 5D · Hypercube 5D (`hyper5`)
+#### 135. Hypercube 5D (`hyper5`)
 
 **Sudoku in five dimensions (3⁵ = 243 cells).**
 
@@ -220,7 +220,7 @@ The 3×3×3×3×3 hypercube is unfolded into three 3×3 mosaics of 3×3 layers p
 </details>
 
 <a id="greco"></a>
-#### 136. Greco-Latin (orthogonal squares) · Greco-Latin (orthogonal squares) (`greco`)
+#### 136. Greco-Latin (orthogonal squares) (`greco`)
 
 **Two overlaid Latin squares: every digit–letter pair appears once.**
 

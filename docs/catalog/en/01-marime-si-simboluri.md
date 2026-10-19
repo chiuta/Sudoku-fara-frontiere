@@ -12,7 +12,7 @@
 _Choose the size under “New game”; the symbols (digits or letters) appear on the keypad below the board._
 
 <a id="clasic"></a>
-#### 1. Classic · Classic (`clasic`)
+#### 1. Classic (`clasic`)
 
 **Row, column, box: each digit once.**
 
@@ -66,7 +66,7 @@ Fill the grid so every row, column and box contains each digit exactly once. Siz
 </details>
 
 <a id="wordoku"></a>
-#### 2. Wordoku · Wordoku (`wordoku`)
+#### 2. Wordoku (`wordoku`)
 
 **Letters instead of digits.**
 
@@ -119,7 +119,7 @@ The same game as Classic, but with letters. At 9×9 you may choose any word made
 </details>
 
 <a id="latin"></a>
-#### 3. Latin square · Latin square (`latin`)
+#### 3. Latin square (`latin`)
 
 **Rows and columns only, no boxes.**
 
@@ -172,7 +172,7 @@ Every row and column contains each digit once; there are no boxes. Sizes 4–9.
 </details>
 
 <a id="zero"></a>
-#### 4. Zero Sudoku · Zero Sudoku (`zero`)
+#### 4. Zero Sudoku (`zero`)
 
 **Digits run from 0 to N−1.**
 

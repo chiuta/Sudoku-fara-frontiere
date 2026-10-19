@@ -12,7 +12,7 @@
 _The rule says which cells cannot hold the same digit or close digits; conflicts show in red if “Show conflicts” is ticked._
 
 <a id="antiknight"></a>
-#### 16. Anti-knight · Anti-knight (`antiknight`)
+#### 16. Anti-knight (`antiknight`)
 
 **No equal digits a knight's move apart.**
 
@@ -64,7 +64,7 @@ In addition to the classic rules, two cells a chess knight's move apart cannot c
 </details>
 
 <a id="antiking"></a>
-#### 17. Anti-king · Anti-king (`antiking`)
+#### 17. Anti-king (`antiking`)
 
 **Diagonal neighbours differ.**
 
@@ -116,7 +116,7 @@ In addition to the classic rules, two diagonally adjacent cells (a king's move) 
 </details>
 
 <a id="nonconsec"></a>
-#### 18. Non-consecutive · Non-consecutive (`nonconsec`)
+#### 18. Non-consecutive (`nonconsec`)
 
 **Neighbours are never consecutive.**
 
@@ -168,7 +168,7 @@ In addition to the classic rules, orthogonally adjacent cells cannot contain con
 </details>
 
 <a id="miracle"></a>
-#### 19. Miracle · Miracle (`miracle`)
+#### 19. Miracle (`miracle`)
 
 **Anti-knight + anti-king + non-consecutive.**
 

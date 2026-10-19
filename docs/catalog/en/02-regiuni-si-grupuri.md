@@ -12,7 +12,7 @@
 _The extra regions or groups are coloured or outlined on the board; each must contain the digits exactly once._
 
 <a id="diag"></a>
-#### 5. Sudoku X · Sudoku X (`diag`)
+#### 5. Sudoku X (`diag`)
 
 **Plus both diagonals.**
 
@@ -64,7 +64,7 @@ In addition to the classic rules, each of the two main diagonals contains every 
 </details>
 
 <a id="hyper"></a>
-#### 6. Hyper (Windoku) · Hyper (Windoku) (`hyper`)
+#### 6. Hyper (Windoku) (`hyper`)
 
 **Four extra 3×3 windows.**
 
@@ -116,7 +116,7 @@ In addition to the classic rules, four extra 3×3 windows (shaded) each contain 
 </details>
 
 <a id="jigsaw"></a>
-#### 7. Jigsaw (irregular) · Jigsaw (irregular) (`jigsaw`)
+#### 7. Jigsaw (irregular) (`jigsaw`)
 
 **Irregular regions instead of square boxes.**
 
@@ -169,7 +169,7 @@ Boxes are irregular regions of N cells each (thick outlines). Every row, column 
 </details>
 
 <a id="dg"></a>
-#### 8. Disjoint groups · Disjoint groups (`dg`)
+#### 8. Disjoint groups (`dg`)
 
 **Same position in each box = a group.**
 
@@ -221,7 +221,7 @@ In addition to the classic rules: all cells in the same position within their bo
 </details>
 
 <a id="center"></a>
-#### 9. Centre dots · Centre dots (`center`)
+#### 9. Centre dots (`center`)
 
 **The nine box centres are all different.**
 
@@ -273,7 +273,7 @@ In addition to the classic rules, the nine centre cells of the boxes (marked) co
 </details>
 
 <a id="girandola"></a>
-#### 10. Girandola · Girandola (`girandola`)
+#### 10. Girandola (`girandola`)
 
 **One more group of 9 cells in a pinwheel shape.**
 
@@ -325,7 +325,7 @@ On top of the classic rules, the nine marked cells (the four corners, the centre
 </details>
 
 <a id="sparse9"></a>
-#### 11. Scattered nine · Scattered nine (`sparse9`)
+#### 11. Scattered nine (`sparse9`)
 
 **One more group of 9 cells: corners, side midpoints, centre.**
 
@@ -377,7 +377,7 @@ On top of the classic rules, the nine marked cells (the four corners, the midpoi
 </details>
 
 <a id="asterisk"></a>
-#### 12. Asterisk · Asterisk (`asterisk`)
+#### 12. Asterisk (`asterisk`)
 
 **One group shaped like an asterisk.**
 
@@ -429,7 +429,7 @@ The nine marked cells, laid out as an asterisk around the centre (the centre, fo
 </details>
 
 <a id="diag1"></a>
-#### 13. Single diagonal · Single diagonal (`diag1`)
+#### 13. Single diagonal (`diag1`)
 
 **Only the main diagonal is special.**
 
@@ -481,7 +481,7 @@ The main diagonal (top-left to bottom-right) contains each digit exactly once, o
 </details>
 
 <a id="clone"></a>
-#### 14. Clone · Clone (`clone`)
+#### 14. Clone (`clone`)
 
 **Identical regions hold the same digits.**
 
@@ -533,7 +533,7 @@ Two or more regions in the same colour have the same shape and identical digits 
 </details>
 
 <a id="pandiag"></a>
-#### 15. Pandiagonal · Pandiagonal (`pandiag`)
+#### 15. Pandiagonal (`pandiag`)
 
 **Latin square with all broken diagonals.**
 

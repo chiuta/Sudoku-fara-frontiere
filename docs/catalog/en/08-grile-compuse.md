@@ -12,7 +12,7 @@
 _The grids overlap; shared cells obey the rules of both grids at once. The board can be enlarged with the larger-text setting._
 
 <a id="samurai"></a>
-#### 92. Samurai · Samurai (`samurai`)
+#### 92. Samurai (`samurai`)
 
 **Five overlapping grids.**
 
@@ -64,7 +64,7 @@ Five 9×9 grids overlapping at the corners; shared boxes are filled in only once
 </details>
 
 <a id="twodoku"></a>
-#### 93. Twodoku · Twodoku (`twodoku`)
+#### 93. Twodoku (`twodoku`)
 
 **Two grids sharing a box.**
 
@@ -116,7 +116,7 @@ Two 9×9 grids that share one box.
 </details>
 
 <a id="gattai3"></a>
-#### 94. Gattai-3 · Gattai-3 (`gattai3`)
+#### 94. Gattai-3 (`gattai3`)
 
 **Three grids in a chain.**
 
@@ -168,7 +168,7 @@ Three 9×9 grids linked diagonally, each neighbouring pair sharing one box.
 </details>
 
 <a id="sohei"></a>
-#### 95. Sohei (ring of four) · Sohei (ring of four) (`sohei`)
+#### 95. Sohei (ring of four) (`sohei`)
 
 **Four 9×9 grids linked in a diamond ring.**
 
@@ -220,7 +220,7 @@ Four 9×9 grids are placed in a diamond (top, right, bottom, left); each two nei
 </details>
 
 <a id="kazaguruma"></a>
-#### 96. Kazaguruma (windmill) · Kazaguruma (windmill) (`kazaguruma`)
+#### 96. Kazaguruma (windmill) (`kazaguruma`)
 
 **Centre plus four arms, each overlapping two boxes.**
 
@@ -272,7 +272,7 @@ A central 9×9 grid and four 9×9 arms in a windmill shape; each arm overlaps th
 </details>
 
 <a id="tripledoku"></a>
-#### 97. Tripledoku (V) · Tripledoku (V) (`tripledoku`)
+#### 97. Tripledoku (V) (`tripledoku`)
 
 **Three grids in a V shape.**
 
@@ -324,7 +324,7 @@ Three 9×9 grids placed in a V: top-left, middle-bottom and top-right; the middl
 </details>
 
 <a id="cross"></a>
-#### 98. Cross · Cross (`cross`)
+#### 98. Cross (`cross`)
 
 **Centre plus four arms, each overlapping a full band.**
 

@@ -12,7 +12,7 @@
 _The signs (dots, circles, comparison arrows, bars) are drawn between cells or inside cells; the absence of a sign may matter, see the rules sheet._
 
 <a id="evenodd"></a>
-#### 20. Even–odd · Even–odd (`evenodd`)
+#### 20. Even–odd (`evenodd`)
 
 **Square = even, circle = odd.**
 
@@ -64,7 +64,7 @@ Cells marked with a square contain even digits, cells marked with a circle odd d
 </details>
 
 <a id="kropki"></a>
-#### 21. Kropki · Kropki (`kropki`)
+#### 21. Kropki (`kropki`)
 
 **Dots: consecutive or double.**
 
@@ -116,7 +116,7 @@ A white dot between two cells: the digits are consecutive. A black dot: one is d
 </details>
 
 <a id="consec"></a>
-#### 22. Consecutive · Consecutive (`consec`)
+#### 22. Consecutive (`consec`)
 
 **Bar = consecutive; no bar = not.**
 
@@ -168,7 +168,7 @@ A bar between two cells means consecutive digits. Where there is no bar, neighbo
 </details>
 
 <a id="xv"></a>
-#### 23. XV · XV (`xv`)
+#### 23. XV (`xv`)
 
 **X = sum 10, V = sum 5.**
 
@@ -220,7 +220,7 @@ An X between two cells: their sum is 10; a V: their sum is 5. Where there is no 
 </details>
 
 <a id="greater"></a>
-#### 24. Greater-than · Greater-than (`greater`)
+#### 24. Greater-than (`greater`)
 
 **Greater / less-than signs.**
 
@@ -272,7 +272,7 @@ The sign between two cells opens towards the larger digit.
 </details>
 
 <a id="batt"></a>
-#### 25. Battenburg · Battenburg (`batt`)
+#### 25. Battenburg (`batt`)
 
 **Chessboard parity on a 2×2.**
 
@@ -324,7 +324,7 @@ A four-square mark at the corner shared by four cells means the parities alterna
 </details>
 
 <a id="quad"></a>
-#### 26. Quadruples · Quadruples (`quad`)
+#### 26. Quadruples (`quad`)
 
 **Circles listing digits of a 2×2.**
 
@@ -376,7 +376,7 @@ A circle at the corner shared by four cells lists digits that appear among those
 </details>
 
 <a id="evenonly"></a>
-#### 27. Marked evens only · Marked evens only (`evenonly`)
+#### 27. Marked evens only (`evenonly`)
 
 **Shaded cells are even.**
 
@@ -428,7 +428,7 @@ Every cell marked with a grey square holds an even digit. Unmarked cells say not
 </details>
 
 <a id="oddonly"></a>
-#### 28. Marked odds only · Marked odds only (`oddonly`)
+#### 28. Marked odds only (`oddonly`)
 
 **Circled cells are odd.**
 
@@ -480,7 +480,7 @@ Every cell marked with a grey circle holds an odd digit. Unmarked cells say noth
 </details>
 
 <a id="fortress"></a>
-#### 29. Fortress · Fortress (`fortress`)
+#### 29. Fortress (`fortress`)
 
 **Shaded cells beat their neighbours.**
 
@@ -532,7 +532,7 @@ A shaded cell is greater than every orthogonal neighbour that is not shaded. Not
 </details>
 
 <a id="minmax"></a>
-#### 30. Min / Max · Min / Max (`minmax`)
+#### 30. Min / Max (`minmax`)
 
 **Cells smaller or larger than all neighbours.**
 
@@ -584,7 +584,7 @@ A cell marked with a downward triangle ("min") is strictly smaller than all its 
 </details>
 
 <a id="indexing"></a>
-#### 31. Indexing · Indexing (`indexing`)
+#### 31. Indexing (`indexing`)
 
 **The first digit of a row says where the 1 is.**
 
@@ -636,7 +636,7 @@ In every row, the digit in the first (leftmost) cell gives the column number whe
 </details>
 
 <a id="ratio"></a>
-#### 32. Ratio ×3 · Ratio ×3 (`ratio`)
+#### 32. Ratio ×3 (`ratio`)
 
 **Dots for pairs in 3:1 ratio.**
 
@@ -688,7 +688,7 @@ On the edge between two adjacent cells, a circle with a 3 means one digit is thr
 </details>
 
 <a id="diff"></a>
-#### 33. Difference · Difference (`diff`)
+#### 33. Difference (`diff`)
 
 **The number between cells is their difference.**
 
@@ -740,7 +740,7 @@ In addition to the classic rules, a number between two neighbouring cells is the
 </details>
 
 <a id="kropkipos"></a>
-#### 34. Kropki marked only · Kropki marked only (`kropkipos`)
+#### 34. Kropki marked only (`kropkipos`)
 
 **Dots given; no dot says nothing.**
 
@@ -792,7 +792,7 @@ As in Kropki (white = consecutive, black = double), but the absence of a dot mea
 </details>
 
 <a id="xvpos"></a>
-#### 35. XV marked only · XV marked only (`xvpos`)
+#### 35. XV marked only (`xvpos`)
 
 **Signs given; no sign says nothing.**
 
@@ -844,7 +844,7 @@ As in XV (X = sum 10, V = sum 5), but the absence of a sign means nothing. 9×9 
 </details>
 
 <a id="consecpos"></a>
-#### 36. Consecutive marked only · Consecutive marked only (`consecpos`)
+#### 36. Consecutive marked only (`consecpos`)
 
 **Bars given; no bar says nothing.**
 
@@ -896,7 +896,7 @@ As in Consecutive (bar = consecutive digits), but the absence of a bar means not
 </details>
 
 <a id="clueless"></a>
-#### 37. Clueless · Clueless (`clueless`)
+#### 37. Clueless (`clueless`)
 
 **Only Kropki dots; usually no given digits.**
 

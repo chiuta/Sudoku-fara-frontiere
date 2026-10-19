@@ -8,7 +8,7 @@ Lingue dell'interfaccia: **Română, English, Français, Italiano, Español, Por
 
 Un atlante di varianti del Sudoku, con generatore e risolutore che funzionano in locale — in un unico file HTML.
 
-**Licenza:** [MIT](LICENSE) · **Applicazione online:** <https://chiuta.github.io/Sudoku-fara-frontiere/> · **Guida illustrata (una sola pagina):** <https://chiuta.github.io/Sudoku-fara-frontiere/docs/GHID.html>
+**Licenza:** [MIT](LICENSE) · **Applicazione online:** <https://chiuta.github.io/Sudoku-fara-frontiere/> · **Guida illustrata (una sola pagina):** <https://chiuta.github.io/Sudoku-fara-frontiere/docs/GHID.it.html>
 
 ![Alcune varianti, dopo «Passo dopo passo»](docs/screenshot.png)
 
@@ -180,7 +180,7 @@ engine.js           motorul: solver, generator, variantele
 src/                interfața (template.html, style.css, data.js, app.js)
 build.py            asamblează index.html din src/ + engine.js
 test.js             suita de teste (node test.js)
-docs/               capturi (docs/screens), catalogul pe categorii (docs/catalog), GHID.html (se vede pe Pages, nu în GitHub: fișierul are ~6 MB)
+docs/               capturi (docs/screens), catalogul pe categorii (docs/catalog), GHID.html + GHID.<lang>.html (ghid ilustrat; se văd pe Pages)
 CHANGELOG.md        istoric versiuni
 CONTRIBUTING.md     cum contribui
 LICENSE             MIT

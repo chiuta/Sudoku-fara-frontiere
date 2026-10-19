@@ -12,7 +12,7 @@
 _The rule concerns the whole grid and usually has no markings of its own; test it with “Check” or watch the conflicts._
 
 <a id="symcomp"></a>
-#### 111. Complementary symmetry · Complementary symmetry (`symcomp`)
+#### 111. Complementary symmetry (`symcomp`)
 
 **Cells opposite through the centre sum to N+1.**
 
@@ -64,7 +64,7 @@ In addition to the classic rules, any two cells symmetric about the centre of th
 </details>
 
 <a id="symparity"></a>
-#### 112. Symmetric parity · Symmetric parity (`symparity`)
+#### 112. Symmetric parity (`symparity`)
 
 **Cells opposite through the centre share parity.**
 
@@ -116,7 +116,7 @@ In addition to the classic rules, any two cells symmetric about the centre of th
 </details>
 
 <a id="cgrav"></a>
-#### 113. Centre of gravity · Centre of gravity (`cgrav`)
+#### 113. Centre of gravity (`cgrav`)
 
 **Every row balances like a seesaw.**
 
@@ -168,7 +168,7 @@ In addition to the classic rules, every row is balanced: number the positions �
 </details>
 
 <a id="lexrows"></a>
-#### 114. Lexicographic rows · Lexicographic rows (`lexrows`)
+#### 114. Lexicographic rows (`lexrows`)
 
 **Rows increase like dictionary words (first column: 1…N).**
 
@@ -220,7 +220,7 @@ In addition to the classic rules, reading the rows top to bottom as digit “wor
 </details>
 
 <a id="extremes"></a>
-#### 115. Touching extremes · Touching extremes (`extremes`)
+#### 115. Touching extremes (`extremes`)
 
 **The smallest and largest digit of each box touch.**
 
@@ -272,7 +272,7 @@ In addition to the classic rules, in each box the digits 1 and N lie in neighbou
 </details>
 
 <a id="boxbalance"></a>
-#### 116. Balanced boxes · Balanced boxes (`boxbalance`)
+#### 116. Balanced boxes (`boxbalance`)
 
 **First and last box column have equal sums.**
 
@@ -324,7 +324,7 @@ In addition to the classic rules, in every box the sum of the left column equals
 </details>
 
 <a id="lonely5"></a>
-#### 117. Lonely 5 · Lonely 5 (`lonely5`)
+#### 117. Lonely 5 (`lonely5`)
 
 **A 5 has only even neighbours.**
 
@@ -376,7 +376,7 @@ In addition to the classic rules, every 5 has only even orthogonal neighbours. S
 </details>
 
 <a id="nolonely"></a>
-#### 118. No lonely cells · No lonely cells (`nolonely`)
+#### 118. No lonely cells (`nolonely`)
 
 **Every cell has a consecutive neighbour.**
 
@@ -428,7 +428,7 @@ In addition to the classic rules, every cell has at least one orthogonal neighbo
 </details>
 
 <a id="noprog"></a>
-#### 119. No arithmetic progressions · No arithmetic progressions (`noprog`)
+#### 119. No arithmetic progressions (`noprog`)
 
 **No three neighbours form an arithmetic progression.**
 
@@ -480,7 +480,7 @@ In addition to the classic rules, three adjacent cells in a row or column cannot
 </details>
 
 <a id="semimagic"></a>
-#### 120. Semi-magic boxes · Semi-magic boxes (`semimagic`)
+#### 120. Semi-magic boxes (`semimagic`)
 
 **Rows and columns of every box sum to 15.**
 

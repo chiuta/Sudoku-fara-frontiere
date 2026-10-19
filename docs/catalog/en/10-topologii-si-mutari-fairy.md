@@ -12,7 +12,7 @@
 _The edges of the grid are glued together according to the variant’s rule; a cell on the edge also has neighbours on the opposite side._
 
 <a id="antibishop"></a>
-#### 102. Anti-alfil · Anti-alfil (`antibishop`)
+#### 102. Anti-alfil (`antibishop`)
 
 **No equal digits two diagonal steps apart.**
 
@@ -64,7 +64,7 @@ In addition to the classic rules, two cells exactly two steps apart diagonally (
 </details>
 
 <a id="anticamel"></a>
-#### 103. Anti-camel · Anti-camel (`anticamel`)
+#### 103. Anti-camel (`anticamel`)
 
 **No equal digits a camel’s leap (1,3) apart.**
 
@@ -116,7 +116,7 @@ In addition to the classic rules, two cells a camel’s leap apart (1 row and 3 
 </details>
 
 <a id="antizebra"></a>
-#### 104. Anti-zebra · Anti-zebra (`antizebra`)
+#### 104. Anti-zebra (`antizebra`)
 
 **No equal digits a zebra’s leap (2,3) apart.**
 
@@ -168,7 +168,7 @@ In addition to the classic rules, two cells a zebra’s leap apart (2 rows and 3
 </details>
 
 <a id="torusking"></a>
-#### 105. Torus anti-king · Torus anti-king (`torusking`)
+#### 105. Torus anti-king (`torusking`)
 
 **Anti-king on a grid that wraps like a torus.**
 
@@ -220,7 +220,7 @@ The grid continues across the edges: the top edge is glued to the bottom one, le
 </details>
 
 <a id="torusknight"></a>
-#### 106. Torus anti-knight · Torus anti-knight (`torusknight`)
+#### 106. Torus anti-knight (`torusknight`)
 
 **Anti-knight on a grid that wraps like a torus.**
 
@@ -272,7 +272,7 @@ The grid continues across the edges (top to bottom, left to right). Two cells a 
 </details>
 
 <a id="cylking"></a>
-#### 107. Cylinder anti-king · Cylinder anti-king (`cylking`)
+#### 107. Cylinder anti-king (`cylking`)
 
 **Left glued to right; top and bottom stay edges.**
 
@@ -324,7 +324,7 @@ The left edge is glued to the right edge like a cylinder; top and bottom are not
 </details>
 
 <a id="mobiusking"></a>
-#### 108. Möbius anti-king · Möbius anti-king (`mobiusking`)
+#### 108. Möbius anti-king (`mobiusking`)
 
 **Left glued to right with a twist.**
 
@@ -376,7 +376,7 @@ The left edge is glued to the right edge with a twist (row r joins row 10−r), 
 </details>
 
 <a id="kleinking"></a>
-#### 109. Klein anti-king · Klein anti-king (`kleinking`)
+#### 109. Klein anti-king (`kleinking`)
 
 **Klein bottle: left–right twisted, top–bottom plain.**
 
@@ -428,7 +428,7 @@ The left edge is glued to the right edge with a twist (row r joins row 10−r), 
 </details>
 
 <a id="projking"></a>
-#### 110. Projective-plane anti-king · Projective-plane anti-king (`projking`)
+#### 110. Projective-plane anti-king (`projking`)
 
 **Both pairs of edges glued with a twist.**
 

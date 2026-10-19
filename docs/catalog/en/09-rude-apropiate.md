@@ -12,7 +12,7 @@
 _A close relative of Sudoku: read the rules sheet to see what changes compared with the classic game._
 
 <a id="futoshiki"></a>
-#### 99. Futoshiki · Futoshiki (`futoshiki`)
+#### 99. Futoshiki (`futoshiki`)
 
 **Latin square with inequality signs.**
 
@@ -65,7 +65,7 @@ Every row and column contains the digits 1–N once; the signs < and > between t
 </details>
 
 <a id="kenken"></a>
-#### 100. KenKen (Calcudoku) · KenKen (Calcudoku) (`kenken`)
+#### 100. KenKen (Calcudoku) (`kenken`)
 
 **Latin square with arithmetic cages.**
 
@@ -117,7 +117,7 @@ Each row and column contains the digits 1–N once; each cage has a target and a
 </details>
 
 <a id="strimko"></a>
-#### 101. Strimko · Strimko (`strimko`)
+#### 101. Strimko (`strimko`)
 
 **Chains instead of boxes.**
 

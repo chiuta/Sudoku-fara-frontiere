@@ -1,0 +1,233 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sudoku fără frontiere</title><style>body{font:16px/1.55 system-ui,sans-serif;max-width:900px;margin:0 auto;padding:16px;color:#1d2230;background:#fbfaf6}img{max-width:100%;height:auto;border-radius:6px}table{border-collapse:collapse;max-width:100%}td,th{border:1px solid #d9d5c7;padding:6px 8px;vertical-align:top}a{color:#0b5fd3}a:visited{color:#6b3fa0}code{background:#eee9;padding:1px 4px;border-radius:4px}h4{margin-top:2em;border-top:1px solid #d9d5c7;padding-top:1em}@media(prefers-color-scheme:dark){body{background:#0f1218;color:#e6e8ee}a{color:#8fc0ff}a:visited{color:#c7a8ff}td,th,h4{border-color:#2b3140}code{background:#2b3140}}</style><body>
+<h1 id="sudoku-fără-frontiere">Sudoku fără frontiere</h1>
+<p><a href="../README.md">English</a> · <a href="../README.ro.md">Română</a> · <a href="../README.fr.md">Français</a> · <a href="../README.it.md">Italiano</a> · <strong>Español</strong> · <a href="../README.pt.md">Português</a> · <a href="../README.de.md">Deutsch</a> · <a href="../README.hu.md">Magyar</a></p>
+<p><strong>Versión:</strong> 1.6.0 · <strong>Última actualización:</strong> 2026-10-19</p>
+<p>Idiomas de la interfaz: <strong>Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar</strong></p>
+<p>Un atlas de variantes del Sudoku, con generador y resolutor que se ejecutan en local — en un único archivo HTML.</p>
+<p><strong>Licencia:</strong> <a href="../LICENSE">MIT</a> · <strong>Aplicación en línea:</strong> <a href="https://chiuta.github.io/Sudoku-fara-frontiere/">https://chiuta.github.io/Sudoku-fara-frontiere/</a> · <strong>Guía ilustrada (una sola página):</strong> <a href="https://chiuta.github.io/Sudoku-fara-frontiere/docs/GHID.html">https://chiuta.github.io/Sudoku-fara-frontiere/docs/GHID.html</a></p>
+<p><img src="screenshot.png" alt="Algunas variantes, tras «Paso a paso»" /></p>
+<h2 id="qué-es">Qué es</h2>
+<p>Un atlas interactivo de 136 entradas (≈130 con reglas distintas: Sótano, Sudoku con cero y Filas lexicográficas son lógicamente casi idénticas a otras variantes y se declaran como tales en sus fichas) (clásicas, con regiones especiales, topologías y saltos fairy, reglas globales, pistas en las líneas, en el borde, en las celdas o en la cuadrícula, cuadrículas compuestas, cubos e hipercubos, grecolatino y parientes cercanos), más 7 modos de juego. Cada variante tiene una ficha con sus reglas y se puede jugar en local: los puzles se generan en el navegador, con una <strong>solución única demostrada</strong> por un resolutor con propagación. También puedes combinar reglas en una «Combinación personalizada».</p>
+<h2 id="guía-de-uso">Guía de uso</h2>
+<h3 id="inicio-rápido">Inicio rápido</h3>
+<ol type="1">
+<li>Abre <code>index.html</code> en un navegador (funciona sin conexión, sin instalación).</li>
+<li>En <strong>Atlas</strong> eliges una variante (búsqueda, categorías, «Variante de hoy», «Sorpréndeme»); cada variante tiene una ficha con las reglas.</li>
+<li>En <strong>Jugar</strong> eliges la variante, el tamaño, la dificultad y el modo, y luego pulsas <strong>Partida nueva</strong>. El puzle se genera en el navegador, con solución única.</li>
+</ol>
+<p align="center"><img src="screens/ui_atlas.es.webp" width="760" alt="El atlas de variantes"><br><sub>Atlas: búsqueda, filtros por categoría y tarjetas con los tamaños disponibles.</sub></p>
+
+<h3 id="la-pantalla-de-juego">La pantalla de juego</h3>
+<p align="center"><img src="screens/ui_play.es.webp" width="760" alt="La pantalla de juego"><br><sub>El tablero, la barra de estado (variante · tamaño · pistas · dificultad · ramificaciones necesarias para el resolutor · tiempo), el panel «Partida nueva» con código para compartir, el teclado numérico y las acciones.</sub></p>
+
+<ul>
+<li><strong>Cifras:</strong> seleccionas una celda (o varias, con Mayús/arrastre) y pulsas la cifra, en el teclado o en el teclado en pantalla. Las cifras agotadas aparecen atenuadas.</li>
+<li><strong>Teclado:</strong> flechas = mover la selección, cifras/letras = rellenar, <code>Retroceso</code>/<code>Supr</code>/<code>0</code> = borrar, <code>N</code> = notas, <code>Ctrl+Z</code> / <code>Ctrl+Y</code> = deshacer / rehacer.</li>
+<li><strong>Notas:</strong> el botón «Notas» (o <code>N</code>) pasa a candidatos pequeños en la celda; «Notas automáticas» los calcula a partir de las reglas visibles.</li>
+<li><strong>Comprobaciones:</strong> «Mostrar los conflictos», «Resaltar la misma cifra», «Resaltar las celdas relacionadas» y «Borrar las notas automáticamente» se pueden marcar; «Comprobar» señala las cifras erróneas.</li>
+<li><strong>Pista</strong> rellena una celda (por lógica sobre candidatos; si no hay un paso directo, la cifra viene de la solución). <strong>Mostrar la solución</strong> lo rellena todo.</li>
+<li><strong>Código:</strong> el código junto a «Partida nueva» regenera el mismo puzle en la misma versión de la aplicación; lo pegas en «Abrir».</li>
+</ul>
+<p align="center"><img src="screens/ui_notes.es.webp" width="760" alt="Notas"><br><sub>Notas: los candidatos pequeños en una celda.</sub></p>
+
+<h3 id="paso-a-paso-y--auto">Paso a paso y ▶ Auto</h3>
+<p><strong>Paso a paso</strong> coloca una cifra y muestra por qué: las celdas que la justifican se colorean (amarillo), la celda nueva es verde y bajo el tablero aparece la explicación. <strong>▶ Auto</strong> ejecuta los pasos por sí solo, cada 1,6 s. Los motivos posibles: la única cifra que queda en la celda; la única celda de una fila/columna/región donde puede ir la cifra; una deducción a partir de las reglas de la variante; o, cuando no hay deducción directa, la cifra de la solución (dicho explícitamente). Si tienes una cifra errónea, el primer paso la corrige. Cada paso se puede deshacer; está desactivado en Hardcore y Memoria.</p>
+<p align="center"><img src="screens/ui_step.es.webp" width="760" alt="Paso a paso"><br><sub>Tras tres pasos: la última cifra (verde) y las celdas que la justifican (amarillo), con la explicación bajo el tablero.</sub></p>
+
+<h3 id="modos-de-juego">Modos de juego</h3>
+<p>Se eligen en «Partida nueva → Modo de juego»; el código recibe el sufijo <code>@modo</code> (excepciones: «Puzle del día» y Maratón no tienen sufijo; un código de Maratón abre un puzle corriente).</p>
+<ul>
+<li><strong>Orb:</strong> solo se ven las celdas a 2 pasos como máximo de la selección.</li>
+<li><strong>Memoria:</strong> las pistas se ven unos segundos y luego se ocultan; el botón de vistazo cuesta 30 s. Sin pistas, comprobación, notas automáticas, «Paso a paso» ni resaltado de conflictos.</li>
+<li><strong>Maratón:</strong> 5 puzles seguidos (fácil, fácil, medio, medio, difícil) con un tiempo total.</li>
+<li><strong>Duelo:</strong> un adversario-cronómetro rellena una celda cada pocos segundos, a partir de la solución conocida (sin lógica); si termina primero, pierdes.</li>
+<li><strong>Hardcore:</strong> 3 vidas, cada cifra errónea cuesta una; sin pista, comprobación ni notas automáticas.</li>
+<li><strong>Puzle del día:</strong> el mismo puzle para todos en un día dado (fecha UTC), con una racha de días consecutivos guardada en local.</li>
+<li><strong>Sonoro:</strong> cada cifra tiene una nota; una fila, una columna o una caja completa suena como un arpegio.</li>
+</ul>
+<p align="center"><img src="screens/ui_mode_orb.es.webp" width="760" alt="Modo Orb"><br><sub>Modo Orb: solo es visible el entorno de la selección.</sub></p>
+
+<h3 id="cubos-e-hipercubos">Cubos e hipercubos</h3>
+<p>Las capas se muestran como un mosaico de rebanadas. Para los cubos 3D aparece también una «Vista 3D»: arrastras con el ratón para girar el cubo, y el deslizador oculta las capas delanteras. Los hipercubos 4D/5D quedan solo por capas.</p>
+<p align="center"><img src="screens/ui_3d.es.webp" width="760" alt="Vista 3D"><br><sub>Cubo latino 3D 4×4×4 en la vista 3D giratoria.</sub></p>
+
+<h3 id="resolutor-clásico-99">Resolutor clásico 9×9</h3>
+<p>Pegas un puzle (81 caracteres: 1–9, con los huecos como 0 o <code>.</code>), marcas opcionalmente reglas adicionales (diagonales, ventanas hyper, anti-caballo, etc.) y pulsas <strong>Resolver</strong>: la aplicación indica si la solución es única, múltiple o inexistente. «Jugar este puzle» lo lleva al tablero de juego.</p>
+<p align="center"><img src="screens/ui_solver.es.webp" width="760" alt="Resolutor"><br><sub>El resolutor con el puzle de ejemplo: «Solución única».</sub></p>
+
+<h3 id="teléfono-y-tema-oscuro">Teléfono y tema oscuro</h3>
+<p>La interfaz se adapta a pantallas estrechas; tema claro/oscuro/automático (el botón 🌓), texto ampliado (el botón A), idioma RO/EN (el botón RO).</p>
+<p align="center"><img src="screens/ui_mobile.es.webp" width="260" alt="Teléfono, tema claro"> &nbsp; <img src="screens/ui_dark.es.webp" width="260" alt="Teléfono, tema oscuro"></p>
+
+<h3 id="combinación-personalizada">Combinación personalizada</h3>
+<p>En Atlas, «Combinación personalizada» (o la variante «Combinación personalizada» de «Partida nueva») permite marcar cualquier conjunto compatible de reglas de cuadrícula y pistas (p. ej. Killer + diagonales, termómetros + flechas).</p>
+<h3 id="galería-de-la-interfaz-todos-los-tipos-de-pantalla">Galería de la interfaz (todos los tipos de pantalla)</h3>
+<p><strong>Atlas</strong></p>
+<table><tr><td align="center" valign="top"><img src="screens/ui_atlas_filter.es.webp" width="330" alt="Filtrado por categoría"><br><sub>Filtrado por categoría</sub></td><td align="center" valign="top"><img src="screens/ui_atlas_search.es.webp" width="330" alt="Búsqueda por nombre"><br><sub>Búsqueda por nombre</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_lexicon.es.webp" width="330" alt="Léxico"><br><sub>Léxico</sub></td><td align="center" valign="top"><img src="screens/ui_atlas_en.webp" width="330" alt="Atlas en inglés"><br><sub>Atlas en inglés</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_atlas_dark.es.webp" width="330" alt="Atlas, tema oscuro"><br><sub>Atlas, tema oscuro</sub></td></tr></table>
+
+<p><strong>Modos de juego</strong></p>
+<table><tr><td align="center" valign="top"><img src="screens/ui_mode_memory_show.es.webp" width="330" alt="Memoria: las pistas son visibles"><br><sub>Memoria: las pistas son visibles</sub></td><td align="center" valign="top"><img src="screens/ui_mode_memory_hidden.es.webp" width="330" alt="Memoria: las pistas se han ocultado"><br><sub>Memoria: las pistas se han ocultado</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_mode_marathon.es.webp" width="330" alt="Maratón"><br><sub>Maratón</sub></td><td align="center" valign="top"><img src="screens/ui_mode_duel.es.webp" width="330" alt="Duelo (el adversario rellena celdas)"><br><sub>Duelo (el adversario rellena celdas)</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_mode_hardcore.es.webp" width="330" alt="Hardcore: un error cuesta una vida"><br><sub>Hardcore: un error cuesta una vida</sub></td><td align="center" valign="top"><img src="screens/ui_mode_daily.es.webp" width="330" alt="Puzle del día"><br><sub>Puzle del día</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_mode_sound.es.webp" width="330" alt="Sonoro"><br><sub>Sonoro</sub></td><td align="center" valign="top"><img src="screens/ui_mode_orb.es.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
+
+<p><strong>Juego y herramientas</strong></p>
+<table><tr><td align="center" valign="top"><img src="screens/ui_autoplay.es.webp" width="330" alt="▶ Auto en marcha"><br><sub>▶ Auto en marcha</sub></td><td align="center" valign="top"><img src="screens/ui_solved.es.webp" width="330" alt="Puzle resuelto"><br><sub>Puzle resuelto</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_custom.es.webp" width="330" alt="Combinación personalizada (lista de reglas)"><br><sub>Combinación personalizada (lista de reglas)</sub></td><td align="center" valign="top"><img src="screens/ui_3d_rotated.es.webp" width="330" alt="Vista 3D girada"><br><sub>Vista 3D girada</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_print.webp" width="330" alt="Vista de impresión"><br><sub>Vista de impresión</sub></td></tr></table>
+
+<p><strong>Resolutor y Acerca de</strong></p>
+<table><tr><td align="center" valign="top"><img src="screens/ui_solver_multi.es.webp" width="330" alt="Resolutor: cuadrícula vacía (soluciones múltiples)"><br><sub>Resolutor: cuadrícula vacía (soluciones múltiples)</sub></td><td align="center" valign="top"><img src="screens/ui_solver_none.es.webp" width="330" alt="Resolutor: sin solución"><br><sub>Resolutor: sin solución</sub></td></tr><tr><td align="center" valign="top"><img src="screens/ui_about.es.webp" width="330" alt="La página «Acerca de»"><br><sub>La página «Acerca de»</sub></td></tr></table>
+
+<h2 id="catálogo-de-variantes-136">Catálogo de variantes (136)</h2>
+<p>Cada variante tiene a continuación: las reglas de la ficha, una captura con un puzle real generado por la aplicación (el tamaño predeterminado de la variante (9×9 donde existe, si no p. ej. 5×5 o 4×4); nivel «medio»), una segunda captura tras 4 pasos de «Paso a paso», la explicación real del último paso y un código con el que regeneras exactamente el mismo puzle. Bajo cada variante, una «Galería completa» (desplegable) contiene los demás tipos de capturas: la tarjeta en el Atlas y la ficha, todos los tamaños, fácil/medio/difícil, notas automáticas, comprobación con una cifra errónea, la solución completa, el tema oscuro, el teléfono, la interfaz en inglés y el panel de reglas. Las capturas están en <code>docs/screens/</code>. Las capturas se hacen automáticamente desde la versión 1.4.0, en tema claro.</p>
+<p><strong>Catálogo completo:</strong> <a href="catalog/es/README.md">docs/catalog/es/README.md</a></p>
+<table>
+<thead>
+<tr class="header">
+<th>Categoría</th>
+<th>Variantes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Tamaño y símbolos</strong></td>
+<td><a href="catalog/es/01-marime-si-simboluri.md#clasic">Clásico</a> · <a href="catalog/es/01-marime-si-simboluri.md#wordoku">Wordoku</a> · <a href="catalog/es/01-marime-si-simboluri.md#latin">Cuadrado latino</a> · <a href="catalog/es/01-marime-si-simboluri.md#zero">Sudoku con cero</a></td>
+</tr>
+<tr class="even">
+<td><strong>Regiones y grupos</strong></td>
+<td><a href="catalog/es/02-regiuni-si-grupuri.md#diag">Sudoku X</a> · <a href="catalog/es/02-regiuni-si-grupuri.md#hyper">Hyper (Windoku)</a> · <a href="catalog/es/02-regiuni-si-grupuri.md#jigsaw">Jigsaw (irregular)</a> · <a href="catalog/es/02-regiuni-si-grupuri.md#dg">Grupos disjuntos</a> · <a href="catalog/es/02-regiuni-si-grupuri.md#center">Puntos centrales</a> · <a href="catalog/es/02-regiuni-si-grupuri.md#girandola">Girandola</a> · <a href="catalog/es/02-regiuni-si-grupuri.md#sparse9">Nueves dispersos</a> · <a href="catalog/es/02-regiuni-si-grupuri.md#asterisk">Asterisk</a> · <a href="catalog/es/02-regiuni-si-grupuri.md#diag1">Diagonal simple</a> · <a href="catalog/es/02-regiuni-si-grupuri.md#clone">Clone</a> · <a href="catalog/es/02-regiuni-si-grupuri.md#pandiag">Pandiagonal</a></td>
+</tr>
+<tr class="odd">
+<td><strong>Vecinos</strong></td>
+<td><a href="catalog/es/03-vecini.md#antiknight">Anti-caballo</a> · <a href="catalog/es/03-vecini.md#antiking">Anti-rey</a> · <a href="catalog/es/03-vecini.md#nonconsec">Sin consecutivos</a> · <a href="catalog/es/03-vecini.md#miracle">Milagro</a></td>
+</tr>
+<tr class="even">
+<td><strong>Paridad, puntos, signos</strong></td>
+<td><a href="catalog/es/04-paritate-puncte-semne.md#evenodd">Par–impar</a> · <a href="catalog/es/04-paritate-puncte-semne.md#kropki">Kropki</a> · <a href="catalog/es/04-paritate-puncte-semne.md#consec">Consecutivo</a> · <a href="catalog/es/04-paritate-puncte-semne.md#xv">XV</a> · <a href="catalog/es/04-paritate-puncte-semne.md#greater">Comparaciones</a> · <a href="catalog/es/04-paritate-puncte-semne.md#batt">Battenburg</a> · <a href="catalog/es/04-paritate-puncte-semne.md#quad">Cuádruples</a> · <a href="catalog/es/04-paritate-puncte-semne.md#evenonly">Solo pares marcados</a> · <a href="catalog/es/04-paritate-puncte-semne.md#oddonly">Solo impares marcados</a> · <a href="catalog/es/04-paritate-puncte-semne.md#fortress">Fortaleza</a> · <a href="catalog/es/04-paritate-puncte-semne.md#minmax">Mínimo / Máximo</a> · <a href="catalog/es/04-paritate-puncte-semne.md#indexing">Indexación</a> · <a href="catalog/es/04-paritate-puncte-semne.md#ratio">Razón ×3</a> · <a href="catalog/es/04-paritate-puncte-semne.md#diff">Diferencia</a> · <a href="catalog/es/04-paritate-puncte-semne.md#kropkipos">Kropki solo marcados</a> · <a href="catalog/es/04-paritate-puncte-semne.md#xvpos">XV solo marcados</a> · <a href="catalog/es/04-paritate-puncte-semne.md#consecpos">Consecutivo solo marcados</a> · <a href="catalog/es/04-paritate-puncte-semne.md#clueless">Sin pistas</a></td>
+</tr>
+<tr class="odd">
+<td><strong>Sumas</strong></td>
+<td><a href="catalog/es/05-sume.md#killer">Killer</a> · <a href="catalog/es/05-sume.md#littlekiller">Little Killer</a> · <a href="catalog/es/05-sume.md#luk">Little Killer único</a></td>
+</tr>
+<tr class="even">
+<td><strong>Pistas en el borde</strong></td>
+<td><a href="catalog/es/06-indicii-pe-margine.md#sandwich">Sandwich</a> · <a href="catalog/es/06-indicii-pe-margine.md#xsum">X-Sums</a> · <a href="catalog/es/06-indicii-pe-margine.md#frame">Frame (los tres primeros)</a> · <a href="catalog/es/06-indicii-pe-margine.md#skyscraper">Rascacielos</a> · <a href="catalog/es/06-indicii-pe-margine.md#rossini">Rossini</a> · <a href="catalog/es/06-indicii-pe-margine.md#outside">Outside</a> · <a href="catalog/es/06-indicii-pe-margine.md#radar">Radar</a> · <a href="catalog/es/06-indicii-pe-margine.md#sandnum">Sándwich numérico</a> · <a href="catalog/es/06-indicii-pe-margine.md#sandpar">Sándwich de paridad</a> · <a href="catalog/es/06-indicii-pe-margine.md#sand2">Sándwich doble</a> · <a href="catalog/es/06-indicii-pe-margine.md#subsol">Sótano</a> · <a href="catalog/es/06-indicii-pe-margine.md#prodmargin">Producto en el borde</a> · <a href="catalog/es/06-indicii-pe-margine.md#diffmargin">Diferencia en el borde</a> · <a href="catalog/es/06-indicii-pe-margine.md#ascents">Subidas</a> · <a href="catalog/es/06-indicii-pe-margine.md#inversions">Inversiones</a> · <a href="catalog/es/06-indicii-pe-margine.md#cycles">Ciclos</a> · <a href="catalog/es/06-indicii-pe-margine.md#fixedpts">Puntos fijos</a> · <a href="catalog/es/06-indicii-pe-margine.md#altsum">Suma alternada</a> · <a href="catalog/es/06-indicii-pe-margine.md#dxsum">Sumas en las diagonales</a></td>
+</tr>
+<tr class="odd">
+<td><strong>Líneas</strong></td>
+<td><a href="catalog/es/07-linii.md#thermo">Termómetros</a> · <a href="catalog/es/07-linii.md#arrow">Flechas</a> · <a href="catalog/es/07-linii.md#renban">Renban</a> · <a href="catalog/es/07-linii.md#whisper">Susurros alemanes</a> · <a href="catalog/es/07-linii.md#palindrome">Palíndromo</a> · <a href="catalog/es/07-linii.md#between">Entre líneas</a> · <a href="catalog/es/07-linii.md#entropic">Líneas entrópicas</a> · <a href="catalog/es/07-linii.md#modular">Líneas modulares</a> · <a href="catalog/es/07-linii.md#dutch">Susurros neerlandeses</a> · <a href="catalog/es/07-linii.md#nabner">Nabner</a> · <a href="catalog/es/07-linii.md#slowthermo">Termómetro lento</a> · <a href="catalog/es/07-linii.md#parityline">Línea de paridad</a> · <a href="catalog/es/07-linii.md#sameparity">Línea de igual paridad</a> · <a href="catalog/es/07-linii.md#lockout">Lockout</a> · <a href="catalog/es/07-linii.md#doublearrow">Flecha doble</a> · <a href="catalog/es/07-linii.md#zipper">Zipper</a> · <a href="catalog/es/07-linii.md#regionsum">Líneas con sumas por región</a> · <a href="catalog/es/07-linii.md#avgarrow">Flecha media</a> · <a href="catalog/es/07-linii.md#prodarrow">Flecha producto</a> · <a href="catalog/es/07-linii.md#pillarrow">Flecha «píldora»</a> · <a href="catalog/es/07-linii.md#fog">Niebla</a> · <a href="catalog/es/07-linii.md#legato">Legato</a> · <a href="catalog/es/07-linii.md#consonant">Consonancia</a> · <a href="catalog/es/07-linii.md#fixstep">Paso fijo</a> · <a href="catalog/es/07-linii.md#compline">Línea complementaria</a> · <a href="catalog/es/07-linii.md#zigzag">Zigzag</a> · <a href="catalog/es/07-linii.md#fibonacci">Fibonacci</a> · <a href="catalog/es/07-linii.md#steps">Peldaños</a> · <a href="catalog/es/07-linii.md#progression">Progresión aritmética</a> · <a href="catalog/es/07-linii.md#echo">Eco</a> · <a href="catalog/es/07-linii.md#divisible">Línea divisible</a> · <a href="catalog/es/07-linii.md#primeline">Línea prima</a></td>
+</tr>
+<tr class="even">
+<td><strong>Cuadrículas compuestas</strong></td>
+<td><a href="catalog/es/08-grile-compuse.md#samurai">Samurai</a> · <a href="catalog/es/08-grile-compuse.md#twodoku">Twodoku</a> · <a href="catalog/es/08-grile-compuse.md#gattai3">Gattai-3</a> · <a href="catalog/es/08-grile-compuse.md#sohei">Sohei (anillo de cuatro)</a> · <a href="catalog/es/08-grile-compuse.md#kazaguruma">Kazaguruma (molino de viento)</a> · <a href="catalog/es/08-grile-compuse.md#tripledoku">Tripledoku (V)</a> · <a href="catalog/es/08-grile-compuse.md#cross">Cruz</a></td>
+</tr>
+<tr class="odd">
+<td><strong>Parientes cercanos</strong></td>
+<td><a href="catalog/es/09-rude-apropiate.md#futoshiki">Futoshiki</a> · <a href="catalog/es/09-rude-apropiate.md#kenken">KenKen (Calcudoku)</a> · <a href="catalog/es/09-rude-apropiate.md#strimko">Strimko</a></td>
+</tr>
+<tr class="even">
+<td><strong>Topologías y movimientos fairy</strong></td>
+<td><a href="catalog/es/10-topologii-si-mutari-fairy.md#antibishop">Anti-alfil</a> · <a href="catalog/es/10-topologii-si-mutari-fairy.md#anticamel">Anti-camello</a> · <a href="catalog/es/10-topologii-si-mutari-fairy.md#antizebra">Anti-cebra</a> · <a href="catalog/es/10-topologii-si-mutari-fairy.md#torusking">Toro anti-rey</a> · <a href="catalog/es/10-topologii-si-mutari-fairy.md#torusknight">Toro anti-caballo</a> · <a href="catalog/es/10-topologii-si-mutari-fairy.md#cylking">Cilindro anti-rey</a> · <a href="catalog/es/10-topologii-si-mutari-fairy.md#mobiusking">Möbius anti-rey</a> · <a href="catalog/es/10-topologii-si-mutari-fairy.md#kleinking">Klein anti-rey</a> · <a href="catalog/es/10-topologii-si-mutari-fairy.md#projking">Plano proyectivo anti-rey</a></td>
+</tr>
+<tr class="odd">
+<td><strong>Reglas globales</strong></td>
+<td><a href="catalog/es/11-reguli-globale.md#symcomp">Simetría complementaria</a> · <a href="catalog/es/11-reguli-globale.md#symparity">Paridad simétrica</a> · <a href="catalog/es/11-reguli-globale.md#cgrav">Centro de gravedad</a> · <a href="catalog/es/11-reguli-globale.md#lexrows">Filas lexicográficas</a> · <a href="catalog/es/11-reguli-globale.md#extremes">Extremos adyacentes</a> · <a href="catalog/es/11-reguli-globale.md#boxbalance">Cajas equilibradas</a> · <a href="catalog/es/11-reguli-globale.md#lonely5">El cinco solitario</a> · <a href="catalog/es/11-reguli-globale.md#nolonely">Sin celdas solitarias</a> · <a href="catalog/es/11-reguli-globale.md#noprog">Sin progresiones</a> · <a href="catalog/es/11-reguli-globale.md#semimagic">Cajas semimágicas</a></td>
+</tr>
+<tr class="even">
+<td><strong>Pistas en las celdas</strong></td>
+<td><a href="catalog/es/12-indicii-in-celule.md#relief">Relieve</a> · <a href="catalog/es/12-indicii-in-celule.md#oddsweeper">Minas impares</a> · <a href="catalog/es/12-indicii-in-celule.md#compass">Brújula</a> · <a href="catalog/es/12-indicii-in-celule.md#quadsum">Suma en el cuadrado</a> · <a href="catalog/es/12-indicii-in-celule.md#stone">Piedra 2×2</a> · <a href="catalog/es/12-indicii-in-celule.md#domino">Dominó</a> · <a href="catalog/es/12-indicii-in-celule.md#pillsq">Píldora de cuadrado perfecto</a> · <a href="catalog/es/12-indicii-in-celule.md#primecage">Jaula prima</a> · <a href="catalog/es/12-indicii-in-celule.md#balcage">Jaula equilibrada</a> · <a href="catalog/es/12-indicii-in-celule.md#doubler">Duplicadores</a> · <a href="catalog/es/12-indicii-in-celule.md#clonemir">Clones en espejo</a></td>
+</tr>
+<tr class="odd">
+<td><strong>Dimensiones superiores</strong></td>
+<td><a href="catalog/es/13-dimensiuni-superioare.md#cube3">Cubo latino 3D</a> · <a href="catalog/es/13-dimensiuni-superioare.md#cubebox">Cubo con cajas 2×2</a> · <a href="catalog/es/13-dimensiuni-superioare.md#hyper4">Hipercubo 4D</a> · <a href="catalog/es/13-dimensiuni-superioare.md#hyper5">Hipercubo 5D</a> · <a href="catalog/es/13-dimensiuni-superioare.md#greco">Grecolatino (cuadrados ortogonales)</a></td>
+</tr>
+</tbody>
+</table>
+<p>Cada categoría tiene su propia página en <a href="catalog/README.md"><code>docs/catalog/</code></a> (capturas y galerías completas).</p>
+<h2 id="funciones">Funciones</h2>
+<ul>
+<li><strong>Variantes desde la versión 1.0 (38):</strong> clásico (4×4, 6×6, 8×8, 9×9, 12×12, 16×16, 25×25), wordoku, cuadrado latino, Sudoku X, Hyper (Windoku), Jigsaw, grupos disjuntos, puntos centrales, anti-caballo, anti-rey, sin consecutivos, Milagro, par–impar, Kropki, consecutivo, XV, comparaciones, Battenburg, cuádruples, Killer, Little Killer, Sándwich, X-Sums, Frame, rascacielos, termómetros, flechas, Renban, susurros alemanes, palíndromo, entre líneas, líneas entrópicas, líneas modulares, Samurai, Twodoku, Gattai-3, Futoshiki, KenKen.</li>
+<li><strong>Añadidas en la versión 1.1 (24):</strong> Girandola (corregida en 1.4), Asterisk, diagonal simple, susurros neerlandeses, Nabner, termómetro lento, línea de paridad (alternante), línea de igual paridad, solo pares marcados, solo impares marcados, Little Killer único, Fortaleza, Mínimo/Máximo, Lockout, flecha doble, Zipper, Rossini, Outside, Clone, líneas con sumas por región, flecha media, flecha producto, flecha «píldora», Strimko.</li>
+<li><strong>Añadidas en la versión 1.2 (nivel 3, 3):</strong> Indexación (la primera cifra de la fila indica la columna del 1), Razón ×3 (círculos para pares 3:1), Niebla (las pistas aparecen a medida que resuelves; el puzle está construido de modo que la simple propagación solo pueda continuar con lo que se ve).</li>
+<li><strong>Añadidas en la versión 1.3 (70):</strong>
+<ul>
+<li><em>Topologías y saltos fairy (9):</em> Anti-alfil, Anti-camello, Anti-cebra, Toro anti-rey, Toro anti-caballo, Cilindro, Möbius, Klein y plano proyectivo anti-rey.</li>
+<li><em>Reglas globales (12):</em> Pandiagonal, Sudoku con cero, Simetría complementaria, Paridad simétrica, Centro de gravedad, Filas lexicográficas, Extremos adyacentes, Cajas equilibradas, El cinco solitario, Sin celdas solitarias, Sin progresiones, Cajas semimágicas.</li>
+<li><em>Pistas en el borde (13):</em> Radar, Sándwich numérico, Sándwich de paridad, Sándwich doble, Sótano, Producto en el borde, Diferencia en el borde, Subidas, Inversiones, Ciclos, Puntos fijos, Suma alternada, Sumas en las diagonales.</li>
+<li><em>Pistas en las celdas y jaulas (11):</em> Relieve, Minas impares, Brújula, Suma en el cuadrado, Piedra 2×2, Dominó, Píldora de cuadrado perfecto, Jaula prima, Jaula equilibrada, Duplicadores, Clones en espejo.</li>
+<li><em>Puntos (5):</em> Diferencia, Kropki / XV / Consecutivo solo marcados, Sin pistas (solo puntos Kropki).</li>
+<li><em>Líneas (11):</em> Legato, Consonancia, Paso fijo, Línea complementaria, Zigzag, Fibonacci, Peldaños, Progresión aritmética, Eco, Línea divisible, Línea prima.</li>
+<li><em>Cuadrículas compuestas (4):</em> Sohei, Kazaguruma, Cruz, Tripledoku (V).</li>
+<li><em>Dimensiones superiores (5):</em> Cubo latino 3D, Cubo con cajas 2×2, Hipercubo 4D, Hipercubo 5D, Grecolatino.</li>
+</ul></li>
+<li><strong>Modos de juego (7):</strong> Orb, Memoria, Maratón, Duelo, Hardcore, Puzle del día, Sonoro. Se eligen en «Partida nueva»; el código para compartir recibe el sufijo <code>@modo</code> (no en el Puzle del día ni en el Maratón).</li>
+<li><strong>Combinación personalizada:</strong> cualquier conjunto compatible de reglas de cuadrícula + pistas (p. ej. Killer + diagonales, termómetros + flechas).</li>
+<li><strong>Juego:</strong> selección múltiple, notas, deshacer/rehacer, pista (lógica sobre candidatos), notas automáticas, comprobación, conflictos resaltados, cronómetro, guardado automático, impresión.</li>
+<li><strong>Código para compartir:</strong> <code>variante-tamaño-dificultad-semilla</code> regenera el mismo puzle en la misma versión.</li>
+<li><strong>Resolutor clásico 9×9</strong> con reglas adicionales opcionales; indica si la solución es única, múltiple o inexistente.</li>
+<li><strong>Atlas:</strong> búsqueda, categorías, «Variante de hoy», «Sorpréndeme», léxico, exportación CSV, cita BibTeX.</li>
+<li>Tema claro/oscuro/automático, texto ampliado, interfaz en 8 idiomas (RO, EN, FR, IT, ES, PT, DE, HU).</li>
+<li>El <strong>Puzle del día</strong> usa la fecha UTC; la racha de días consecutivos se guarda en local (<code>sff_daily</code>).</li>
+</ul>
+<h2 id="cómo-genera">Cómo genera</h2>
+<p>El motor elige una cuadrícula resuelta que respete las reglas, deduce de ella las pistas (jaulas, termómetros, puntos...), y luego quita las cifras dadas una a una, solo mientras el resolutor demuestre que la solución sigue siendo única. La generación se ejecuta en un Web Worker creado a partir del mismo archivo (sin red); si el Worker no está disponible, se ejecuta en el hilo principal.</p>
+<h2 id="límites">Límites</h2>
+<ul>
+<li>«Paso a paso» rellena una cifra y resalta por qué (la única cifra que queda en la celda; la única celda posible de una fila/columna/región; una deducción a partir de las reglas de la variante; o, cuando no hay deducción directa, la cifra de la solución, marcada como tal). «▶ Auto» ejecuta los pasos por sí solo, cada 1,6 s. Desactivado en Hardcore y Memoria; cada paso se puede deshacer.</li>
+<li>La dificultad fácil/medio/difícil es solo el número de pistas conservadas. El puzle muestra también una medida del esfuerzo del resolutor (0 = se resuelve solo por propagación; si no, el número de ramificaciones), que no es una evaluación de las técnicas humanas. Si la generación tarda más de 12 s, la dificultad baja automáticamente (pero no en el «Puzle del día» ni en los códigos compartidos).</li>
+<li>Probado en Chromium (incluso abierto como file://). Firefox y Safari/iOS no pudieron probarse en el entorno de desarrollo; si el Worker desde un Blob está bloqueado, la aplicación recurre a la generación en el hilo principal (interfaz bloqueada durante la generación).</li>
+<li>Accesibilidad: el teclado (flechas, cifras, N, Ctrl+Z) y el anuncio por voz de la celda seleccionada; el tablero es SVG y no es una herramienta completa para lectores de pantalla.</li>
+<li>El estado guardado tiene un número de versión; un formato desconocido se aparta (<code>sff_game_bad</code>), no se borra.</li>
+<li>«Difícil» quita tantas cifras como puede; en variantes con muchas pistas en la cuadrícula pueden quedar muy pocas cifras dadas.</li>
+<li>Las cuadrículas compuestas solo tienen las reglas clásicas; las combinaciones muy cargadas pueden tardar más o fallar (la aplicación lo indica).</li>
+<li>16×16 y 25×25 usan los símbolos 1–9 y letras (A–G y A–P respectivamente).</li>
+<li><strong>Geometrías elegidas por mí</strong> (las fuentes difieren): Sohei, Kazaguruma, Cruz, Tripledoku (V); la definición de Dominó; el pegado de los bordes en Möbius, Klein y el plano proyectivo; «Extremos adyacentes» con vecinos incluidas las diagonales (con vecinos solo ortogonales no existen cuadrículas 9×9); Cajas semimágicas en filas y columnas (las cajas totalmente mágicas, con diagonales, son imposibles).</li>
+<li><strong>Hipercubos y cubos:</strong> se muestran por capas (mosaico de rebanadas) y, los 3D, en una vista 3D giratoria; en los cubos 3D existe además una «Vista 3D» giratoria (arrastras con el ratón, el deslizador oculta las capas delanteras); los hipercubos 4D/5D quedan solo por capas. Al ser muy rígidos, en «Difícil» quedan solo unas pocas cifras dadas (en 5D solo unas pocas de las 243 celdas). Grecolatino: tamaños 3, 4, 5, 7 (6 es imposible; 8 y 9 omitidos por velocidad).</li>
+<li><strong>Anti-wazir</strong> no existe: prohibir la misma cifra en celdas vecinas ortogonalmente ya es una regla de cualquier Sudoku. «Anti-alfil» significa el salto 2×2, no un alfil deslizante. Los elementos «Strings complementary/equal» de la lista de trabajo no son variantes separadas: la idea queda cubierta por Línea complementaria y Eco.</li>
+<li><strong>Variantes lógicamente cercanas o idénticas (indicadas en las fichas):</strong> Sudoku con cero (solo otros símbolos respecto al Clásico), Filas lexicográficas (se reduce a «la primera columna es 1…N»), Sótano (Rascacielos con las cifras invertidas).</li>
+<li><strong>Duelo:</strong> el adversario es un cronómetro que rellena celdas a partir de la solución conocida, no un resolutor con lógica.</li>
+<li>Las reglas siguen las convenciones habituales; las fichas indican qué variante de convención se eligió. Para algunas variantes nuevas las fuentes difieren y fijé una convención explícita: Girandola (desde 1.4: esquinas, centro y r2c5, r5c2, r5c8, r8c5, según Regexp::Sudoku; la disposición antigua es ahora «Nueves dispersos»), «línea de paridad» (alternante, con la variante «igual paridad» aparte), Rossini (la flecha apunta hacia la mayor de las tres primeras cifras), Outside (las cifras del borde aparecen entre las tres primeras celdas), Zipper (todos los pares simétricos suman el centro), Líneas con sumas por región (la suma en cada caja atravesada es la misma), Fortaleza (solo cuentan los vecinos no marcados).</li>
+</ul>
+<h2 id="privacidad-y-red">Privacidad y red</h2>
+<ul>
+<li><strong>Almacenamiento local:</strong> <code>localStorage</code>, claves <code>sff_lang</code>, <code>sff_theme</code>, <code>sff_size</code>, <code>sff_game</code>, <code>sff_daily</code> (idioma, tema, tamaño del texto, la partida en curso, la racha del Puzle del día) y <code>sff_game_bad</code> (estado guardado en un formato desconocido, conservado).</li>
+<li><strong>Red:</strong> en el código no hay <code>fetch</code>, <code>XMLHttpRequest</code>, CDN ni recursos externos. La única URL del archivo es el espacio de nombres SVG (<code>http://www.w3.org/2000/svg</code>), que no genera ninguna solicitud.</li>
+</ul>
+<h2 id="estructura-del-repositorio">Estructura del repositorio</h2>
+<pre><code>index.html          aplicația (generat; se deschide direct în browser)
+engine.js           motorul: solver, generator, variantele
+src/                interfața (template.html, style.css, data.js, app.js)
+build.py            asamblează index.html din src/ + engine.js
+test.js             suita de teste (node test.js)
+docs/               capturi (docs/screens), catalogul pe categorii (docs/catalog), GHID.html (se vede pe Pages, nu în GitHub: fișierul are ~6 MB)
+CHANGELOG.md        istoric versiuni
+CONTRIBUTING.md     cum contribui
+LICENSE             MIT</code></pre>
+<p>Publicación en GitHub Pages: Settings → Pages → Branch <code>main</code>, carpeta <code>/ (root)</code>; <code>index.html</code> está en la raíz y usa solo rutas relativas, por lo que funciona también bajo <code>https://&lt;usuario&gt;.github.io/&lt;repositorio&gt;/</code>. Véanse <a href="../CHANGELOG.md"><code>CHANGELOG.md</code></a> y <a href="../CONTRIBUTING.md"><code>CONTRIBUTING.md</code></a>.</p>
+<h2 id="ejecución-local--sin-conexión">Ejecución local / sin conexión</h2>
+<p>Descarga <code>index.html</code> y ábrelo en un navegador; no requiere internet.</p>
+<h2 id="pruebas">Pruebas</h2>
+<p>También se ejecutan automáticamente en GitHub (Actions, <code>.github/workflows/ci.yml</code>): compilación reproducible, <code>node test.js</code> y comprobación de que <code>index.html</code> no tiene recursos externos.</p>
+<p><code>engine.js</code> es el motor (la misma fuente está incluida en <code>index.html</code>). El conjunto <code>test.js</code> se ejecuta con Node:</p>
+<pre><code>node test.js            # toate variantele și mărimile
+node test.js killer     # o singură variantă</code></pre>
+<p>Para cada variante y tamaño, en nivel fácil y difícil, comprueba: la solución respeta las reglas, el puzle tiene solución única (recuento con el mismo resolutor que el generador, con un presupuesto amplio; las enumeraciones 4×4 y el validador de semántica están escritos por separado), la solución sobrevive a la propagación a partir de subconjuntos aleatorios de pistas (<em>soundness</em>). Además, en 4×4 el número de soluciones sin pistas se compara con una enumeración exhaustiva (p. ej. 288 para el clásico), y se verifican algunas combinaciones personalizadas. Desde la versión 1.1, cada puzle es verificado también por un validador de la semántica de las reglas escrito aparte del motor, directamente a partir del texto de las fichas (comprueba, por ejemplo, Zipper, Lockout, las flechas media/producto/píldora, Clone, las cadenas de Strimko). Desde la versión 1.3, el validador independiente cubre también las topologías, los saltos fairy, las reglas globales, las pistas en el borde, en las celdas, las jaulas, las líneas y los puntos (fórmulas reescritas aparte del motor), y para cubos, hipercubos y grecolatino el número de soluciones sin pistas se compara con una enumeración DFS aparte (p. ej. 21888 para el cubo 4×4×4 con cajas 2×2, 72 y 6912 para el grecolatino 3 y 4). Última ejecución: 3144 comprobaciones, todas superadas; el validador independiente cubre ahora también los tipos de 1.0–1.2, y una prueba de mutantes (16.506 cambios de nombre de cifras) muestra acuerdo total entre el motor y el validador; 660 puzles 4×4 fueron confirmados únicos por una enumeración aparte; estrés adicional con 12 semillas por variante (5652 puzles, cero errores); además, una prueba de estrés con 5 puzles en cada variante, tamaño mínimo y máximo, sin ningún error (la generación más lenta, en «Difícil» en algunas variantes con reglas globales, tardó unos 21 s). Límite: la verificación cruzada por enumeración exhaustiva existe solo para las variantes que tienen tamaño 4×4 (y para cubos/grecolatino pequeños, como se muestra arriba).</p>
+<h2 id="lo-que-no-está-implementado-del-nivel-3">Lo que no está implementado del nivel 3</h2>
+<p>No se incluyen: Chaos Construction, Deconstruction, los híbridos con otros puzles (Loop, Snake, Yin-Yang, Nurikabe, Sudoku Mine), las cuadrículas superpuestas Flower/Butterfly (Sohei y Kazaguruma existen desde 1.3, con una geometría elegida por mí), las celdas modificadoras, Schrödinger, «liar», Vudoku, Capsule, Deficit. Algunas cambian el modo de juego o exigen resolutores con otro tipo de lógica; para otras, las fuentes encontradas no fijan ni las reglas ni la geometría, e inventarlas significaría presentar como variante conocida algo que no lo es.</p>
+<h2 id="licencia">Licencia</h2>
+<p><strong>MIT</strong> — véase <a href="../LICENSE"><code>LICENSE</code></a>. Se aplica a todo el repositorio: el código (<code>engine.js</code>, <code>src/</code>, <code>build.py</code>, <code>test.js</code>, <code>index.html</code>), los textos (README, las fichas) y las capturas de <code>docs/screens/</code>. Puedes usar, copiar, modificar, publicar y vender, a condición de conservar el aviso de derechos de autor y el texto de la licencia. El programa se ofrece «tal cual», sin garantías.</p>
+<p>Notas:</p>
+<ul>
+<li>La aplicación no incluye bibliotecas ni recursos externos, por lo que no hay licencias de terceros que respetar.</li>
+<li>Los nombres y las reglas de las variantes del Sudoku (Killer, Kropki, Sandwich, etc.) designan tipos de puzle conocidos públicamente; los textos de las fichas están escritos para esta aplicación. Los nombres siguen siendo de los autores y comunidades que los crearon.</li>
+</ul>
+<h2 id="autor">Autor</h2>
+<p>Alexio — Alexandru-Ionuț Chiuță, contacto: <a href="mailto:alexio@trom.tf">alexio@trom.tf</a>.</p>
+<h2 id="resumen">Resumen</h2>
+<p>Un atlas de 136 entradas de Sudoku (≈130 con reglas distintas; Sótano, Cero y Filas lexicográficas son casi duplicados de otras variantes y lo dicen en sus fichas) (más 7 modos de juego: Orb, Memoria, Maratón, Duelo, Hardcore, Puzle del día, Sonoro) con generador y resolutor locales, en un solo archivo HTML. Los puzles se generan en el navegador con una solución única demostrada (las cifras dadas solo se quitan mientras un resolutor con propagación confirme la unicidad). Incluye un mezclador de reglas personalizado, notas/deshacer/pistas, códigos para compartir, un resolutor clásico 9×9, exportación CSV y cita BibTeX. Sin solicitudes de red; el estado se guarda en <code>localStorage</code> (<code>sff_*</code>). La dificultad (fácil/medio/difícil) es solo el número de cifras dadas conservadas; cada puzle muestra además una cifra medida: cuántas ramificaciones necesita un resolutor con propagación (0 = se resuelve solo por propagación). Es esfuerzo del resolutor, no una valoración de técnicas humanas. Ejecuta <code>node test.js</code> para el conjunto de pruebas del motor. Licencia: MIT (véase <code>LICENSE</code>), que abarca código, textos y capturas.</p>
+<p>Este README contiene una guía de uso con capturas de la interfaz y un catálogo con dos capturas reales, las reglas y un código reproducible para cada una de las 136 variantes (<code>screens/</code>).</p>
+<h2 id="notas-v14">Notas v1.4</h2>
+<ul>
+<li><strong>Girandola</strong> se corrigió según la descripción de Regexp::Sudoku (esquinas, centro, r2c5, r5c2, r5c8, r8c5). La disposición antigua (esquinas, puntos medios de los lados, centro) queda como «Nueves dispersos» (<code>sparse9</code>). Los códigos <code>girandola-…</code> generados antes de 1.4 producen ahora otro puzle.</li>
+<li>Corregido en 1.4 a partir de las capturas: la etiqueta de la pestaña «Jugar» (clave de texto duplicada), las listas que quedaban con valores antiguos tras «Abrir» con un código y el mensaje «Celdas erróneas» que permanecía tras deshacer.</li>
+<li>Comprobaciones 1.4: validador escrito a ciegas a partir del texto de las fichas (135/135 de las variantes existentes entonces pasaron; «Nueves dispersos» se añadió después y tiene validador en <code>test.js</code>), contraste con fuentes publicadas en 56 variantes (las fichas Regionsum, Rossini y Little Unique Killer recibieron precisiones), una ejecución única de 1818 puzles en todas las variantes y tamaños ≤12 sin errores (el script no forma parte del repositorio), «Paso a paso» probado en las 136 variantes.</li>
+<li>Aún sin confirmar por las fuentes: la disposición de Sohei, Kazaguruma, Cruz, Tripledoku V; el tratamiento de las cifras repetidas en Quad y Duplicadores; la conectividad diagonal en Strimko.</li>
+</ul>
+
+</body></html>

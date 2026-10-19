@@ -12,7 +12,7 @@
 _The clues are written outside the grid, at the end of the row or column they refer to._
 
 <a id="sandwich"></a>
-#### 41. Sandwich · Sandwich (`sandwich`)
+#### 41. Sandwich (`sandwich`)
 
 **Sum between 1 and the largest digit.**
 
@@ -64,7 +64,7 @@ The number outside is the sum of the digits between the 1 and the digit N (9 in 
 </details>
 
 <a id="xsum"></a>
-#### 42. X-Sums · X-Sums (`xsum`)
+#### 42. X-Sums (`xsum`)
 
 **The first digit says how many cells to add.**
 
@@ -116,7 +116,7 @@ If the first digit of a row or column is k, the sum of the first k digits (from 
 </details>
 
 <a id="frame"></a>
-#### 43. Frame (first three) · Frame (first three) (`frame`)
+#### 43. Frame (first three) (`frame`)
 
 **Sum of the first three digits.**
 
@@ -168,7 +168,7 @@ The number outside is the sum of the first three digits of the row or column, co
 </details>
 
 <a id="skyscraper"></a>
-#### 44. Skyscrapers · Skyscrapers (`skyscraper`)
+#### 44. Skyscrapers (`skyscraper`)
 
 **How many buildings you can see.**
 
@@ -220,7 +220,7 @@ Digits are building heights. The number outside shows how many buildings are vis
 </details>
 
 <a id="rossini"></a>
-#### 45. Rossini · Rossini (`rossini`)
+#### 45. Rossini (`rossini`)
 
 **Edge arrow: the first three digits rise one way.**
 
@@ -272,7 +272,7 @@ An arrow outside the grid says the first three digits from that end are strictly
 </details>
 
 <a id="outside"></a>
-#### 46. Outside · Outside (`outside`)
+#### 46. Outside (`outside`)
 
 **Edge digits appear among the first three cells.**
 
@@ -324,7 +324,7 @@ Digits written outside the grid must appear among the first three cells of that 
 </details>
 
 <a id="radar"></a>
-#### 47. Radar · Radar (`radar`)
+#### 47. Radar (`radar`)
 
 **The clue tells where the biggest digit is.**
 
@@ -376,7 +376,7 @@ In addition to the classic rules, a number outside the grid gives the position (
 </details>
 
 <a id="sandnum"></a>
-#### 48. Counting sandwich · Counting sandwich (`sandnum`)
+#### 48. Counting sandwich (`sandnum`)
 
 **How many cells lie between 1 and N.**
 
@@ -428,7 +428,7 @@ In addition to the classic rules, a number outside the grid says how many cells 
 </details>
 
 <a id="sandpar"></a>
-#### 49. Parity sandwich · Parity sandwich (`sandpar`)
+#### 49. Parity sandwich (`sandpar`)
 
 **How many odd digits lie between 1 and N.**
 
@@ -480,7 +480,7 @@ In addition to the classic rules, a number outside the grid says how many odd di
 </details>
 
 <a id="sand2"></a>
-#### 50. Double sandwich · Double sandwich (`sand2`)
+#### 50. Double sandwich (`sand2`)
 
 **Two sums: between 1 and 9, between 2 and 8.**
 
@@ -532,7 +532,7 @@ In addition to the classic rules, a clue “a,b” outside the grid means: a = s
 </details>
 
 <a id="subsol"></a>
-#### 51. Basement · Basement (`subsol`)
+#### 51. Basement (`subsol`)
 
 **Like Skyscrapers, but with the digits reversed.**
 
@@ -584,7 +584,7 @@ In addition to the classic rules, a number outside the grid says how many times,
 </details>
 
 <a id="prodmargin"></a>
-#### 52. Edge product · Edge product (`prodmargin`)
+#### 52. Edge product (`prodmargin`)
 
 **Product of the first two digits.**
 
@@ -636,7 +636,7 @@ In addition to the classic rules, a number outside the grid is the product of th
 </details>
 
 <a id="diffmargin"></a>
-#### 53. Edge difference · Edge difference (`diffmargin`)
+#### 53. Edge difference (`diffmargin`)
 
 **Difference of the first two digits.**
 
@@ -688,7 +688,7 @@ In addition to the classic rules, a number outside the grid is the difference (a
 </details>
 
 <a id="ascents"></a>
-#### 54. Ascents · Ascents (`ascents`)
+#### 54. Ascents (`ascents`)
 
 **How many neighbouring pairs go up.**
 
@@ -740,7 +740,7 @@ In addition to the classic rules, a number outside the grid says how many times,
 </details>
 
 <a id="inversions"></a>
-#### 55. Inversions · Inversions (`inversions`)
+#### 55. Inversions (`inversions`)
 
 **How many pairs are out of order.**
 
@@ -792,7 +792,7 @@ In addition to the classic rules, a number outside the grid is the number of inv
 </details>
 
 <a id="cycles"></a>
-#### 56. Cycles · Cycles (`cycles`)
+#### 56. Cycles (`cycles`)
 
 **How many cycles the permutation has.**
 
@@ -844,7 +844,7 @@ In addition to the classic rules, a row/column read from that end is a permutati
 </details>
 
 <a id="fixedpts"></a>
-#### 57. Fixed points · Fixed points (`fixedpts`)
+#### 57. Fixed points (`fixedpts`)
 
 **How many digits sit at their own position.**
 
@@ -896,7 +896,7 @@ In addition to the classic rules, a number outside the grid says how many digits
 </details>
 
 <a id="altsum"></a>
-#### 58. Alternating sum · Alternating sum (`altsum`)
+#### 58. Alternating sum (`altsum`)
 
 **a₁ − a₂ + a₃ − …**
 
@@ -948,7 +948,7 @@ In addition to the classic rules, a number outside the grid is the alternating s
 </details>
 
 <a id="dxsum"></a>
-#### 59. Diagonal X-sums · Diagonal X-sums (`dxsum`)
+#### 59. Diagonal X-sums (`dxsum`)
 
 **First d cells of a diagonal, d = its first digit.**
 

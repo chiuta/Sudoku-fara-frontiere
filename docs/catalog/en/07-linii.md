@@ -12,7 +12,7 @@
 _The coloured lines run through cells; the digits on them follow the line rule described in the rules sheet._
 
 <a id="thermo"></a>
-#### 60. Thermometers · Thermometers (`thermo`)
+#### 60. Thermometers (`thermo`)
 
 **Digits rise from the bulb.**
 
@@ -64,7 +64,7 @@ Along each thermometer the digits strictly increase starting from the bulb.
 </details>
 
 <a id="arrow"></a>
-#### 61. Arrows · Arrows (`arrow`)
+#### 61. Arrows (`arrow`)
 
 **Circle = sum of the arrow.**
 
@@ -116,7 +116,7 @@ The digit in the circle of an arrow equals the sum of the digits along the arrow
 </details>
 
 <a id="renban"></a>
-#### 62. Renban · Renban (`renban`)
+#### 62. Renban (`renban`)
 
 **Consecutive digits on a line.**
 
@@ -168,7 +168,7 @@ On the purple line the digits form a set of consecutive numbers, in any order, w
 </details>
 
 <a id="whisper"></a>
-#### 63. German whispers · German whispers (`whisper`)
+#### 63. German whispers (`whisper`)
 
 **Neighbours differ by at least 5.**
 
@@ -220,7 +220,7 @@ On the green line, two neighbouring digits differ by at least 5. 9×9 only.
 </details>
 
 <a id="palindrome"></a>
-#### 64. Palindrome · Palindrome (`palindrome`)
+#### 64. Palindrome (`palindrome`)
 
 **The line reads the same both ways.**
 
@@ -272,7 +272,7 @@ The digits on the grey line form a palindrome.
 </details>
 
 <a id="between"></a>
-#### 65. Between lines · Between lines (`between`)
+#### 65. Between lines (`between`)
 
 **The inside lies between the ends.**
 
@@ -324,7 +324,7 @@ The digits on the line between the two circles lie strictly between the digits i
 </details>
 
 <a id="entropic"></a>
-#### 66. Entropic lines · Entropic lines (`entropic`)
+#### 66. Entropic lines (`entropic`)
 
 **Low / middle / high.**
 
@@ -376,7 +376,7 @@ On the orange line, any three consecutive cells contain one digit from each thir
 </details>
 
 <a id="modular"></a>
-#### 67. Modular lines · Modular lines (`modular`)
+#### 67. Modular lines (`modular`)
 
 **Different remainders mod 3.**
 
@@ -428,7 +428,7 @@ On the teal line, any three consecutive cells have different remainders when div
 </details>
 
 <a id="dutch"></a>
-#### 68. Dutch whispers · Dutch whispers (`dutch`)
+#### 68. Dutch whispers (`dutch`)
 
 **Neighbours differ by at least 4.**
 
@@ -480,7 +480,7 @@ On the green line, any two neighbouring digits differ by at least 4 (German whis
 </details>
 
 <a id="nabner"></a>
-#### 69. Nabner · Nabner (`nabner`)
+#### 69. Nabner (`nabner`)
 
 **No repeats and no consecutive digits on a line.**
 
@@ -532,7 +532,7 @@ On a brown line, no digit repeats and no two digits on the line (not only neighb
 </details>
 
 <a id="slowthermo"></a>
-#### 70. Slow thermometer · Slow thermometer (`slowthermo`)
+#### 70. Slow thermometer (`slowthermo`)
 
 **Digits never decrease from the bulb.**
 
@@ -584,7 +584,7 @@ Along each slow thermometer the digits increase or stay equal starting from the 
 </details>
 
 <a id="parityline"></a>
-#### 71. Parity line · Parity line (`parityline`)
+#### 71. Parity line (`parityline`)
 
 **Parity alternates.**
 
@@ -636,7 +636,7 @@ On the yellow line, two neighbouring digits always have different parity: even, 
 </details>
 
 <a id="sameparity"></a>
-#### 72. Same-parity line · Same-parity line (`sameparity`)
+#### 72. Same-parity line (`sameparity`)
 
 **Neighbouring digits share parity.**
 
@@ -688,7 +688,7 @@ On the indigo line, two neighbouring digits have the same parity, so the whole l
 </details>
 
 <a id="lockout"></a>
-#### 73. Lockout · Lockout (`lockout`)
+#### 73. Lockout (`lockout`)
 
 **Ends differ by ≥4; the inside lies outside.**
 
@@ -740,7 +740,7 @@ A line has diamonds at both ends. The two diamond digits differ by at least 4, a
 </details>
 
 <a id="doublearrow"></a>
-#### 74. Double arrow · Double arrow (`doublearrow`)
+#### 74. Double arrow (`doublearrow`)
 
 **Middle sum = sum of the two ends.**
 
@@ -792,7 +792,7 @@ A line with a circle at each end: the digits between the circles sum to the sum 
 </details>
 
 <a id="zipper"></a>
-#### 75. Zipper · Zipper (`zipper`)
+#### 75. Zipper (`zipper`)
 
 **Symmetric pairs add up to the centre digit.**
 
@@ -844,7 +844,7 @@ On a line with an odd number of cells, digits at equal distance from the centre 
 </details>
 
 <a id="regionsum"></a>
-#### 76. Region sum lines · Region sum lines (`regionsum`)
+#### 76. Region sum lines (`regionsum`)
 
 **Equal sum in every box crossed.**
 
@@ -896,7 +896,7 @@ On the pink line, the sum of the digits inside each box the line crosses is the 
 </details>
 
 <a id="avgarrow"></a>
-#### 77. Average arrow · Average arrow (`avgarrow`)
+#### 77. Average arrow (`avgarrow`)
 
 **Circle = mean of the arrow digits.**
 
@@ -948,7 +948,7 @@ The digit in the circle is the arithmetic mean of the digits on the arrow (their
 </details>
 
 <a id="prodarrow"></a>
-#### 78. Product arrow · Product arrow (`prodarrow`)
+#### 78. Product arrow (`prodarrow`)
 
 **Circle = product of the arrow digits.**
 
@@ -1000,7 +1000,7 @@ The digit in the circle equals the product of the digits on the arrow. The sign 
 </details>
 
 <a id="pillarrow"></a>
-#### 79. Pill arrow · Pill arrow (`pillarrow`)
+#### 79. Pill arrow (`pillarrow`)
 
 **The pill forms a two-digit number.**
 
@@ -1052,7 +1052,7 @@ The two cells in the pill form a two-digit number (tens, units); the digits alon
 </details>
 
 <a id="fog"></a>
-#### 80. Fog of war · Fog of war (`fog`)
+#### 80. Fog of war (`fog`)
 
 **Clues appear as you solve.**
 
@@ -1104,7 +1104,7 @@ Clues (thermometers, arrows, Renban) are hidden in fog. A cell is lit if it or o
 </details>
 
 <a id="legato"></a>
-#### 81. Legato · Legato (`legato`)
+#### 81. Legato (`legato`)
 
 **Neighbouring digits differ by at most 2.**
 
@@ -1156,7 +1156,7 @@ In addition to the classic rules, on a legato line two neighbouring digits diffe
 </details>
 
 <a id="consonant"></a>
-#### 82. Consonant line · Consonant line (`consonant`)
+#### 82. Consonant line (`consonant`)
 
 **Neighbours differ by 2, 3 or 4.**
 
@@ -1208,7 +1208,7 @@ In addition to the classic rules, on a consonant line two neighbouring digits di
 </details>
 
 <a id="fixstep"></a>
-#### 83. Fixed-step line · Fixed-step line (`fixstep`)
+#### 83. Fixed-step line (`fixstep`)
 
 **Neighbours differ by exactly 3.**
 
@@ -1260,7 +1260,7 @@ In addition to the classic rules, on a fixed-step line two neighbouring digits d
 </details>
 
 <a id="compline"></a>
-#### 84. Complementary line · Complementary line (`compline`)
+#### 84. Complementary line (`compline`)
 
 **Neighbours sum to N+1.**
 
@@ -1312,7 +1312,7 @@ In addition to the classic rules, on a complementary line two neighbouring digit
 </details>
 
 <a id="zigzag"></a>
-#### 85. Zigzag · Zigzag (`zigzag`)
+#### 85. Zigzag (`zigzag`)
 
 **Digits alternate up and down.**
 
@@ -1364,7 +1364,7 @@ In addition to the classic rules, on a zigzag line the digits alternately rise a
 </details>
 
 <a id="fibonacci"></a>
-#### 86. Fibonacci line · Fibonacci line (`fibonacci`)
+#### 86. Fibonacci line (`fibonacci`)
 
 **Each digit is the sum of the two before.**
 
@@ -1416,7 +1416,7 @@ In addition to the classic rules, on a Fibonacci line (the arrow shows the direc
 </details>
 
 <a id="steps"></a>
-#### 87. Steps · Steps (`steps`)
+#### 87. Steps (`steps`)
 
 **Signed differences keep growing.**
 
@@ -1468,7 +1468,7 @@ In addition to the classic rules, on a steps line (the arrow shows the direction
 </details>
 
 <a id="progression"></a>
-#### 88. Arithmetic progression · Arithmetic progression (`progression`)
+#### 88. Arithmetic progression (`progression`)
 
 **Constant difference.**
 
@@ -1520,7 +1520,7 @@ In addition to the classic rules, on an arithmetic-progression line the differen
 </details>
 
 <a id="echo"></a>
-#### 89. Echo line · Echo line (`echo`)
+#### 89. Echo line (`echo`)
 
 **The digit repeats every three cells.**
 
@@ -1572,7 +1572,7 @@ In addition to the classic rules, on an echo line the cell at position i and the
 </details>
 
 <a id="divisible"></a>
-#### 90. Divisible line · Divisible line (`divisible`)
+#### 90. Divisible line (`divisible`)
 
 **The number read is divisible by m.**
 
@@ -1624,7 +1624,7 @@ In addition to the classic rules, the digits on the line, read in the direction 
 </details>
 
 <a id="primeline"></a>
-#### 91. Prime line · Prime line (`primeline`)
+#### 91. Prime line (`primeline`)
 
 **Prime digits only.**
 

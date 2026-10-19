@@ -8,7 +8,7 @@ A felület nyelvei: **Română, English, Français, Italiano, Español, Portugu�
 
 Sudoku-változatok atlasza helyben futó generátorral és megoldóval — egyetlen HTML-fájlban.
 
-**Licenc:** [MIT](LICENSE) · **Online alkalmazás:** <https://chiuta.github.io/Sudoku-fara-frontiere/> · **Illusztrált útmutató (egyetlen oldal):** <https://chiuta.github.io/Sudoku-fara-frontiere/docs/GHID.html>
+**Licenc:** [MIT](LICENSE) · **Online alkalmazás:** <https://chiuta.github.io/Sudoku-fara-frontiere/> · **Illusztrált útmutató (egyetlen oldal):** <https://chiuta.github.io/Sudoku-fara-frontiere/docs/GHID.hu.html>
 
 ![Néhány változat a „Lépésről lépésre” után](docs/screenshot.png)
 
@@ -180,7 +180,7 @@ engine.js           motorul: solver, generator, variantele
 src/                interfața (template.html, style.css, data.js, app.js)
 build.py            asamblează index.html din src/ + engine.js
 test.js             suita de teste (node test.js)
-docs/               capturi (docs/screens), catalogul pe categorii (docs/catalog), GHID.html (se vede pe Pages, nu în GitHub: fișierul are ~6 MB)
+docs/               capturi (docs/screens), catalogul pe categorii (docs/catalog), GHID.html + GHID.<lang>.html (ghid ilustrat; se văd pe Pages)
 CHANGELOG.md        istoric versiuni
 CONTRIBUTING.md     cum contribui
 LICENSE             MIT

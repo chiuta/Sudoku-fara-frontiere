@@ -12,7 +12,7 @@
 _The small numbers in the corner of a cage or on the edge are sums; digits in a cage do not repeat unless the rules sheet says otherwise._
 
 <a id="killer"></a>
-#### 38. Killer · Killer (`killer`)
+#### 38. Killer (`killer`)
 
 **Cages with sums, no repeats.**
 
@@ -64,7 +64,7 @@ The grid is divided into dashed cages; the number in the corner is the sum of th
 </details>
 
 <a id="littlekiller"></a>
-#### 39. Little Killer · Little Killer (`littlekiller`)
+#### 39. Little Killer (`littlekiller`)
 
 **Diagonal sum from the edge.**
 
@@ -116,7 +116,7 @@ A number with an arrow outside the grid is the sum of the digits on the diagonal
 </details>
 
 <a id="luk"></a>
-#### 40. Little Unique Killer · Little Unique Killer (`luk`)
+#### 40. Little Unique Killer (`luk`)
 
 **Little Killer with distinct digits on the diagonal.**
 
