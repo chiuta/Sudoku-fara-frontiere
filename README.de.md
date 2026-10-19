@@ -24,11 +24,11 @@ Ein interaktiver Atlas mit 136 Einträgen (≈130 mit eigenen Regeln: Untergesch
 2. Im **Atlas** wählst du eine Variante (Suche, Kategorien, „Variante des Tages“, „Überrasch mich“); jede Variante hat ein Datenblatt mit den Regeln.
 3. Unter **Spielen** wählst du Variante, Größe, Schwierigkeit und Modus und drückst dann **Neues Spiel**. Das Rätsel wird im Browser erzeugt, mit eindeutiger Lösung.
 
-<p align="center"><img src="docs/screens/ui_atlas.webp" width="760" alt="Der Variantenatlas"><br><sub>Atlas: Suche, Kategoriefilter und Karten mit den verfügbaren Größen.</sub></p>
+<p align="center"><img src="docs/screens/ui_atlas.de.webp" width="760" alt="Der Variantenatlas"><br><sub>Atlas: Suche, Kategoriefilter und Karten mit den verfügbaren Größen.</sub></p>
 
 ### Der Spielbildschirm
 
-<p align="center"><img src="docs/screens/ui_play.webp" width="760" alt="Der Spielbildschirm"><br><sub>Das Brett, die Statusleiste (Variante · Größe · Hinweise · Schwierigkeit · vom Löser benötigte Verzweigungen · Zeit), das Panel „Neues Spiel“ mit Teilen-Code, das Zahlenfeld und die Aktionen.</sub></p>
+<p align="center"><img src="docs/screens/ui_play.de.webp" width="760" alt="Der Spielbildschirm"><br><sub>Das Brett, die Statusleiste (Variante · Größe · Hinweise · Schwierigkeit · vom Löser benötigte Verzweigungen · Zeit), das Panel „Neues Spiel“ mit Teilen-Code, das Zahlenfeld und die Aktionen.</sub></p>
 
 - **Ziffern:** Du wählst eine Zelle (oder mehrere, mit Umschalt/Ziehen) und drückst die Ziffer, auf der Tastatur oder auf dem Bildschirm-Zahlenfeld. Vollständig verwendete Ziffern erscheinen abgeblendet.
 - **Tastatur:** Pfeile = Auswahl verschieben, Ziffern/Buchstaben = eintragen, `Rücktaste`/`Entf`/`0` = löschen, `N` = Notizen, `Strg+Z` / `Strg+Y` = rückgängig / wiederholen.
@@ -37,13 +37,13 @@ Ein interaktiver Atlas mit 136 Einträgen (≈130 mit eigenen Regeln: Untergesch
 - **Hinweis** füllt eine Zelle aus (per Logik über Kandidaten; gibt es keinen direkten Schritt, stammt die Ziffer aus der Lösung). **Lösung anzeigen** füllt alles aus.
 - **Code:** Der Code neben „Neues Spiel“ erzeugt dasselbe Rätsel in derselben Version der App neu; du fügst ihn bei „Öffnen“ ein.
 
-<p align="center"><img src="docs/screens/ui_notes.webp" width="760" alt="Notizen"><br><sub>Notizen: kleine Kandidaten in einer Zelle.</sub></p>
+<p align="center"><img src="docs/screens/ui_notes.de.webp" width="760" alt="Notizen"><br><sub>Notizen: kleine Kandidaten in einer Zelle.</sub></p>
 
 ### Schritt für Schritt und ▶ Auto
 
 **Schritt für Schritt** setzt eine Ziffer und zeigt, warum: Die Zellen, die sie begründen, sind eingefärbt (gelb), die neue Zelle ist grün, und unter dem Brett erscheint die Erklärung. **▶ Auto** führt die Schritte selbstständig aus, im Abstand von 1,6 s. Mögliche Gründe: die einzige in der Zelle verbliebene Ziffer; die einzige Zelle einer Zeile/Spalte/Region, in der die Ziffer stehen kann; eine Ableitung aus den Regeln der Variante; oder, wenn es keine direkte Ableitung gibt, die Ziffer aus der Lösung (ausdrücklich gesagt). Hast du eine falsche Ziffer, korrigiert sie der erste Schritt. Jeder Schritt lässt sich rückgängig machen; bei Hardcore und Gedächtnis ist er deaktiviert.
 
-<p align="center"><img src="docs/screens/ui_step.webp" width="760" alt="Schritt für Schritt"><br><sub>Nach drei Schritten: die letzte Ziffer (grün) und die Zellen, die sie begründen (gelb), mit der Erklärung unter dem Brett.</sub></p>
+<p align="center"><img src="docs/screens/ui_step.de.webp" width="760" alt="Schritt für Schritt"><br><sub>Nach drei Schritten: die letzte Ziffer (grün) und die Zellen, die sie begründen (gelb), mit der Erklärung unter dem Brett.</sub></p>
 
 ### Spielmodi
 
@@ -57,25 +57,25 @@ Sie werden unter „Neues Spiel → Spielmodus“ gewählt; der Code erhält das
 - **Rätsel des Tages:** dasselbe Rätsel für alle an einem Tag (UTC-Datum), mit einer lokal gespeicherten Serie aufeinanderfolgender Tage.
 - **Klang:** Jede Ziffer hat einen Ton; eine vollständige Zeile, Spalte oder Box spielt ein Arpeggio.
 
-<p align="center"><img src="docs/screens/ui_mode_orb.webp" width="760" alt="Orb-Modus"><br><sub>Orb-Modus: Nur die Umgebung der Auswahl ist sichtbar.</sub></p>
+<p align="center"><img src="docs/screens/ui_mode_orb.de.webp" width="760" alt="Orb-Modus"><br><sub>Orb-Modus: Nur die Umgebung der Auswahl ist sichtbar.</sub></p>
 
 ### Würfel und Hyperwürfel
 
 Die Schichten werden als Mosaik aus Scheiben angezeigt. Bei 3D-Würfeln erscheint zusätzlich eine „3D-Ansicht“: Du ziehst mit der Maus, um den Würfel zu drehen, und der Schieberegler blendet die vorderen Schichten aus. Die 4D-/5D-Hyperwürfel bleiben nur in Schichten.
 
-<p align="center"><img src="docs/screens/ui_3d.webp" width="760" alt="3D-Ansicht"><br><sub>Lateinischer 3D-Würfel 4×4×4 in der drehbaren 3D-Ansicht.</sub></p>
+<p align="center"><img src="docs/screens/ui_3d.de.webp" width="760" alt="3D-Ansicht"><br><sub>Lateinischer 3D-Würfel 4×4×4 in der drehbaren 3D-Ansicht.</sub></p>
 
 ### Klassischer 9×9-Löser
 
 Du fügst ein Rätsel ein (81 Zeichen: 1–9, Lücken als 0 oder `.`), kreuzt gegebenenfalls zusätzliche Regeln an (Diagonalen, Hyper-Fenster, Anti-Springer usw.) und drückst **Lösen**: Die App sagt, ob die Lösung eindeutig, mehrfach oder nicht vorhanden ist. „Dieses Rätsel spielen“ bringt es auf das Spielbrett.
 
-<p align="center"><img src="docs/screens/ui_solver.webp" width="760" alt="Löser"><br><sub>Der Löser mit dem Beispielrätsel: „Eindeutige Lösung“.</sub></p>
+<p align="center"><img src="docs/screens/ui_solver.de.webp" width="760" alt="Löser"><br><sub>Der Löser mit dem Beispielrätsel: „Eindeutige Lösung“.</sub></p>
 
 ### Telefon und dunkles Thema
 
 Die Oberfläche passt sich schmalen Bildschirmen an; helles/dunkles/automatisches Thema (die Schaltfläche 🌓), vergrößerter Text (die Schaltfläche A), Sprache RO/EN (die Schaltfläche RO).
 
-<p align="center"><img src="docs/screens/ui_mobile.webp" width="260" alt="Telefon, helles Thema"> &nbsp; <img src="docs/screens/ui_dark.webp" width="260" alt="Telefon, dunkles Thema"></p>
+<p align="center"><img src="docs/screens/ui_mobile.de.webp" width="260" alt="Telefon, helles Thema"> &nbsp; <img src="docs/screens/ui_dark.de.webp" width="260" alt="Telefon, dunkles Thema"></p>
 
 ### Eigene Kombination
 
@@ -85,19 +85,19 @@ Im Atlas lässt „Eigene Kombination“ (oder die Variante „Eigene Kombinatio
 
 **Atlas**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_filter.webp" width="330" alt="Filtern nach einer Kategorie"><br><sub>Filtern nach einer Kategorie</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_search.webp" width="330" alt="Suche nach Name"><br><sub>Suche nach Name</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_lexicon.webp" width="330" alt="Lexikon"><br><sub>Lexikon</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_en.webp" width="330" alt="Atlas auf Englisch"><br><sub>Atlas auf Englisch</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_dark.webp" width="330" alt="Atlas, dunkles Thema"><br><sub>Atlas, dunkles Thema</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_filter.de.webp" width="330" alt="Filtern nach einer Kategorie"><br><sub>Filtern nach einer Kategorie</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_search.de.webp" width="330" alt="Suche nach Name"><br><sub>Suche nach Name</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_lexicon.de.webp" width="330" alt="Lexikon"><br><sub>Lexikon</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_en.webp" width="330" alt="Atlas auf Englisch"><br><sub>Atlas auf Englisch</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_dark.de.webp" width="330" alt="Atlas, dunkles Thema"><br><sub>Atlas, dunkles Thema</sub></td></tr></table>
 
 **Spielmodi**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_show.webp" width="330" alt="Gedächtnis: Die Hinweise sind sichtbar"><br><sub>Gedächtnis: Die Hinweise sind sichtbar</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_hidden.webp" width="330" alt="Gedächtnis: Die Hinweise sind verborgen"><br><sub>Gedächtnis: Die Hinweise sind verborgen</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_marathon.webp" width="330" alt="Marathon"><br><sub>Marathon</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_duel.webp" width="330" alt="Duell (der Gegner füllt Zellen aus)"><br><sub>Duell (der Gegner füllt Zellen aus)</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_hardcore.webp" width="330" alt="Hardcore: Ein Fehler kostet ein Leben"><br><sub>Hardcore: Ein Fehler kostet ein Leben</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_daily.webp" width="330" alt="Rätsel des Tages"><br><sub>Rätsel des Tages</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_sound.webp" width="330" alt="Klang"><br><sub>Klang</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_orb.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_show.de.webp" width="330" alt="Gedächtnis: Die Hinweise sind sichtbar"><br><sub>Gedächtnis: Die Hinweise sind sichtbar</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_hidden.de.webp" width="330" alt="Gedächtnis: Die Hinweise sind verborgen"><br><sub>Gedächtnis: Die Hinweise sind verborgen</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_marathon.de.webp" width="330" alt="Marathon"><br><sub>Marathon</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_duel.de.webp" width="330" alt="Duell (der Gegner füllt Zellen aus)"><br><sub>Duell (der Gegner füllt Zellen aus)</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_hardcore.de.webp" width="330" alt="Hardcore: Ein Fehler kostet ein Leben"><br><sub>Hardcore: Ein Fehler kostet ein Leben</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_daily.de.webp" width="330" alt="Rätsel des Tages"><br><sub>Rätsel des Tages</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_sound.de.webp" width="330" alt="Klang"><br><sub>Klang</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_orb.de.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
 
 **Spiel und Werkzeuge**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_autoplay.webp" width="330" alt="▶ Auto läuft"><br><sub>▶ Auto läuft</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solved.webp" width="330" alt="Rätsel gelöst"><br><sub>Rätsel gelöst</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_custom.webp" width="330" alt="Eigene Kombination (Liste der Regeln)"><br><sub>Eigene Kombination (Liste der Regeln)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_3d_rotated.webp" width="330" alt="Gedrehte 3D-Ansicht"><br><sub>Gedrehte 3D-Ansicht</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_print.webp" width="330" alt="Druckansicht"><br><sub>Druckansicht</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_autoplay.de.webp" width="330" alt="▶ Auto läuft"><br><sub>▶ Auto läuft</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solved.de.webp" width="330" alt="Rätsel gelöst"><br><sub>Rätsel gelöst</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_custom.de.webp" width="330" alt="Eigene Kombination (Liste der Regeln)"><br><sub>Eigene Kombination (Liste der Regeln)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_3d_rotated.de.webp" width="330" alt="Gedrehte 3D-Ansicht"><br><sub>Gedrehte 3D-Ansicht</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_print.webp" width="330" alt="Druckansicht"><br><sub>Druckansicht</sub></td></tr></table>
 
 **Löser und Über**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_solver_multi.webp" width="330" alt="Löser: leeres Gitter (mehrere Lösungen)"><br><sub>Löser: leeres Gitter (mehrere Lösungen)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solver_none.webp" width="330" alt="Löser: keine Lösung"><br><sub>Löser: keine Lösung</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_about.webp" width="330" alt="Die Seite „Über“"><br><sub>Die Seite „Über“</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_solver_multi.de.webp" width="330" alt="Löser: leeres Gitter (mehrere Lösungen)"><br><sub>Löser: leeres Gitter (mehrere Lösungen)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solver_none.de.webp" width="330" alt="Löser: keine Lösung"><br><sub>Löser: keine Lösung</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_about.de.webp" width="330" alt="Die Seite „Über“"><br><sub>Die Seite „Über“</sub></td></tr></table>
 
 ## Katalog der Varianten (136)
 

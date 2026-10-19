@@ -24,11 +24,11 @@ An interactive atlas of 136 entries (≈130 with distinct rules: Basement, Zero 
 2. In **Atlas** you choose a variant (search, categories, “Today's variant”, “Surprise me”); each variant has a sheet with the rules.
 3. In **Play** you choose the variant, size, difficulty and mode, then press **New game**. The puzzle is generated in the browser, with a unique solution.
 
-<p align="center"><img src="docs/screens/ui_atlas.webp" width="760" alt="The variants atlas"><br><sub>Atlas: search, category filters and cards with the available sizes.</sub></p>
+<p align="center"><img src="docs/screens/ui_atlas.en.webp" width="760" alt="The variants atlas"><br><sub>Atlas: search, category filters and cards with the available sizes.</sub></p>
 
 ### The game screen
 
-<p align="center"><img src="docs/screens/ui_play.webp" width="760" alt="The game screen"><br><sub>The board, the status bar (variant · size · clues · difficulty · branches required by the solver · time), the “New game” panel with share code, the numeric keypad and the actions.</sub></p>
+<p align="center"><img src="docs/screens/ui_play.en.webp" width="760" alt="The game screen"><br><sub>The board, the status bar (variant · size · clues · difficulty · branches required by the solver · time), the “New game” panel with share code, the numeric keypad and the actions.</sub></p>
 
 - **Digits:** you select a cell (or several, with Shift/drag) and press the digit, on the keyboard or on the on-screen keypad. Finished digits appear dimmed.
 - **Keyboard:** arrows = move the selection, digits/letters = fill in, `Backspace`/`Delete`/`0` = erase, `N` = notes, `Ctrl+Z` / `Ctrl+Y` = undo / redo.
@@ -37,13 +37,13 @@ An interactive atlas of 136 entries (≈130 with distinct rules: Basement, Zero 
 - **Hint** fills in a cell (by logic on candidates; if there is no direct step, the digit comes from the solution). **Show solution** fills in everything.
 - **Code:** the code next to “New game” regenerates the same puzzle in the same version of the app; you paste it at “Open”.
 
-<p align="center"><img src="docs/screens/ui_notes.webp" width="760" alt="Notes"><br><sub>Notes: small candidates in a cell.</sub></p>
+<p align="center"><img src="docs/screens/ui_notes.en.webp" width="760" alt="Notes"><br><sub>Notes: small candidates in a cell.</sub></p>
 
 ### Step by step and ▶ Auto
 
 **Step by step** places a digit and shows why: the cells that justify it are colored (yellow), the new cell is green, and an explanation appears below the board. **▶ Auto** runs the steps by itself, at 1.6 s. The possible reasons: the only digit left in the cell; the only cell in a row/column/region where the digit can go; a deduction from the variant's rules; or, when there is no direct deduction, the digit from the solution (stated explicitly). If you have a wrong digit, the first step corrects it. Each step can be undone; it is disabled in Hardcore and Memory.
 
-<p align="center"><img src="docs/screens/ui_step.webp" width="760" alt="Step by step"><br><sub>After three steps: the last digit (green) and the cells that justify it (yellow), with the explanation below the board.</sub></p>
+<p align="center"><img src="docs/screens/ui_step.en.webp" width="760" alt="Step by step"><br><sub>After three steps: the last digit (green) and the cells that justify it (yellow), with the explanation below the board.</sub></p>
 
 ### Game modes
 
@@ -57,25 +57,25 @@ They are chosen at “New game → Game mode”; the code gets the suffix `@mode
 - **Puzzle of the day:** the same puzzle for everyone on a given day (UTC date), with a streak of consecutive days kept locally.
 - **Sound:** each digit has a note; a complete row, column or box plays an arpeggio.
 
-<p align="center"><img src="docs/screens/ui_mode_orb.webp" width="760" alt="Orb mode"><br><sub>Orb mode: only the neighborhood of the selection is visible.</sub></p>
+<p align="center"><img src="docs/screens/ui_mode_orb.en.webp" width="760" alt="Orb mode"><br><sub>Orb mode: only the neighborhood of the selection is visible.</sub></p>
 
 ### Cubes and hypercubes
 
 The layers are displayed as a mosaic of slices. For 3D cubes a “3D view” also appears: you drag with the mouse to rotate the cube, and the slider hides the front layers. The 4D/Hypercube 5Ds remain layers only.
 
-<p align="center"><img src="docs/screens/ui_3d.webp" width="760" alt="3D view"><br><sub>4×4×4 Latin cube 3D in the rotating 3D view.</sub></p>
+<p align="center"><img src="docs/screens/ui_3d.en.webp" width="760" alt="3D view"><br><sub>4×4×4 Latin cube 3D in the rotating 3D view.</sub></p>
 
 ### Classic 9×9 solver
 
 You paste a puzzle (81 characters: 1–9, with blanks as 0 or `.`), optionally tick extra rules (diagonals, hyper windows, anti-knight, etc.) and press **Solve**: the app says whether the solution is unique, multiple or nonexistent. “Play this puzzle” takes it to the game board.
 
-<p align="center"><img src="docs/screens/ui_solver.webp" width="760" alt="Solver"><br><sub>The solver with the example puzzle: “Unique solution”.</sub></p>
+<p align="center"><img src="docs/screens/ui_solver.en.webp" width="760" alt="Solver"><br><sub>The solver with the example puzzle: “Unique solution”.</sub></p>
 
 ### Phone and dark theme
 
 The interface adapts to narrow screens; light/dark/automatic theme (the 🌓 button), larger text (the A button), RO/EN language (the RO button).
 
-<p align="center"><img src="docs/screens/ui_mobile.webp" width="260" alt="Phone, light theme"> &nbsp; <img src="docs/screens/ui_dark.webp" width="260" alt="Phone, dark theme"></p>
+<p align="center"><img src="docs/screens/ui_mobile.en.webp" width="260" alt="Phone, light theme"> &nbsp; <img src="docs/screens/ui_dark.en.webp" width="260" alt="Phone, dark theme"></p>
 
 ### Custom combination
 
@@ -85,19 +85,19 @@ In Atlas, “Custom combination” (or the “Custom combination” variant in �
 
 **Atlas**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_filter.webp" width="330" alt="Filtering by a category"><br><sub>Filtering by a category</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_search.webp" width="330" alt="Search by name"><br><sub>Search by name</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_lexicon.webp" width="330" alt="Lexicon"><br><sub>Lexicon</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_en.webp" width="330" alt="Atlas in English"><br><sub>Atlas in English</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_dark.webp" width="330" alt="Atlas, dark theme"><br><sub>Atlas, dark theme</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_filter.en.webp" width="330" alt="Filtering by a category"><br><sub>Filtering by a category</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_search.en.webp" width="330" alt="Search by name"><br><sub>Search by name</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_lexicon.en.webp" width="330" alt="Lexicon"><br><sub>Lexicon</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_en.webp" width="330" alt="Atlas in English"><br><sub>Atlas in English</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_dark.en.webp" width="330" alt="Atlas, dark theme"><br><sub>Atlas, dark theme</sub></td></tr></table>
 
 **Game modes**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_show.webp" width="330" alt="Memory: the clues are visible"><br><sub>Memory: the clues are visible</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_hidden.webp" width="330" alt="Memory: the clues have been hidden"><br><sub>Memory: the clues have been hidden</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_marathon.webp" width="330" alt="Marathon"><br><sub>Marathon</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_duel.webp" width="330" alt="Duel (the opponent fills in cells)"><br><sub>Duel (the opponent fills in cells)</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_hardcore.webp" width="330" alt="Hardcore: a mistake costs a life"><br><sub>Hardcore: a mistake costs a life</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_daily.webp" width="330" alt="Puzzle of the day"><br><sub>Puzzle of the day</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_sound.webp" width="330" alt="Sound"><br><sub>Sound</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_orb.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_show.en.webp" width="330" alt="Memory: the clues are visible"><br><sub>Memory: the clues are visible</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_hidden.en.webp" width="330" alt="Memory: the clues have been hidden"><br><sub>Memory: the clues have been hidden</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_marathon.en.webp" width="330" alt="Marathon"><br><sub>Marathon</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_duel.en.webp" width="330" alt="Duel (the opponent fills in cells)"><br><sub>Duel (the opponent fills in cells)</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_hardcore.en.webp" width="330" alt="Hardcore: a mistake costs a life"><br><sub>Hardcore: a mistake costs a life</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_daily.en.webp" width="330" alt="Puzzle of the day"><br><sub>Puzzle of the day</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_sound.en.webp" width="330" alt="Sound"><br><sub>Sound</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_orb.en.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
 
 **Game and tools**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_autoplay.webp" width="330" alt="▶ Auto running"><br><sub>▶ Auto running</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solved.webp" width="330" alt="Puzzle solved"><br><sub>Puzzle solved</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_custom.webp" width="330" alt="Custom combination (list of rules)"><br><sub>Custom combination (list of rules)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_3d_rotated.webp" width="330" alt="Rotated 3D view"><br><sub>Rotated 3D view</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_print.webp" width="330" alt="Print view"><br><sub>Print view</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_autoplay.en.webp" width="330" alt="▶ Auto running"><br><sub>▶ Auto running</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solved.en.webp" width="330" alt="Puzzle solved"><br><sub>Puzzle solved</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_custom.en.webp" width="330" alt="Custom combination (list of rules)"><br><sub>Custom combination (list of rules)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_3d_rotated.en.webp" width="330" alt="Rotated 3D view"><br><sub>Rotated 3D view</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_print.webp" width="330" alt="Print view"><br><sub>Print view</sub></td></tr></table>
 
 **Solver and About**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_solver_multi.webp" width="330" alt="Solver: empty grid (multiple solutions)"><br><sub>Solver: empty grid (multiple solutions)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solver_none.webp" width="330" alt="Solver: no solution"><br><sub>Solver: no solution</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_about.webp" width="330" alt="The “About” page"><br><sub>The “About” page</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_solver_multi.en.webp" width="330" alt="Solver: empty grid (multiple solutions)"><br><sub>Solver: empty grid (multiple solutions)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solver_none.en.webp" width="330" alt="Solver: no solution"><br><sub>Solver: no solution</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_about.en.webp" width="330" alt="The “About” page"><br><sub>The “About” page</sub></td></tr></table>
 
 ## Catalog of variants (136)
 

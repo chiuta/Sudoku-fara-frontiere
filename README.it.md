@@ -24,11 +24,11 @@ Un atlante interattivo di 136 voci (≈130 con regole distinte: Seminterrato, Su
 2. In **Atlante** scegli una variante (ricerca, categorie, «Variante di oggi», «Sorprendimi»); ogni variante ha una scheda con le regole.
 3. In **Gioca** scegli la variante, la dimensione, la difficoltà e la modalità, poi premi **Nuova partita**. Il puzzle viene generato nel browser, con soluzione unica.
 
-<p align="center"><img src="docs/screens/ui_atlas.webp" width="760" alt="L'atlante delle varianti"><br><sub>Atlante: ricerca, filtri per categoria e schede con le dimensioni disponibili.</sub></p>
+<p align="center"><img src="docs/screens/ui_atlas.it.webp" width="760" alt="L'atlante delle varianti"><br><sub>Atlante: ricerca, filtri per categoria e schede con le dimensioni disponibili.</sub></p>
 
 ### La schermata di gioco
 
-<p align="center"><img src="docs/screens/ui_play.webp" width="760" alt="La schermata di gioco"><br><sub>La tavola, la barra di stato (variante · dimensione · indizi · difficoltà · ramificazioni necessarie al risolutore · tempo), il pannello «Nuova partita» con codice di condivisione, il tastierino numerico e le azioni.</sub></p>
+<p align="center"><img src="docs/screens/ui_play.it.webp" width="760" alt="La schermata di gioco"><br><sub>La tavola, la barra di stato (variante · dimensione · indizi · difficoltà · ramificazioni necessarie al risolutore · tempo), il pannello «Nuova partita» con codice di condivisione, il tastierino numerico e le azioni.</sub></p>
 
 - **Cifre:** selezioni una cella (o più, con Maiusc/trascinamento) e premi la cifra, sulla tastiera o sul tastierino a schermo. Le cifre esaurite appaiono attenuate.
 - **Tastiera:** frecce = sposta la selezione, cifre/lettere = compila, `Backspace`/`Canc`/`0` = cancella, `N` = appunti, `Ctrl+Z` / `Ctrl+Y` = annulla / ripeti.
@@ -37,13 +37,13 @@ Un atlante interattivo di 136 voci (≈130 con regole distinte: Seminterrato, Su
 - **Suggerimento** compila una cella (con la logica sui candidati; se non esiste un passo diretto, la cifra viene dalla soluzione). **Mostra la soluzione** compila tutto.
 - **Codice:** il codice accanto a «Nuova partita» rigenera lo stesso puzzle nella stessa versione dell'applicazione; lo incolli in «Apri».
 
-<p align="center"><img src="docs/screens/ui_notes.webp" width="760" alt="Appunti"><br><sub>Appunti: i piccoli candidati in una cella.</sub></p>
+<p align="center"><img src="docs/screens/ui_notes.it.webp" width="760" alt="Appunti"><br><sub>Appunti: i piccoli candidati in una cella.</sub></p>
 
 ### Passo dopo passo e ▶ Auto
 
 **Passo dopo passo** inserisce una cifra e mostra il perché: le celle che la giustificano sono colorate (giallo), la nuova cella è verde e sotto la tavola compare la spiegazione. **▶ Auto** esegue i passi da solo, a 1,6 s. I motivi possibili: l'unica cifra rimasta nella cella; l'unica cella di una riga/colonna/regione dove la cifra può stare; una deduzione dalle regole della variante; oppure, quando non esiste una deduzione diretta, la cifra della soluzione (detto esplicitamente). Se hai una cifra sbagliata, il primo passo la corregge. Ogni passo si può annullare; è disattivato in Hardcore e in Memoria.
 
-<p align="center"><img src="docs/screens/ui_step.webp" width="760" alt="Passo dopo passo"><br><sub>Dopo tre passi: l'ultima cifra (verde) e le celle che la giustificano (giallo), con la spiegazione sotto la tavola.</sub></p>
+<p align="center"><img src="docs/screens/ui_step.it.webp" width="760" alt="Passo dopo passo"><br><sub>Dopo tre passi: l'ultima cifra (verde) e le celle che la giustificano (giallo), con la spiegazione sotto la tavola.</sub></p>
 
 ### Modalità di gioco
 
@@ -57,25 +57,25 @@ Si scelgono in «Nuova partita → Modalità di gioco»; il codice riceve il suf
 - **Puzzle del giorno:** lo stesso puzzle per tutti in un dato giorno (data UTC), con una serie di giorni consecutivi conservata in locale.
 - **Sonoro:** ogni cifra ha una nota; una riga, una colonna o un riquadro completo suona un arpeggio.
 
-<p align="center"><img src="docs/screens/ui_mode_orb.webp" width="760" alt="Modalità Orb"><br><sub>Modalità Orb: è visibile solo l'intorno della selezione.</sub></p>
+<p align="center"><img src="docs/screens/ui_mode_orb.it.webp" width="760" alt="Modalità Orb"><br><sub>Modalità Orb: è visibile solo l'intorno della selezione.</sub></p>
 
 ### Cubi e ipercubi
 
 Gli strati sono mostrati come mosaico di fette. Per i cubi 3D compare anche una «Vista 3D»: trascini con il mouse per ruotare il cubo e il cursore nasconde gli strati anteriori. Gli ipercubi 4D/5D restano solo per strati.
 
-<p align="center"><img src="docs/screens/ui_3d.webp" width="760" alt="Vista 3D"><br><sub>Cubo latino 3D 4×4×4 nella vista 3D rotante.</sub></p>
+<p align="center"><img src="docs/screens/ui_3d.it.webp" width="760" alt="Vista 3D"><br><sub>Cubo latino 3D 4×4×4 nella vista 3D rotante.</sub></p>
 
 ### Risolutore classico 9×9
 
 Incolli un puzzle (81 caratteri: 1–9, con i vuoti come 0 o `.`), spunti eventualmente regole aggiuntive (diagonali, finestre hyper, anti-cavallo ecc.) e premi **Risolvi**: l'applicazione dice se la soluzione è unica, multipla o inesistente. «Gioca questo puzzle» lo porta nella tavola di gioco.
 
-<p align="center"><img src="docs/screens/ui_solver.webp" width="760" alt="Risolutore"><br><sub>Il risolutore con il puzzle di esempio: «Soluzione unica».</sub></p>
+<p align="center"><img src="docs/screens/ui_solver.it.webp" width="760" alt="Risolutore"><br><sub>Il risolutore con il puzzle di esempio: «Soluzione unica».</sub></p>
 
 ### Telefono e tema scuro
 
 L'interfaccia si adatta agli schermi stretti; tema chiaro/scuro/automatico (il pulsante 🌓), testo ingrandito (il pulsante A), lingua RO/EN (il pulsante RO).
 
-<p align="center"><img src="docs/screens/ui_mobile.webp" width="260" alt="Telefono, tema chiaro"> &nbsp; <img src="docs/screens/ui_dark.webp" width="260" alt="Telefono, tema scuro"></p>
+<p align="center"><img src="docs/screens/ui_mobile.it.webp" width="260" alt="Telefono, tema chiaro"> &nbsp; <img src="docs/screens/ui_dark.it.webp" width="260" alt="Telefono, tema scuro"></p>
 
 ### Combinazione personalizzata
 
@@ -85,19 +85,19 @@ In Atlante, «Combinazione personalizzata» (o la variante «Combinazione person
 
 **Atlante**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_filter.webp" width="330" alt="Filtro per categoria"><br><sub>Filtro per categoria</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_search.webp" width="330" alt="Ricerca per nome"><br><sub>Ricerca per nome</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_lexicon.webp" width="330" alt="Lessico"><br><sub>Lessico</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_en.webp" width="330" alt="Atlante in inglese"><br><sub>Atlante in inglese</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_dark.webp" width="330" alt="Atlante, tema scuro"><br><sub>Atlante, tema scuro</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_filter.it.webp" width="330" alt="Filtro per categoria"><br><sub>Filtro per categoria</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_search.it.webp" width="330" alt="Ricerca per nome"><br><sub>Ricerca per nome</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_lexicon.it.webp" width="330" alt="Lessico"><br><sub>Lessico</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_en.webp" width="330" alt="Atlante in inglese"><br><sub>Atlante in inglese</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_dark.it.webp" width="330" alt="Atlante, tema scuro"><br><sub>Atlante, tema scuro</sub></td></tr></table>
 
 **Modalità di gioco**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_show.webp" width="330" alt="Memoria: gli indizi sono visibili"><br><sub>Memoria: gli indizi sono visibili</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_hidden.webp" width="330" alt="Memoria: gli indizi si sono nascosti"><br><sub>Memoria: gli indizi si sono nascosti</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_marathon.webp" width="330" alt="Maratona"><br><sub>Maratona</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_duel.webp" width="330" alt="Duello (l'avversario completa celle)"><br><sub>Duello (l'avversario completa celle)</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_hardcore.webp" width="330" alt="Hardcore: un errore costa una vita"><br><sub>Hardcore: un errore costa una vita</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_daily.webp" width="330" alt="Puzzle del giorno"><br><sub>Puzzle del giorno</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_sound.webp" width="330" alt="Sonoro"><br><sub>Sonoro</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_orb.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_show.it.webp" width="330" alt="Memoria: gli indizi sono visibili"><br><sub>Memoria: gli indizi sono visibili</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_hidden.it.webp" width="330" alt="Memoria: gli indizi si sono nascosti"><br><sub>Memoria: gli indizi si sono nascosti</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_marathon.it.webp" width="330" alt="Maratona"><br><sub>Maratona</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_duel.it.webp" width="330" alt="Duello (l'avversario completa celle)"><br><sub>Duello (l'avversario completa celle)</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_hardcore.it.webp" width="330" alt="Hardcore: un errore costa una vita"><br><sub>Hardcore: un errore costa una vita</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_daily.it.webp" width="330" alt="Puzzle del giorno"><br><sub>Puzzle del giorno</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_sound.it.webp" width="330" alt="Sonoro"><br><sub>Sonoro</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_orb.it.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
 
 **Gioco e strumenti**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_autoplay.webp" width="330" alt="▶ Auto in corso"><br><sub>▶ Auto in corso</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solved.webp" width="330" alt="Puzzle risolto"><br><sub>Puzzle risolto</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_custom.webp" width="330" alt="Combinazione personalizzata (elenco delle regole)"><br><sub>Combinazione personalizzata (elenco delle regole)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_3d_rotated.webp" width="330" alt="Vista 3D ruotata"><br><sub>Vista 3D ruotata</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_print.webp" width="330" alt="Vista di stampa"><br><sub>Vista di stampa</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_autoplay.it.webp" width="330" alt="▶ Auto in corso"><br><sub>▶ Auto in corso</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solved.it.webp" width="330" alt="Puzzle risolto"><br><sub>Puzzle risolto</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_custom.it.webp" width="330" alt="Combinazione personalizzata (elenco delle regole)"><br><sub>Combinazione personalizzata (elenco delle regole)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_3d_rotated.it.webp" width="330" alt="Vista 3D ruotata"><br><sub>Vista 3D ruotata</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_print.webp" width="330" alt="Vista di stampa"><br><sub>Vista di stampa</sub></td></tr></table>
 
 **Risolutore e Informazioni**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_solver_multi.webp" width="330" alt="Risolutore: griglia vuota (soluzioni multiple)"><br><sub>Risolutore: griglia vuota (soluzioni multiple)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solver_none.webp" width="330" alt="Risolutore: nessuna soluzione"><br><sub>Risolutore: nessuna soluzione</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_about.webp" width="330" alt="La pagina «Informazioni»"><br><sub>La pagina «Informazioni»</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_solver_multi.it.webp" width="330" alt="Risolutore: griglia vuota (soluzioni multiple)"><br><sub>Risolutore: griglia vuota (soluzioni multiple)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solver_none.it.webp" width="330" alt="Risolutore: nessuna soluzione"><br><sub>Risolutore: nessuna soluzione</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_about.it.webp" width="330" alt="La pagina «Informazioni»"><br><sub>La pagina «Informazioni»</sub></td></tr></table>
 
 ## Catalogo delle varianti (136)
 

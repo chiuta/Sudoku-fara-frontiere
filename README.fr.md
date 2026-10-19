@@ -24,11 +24,11 @@ Un atlas interactif de 136 entrées (≈130 aux règles distinctes : Sous-sol, S
 2. Dans **Atlas**, vous choisissez une variante (recherche, catégories, « Variante du jour », « Surprenez-moi ») ; chaque variante a une fiche avec les règles.
 3. Dans **Jouer**, vous choisissez la variante, la taille, la difficulté et le mode, puis vous appuyez sur **Nouvelle partie**. Le puzzle est généré dans le navigateur, avec une solution unique.
 
-<p align="center"><img src="docs/screens/ui_atlas.webp" width="760" alt="L'atlas des variantes"><br><sub>Atlas : recherche, filtres par catégorie et cartes avec les tailles disponibles.</sub></p>
+<p align="center"><img src="docs/screens/ui_atlas.fr.webp" width="760" alt="L'atlas des variantes"><br><sub>Atlas : recherche, filtres par catégorie et cartes avec les tailles disponibles.</sub></p>
 
 ### L'écran de jeu
 
-<p align="center"><img src="docs/screens/ui_play.webp" width="760" alt="L'écran de jeu"><br><sub>Le plateau, la barre d'état (variante · taille · indices · difficulté · ramifications nécessaires au solveur · temps), le panneau « Nouvelle partie » avec code de partage, le pavé numérique et les actions.</sub></p>
+<p align="center"><img src="docs/screens/ui_play.fr.webp" width="760" alt="L'écran de jeu"><br><sub>Le plateau, la barre d'état (variante · taille · indices · difficulté · ramifications nécessaires au solveur · temps), le panneau « Nouvelle partie » avec code de partage, le pavé numérique et les actions.</sub></p>
 
 - **Chiffres :** vous sélectionnez une cellule (ou plusieurs, avec Maj/glissement) et vous appuyez sur le chiffre, au clavier ou sur le pavé à l'écran. Les chiffres épuisés apparaissent estompés.
 - **Clavier :** flèches = déplacer la sélection, chiffres/lettres = remplir, `Retour arrière`/`Suppr`/`0` = effacer, `N` = notes, `Ctrl+Z` / `Ctrl+Y` = annuler / rétablir.
@@ -37,13 +37,13 @@ Un atlas interactif de 136 entrées (≈130 aux règles distinctes : Sous-sol, S
 - **Indice** remplit une cellule (par logique sur les candidats ; s'il n'existe pas d'étape directe, le chiffre vient de la solution). **Afficher la solution** remplit tout.
 - **Code :** le code à côté de « Nouvelle partie » régénère le même puzzle dans la même version de l'application ; vous le collez dans « Ouvrir ».
 
-<p align="center"><img src="docs/screens/ui_notes.webp" width="760" alt="Notes"><br><sub>Notes : les petits candidats dans une cellule.</sub></p>
+<p align="center"><img src="docs/screens/ui_notes.fr.webp" width="760" alt="Notes"><br><sub>Notes : les petits candidats dans une cellule.</sub></p>
 
 ### Pas à pas et ▶ Auto
 
 **Pas à pas** place un chiffre et montre pourquoi : les cellules qui le justifient sont colorées (jaune), la nouvelle cellule est verte, et l'explication apparaît sous le plateau. **▶ Auto** exécute les étapes tout seul, toutes les 1,6 s. Les motifs possibles : l'unique chiffre restant dans la cellule ; l'unique cellule d'une ligne/colonne/région où le chiffre peut aller ; une déduction à partir des règles de la variante ; ou, lorsqu'il n'existe pas de déduction directe, le chiffre de la solution (dit explicitement). Si vous avez un chiffre erroné, la première étape le corrige. Chaque étape peut être annulée ; il est désactivé en Hardcore et en Mémoire.
 
-<p align="center"><img src="docs/screens/ui_step.webp" width="760" alt="Pas à pas"><br><sub>Après trois étapes : le dernier chiffre (vert) et les cellules qui le justifient (jaune), avec l'explication sous le plateau.</sub></p>
+<p align="center"><img src="docs/screens/ui_step.fr.webp" width="760" alt="Pas à pas"><br><sub>Après trois étapes : le dernier chiffre (vert) et les cellules qui le justifient (jaune), avec l'explication sous le plateau.</sub></p>
 
 ### Modes de jeu
 
@@ -57,25 +57,25 @@ Ils se choisissent dans « Nouvelle partie → Mode de jeu » ; le code reçoit 
 - **Puzzle du jour :** le même puzzle pour tous un jour donné (date UTC), avec une série de jours consécutifs conservée en local.
 - **Sonore :** chaque chiffre a une note ; une ligne, une colonne ou une boîte complète joue un arpège.
 
-<p align="center"><img src="docs/screens/ui_mode_orb.webp" width="760" alt="Mode Orb"><br><sub>Mode Orb : seul le voisinage de la sélection est visible.</sub></p>
+<p align="center"><img src="docs/screens/ui_mode_orb.fr.webp" width="760" alt="Mode Orb"><br><sub>Mode Orb : seul le voisinage de la sélection est visible.</sub></p>
 
 ### Cubes et hypercubes
 
 Les couches sont affichées sous forme de mosaïque de tranches. Pour les cubes 3D apparaît aussi une « Vue 3D » : vous faites glisser la souris pour faire tourner le cube, et le curseur masque les couches de devant. Les hypercubes 4D/5D restent uniquement en couches.
 
-<p align="center"><img src="docs/screens/ui_3d.webp" width="760" alt="Vue 3D"><br><sub>Cube latin 3D 4×4×4 dans la vue 3D rotative.</sub></p>
+<p align="center"><img src="docs/screens/ui_3d.fr.webp" width="760" alt="Vue 3D"><br><sub>Cube latin 3D 4×4×4 dans la vue 3D rotative.</sub></p>
 
 ### Solveur classique 9×9
 
 Vous collez un puzzle (81 caractères : 1–9, les cases vides en 0 ou `.`), cochez éventuellement des règles supplémentaires (diagonales, fenêtres hyper, anti-cavalier, etc.) et appuyez sur **Résoudre** : l'application indique si la solution est unique, multiple ou inexistante. « Jouer ce puzzle » l'emmène sur le plateau de jeu.
 
-<p align="center"><img src="docs/screens/ui_solver.webp" width="760" alt="Solveur"><br><sub>Le solveur avec le puzzle d'exemple : « Solution unique ».</sub></p>
+<p align="center"><img src="docs/screens/ui_solver.fr.webp" width="760" alt="Solveur"><br><sub>Le solveur avec le puzzle d'exemple : « Solution unique ».</sub></p>
 
 ### Téléphone et thème sombre
 
 L'interface s'adapte aux écrans étroits ; thème clair/sombre/automatique (le bouton 🌓), texte agrandi (le bouton A), langue RO/EN (le bouton RO).
 
-<p align="center"><img src="docs/screens/ui_mobile.webp" width="260" alt="Téléphone, thème clair"> &nbsp; <img src="docs/screens/ui_dark.webp" width="260" alt="Téléphone, thème sombre"></p>
+<p align="center"><img src="docs/screens/ui_mobile.fr.webp" width="260" alt="Téléphone, thème clair"> &nbsp; <img src="docs/screens/ui_dark.fr.webp" width="260" alt="Téléphone, thème sombre"></p>
 
 ### Combinaison personnalisée
 
@@ -85,19 +85,19 @@ Dans Atlas, « Combinaison personnalisée » (ou la variante « Combinaison pers
 
 **Atlas**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_filter.webp" width="330" alt="Filtrage par catégorie"><br><sub>Filtrage par catégorie</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_search.webp" width="330" alt="Recherche par nom"><br><sub>Recherche par nom</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_lexicon.webp" width="330" alt="Lexique"><br><sub>Lexique</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_en.webp" width="330" alt="Atlas en anglais"><br><sub>Atlas en anglais</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_dark.webp" width="330" alt="Atlas, thème sombre"><br><sub>Atlas, thème sombre</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_filter.fr.webp" width="330" alt="Filtrage par catégorie"><br><sub>Filtrage par catégorie</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_search.fr.webp" width="330" alt="Recherche par nom"><br><sub>Recherche par nom</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_lexicon.fr.webp" width="330" alt="Lexique"><br><sub>Lexique</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_en.webp" width="330" alt="Atlas en anglais"><br><sub>Atlas en anglais</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_dark.fr.webp" width="330" alt="Atlas, thème sombre"><br><sub>Atlas, thème sombre</sub></td></tr></table>
 
 **Modes de jeu**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_show.webp" width="330" alt="Mémoire : les indices sont visibles"><br><sub>Mémoire : les indices sont visibles</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_hidden.webp" width="330" alt="Mémoire : les indices se sont cachés"><br><sub>Mémoire : les indices se sont cachés</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_marathon.webp" width="330" alt="Marathon"><br><sub>Marathon</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_duel.webp" width="330" alt="Duel (l'adversaire remplit des cellules)"><br><sub>Duel (l'adversaire remplit des cellules)</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_hardcore.webp" width="330" alt="Hardcore : une erreur coûte une vie"><br><sub>Hardcore : une erreur coûte une vie</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_daily.webp" width="330" alt="Puzzle du jour"><br><sub>Puzzle du jour</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_sound.webp" width="330" alt="Sonore"><br><sub>Sonore</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_orb.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_show.fr.webp" width="330" alt="Mémoire : les indices sont visibles"><br><sub>Mémoire : les indices sont visibles</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_hidden.fr.webp" width="330" alt="Mémoire : les indices se sont cachés"><br><sub>Mémoire : les indices se sont cachés</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_marathon.fr.webp" width="330" alt="Marathon"><br><sub>Marathon</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_duel.fr.webp" width="330" alt="Duel (l'adversaire remplit des cellules)"><br><sub>Duel (l'adversaire remplit des cellules)</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_hardcore.fr.webp" width="330" alt="Hardcore : une erreur coûte une vie"><br><sub>Hardcore : une erreur coûte une vie</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_daily.fr.webp" width="330" alt="Puzzle du jour"><br><sub>Puzzle du jour</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_sound.fr.webp" width="330" alt="Sonore"><br><sub>Sonore</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_orb.fr.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
 
 **Jeu et outils**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_autoplay.webp" width="330" alt="▶ Auto en cours"><br><sub>▶ Auto en cours</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solved.webp" width="330" alt="Puzzle résolu"><br><sub>Puzzle résolu</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_custom.webp" width="330" alt="Combinaison personnalisée (liste des règles)"><br><sub>Combinaison personnalisée (liste des règles)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_3d_rotated.webp" width="330" alt="Vue 3D tournée"><br><sub>Vue 3D tournée</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_print.webp" width="330" alt="Vue d'impression"><br><sub>Vue d'impression</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_autoplay.fr.webp" width="330" alt="▶ Auto en cours"><br><sub>▶ Auto en cours</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solved.fr.webp" width="330" alt="Puzzle résolu"><br><sub>Puzzle résolu</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_custom.fr.webp" width="330" alt="Combinaison personnalisée (liste des règles)"><br><sub>Combinaison personnalisée (liste des règles)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_3d_rotated.fr.webp" width="330" alt="Vue 3D tournée"><br><sub>Vue 3D tournée</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_print.webp" width="330" alt="Vue d'impression"><br><sub>Vue d'impression</sub></td></tr></table>
 
 **Solveur et À propos**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_solver_multi.webp" width="330" alt="Solveur : grille vide (solutions multiples)"><br><sub>Solveur : grille vide (solutions multiples)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solver_none.webp" width="330" alt="Solveur : aucune solution"><br><sub>Solveur : aucune solution</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_about.webp" width="330" alt="La page « À propos »"><br><sub>La page « À propos »</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_solver_multi.fr.webp" width="330" alt="Solveur : grille vide (solutions multiples)"><br><sub>Solveur : grille vide (solutions multiples)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solver_none.fr.webp" width="330" alt="Solveur : aucune solution"><br><sub>Solveur : aucune solution</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_about.fr.webp" width="330" alt="La page « À propos »"><br><sub>La page « À propos »</sub></td></tr></table>
 
 ## Catalogue des variantes (136)
 

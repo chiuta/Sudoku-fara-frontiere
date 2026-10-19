@@ -24,11 +24,11 @@ Un atlas interactiv de 136 de intrări (≈130 cu reguli distincte: Subsol, Sudo
 2. La **Atlas** alegi o variantă (căutare, categorii, „Varianta de astăzi”, „Surprinde-mă”); fiecare variantă are o fișă cu regulile.
 3. La **Joacă** alegi varianta, mărimea, dificultatea și modul, apoi apeși **Joc nou**. Puzzle-ul se generează în browser, cu soluție unică.
 
-<p align="center"><img src="docs/screens/ui_atlas.webp" width="760" alt="Atlasul variantelor"><br><sub>Atlas: căutare, filtre pe categorii și carduri cu mărimile disponibile.</sub></p>
+<p align="center"><img src="docs/screens/ui_atlas.ro.webp" width="760" alt="Atlasul variantelor"><br><sub>Atlas: căutare, filtre pe categorii și carduri cu mărimile disponibile.</sub></p>
 
 ### Ecranul de joc
 
-<p align="center"><img src="docs/screens/ui_play.webp" width="760" alt="Ecranul de joc"><br><sub>Tabla, bara de stare (variantă · mărime · indicii · dificultate · ramificări necesare solverului · timp), panoul „Joc nou” cu cod de partajare, tastatura numerică și acțiunile.</sub></p>
+<p align="center"><img src="docs/screens/ui_play.ro.webp" width="760" alt="Ecranul de joc"><br><sub>Tabla, bara de stare (variantă · mărime · indicii · dificultate · ramificări necesare solverului · timp), panoul „Joc nou” cu cod de partajare, tastatura numerică și acțiunile.</sub></p>
 
 - **Cifre:** selectezi o celulă (sau mai multe, cu Shift/tragere) și apeși cifra, pe tastatură sau pe tastatura de pe ecran. Cifrele terminate apar estompate.
 - **Tastatură:** săgeți = mută selecția, cifre/litere = completează, `Backspace`/`Delete`/`0` = șterge, `N` = notițe, `Ctrl+Z` / `Ctrl+Y` = anulează / refă.
@@ -37,13 +37,13 @@ Un atlas interactiv de 136 de intrări (≈130 cu reguli distincte: Subsol, Sudo
 - **Indiciu** completează o celulă (prin logică pe candidați; dacă nu există pas direct, cifra vine din soluție). **Arată soluția** completează tot.
 - **Cod:** codul de lângă „Joc nou” regenerează același puzzle în aceeași versiune a aplicației; îl lipești la „Deschide”.
 
-<p align="center"><img src="docs/screens/ui_notes.webp" width="760" alt="Notițe"><br><sub>Notițe: candidații mici într-o celulă.</sub></p>
+<p align="center"><img src="docs/screens/ui_notes.ro.webp" width="760" alt="Notițe"><br><sub>Notițe: candidații mici într-o celulă.</sub></p>
 
 ### Pas cu pas și ▶ Auto
 
 **Pas cu pas** pune o cifră și arată de ce: celulele care o justifică sunt colorate (galben), celula nouă e verde, iar sub tablă apare explicația. **▶ Auto** rulează pașii singur, la 1,6 s. Motivele posibile: unica cifră rămasă în celulă; unica celulă dintr-un rând/coloană/regiune unde poate sta cifra; deducție din regulile variantei; sau, când nu există deducție directă, cifra din soluție (spus explicit). Dacă ai o cifră greșită, primul pas o corectează. Fiecare pas se poate anula; la Hardcore și Memorie e dezactivat.
 
-<p align="center"><img src="docs/screens/ui_step.webp" width="760" alt="Pas cu pas"><br><sub>După trei pași: ultima cifră (verde) și celulele care o justifică (galben), cu explicația sub tablă.</sub></p>
+<p align="center"><img src="docs/screens/ui_step.ro.webp" width="760" alt="Pas cu pas"><br><sub>După trei pași: ultima cifră (verde) și celulele care o justifică (galben), cu explicația sub tablă.</sub></p>
 
 ### Moduri de joc
 
@@ -57,25 +57,25 @@ Se aleg la „Joc nou → Mod de joc”; codul primește sufixul `@mod` (excepț
 - **Puzzle-ul zilei:** același puzzle pentru toți într-o zi (data UTC), cu serie de zile consecutive păstrată local.
 - **Sonor:** fiecare cifră are o notă; un rând, o coloană sau o casetă completă cântă un arpegiu.
 
-<p align="center"><img src="docs/screens/ui_mode_orb.webp" width="760" alt="Modul Orb"><br><sub>Modul Orb: doar vecinătatea selecției e vizibilă.</sub></p>
+<p align="center"><img src="docs/screens/ui_mode_orb.ro.webp" width="760" alt="Modul Orb"><br><sub>Modul Orb: doar vecinătatea selecției e vizibilă.</sub></p>
 
 ### Cuburi și hipercuburi
 
 Straturile sunt afișate ca mozaic de felii. La cuburile 3D apare și „Vedere 3D”: tragi cu mausul ca să rotești cubul, iar glisorul ascunde straturile din față. Hipercuburile 4D/5D rămân doar pe straturi.
 
-<p align="center"><img src="docs/screens/ui_3d.webp" width="760" alt="Vedere 3D"><br><sub>Cub latin 3D 4×4×4 în vederea 3D rotativă.</sub></p>
+<p align="center"><img src="docs/screens/ui_3d.ro.webp" width="760" alt="Vedere 3D"><br><sub>Cub latin 3D 4×4×4 în vederea 3D rotativă.</sub></p>
 
 ### Rezolvator clasic 9×9
 
 Lipești un puzzle (81 de caractere: 1–9, iar golurile ca 0 sau `.`), bifezi eventual reguli suplimentare (diagonale, ferestre hyper, anti-cal etc.) și apeși **Rezolvă**: aplicația spune dacă soluția e unică, multiplă sau inexistentă. „Joacă acest puzzle” îl duce în tabla de joc.
 
-<p align="center"><img src="docs/screens/ui_solver.webp" width="760" alt="Rezolvator"><br><sub>Rezolvatorul cu puzzle-ul de exemplu: „Soluție unică”.</sub></p>
+<p align="center"><img src="docs/screens/ui_solver.ro.webp" width="760" alt="Rezolvator"><br><sub>Rezolvatorul cu puzzle-ul de exemplu: „Soluție unică”.</sub></p>
 
 ### Telefon și temă întunecată
 
 Interfața se adaptează la ecrane înguste; temă luminoasă/întunecată/automată (butonul 🌓), text mărit (butonul A), limbă RO/EN (butonul RO).
 
-<p align="center"><img src="docs/screens/ui_mobile.webp" width="260" alt="Telefon, temă luminoasă"> &nbsp; <img src="docs/screens/ui_dark.webp" width="260" alt="Telefon, temă întunecată"></p>
+<p align="center"><img src="docs/screens/ui_mobile.ro.webp" width="260" alt="Telefon, temă luminoasă"> &nbsp; <img src="docs/screens/ui_dark.ro.webp" width="260" alt="Telefon, temă întunecată"></p>
 
 ### Combinație proprie
 
@@ -85,19 +85,19 @@ Interfața se adaptează la ecrane înguste; temă luminoasă/întunecată/autom
 
 **Atlas**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_filter.webp" width="330" alt="Filtrare pe o categorie"><br><sub>Filtrare pe o categorie</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_search.webp" width="330" alt="Căutare după nume"><br><sub>Căutare după nume</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_lexicon.webp" width="330" alt="Lexicon"><br><sub>Lexicon</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_en.webp" width="330" alt="Atlas în engleză"><br><sub>Atlas în engleză</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_dark.webp" width="330" alt="Atlas, temă întunecată"><br><sub>Atlas, temă întunecată</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_filter.ro.webp" width="330" alt="Filtrare pe o categorie"><br><sub>Filtrare pe o categorie</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_search.ro.webp" width="330" alt="Căutare după nume"><br><sub>Căutare după nume</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_lexicon.ro.webp" width="330" alt="Lexicon"><br><sub>Lexicon</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_en.webp" width="330" alt="Atlas în engleză"><br><sub>Atlas în engleză</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_dark.ro.webp" width="330" alt="Atlas, temă întunecată"><br><sub>Atlas, temă întunecată</sub></td></tr></table>
 
 **Moduri de joc**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_show.webp" width="330" alt="Memorie: indiciile se văd"><br><sub>Memorie: indiciile se văd</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_hidden.webp" width="330" alt="Memorie: indiciile s-au ascuns"><br><sub>Memorie: indiciile s-au ascuns</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_marathon.webp" width="330" alt="Maraton"><br><sub>Maraton</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_duel.webp" width="330" alt="Duel (adversarul completează celule)"><br><sub>Duel (adversarul completează celule)</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_hardcore.webp" width="330" alt="Hardcore: o greșeală costă o viață"><br><sub>Hardcore: o greșeală costă o viață</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_daily.webp" width="330" alt="Puzzle-ul zilei"><br><sub>Puzzle-ul zilei</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_sound.webp" width="330" alt="Sonor"><br><sub>Sonor</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_orb.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_show.ro.webp" width="330" alt="Memorie: indiciile se văd"><br><sub>Memorie: indiciile se văd</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_hidden.ro.webp" width="330" alt="Memorie: indiciile s-au ascuns"><br><sub>Memorie: indiciile s-au ascuns</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_marathon.ro.webp" width="330" alt="Maraton"><br><sub>Maraton</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_duel.ro.webp" width="330" alt="Duel (adversarul completează celule)"><br><sub>Duel (adversarul completează celule)</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_hardcore.ro.webp" width="330" alt="Hardcore: o greșeală costă o viață"><br><sub>Hardcore: o greșeală costă o viață</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_daily.ro.webp" width="330" alt="Puzzle-ul zilei"><br><sub>Puzzle-ul zilei</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_sound.ro.webp" width="330" alt="Sonor"><br><sub>Sonor</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_orb.ro.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
 
 **Joc și instrumente**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_autoplay.webp" width="330" alt="▶ Auto în desfășurare"><br><sub>▶ Auto în desfășurare</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solved.webp" width="330" alt="Puzzle rezolvat"><br><sub>Puzzle rezolvat</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_custom.webp" width="330" alt="Combinație proprie (lista de reguli)"><br><sub>Combinație proprie (lista de reguli)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_3d_rotated.webp" width="330" alt="Vedere 3D rotită"><br><sub>Vedere 3D rotită</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_print.webp" width="330" alt="Vedere la tipărire"><br><sub>Vedere la tipărire</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_autoplay.ro.webp" width="330" alt="▶ Auto în desfășurare"><br><sub>▶ Auto în desfășurare</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solved.ro.webp" width="330" alt="Puzzle rezolvat"><br><sub>Puzzle rezolvat</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_custom.ro.webp" width="330" alt="Combinație proprie (lista de reguli)"><br><sub>Combinație proprie (lista de reguli)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_3d_rotated.ro.webp" width="330" alt="Vedere 3D rotită"><br><sub>Vedere 3D rotită</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_print.webp" width="330" alt="Vedere la tipărire"><br><sub>Vedere la tipărire</sub></td></tr></table>
 
 **Rezolvator și Despre**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_solver_multi.webp" width="330" alt="Rezolvator: grilă goală (soluții multiple)"><br><sub>Rezolvator: grilă goală (soluții multiple)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solver_none.webp" width="330" alt="Rezolvator: fără soluție"><br><sub>Rezolvator: fără soluție</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_about.webp" width="330" alt="Pagina „Despre”"><br><sub>Pagina „Despre”</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_solver_multi.ro.webp" width="330" alt="Rezolvator: grilă goală (soluții multiple)"><br><sub>Rezolvator: grilă goală (soluții multiple)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solver_none.ro.webp" width="330" alt="Rezolvator: fără soluție"><br><sub>Rezolvator: fără soluție</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_about.ro.webp" width="330" alt="Pagina „Despre”"><br><sub>Pagina „Despre”</sub></td></tr></table>
 
 ## Catalogul variantelor (136)
 

@@ -24,11 +24,11 @@ Um atlas interativo de 136 entradas (≈130 com regras distintas: Cave, Sudoku c
 2. Em **Atlas** escolhe uma variante (pesquisa, categorias, «Variante de hoje», «Surpreende-me»); cada variante tem uma ficha com as regras.
 3. Em **Jogar** escolhe a variante, o tamanho, a dificuldade e o modo, e depois prime **Novo jogo**. O puzzle é gerado no navegador, com solução única.
 
-<p align="center"><img src="docs/screens/ui_atlas.webp" width="760" alt="O atlas de variantes"><br><sub>Atlas: pesquisa, filtros por categoria e cartões com os tamanhos disponíveis.</sub></p>
+<p align="center"><img src="docs/screens/ui_atlas.pt.webp" width="760" alt="O atlas de variantes"><br><sub>Atlas: pesquisa, filtros por categoria e cartões com os tamanhos disponíveis.</sub></p>
 
 ### O ecrã de jogo
 
-<p align="center"><img src="docs/screens/ui_play.webp" width="760" alt="O ecrã de jogo"><br><sub>O tabuleiro, a barra de estado (variante · tamanho · pistas · dificuldade · ramificações necessárias ao resolvedor · tempo), o painel «Novo jogo» com código de partilha, o teclado numérico e as ações.</sub></p>
+<p align="center"><img src="docs/screens/ui_play.pt.webp" width="760" alt="O ecrã de jogo"><br><sub>O tabuleiro, a barra de estado (variante · tamanho · pistas · dificuldade · ramificações necessárias ao resolvedor · tempo), o painel «Novo jogo» com código de partilha, o teclado numérico e as ações.</sub></p>
 
 - **Algarismos:** seleciona uma célula (ou várias, com Shift/arrastar) e prime o algarismo, no teclado ou no teclado do ecrã. Os algarismos esgotados aparecem esbatidos.
 - **Teclado:** setas = mover a seleção, algarismos/letras = preencher, `Backspace`/`Delete`/`0` = apagar, `N` = notas, `Ctrl+Z` / `Ctrl+Y` = anular / refazer.
@@ -37,13 +37,13 @@ Um atlas interativo de 136 entradas (≈130 com regras distintas: Cave, Sudoku c
 - **Pista** preenche uma célula (por lógica sobre candidatos; se não existir um passo direto, o algarismo vem da solução). **Mostrar a solução** preenche tudo.
 - **Código:** o código junto a «Novo jogo» regenera o mesmo puzzle na mesma versão da aplicação; cola-o em «Abrir».
 
-<p align="center"><img src="docs/screens/ui_notes.webp" width="760" alt="Notas"><br><sub>Notas: os candidatos pequenos numa célula.</sub></p>
+<p align="center"><img src="docs/screens/ui_notes.pt.webp" width="760" alt="Notas"><br><sub>Notas: os candidatos pequenos numa célula.</sub></p>
 
 ### Passo a passo e ▶ Auto
 
 **Passo a passo** coloca um algarismo e mostra porquê: as células que o justificam ficam coloridas (amarelo), a célula nova é verde e por baixo do tabuleiro aparece a explicação. **▶ Auto** executa os passos sozinho, a cada 1,6 s. Os motivos possíveis: o único algarismo que resta na célula; a única célula de uma linha/coluna/região onde o algarismo pode ficar; uma dedução a partir das regras da variante; ou, quando não existe dedução direta, o algarismo da solução (dito explicitamente). Se tiver um algarismo errado, o primeiro passo corrige-o. Cada passo pode ser anulado; está desativado em Hardcore e Memória.
 
-<p align="center"><img src="docs/screens/ui_step.webp" width="760" alt="Passo a passo"><br><sub>Depois de três passos: o último algarismo (verde) e as células que o justificam (amarelo), com a explicação por baixo do tabuleiro.</sub></p>
+<p align="center"><img src="docs/screens/ui_step.pt.webp" width="760" alt="Passo a passo"><br><sub>Depois de três passos: o último algarismo (verde) e as células que o justificam (amarelo), com a explicação por baixo do tabuleiro.</sub></p>
 
 ### Modos de jogo
 
@@ -57,25 +57,25 @@ Escolhem-se em «Novo jogo → Modo de jogo»; o código recebe o sufixo `@modo`
 - **Puzzle do dia:** o mesmo puzzle para todos num dado dia (data UTC), com uma série de dias consecutivos guardada localmente.
 - **Sonoro:** cada algarismo tem uma nota; uma linha, uma coluna ou uma caixa completa toca um arpejo.
 
-<p align="center"><img src="docs/screens/ui_mode_orb.webp" width="760" alt="Modo Orb"><br><sub>Modo Orb: só a vizinhança da seleção está visível.</sub></p>
+<p align="center"><img src="docs/screens/ui_mode_orb.pt.webp" width="760" alt="Modo Orb"><br><sub>Modo Orb: só a vizinhança da seleção está visível.</sub></p>
 
 ### Cubos e hipercubos
 
 As camadas são apresentadas como um mosaico de fatias. Nos cubos 3D aparece também uma «Vista 3D»: arrasta com o rato para rodar o cubo, e o cursor oculta as camadas da frente. Os hipercubos 4D/5D ficam apenas por camadas.
 
-<p align="center"><img src="docs/screens/ui_3d.webp" width="760" alt="Vista 3D"><br><sub>Cubo latino 3D 4×4×4 na vista 3D rotativa.</sub></p>
+<p align="center"><img src="docs/screens/ui_3d.pt.webp" width="760" alt="Vista 3D"><br><sub>Cubo latino 3D 4×4×4 na vista 3D rotativa.</sub></p>
 
 ### Resolvedor clássico 9×9
 
 Cola um puzzle (81 carateres: 1–9, com os vazios como 0 ou `.`), assinala opcionalmente regras adicionais (diagonais, janelas hyper, anti-cavalo, etc.) e prime **Resolver**: a aplicação diz se a solução é única, múltipla ou inexistente. «Jogar este puzzle» leva-o para o tabuleiro de jogo.
 
-<p align="center"><img src="docs/screens/ui_solver.webp" width="760" alt="Resolvedor"><br><sub>O resolvedor com o puzzle de exemplo: «Solução única».</sub></p>
+<p align="center"><img src="docs/screens/ui_solver.pt.webp" width="760" alt="Resolvedor"><br><sub>O resolvedor com o puzzle de exemplo: «Solução única».</sub></p>
 
 ### Telemóvel e tema escuro
 
 A interface adapta-se a ecrãs estreitos; tema claro/escuro/automático (o botão 🌓), texto ampliado (o botão A), língua RO/EN (o botão RO).
 
-<p align="center"><img src="docs/screens/ui_mobile.webp" width="260" alt="Telemóvel, tema claro"> &nbsp; <img src="docs/screens/ui_dark.webp" width="260" alt="Telemóvel, tema escuro"></p>
+<p align="center"><img src="docs/screens/ui_mobile.pt.webp" width="260" alt="Telemóvel, tema claro"> &nbsp; <img src="docs/screens/ui_dark.pt.webp" width="260" alt="Telemóvel, tema escuro"></p>
 
 ### Combinação personalizada
 
@@ -85,19 +85,19 @@ No Atlas, a «Combinação personalizada» (ou a variante «Combinação persona
 
 **Atlas**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_filter.webp" width="330" alt="Filtragem por categoria"><br><sub>Filtragem por categoria</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_search.webp" width="330" alt="Pesquisa por nome"><br><sub>Pesquisa por nome</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_lexicon.webp" width="330" alt="Léxico"><br><sub>Léxico</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_en.webp" width="330" alt="Atlas em inglês"><br><sub>Atlas em inglês</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_dark.webp" width="330" alt="Atlas, tema escuro"><br><sub>Atlas, tema escuro</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_filter.pt.webp" width="330" alt="Filtragem por categoria"><br><sub>Filtragem por categoria</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_search.pt.webp" width="330" alt="Pesquisa por nome"><br><sub>Pesquisa por nome</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_lexicon.pt.webp" width="330" alt="Léxico"><br><sub>Léxico</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_en.webp" width="330" alt="Atlas em inglês"><br><sub>Atlas em inglês</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_dark.pt.webp" width="330" alt="Atlas, tema escuro"><br><sub>Atlas, tema escuro</sub></td></tr></table>
 
 **Modos de jogo**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_show.webp" width="330" alt="Memória: as pistas estão visíveis"><br><sub>Memória: as pistas estão visíveis</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_hidden.webp" width="330" alt="Memória: as pistas ocultaram-se"><br><sub>Memória: as pistas ocultaram-se</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_marathon.webp" width="330" alt="Maratona"><br><sub>Maratona</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_duel.webp" width="330" alt="Duelo (o adversário preenche células)"><br><sub>Duelo (o adversário preenche células)</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_hardcore.webp" width="330" alt="Hardcore: um erro custa uma vida"><br><sub>Hardcore: um erro custa uma vida</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_daily.webp" width="330" alt="Puzzle do dia"><br><sub>Puzzle do dia</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_sound.webp" width="330" alt="Sonoro"><br><sub>Sonoro</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_orb.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_show.pt.webp" width="330" alt="Memória: as pistas estão visíveis"><br><sub>Memória: as pistas estão visíveis</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_hidden.pt.webp" width="330" alt="Memória: as pistas ocultaram-se"><br><sub>Memória: as pistas ocultaram-se</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_marathon.pt.webp" width="330" alt="Maratona"><br><sub>Maratona</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_duel.pt.webp" width="330" alt="Duelo (o adversário preenche células)"><br><sub>Duelo (o adversário preenche células)</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_hardcore.pt.webp" width="330" alt="Hardcore: um erro custa uma vida"><br><sub>Hardcore: um erro custa uma vida</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_daily.pt.webp" width="330" alt="Puzzle do dia"><br><sub>Puzzle do dia</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_sound.pt.webp" width="330" alt="Sonoro"><br><sub>Sonoro</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_orb.pt.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
 
 **Jogo e ferramentas**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_autoplay.webp" width="330" alt="▶ Auto em curso"><br><sub>▶ Auto em curso</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solved.webp" width="330" alt="Puzzle resolvido"><br><sub>Puzzle resolvido</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_custom.webp" width="330" alt="Combinação personalizada (lista de regras)"><br><sub>Combinação personalizada (lista de regras)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_3d_rotated.webp" width="330" alt="Vista 3D rodada"><br><sub>Vista 3D rodada</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_print.webp" width="330" alt="Vista de impressão"><br><sub>Vista de impressão</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_autoplay.pt.webp" width="330" alt="▶ Auto em curso"><br><sub>▶ Auto em curso</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solved.pt.webp" width="330" alt="Puzzle resolvido"><br><sub>Puzzle resolvido</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_custom.pt.webp" width="330" alt="Combinação personalizada (lista de regras)"><br><sub>Combinação personalizada (lista de regras)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_3d_rotated.pt.webp" width="330" alt="Vista 3D rodada"><br><sub>Vista 3D rodada</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_print.webp" width="330" alt="Vista de impressão"><br><sub>Vista de impressão</sub></td></tr></table>
 
 **Resolvedor e Sobre**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_solver_multi.webp" width="330" alt="Resolvedor: grelha vazia (soluções múltiplas)"><br><sub>Resolvedor: grelha vazia (soluções múltiplas)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solver_none.webp" width="330" alt="Resolvedor: sem solução"><br><sub>Resolvedor: sem solução</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_about.webp" width="330" alt="A página «Sobre»"><br><sub>A página «Sobre»</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_solver_multi.pt.webp" width="330" alt="Resolvedor: grelha vazia (soluções múltiplas)"><br><sub>Resolvedor: grelha vazia (soluções múltiplas)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solver_none.pt.webp" width="330" alt="Resolvedor: sem solução"><br><sub>Resolvedor: sem solução</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_about.pt.webp" width="330" alt="A página «Sobre»"><br><sub>A página «Sobre»</sub></td></tr></table>
 
 ## Catálogo de variantes (136)
 

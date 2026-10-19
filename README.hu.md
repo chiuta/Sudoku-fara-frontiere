@@ -24,11 +24,11 @@ Sudoku-változatok atlasza helyben futó generátorral és megoldóval — egyet
 2. Az **Atlaszban** kiválasztasz egy változatot (keresés, kategóriák, „A nap változata”, „Lepj meg”); minden változatnak van egy lapja a szabályokkal.
 3. A **Játék** fülön kiválasztod a változatot, a méretet, a nehézséget és a módot, majd megnyomod az **Új játék** gombot. A rejtvényt a böngésző generálja, egyértelmű megoldással.
 
-<p align="center"><img src="docs/screens/ui_atlas.webp" width="760" alt="A változatok atlasza"><br><sub>Atlasz: keresés, kategóriaszűrők és kártyák az elérhető méretekkel.</sub></p>
+<p align="center"><img src="docs/screens/ui_atlas.hu.webp" width="760" alt="A változatok atlasza"><br><sub>Atlasz: keresés, kategóriaszűrők és kártyák az elérhető méretekkel.</sub></p>
 
 ### A játékképernyő
 
-<p align="center"><img src="docs/screens/ui_play.webp" width="760" alt="A játékképernyő"><br><sub>A tábla, az állapotsor (változat · méret · jelzések · nehézség · a megoldónak szükséges elágazások · idő), az „Új játék” panel megosztási kóddal, a számbillentyűzet és a műveletek.</sub></p>
+<p align="center"><img src="docs/screens/ui_play.hu.webp" width="760" alt="A játékképernyő"><br><sub>A tábla, az állapotsor (változat · méret · jelzések · nehézség · a megoldónak szükséges elágazások · idő), az „Új játék” panel megosztási kóddal, a számbillentyűzet és a műveletek.</sub></p>
 
 - **Számjegyek:** kijelölsz egy cellát (vagy többet, Shift-tel/húzással), és megnyomod a számjegyet a billentyűzeten vagy a képernyő számbillentyűzetén. A már elfogyott számjegyek halványan jelennek meg.
 - **Billentyűzet:** nyilak = a kijelölés mozgatása, számjegyek/betűk = kitöltés, `Backspace`/`Delete`/`0` = törlés, `N` = jegyzetek, `Ctrl+Z` / `Ctrl+Y` = visszavonás / ismétlés.
@@ -37,13 +37,13 @@ Sudoku-változatok atlasza helyben futó generátorral és megoldóval — egyet
 - **Tipp** kitölt egy cellát (a jelöltekre épülő logikával; ha nincs közvetlen lépés, a számjegy a megoldásból jön). A **Megoldás mutatása** mindent kitölt.
 - **Kód:** az „Új játék” melletti kód ugyanazt a rejtvényt generálja újra az alkalmazás ugyanazon verziójában; a „Megnyitás” mezőbe illeszted be.
 
-<p align="center"><img src="docs/screens/ui_notes.webp" width="760" alt="Jegyzetek"><br><sub>Jegyzetek: kis jelöltek egy cellában.</sub></p>
+<p align="center"><img src="docs/screens/ui_notes.hu.webp" width="760" alt="Jegyzetek"><br><sub>Jegyzetek: kis jelöltek egy cellában.</sub></p>
 
 ### Lépésről lépésre és ▶ Auto
 
 A **Lépésről lépésre** lerak egy számjegyet, és megmutatja, miért: az indoklásul szolgáló cellák színesek (sárga), az új cella zöld, és a tábla alatt megjelenik a magyarázat. Az **▶ Auto** magától futtatja a lépéseket, 1,6 másodpercenként. A lehetséges indokok: a cellában megmaradt egyetlen számjegy; egy sor/oszlop/régió egyetlen cellája, ahová a számjegy kerülhet; a változat szabályaiból levont következtetés; vagy, ha nincs közvetlen következtetés, a megoldásból vett számjegy (ezt kifejezetten kimondja). Ha hibás számjegyed van, az első lépés kijavítja. Minden lépés visszavonható; Hardcore és Memória módban le van tiltva.
 
-<p align="center"><img src="docs/screens/ui_step.webp" width="760" alt="Lépésről lépésre"><br><sub>Három lépés után: az utolsó számjegy (zöld) és az indoklásul szolgáló cellák (sárga), a magyarázat a tábla alatt.</sub></p>
+<p align="center"><img src="docs/screens/ui_step.hu.webp" width="760" alt="Lépésről lépésre"><br><sub>Három lépés után: az utolsó számjegy (zöld) és az indoklásul szolgáló cellák (sárga), a magyarázat a tábla alatt.</sub></p>
 
 ### Játékmódok
 
@@ -57,25 +57,25 @@ Az „Új játék → Játékmód” alatt választhatók; a kód `@mód` utóta
 - **A nap rejtvénye:** ugyanaz a rejtvény mindenkinek egy adott napon (UTC-dátum), helyben megőrzött egymást követő napok sorozatával.
 - **Hangos:** minden számjegynek van egy hangja; egy kész sor, oszlop vagy doboz arpeggiót játszik.
 
-<p align="center"><img src="docs/screens/ui_mode_orb.webp" width="760" alt="Orb mód"><br><sub>Orb mód: csak a kijelölés környezete látható.</sub></p>
+<p align="center"><img src="docs/screens/ui_mode_orb.hu.webp" width="760" alt="Orb mód"><br><sub>Orb mód: csak a kijelölés környezete látható.</sub></p>
 
 ### Kockák és hiperkockák
 
 A rétegek szeletekből álló mozaikként jelennek meg. A 3D kockáknál „3D nézet” is megjelenik: az egérrel húzva forgatod a kockát, a csúszka pedig elrejti az elülső rétegeket. A 4D/5D hiperkockák csak rétegekben látszanak.
 
-<p align="center"><img src="docs/screens/ui_3d.webp" width="760" alt="3D nézet"><br><sub>4×4×4-es 3D latin kocka a forgatható 3D nézetben.</sub></p>
+<p align="center"><img src="docs/screens/ui_3d.hu.webp" width="760" alt="3D nézet"><br><sub>4×4×4-es 3D latin kocka a forgatható 3D nézetben.</sub></p>
 
 ### Klasszikus 9×9-es megoldó
 
 Beilleszted a rejtvényt (81 karakter: 1–9, az üres helyek 0 vagy `.`), szükség esetén bejelölsz további szabályokat (átlók, hyper ablakok, anti-huszár stb.), és megnyomod a **Megoldás** gombot: az alkalmazás megmondja, hogy a megoldás egyértelmű, többszörös vagy nem létezik. A „Játék ezzel a rejtvénnyel” átviszi a játéktáblára.
 
-<p align="center"><img src="docs/screens/ui_solver.webp" width="760" alt="Megoldó"><br><sub>A megoldó a példarejtvénnyel: „Egyértelmű megoldás”.</sub></p>
+<p align="center"><img src="docs/screens/ui_solver.hu.webp" width="760" alt="Megoldó"><br><sub>A megoldó a példarejtvénnyel: „Egyértelmű megoldás”.</sub></p>
 
 ### Telefon és sötét téma
 
 A felület alkalmazkodik a keskeny képernyőkhöz; világos/sötét/automatikus téma (a 🌓 gomb), nagyított szöveg (az A gomb), RO/EN nyelv (az RO gomb).
 
-<p align="center"><img src="docs/screens/ui_mobile.webp" width="260" alt="Telefon, világos téma"> &nbsp; <img src="docs/screens/ui_dark.webp" width="260" alt="Telefon, sötét téma"></p>
+<p align="center"><img src="docs/screens/ui_mobile.hu.webp" width="260" alt="Telefon, világos téma"> &nbsp; <img src="docs/screens/ui_dark.hu.webp" width="260" alt="Telefon, sötét téma"></p>
 
 ### Saját kombináció
 
@@ -85,19 +85,19 @@ Az Atlaszban a „Saját kombináció” (vagy az „Új játék” alatti „Sa
 
 **Atlasz**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_filter.webp" width="330" alt="Szűrés egy kategóriára"><br><sub>Szűrés egy kategóriára</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_search.webp" width="330" alt="Keresés név szerint"><br><sub>Keresés név szerint</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_lexicon.webp" width="330" alt="Lexikon"><br><sub>Lexikon</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_en.webp" width="330" alt="Atlasz angolul"><br><sub>Atlasz angolul</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_dark.webp" width="330" alt="Atlasz, sötét téma"><br><sub>Atlasz, sötét téma</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_filter.hu.webp" width="330" alt="Szűrés egy kategóriára"><br><sub>Szűrés egy kategóriára</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_search.hu.webp" width="330" alt="Keresés név szerint"><br><sub>Keresés név szerint</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_lexicon.hu.webp" width="330" alt="Lexikon"><br><sub>Lexikon</sub></td><td align="center" valign="top"><img src="docs/screens/ui_atlas_en.webp" width="330" alt="Atlasz angolul"><br><sub>Atlasz angolul</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_atlas_dark.hu.webp" width="330" alt="Atlasz, sötét téma"><br><sub>Atlasz, sötét téma</sub></td></tr></table>
 
 **Játékmódok**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_show.webp" width="330" alt="Memória: a jelzések látszanak"><br><sub>Memória: a jelzések látszanak</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_hidden.webp" width="330" alt="Memória: a jelzések elrejtőztek"><br><sub>Memória: a jelzések elrejtőztek</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_marathon.webp" width="330" alt="Maraton"><br><sub>Maraton</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_duel.webp" width="330" alt="Párbaj (az ellenfél cellákat tölt ki)"><br><sub>Párbaj (az ellenfél cellákat tölt ki)</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_hardcore.webp" width="330" alt="Hardcore: egy hiba egy életbe kerül"><br><sub>Hardcore: egy hiba egy életbe kerül</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_daily.webp" width="330" alt="A nap rejtvénye"><br><sub>A nap rejtvénye</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_sound.webp" width="330" alt="Hangos"><br><sub>Hangos</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_orb.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_show.hu.webp" width="330" alt="Memória: a jelzések látszanak"><br><sub>Memória: a jelzések látszanak</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_memory_hidden.hu.webp" width="330" alt="Memória: a jelzések elrejtőztek"><br><sub>Memória: a jelzések elrejtőztek</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_marathon.hu.webp" width="330" alt="Maraton"><br><sub>Maraton</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_duel.hu.webp" width="330" alt="Párbaj (az ellenfél cellákat tölt ki)"><br><sub>Párbaj (az ellenfél cellákat tölt ki)</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_hardcore.hu.webp" width="330" alt="Hardcore: egy hiba egy életbe kerül"><br><sub>Hardcore: egy hiba egy életbe kerül</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_daily.hu.webp" width="330" alt="A nap rejtvénye"><br><sub>A nap rejtvénye</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_mode_sound.hu.webp" width="330" alt="Hangos"><br><sub>Hangos</sub></td><td align="center" valign="top"><img src="docs/screens/ui_mode_orb.hu.webp" width="330" alt="Orb"><br><sub>Orb</sub></td></tr></table>
 
 **Játék és eszközök**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_autoplay.webp" width="330" alt="▶ Auto fut"><br><sub>▶ Auto fut</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solved.webp" width="330" alt="Megoldott rejtvény"><br><sub>Megoldott rejtvény</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_custom.webp" width="330" alt="Saját kombináció (szabálylista)"><br><sub>Saját kombináció (szabálylista)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_3d_rotated.webp" width="330" alt="Elforgatott 3D nézet"><br><sub>Elforgatott 3D nézet</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_print.webp" width="330" alt="Nyomtatási nézet"><br><sub>Nyomtatási nézet</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_autoplay.hu.webp" width="330" alt="▶ Auto fut"><br><sub>▶ Auto fut</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solved.hu.webp" width="330" alt="Megoldott rejtvény"><br><sub>Megoldott rejtvény</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_custom.hu.webp" width="330" alt="Saját kombináció (szabálylista)"><br><sub>Saját kombináció (szabálylista)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_3d_rotated.hu.webp" width="330" alt="Elforgatott 3D nézet"><br><sub>Elforgatott 3D nézet</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_print.webp" width="330" alt="Nyomtatási nézet"><br><sub>Nyomtatási nézet</sub></td></tr></table>
 
 **Megoldó és Névjegy**
 
-<table><tr><td align="center" valign="top"><img src="docs/screens/ui_solver_multi.webp" width="330" alt="Megoldó: üres rács (több megoldás)"><br><sub>Megoldó: üres rács (több megoldás)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solver_none.webp" width="330" alt="Megoldó: nincs megoldás"><br><sub>Megoldó: nincs megoldás</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_about.webp" width="330" alt="A „Névjegy” oldal"><br><sub>A „Névjegy” oldal</sub></td></tr></table>
+<table><tr><td align="center" valign="top"><img src="docs/screens/ui_solver_multi.hu.webp" width="330" alt="Megoldó: üres rács (több megoldás)"><br><sub>Megoldó: üres rács (több megoldás)</sub></td><td align="center" valign="top"><img src="docs/screens/ui_solver_none.hu.webp" width="330" alt="Megoldó: nincs megoldás"><br><sub>Megoldó: nincs megoldás</sub></td></tr><tr><td align="center" valign="top"><img src="docs/screens/ui_about.hu.webp" width="330" alt="A „Névjegy” oldal"><br><sub>A „Névjegy” oldal</sub></td></tr></table>
 
 ## A változatok katalógusa (136)
 
