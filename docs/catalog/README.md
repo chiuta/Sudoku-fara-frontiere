@@ -1,6 +1,8 @@
 # Catalogul variantelor (136)
 
-[← README](../../README.md)
+[English](en/README.md) · **Română** · [Français](fr/README.md) · [Italiano](it/README.md) · [Español](es/README.md) · [Português](pt/README.md) · [Deutsch](de/README.md) · [Magyar](hu/README.md)
+
+[← README](../../README.ro.md)
 
 
 Fiecare variantă are mai jos: regulile din fișă, o captură cu un puzzle real generat de aplicație (mărimea 9×9 unde există, altfel cea mai mică; nivel „mediu”), o a doua captură după 4 pași „Pas cu pas”, explicația reală a ultimului pas și un cod cu care regenerezi exact același puzzle. Sub fiecare variantă, o „Galerie completă” (desfășurabilă) are celelalte tipuri de capturi: cardul din Atlas și fișa, toate mărimile, ușor/mediu/greu, auto-notițe, verificare cu o cifră greșită, soluția completă, tema întunecată, telefonul, interfața în engleză și panoul de reguli. Toate vin din `../screens/` (în `screens.zip`). Capturile sunt făcute automat din versiunea 1.4.0, în temă luminoasă.

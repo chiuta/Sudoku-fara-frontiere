@@ -1,6 +1,8 @@
 # Catalog: Topologii și mutări fairy (9)
 
-[← README](../../README.md) · [Toate categoriile](README.md)
+[English](en/10-topologii-si-mutari-fairy.md) · **Română** · [Français](fr/10-topologii-si-mutari-fairy.md) · [Italiano](it/10-topologii-si-mutari-fairy.md) · [Español](es/10-topologii-si-mutari-fairy.md) · [Português](pt/10-topologii-si-mutari-fairy.md) · [Deutsch](de/10-topologii-si-mutari-fairy.md) · [Magyar](hu/10-topologii-si-mutari-fairy.md)
+
+[← README](../../README.ro.md) · [Toate categoriile](README.md)
 
 [Mărime și simboluri](01-marime-si-simboluri.md) · [Regiuni și grupuri](02-regiuni-si-grupuri.md) · [Vecini](03-vecini.md) · [Paritate, puncte, semne](04-paritate-puncte-semne.md) · [Sume](05-sume.md) · [Indicii pe margine](06-indicii-pe-margine.md) · [Linii](07-linii.md) · [Grile compuse](08-grile-compuse.md) · [Rude apropiate](09-rude-apropiate.md) · **Topologii și mutări fairy** · [Reguli globale](11-reguli-globale.md) · [Indicii în celule](12-indicii-in-celule.md) · [Dimensiuni superioare](13-dimensiuni-superioare.md)
 

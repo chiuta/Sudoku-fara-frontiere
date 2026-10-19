@@ -1,6 +1,8 @@
 # Catalog: Grile compuse (7)
 
-[← README](../../README.md) · [Toate categoriile](README.md)
+[English](en/08-grile-compuse.md) · **Română** · [Français](fr/08-grile-compuse.md) · [Italiano](it/08-grile-compuse.md) · [Español](es/08-grile-compuse.md) · [Português](pt/08-grile-compuse.md) · [Deutsch](de/08-grile-compuse.md) · [Magyar](hu/08-grile-compuse.md)
+
+[← README](../../README.ro.md) · [Toate categoriile](README.md)
 
 [Mărime și simboluri](01-marime-si-simboluri.md) · [Regiuni și grupuri](02-regiuni-si-grupuri.md) · [Vecini](03-vecini.md) · [Paritate, puncte, semne](04-paritate-puncte-semne.md) · [Sume](05-sume.md) · [Indicii pe margine](06-indicii-pe-margine.md) · [Linii](07-linii.md) · **Grile compuse** · [Rude apropiate](09-rude-apropiate.md) · [Topologii și mutări fairy](10-topologii-si-mutari-fairy.md) · [Reguli globale](11-reguli-globale.md) · [Indicii în celule](12-indicii-in-celule.md) · [Dimensiuni superioare](13-dimensiuni-superioare.md)
 

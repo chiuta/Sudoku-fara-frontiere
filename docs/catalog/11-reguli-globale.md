@@ -1,6 +1,8 @@
 # Catalog: Reguli globale (10)
 
-[← README](../../README.md) · [Toate categoriile](README.md)
+[English](en/11-reguli-globale.md) · **Română** · [Français](fr/11-reguli-globale.md) · [Italiano](it/11-reguli-globale.md) · [Español](es/11-reguli-globale.md) · [Português](pt/11-reguli-globale.md) · [Deutsch](de/11-reguli-globale.md) · [Magyar](hu/11-reguli-globale.md)
+
+[← README](../../README.ro.md) · [Toate categoriile](README.md)
 
 [Mărime și simboluri](01-marime-si-simboluri.md) · [Regiuni și grupuri](02-regiuni-si-grupuri.md) · [Vecini](03-vecini.md) · [Paritate, puncte, semne](04-paritate-puncte-semne.md) · [Sume](05-sume.md) · [Indicii pe margine](06-indicii-pe-margine.md) · [Linii](07-linii.md) · [Grile compuse](08-grile-compuse.md) · [Rude apropiate](09-rude-apropiate.md) · [Topologii și mutări fairy](10-topologii-si-mutari-fairy.md) · **Reguli globale** · [Indicii în celule](12-indicii-in-celule.md) · [Dimensiuni superioare](13-dimensiuni-superioare.md)
 

@@ -1,6 +1,8 @@
 # Catalog: Dimensiuni superioare (5)
 
-[← README](../../README.md) · [Toate categoriile](README.md)
+[English](en/13-dimensiuni-superioare.md) · **Română** · [Français](fr/13-dimensiuni-superioare.md) · [Italiano](it/13-dimensiuni-superioare.md) · [Español](es/13-dimensiuni-superioare.md) · [Português](pt/13-dimensiuni-superioare.md) · [Deutsch](de/13-dimensiuni-superioare.md) · [Magyar](hu/13-dimensiuni-superioare.md)
+
+[← README](../../README.ro.md) · [Toate categoriile](README.md)
 
 [Mărime și simboluri](01-marime-si-simboluri.md) · [Regiuni și grupuri](02-regiuni-si-grupuri.md) · [Vecini](03-vecini.md) · [Paritate, puncte, semne](04-paritate-puncte-semne.md) · [Sume](05-sume.md) · [Indicii pe margine](06-indicii-pe-margine.md) · [Linii](07-linii.md) · [Grile compuse](08-grile-compuse.md) · [Rude apropiate](09-rude-apropiate.md) · [Topologii și mutări fairy](10-topologii-si-mutari-fairy.md) · [Reguli globale](11-reguli-globale.md) · [Indicii în celule](12-indicii-in-celule.md) · **Dimensiuni superioare**
 

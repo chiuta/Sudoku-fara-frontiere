@@ -1,6 +1,8 @@
 # Catalog: Indicii pe margine (19)
 
-[← README](../../README.md) · [Toate categoriile](README.md)
+[English](en/06-indicii-pe-margine.md) · **Română** · [Français](fr/06-indicii-pe-margine.md) · [Italiano](it/06-indicii-pe-margine.md) · [Español](es/06-indicii-pe-margine.md) · [Português](pt/06-indicii-pe-margine.md) · [Deutsch](de/06-indicii-pe-margine.md) · [Magyar](hu/06-indicii-pe-margine.md)
+
+[← README](../../README.ro.md) · [Toate categoriile](README.md)
 
 [Mărime și simboluri](01-marime-si-simboluri.md) · [Regiuni și grupuri](02-regiuni-si-grupuri.md) · [Vecini](03-vecini.md) · [Paritate, puncte, semne](04-paritate-puncte-semne.md) · [Sume](05-sume.md) · **Indicii pe margine** · [Linii](07-linii.md) · [Grile compuse](08-grile-compuse.md) · [Rude apropiate](09-rude-apropiate.md) · [Topologii și mutări fairy](10-topologii-si-mutari-fairy.md) · [Reguli globale](11-reguli-globale.md) · [Indicii în celule](12-indicii-in-celule.md) · [Dimensiuni superioare](13-dimensiuni-superioare.md)
 

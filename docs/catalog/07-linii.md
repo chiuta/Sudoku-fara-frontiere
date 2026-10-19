@@ -1,6 +1,8 @@
 # Catalog: Linii (32)
 
-[← README](../../README.md) · [Toate categoriile](README.md)
+[English](en/07-linii.md) · **Română** · [Français](fr/07-linii.md) · [Italiano](it/07-linii.md) · [Español](es/07-linii.md) · [Português](pt/07-linii.md) · [Deutsch](de/07-linii.md) · [Magyar](hu/07-linii.md)
+
+[← README](../../README.ro.md) · [Toate categoriile](README.md)
 
 [Mărime și simboluri](01-marime-si-simboluri.md) · [Regiuni și grupuri](02-regiuni-si-grupuri.md) · [Vecini](03-vecini.md) · [Paritate, puncte, semne](04-paritate-puncte-semne.md) · [Sume](05-sume.md) · [Indicii pe margine](06-indicii-pe-margine.md) · **Linii** · [Grile compuse](08-grile-compuse.md) · [Rude apropiate](09-rude-apropiate.md) · [Topologii și mutări fairy](10-topologii-si-mutari-fairy.md) · [Reguli globale](11-reguli-globale.md) · [Indicii în celule](12-indicii-in-celule.md) · [Dimensiuni superioare](13-dimensiuni-superioare.md)
 

@@ -1,6 +1,8 @@
 # Catalog: Rude apropiate (3)
 
-[← README](../../README.md) · [Toate categoriile](README.md)
+[English](en/09-rude-apropiate.md) · **Română** · [Français](fr/09-rude-apropiate.md) · [Italiano](it/09-rude-apropiate.md) · [Español](es/09-rude-apropiate.md) · [Português](pt/09-rude-apropiate.md) · [Deutsch](de/09-rude-apropiate.md) · [Magyar](hu/09-rude-apropiate.md)
+
+[← README](../../README.ro.md) · [Toate categoriile](README.md)
 
 [Mărime și simboluri](01-marime-si-simboluri.md) · [Regiuni și grupuri](02-regiuni-si-grupuri.md) · [Vecini](03-vecini.md) · [Paritate, puncte, semne](04-paritate-puncte-semne.md) · [Sume](05-sume.md) · [Indicii pe margine](06-indicii-pe-margine.md) · [Linii](07-linii.md) · [Grile compuse](08-grile-compuse.md) · **Rude apropiate** · [Topologii și mutări fairy](10-topologii-si-mutari-fairy.md) · [Reguli globale](11-reguli-globale.md) · [Indicii în celule](12-indicii-in-celule.md) · [Dimensiuni superioare](13-dimensiuni-superioare.md)
 

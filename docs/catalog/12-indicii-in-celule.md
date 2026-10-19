@@ -1,6 +1,8 @@
 # Catalog: Indicii în celule (11)
 
-[← README](../../README.md) · [Toate categoriile](README.md)
+[English](en/12-indicii-in-celule.md) · **Română** · [Français](fr/12-indicii-in-celule.md) · [Italiano](it/12-indicii-in-celule.md) · [Español](es/12-indicii-in-celule.md) · [Português](pt/12-indicii-in-celule.md) · [Deutsch](de/12-indicii-in-celule.md) · [Magyar](hu/12-indicii-in-celule.md)
+
+[← README](../../README.ro.md) · [Toate categoriile](README.md)
 
 [Mărime și simboluri](01-marime-si-simboluri.md) · [Regiuni și grupuri](02-regiuni-si-grupuri.md) · [Vecini](03-vecini.md) · [Paritate, puncte, semne](04-paritate-puncte-semne.md) · [Sume](05-sume.md) · [Indicii pe margine](06-indicii-pe-margine.md) · [Linii](07-linii.md) · [Grile compuse](08-grile-compuse.md) · [Rude apropiate](09-rude-apropiate.md) · [Topologii și mutări fairy](10-topologii-si-mutari-fairy.md) · [Reguli globale](11-reguli-globale.md) · **Indicii în celule** · [Dimensiuni superioare](13-dimensiuni-superioare.md)
 

@@ -103,6 +103,8 @@ Interfața se adaptează la ecrane înguste; temă luminoasă/întunecată/autom
 
 Fiecare variantă are mai jos: regulile din fișă, o captură cu un puzzle real generat de aplicație (mărimea implicită a variantei (9×9 unde există, altfel de ex. 5×5 sau 4×4); nivel „mediu”), o a doua captură după 4 pași „Pas cu pas”, explicația reală a ultimului pas și un cod cu care regenerezi exact același puzzle. Sub fiecare variantă, o „Galerie completă” (desfășurabilă) are celelalte tipuri de capturi: cardul din Atlas și fișa, toate mărimile, ușor/mediu/greu, auto-notițe, verificare cu o cifră greșită, soluția completă, tema întunecată, telefonul, interfața în engleză și panoul de reguli. Capturile sunt în `docs/screens/`. Capturile sunt făcute automat din versiunea 1.4.0, în temă luminoasă.
 
+**Catalogul complet:** [docs/catalog/README.md](docs/catalog/README.md)
+
 | Categorie | Variante |
 |---|---|
 | **Mărime și simboluri** | [Clasic](docs/catalog/01-marime-si-simboluri.md#clasic) · [Wordoku](docs/catalog/01-marime-si-simboluri.md#wordoku) · [Pătrat latin](docs/catalog/01-marime-si-simboluri.md#latin) · [Sudoku cu zero](docs/catalog/01-marime-si-simboluri.md#zero) |
