@@ -2,7 +2,9 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 1.5.0 · **Last updated:** 2026-10-19
+**Version:** 1.6.0 · **Last updated:** 2026-10-19
+
+Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
 An atlas of Sudoku variants, with a generator and solver that run locally — in a single HTML file.
 
@@ -139,7 +141,7 @@ Each category has its own page in [`docs/catalog/`](docs/catalog/README.md) (scr
 - **Share code:** `variant-size-difficulty-seed` regenerates the same puzzle in the same version.
 - **Classic 9×9 solver** with optional extra rules; it says whether the solution is unique, multiple or nonexistent.
 - **Atlas:** search, categories, “Today's variant”, “Surprise me”, lexicon, CSV export, BibTeX citation.
-- Light/dark/automatic theme, larger text, RO/EN interface.
+- Light/dark/automatic theme, larger text, interface in 8 languages (RO, EN, FR, IT, ES, PT, DE, HU).
 - **Puzzle of the day** uses the UTC date; the streak of consecutive days is kept locally (`sff_daily`).
 
 ## How it generates

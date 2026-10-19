@@ -2,7 +2,9 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 1.5.0 · **Ultima actualizare:** 2026-10-19
+**Versiune:** 1.6.0 · **Ultima actualizare:** 2026-10-19
+
+Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
 Atlas de variante Sudoku, cu generator și rezolvator care rulează local — într-un singur fișier HTML.
 
@@ -139,7 +141,7 @@ Fiecare categorie are propria pagină în [`docs/catalog/`](docs/catalog/README.
 - **Cod de partajare:** `variantă-mărime-dificultate-sămânță` regenerează același puzzle în aceeași versiune.
 - **Rezolvator clasic 9×9** cu reguli suplimentare opționale; spune dacă soluția e unică, multiplă sau inexistentă.
 - **Atlas:** căutare, categorii, „Varianta de astăzi”, „Surprinde-mă”, lexicon, export CSV, citare BibTeX.
-- Temă luminoasă/întunecată/automată, text mărit, interfață RO/EN.
+- Temă luminoasă/întunecată/automată, text mărit, interfață în 8 limbi (RO, EN, FR, IT, ES, PT, DE, HU).
 - **Puzzle-ul zilei** folosește data UTC; seria de zile consecutive se păstrează local (`sff_daily`).
 
 ## Cum generează

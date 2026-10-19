@@ -2,7 +2,9 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 1.5.0 · **Utolsó frissítés:** 2026-10-19
+**Verzió:** 1.6.0 · **Utolsó frissítés:** 2026-10-19
+
+A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
 Sudoku-változatok atlasza helyben futó generátorral és megoldóval — egyetlen HTML-fájlban.
 
@@ -139,7 +141,7 @@ Minden kategóriának saját oldala van a [`docs/catalog/`](docs/catalog/README.
 - **Megosztási kód:** a `változat-méret-nehézség-mag` ugyanazt a rejtvényt generálja újra ugyanabban a verzióban.
 - **Klasszikus 9×9-es megoldó** opcionális kiegészítő szabályokkal; megmondja, hogy a megoldás egyértelmű, többszörös vagy nem létezik.
 - **Atlasz:** keresés, kategóriák, „A nap változata”, „Lepj meg”, lexikon, CSV-export, BibTeX-hivatkozás.
-- Világos/sötét/automatikus téma, nagyított szöveg, RO/EN felület.
+- Világos/sötét/automatikus téma, nagyított szöveg, 8 nyelvű felület (RO, EN, FR, IT, ES, PT, DE, HU).
 - **A nap rejtvénye** az UTC-dátumot használja; az egymást követő napok sorozata helyben marad meg (`sff_daily`).
 
 ## Hogyan generál
