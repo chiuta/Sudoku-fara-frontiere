@@ -24,9 +24,16 @@ function mlabel(m) { return lang === 'ro' ? m[1] : lang === 'en' ? m[2] : lblOf(
 function clabel(c) { return lang === 'ro' ? c[1] : lang === 'en' ? c[2] : lblOf(LBLC, c[0], c[2]); }
 var PRE = SFF.PRESETS;
 var VBY = Object.create(null); VINFO.forEach(function (v) { VBY[v[0]] = v; });
-function vname(v) { return lang === 'ro' ? v[2] : v[5]; }
-function vshort(v) { return lang === 'ro' ? v[3] : v[6]; }
-function vrules(v) { return lang === 'ro' ? v[4] : v[7]; }
+function vx(v, k) { // k: 0 nume, 1 scurt, 2 reguli; ro/en din VINFO, celelalte limbi din VTX (fr|it|es|pt|de|hu)
+  if (lang === 'ro') return v[2 + k];
+  if (lang === 'en') return v[5 + k];
+  var t = VTX[v[0]], r = t && t[LANGS.indexOf(lang) - 2];
+  return (r && r[k] != null) ? r[k] : v[5 + k];
+}
+function vname(v) { return vx(v, 0); }
+function vshort(v) { return vx(v, 1); }
+function vrules(v) { return vx(v, 2); }
+function lexx(i, k) { var x = LEX[i]; if (lang === 'ro') return x[k]; if (lang === 'en') return x[2 + k]; var r = LEXX[i][LANGS.indexOf(lang) - 2]; return r ? r[k] : x[2 + k]; }
 function catName(id) { for (var i = 0; i < CATS.length; i++) if (CATS[i][0] === id) return clabel(CATS[i]); return id; }
 function sizeLabel(n, id) { if (PRE[id] && PRE[id].layout === 'cube') { var dd = PRE[id].dim; return dd === 3 ? n + '×' + n + '×' + n : n + ['', '', '²', '³', '⁴', '⁵'][dd]; } if (PRE[id] && PRE[id].layout === 'greco') return n + '×' + n + ' ×2'; if (PRE[id] && PRE[id].layout) return '9×9 ×' + ({ samurai: 5, twodoku: 2, gattai3: 3, sohei: 4, kazaguruma: 5, tripledoku: 3, cross: 5 })[id]; return n + '×' + n; }
 function sizesOf(id) { return PRE[id].sizes.slice().sort(function (a, b) { return a - b; }); }
@@ -70,7 +77,7 @@ function renderCards() {
   var list = VINFO.filter(function (v) {
     if (atlasCat !== 'all' && v[1] !== atlasCat) return false;
     if (!q) return true;
-    return (v[2] + ' ' + v[3] + ' ' + v[5] + ' ' + v[6]).toLowerCase().indexOf(q) >= 0;
+    return (v[2] + ' ' + v[3] + ' ' + v[5] + ' ' + v[6] + ' ' + vname(v) + ' ' + vshort(v)).toLowerCase().indexOf(q) >= 0;
   });
   if (sort === 'az') list.sort(function (a, b) { return vname(a).localeCompare(vname(b), lang); });
   if (sort === 'za') list.sort(function (a, b) { return vname(b).localeCompare(vname(a), lang); });
@@ -85,7 +92,7 @@ $('b-rand').onclick = function () { openFiche(VINFO[Math.floor(Math.random() * V
 $('b-today').onclick = function () { var d = Math.floor(Date.now() / 86400000); openFiche(VINFO[d % VINFO.length][0]); };
 $('f-play').onclick = function () { $('sel-var').value = 'custom'; onVariantChange(); showTab('play'); };
 function renderLex() {
-  $('lex').innerHTML = LEX.map(function (x) { return '<div><b>' + (lang === 'ro' ? x[0] : x[2]) + '</b>' + (lang === 'ro' ? x[1] : x[3]) + '</div>'; }).join('');
+  $('lex').innerHTML = LEX.map(function (x, i) { return '<div><b>' + lexx(i, 0) + '</b>' + lexx(i, 1) + '</div>'; }).join('');
 }
 function openFiche(id) {
   var v = VBY[id], dlg = $('dlg');

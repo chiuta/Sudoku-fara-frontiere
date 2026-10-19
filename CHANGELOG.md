@@ -1,5 +1,8 @@
 # Istoric versiuni
 
+## 1.6.1
+- Atlasul de variante (136 fișe: nume, descriere scurtă, reguli) și glosarul sunt traduse acum în toate cele 8 limbi (fr, it, es, pt, de, hu pe lângă ro și en); căutarea și sortarea folosesc limba aleasă. Textele sunt în `VTX`/`LEXX` la finalul `src/data.js`.
+
 ## 1.6.0
 - Interfața în 8 limbi (ro, en, fr, it, es, pt, de, hu): selector de limbă în antet (alegerea se păstrează local; implicit din limba browserului, altfel engleză), mesaje, etichete de reguli/indicii/categorii, ajutor și pagina „Despre” traduse. Atlasul de variante și glosarul rămân în ro/en (celelalte limbi folosesc engleza).
 
