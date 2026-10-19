@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "slug": "sudoku-fara-frontiere",
+  "name": "Sudoku fără frontiere",
+  "version": "1.5.0",
+  "updated": "2026-10-19",
+  "description": "Atlas de variante Sudoku cu generator și rezolvator local, într-un singur fișier HTML, offline, fără cont și fără urmărire.",
+  "egress": [],
+  "permissions": [
+    "clipboard",
+    "localStorage",
+    "Worker"
+  ],
+  "storageKeys": [
+    "sff_"
+  ],
+  "sizeBytes": 403688,
+  "sha256": "60789a70371f150001049f6dbe0c66569827f800796447831d8537888218863e",
+  "csp": {
+    "present": true,
+    "directives": {
+      "default-src": "'none'",
+      "script-src": "sha256×4",
+      "style-src": "'unsafe-inline'",
+      "img-src": "data: blob:",
+      "worker-src": "blob:",
+      "connect-src": "'none'",
+      "base-uri": "'none'",
+      "form-action": "'none'"
+    },
+    "scriptInline": "hash",
+    "connect": "'none'"
+  },
+  "features": {
+    "export": true,
+    "import": true,
+    "i18n": [
+      "ro",
+      "en"
+    ],
+    "pwa": {
+      "manifest": false,
+      "serviceWorker": false
+    },
+    "modules": [
+      "core",
+      "label",
+      "bundle"
+    ]
+  },
+  "kit": {
+    "version": "1.1.1",
+    "modules": [
+      "core",
+      "label",
+      "bundle"
+    ]
+  },
+  "selfSerializing": false
+}

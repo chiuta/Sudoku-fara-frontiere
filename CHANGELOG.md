@@ -1,5 +1,8 @@
 # Istoric versiuni
 
+## 1.5.0
+- Kitul comun fff 1.1.1 (eticheta „Transparență”, copie de siguranță `.fff.json`), aplicat în `src/template.html`; `app.json` și blocul `fff-info` se generează cu `fff-kit info` după `build.py`, iar CI (`check_fresh.py`) verifică reproductibilitatea ignorând doar acest bloc.
+
 ## 1.4.0
 - Politică CSP (meta) generată de `build.py`, cu hash-uri pentru scripturile inline; Worker doar din `blob:`, fără rețea.
 - **Pas cu pas** și **▶ Auto**: completează soluția cifră cu cifră, evidențiind motivul fiecărui pas (unica cifră din celulă, unica celulă dintr-un rând/coloană/regiune, deducție din regulile variantei, sau cifra din soluție când nu există deducție directă).

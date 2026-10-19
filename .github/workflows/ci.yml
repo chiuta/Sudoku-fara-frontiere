@@ -22,8 +22,7 @@ jobs:
           python-version: '3.12'
       - name: index.html corespunde sursei (build reproductibil)
         run: |
-          python3 build.py
-          git diff --exit-code index.html
+          python3 check_fresh.py
       - name: Teste motor (aprox. 1,5 minute)
         run: node test.js
       - name: Fără resurse externe în index.html
