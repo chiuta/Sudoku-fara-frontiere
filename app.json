@@ -2,31 +2,33 @@
   "schema": 1,
   "slug": "sudoku-fara-frontiere",
   "name": "Sudoku fără frontiere",
-  "version": "1.6.1",
-  "updated": "2026-10-19",
+  "version": "1.6.2",
+  "updated": "2026-10-22",
   "description": "Atlas de variante Sudoku cu generator și rezolvator local, într-un singur fișier HTML, offline, fără cont și fără urmărire.",
   "egress": [],
   "permissions": [
     "clipboard",
+    "serviceWorker",
     "localStorage",
     "Worker"
   ],
   "storageKeys": [
     "sff_"
   ],
-  "sizeBytes": 709923,
-  "sha256": "20f9e5f65f0310dfaaf5e7908797354044c3b490ea79a3af4e4e37cd0329f1c6",
+  "sizeBytes": 711898,
+  "sha256": "8ed6e6f5b00e44d1a6b9e508cf16a75689877e619b101b37829ae630dc791b2e",
   "csp": {
     "present": true,
     "directives": {
       "default-src": "'none'",
-      "script-src": "sha256×4",
+      "script-src": "sha256×5",
       "style-src": "'unsafe-inline'",
-      "img-src": "data: blob:",
-      "worker-src": "blob:",
+      "img-src": "'self' data: blob:",
+      "worker-src": "'self' blob:",
       "connect-src": "'none'",
       "base-uri": "'none'",
-      "form-action": "'none'"
+      "form-action": "'none'",
+      "manifest-src": "'self'"
     },
     "scriptInline": "hash",
     "connect": "'none'"
@@ -39,8 +41,8 @@
       "en"
     ],
     "pwa": {
-      "manifest": false,
-      "serviceWorker": false
+      "manifest": true,
+      "serviceWorker": true
     },
     "modules": [
       "core",

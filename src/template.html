@@ -1063,16 +1063,23 @@
 <meta name="color-scheme" content="light dark">
 <!--CSP-->
 <title>Sudoku fără frontiere</title>
-<meta name="application-version" content="1.6.1">
-<meta name="last-updated" content="2026-10-19">
+<meta name="application-version" content="1.6.2">
+<meta name="last-updated" content="2026-10-22">
 <meta name="description" content="Atlas de variante Sudoku cu generator și rezolvator local, într-un singur fișier HTML, offline, fără cont și fără urmărire.">
 <style>
 /*CSS*/
 </style>
+<!--fff:pwa:start v=1 d=eyJjc3AiOnsibWFuaWZlc3Qtc3JjIjpudWxsLCJ3b3JrZXItc3JjIjoiYmxvYjoiLCJpbWctc3JjIjoiZGF0YTogYmxvYjoifSwib3JpZyI6ImRlZmF1bHQtc3JjICdub25lJzsgc2NyaXB0LXNyYyAnc2hhMjU2LXZZUGRpL0Fyc1NGL1AwK1QzL1ZGNlgyUEc5ZGNhL0FWb2RIeU1iVHE2OWc9JyAnc2hhMjU2LVhKKzNyQjNmak9EbWVDb0NqTzUvOEhmdkNQNnQvSUJJaXhQNnM4WVRiTlU9JyAnc2hhMjU2LWFSVlhjakZtd3BrSXpHY2JsSHY3Rkl6eW1EMjNKSzljdHdLNFdWblFQUk09JyAnc2hhMjU2LWZSaTROZ0pMQmZFSkJUczA3S21LZC8vdFZLOEErT2g3QWxzME55djF1QXM9Jzsgc3R5bGUtc3JjICd1bnNhZmUtaW5saW5lJzsgaW1nLXNyYyBkYXRhOiBibG9iOjsgd29ya2VyLXNyYyBibG9iOjsgY29ubmVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJyIsIm1hZGUiOlsibWFuaWZlc3Qud2VibWFuaWZlc3QiLCJzdy5qcyIsImljb24tMTkyLnBuZyIsImljb24tNTEyLnBuZyIsImljb24tbWFza2FibGUtNTEyLnBuZyJdfQ-->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#f6f4ee">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<script>if('serviceWorker' in navigator&&window.isSecureContext&&/^https?:$/.test(location.protocol))addEventListener('load',function(){var s=navigator.serviceWorker;s.register('./sw.js',{updateViaCache:'none'}).catch(function(){});s.ready.then(function(r){if(s.controller)return r.update()}).catch(function(){})})</script>
+<!--fff:pwa:end-->
 </head>
 <body>
 <header class="top"><div class="bar">
-  <div class="brand">Sudoku fără frontiere <small id="ver"></small></div>
+  <h1 class="brand">Sudoku fără frontiere <small id="ver"></small></h1>
   <nav class="tabs" role="tablist" id="tabs">
     <button role="tab" data-tab="atlas" id="t-atlas"></button>
     <button role="tab" data-tab="play" id="t-play"></button>

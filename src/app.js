@@ -116,7 +116,7 @@ function download(name, text, type) {
 }
 $('b-csv').onclick = function () {
   var rows = [['id', 'nume_ro', 'nume_en', 'categorie', 'marimi']].concat(VINFO.map(function (v) { return [v[0], v[2], v[5], catName(v[1]), sizesOf(v[0]).join('/')]; }));
-  download('sudoku-fara-frontiere.csv', '﻿' + rows.map(function (r) { return r.map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(','); }).join('\n'), 'text/csv');
+  download('sudoku-fara-frontiere.csv', '﻿' + rows.map(function (r) { return r.map(function (c) { var x = String(c); if (/^[=+\-@\t\r]/.test(x)) x = "'" + x; return '"' + x.replace(/"/g, '""') + '"'; }).join(','); }).join('\n'), 'text/csv');
 };
 $('b-bib').onclick = function () {
   var bib = '@software{chiuta_sudoku_fara_frontiere_2026,\n  author  = {Chiuță, Alexandru-Ionuț},\n  title   = {Sudoku fără frontiere},\n  year    = {2026},\n  version = {' + SFF.VERSION + '},\n  note    = {Atlas de variante Sudoku cu generator și rezolvator local; un singur fișier HTML}\n}\n';
@@ -891,13 +891,17 @@ $('a-hint').onclick = function () {
   pushUndo(); g.vals[target] = g.P.solution[target]; g.notes[target] = 0; g.sel = new Set([target]);
   afterChange(); if (!g.solved) setMsg(logic ? t('hint_logic') : t('hint_rev'), '');
 };
-$('a-solve').onclick = function () {
-  var g = game; if (!g || g.solved) return; if (!confirm(t('confirm_solve'))) return;
+function ask(msg) {
+  return (window.FFF && FFF.bundle && FFF.bundle.confirm) ? FFF.bundle.confirm(msg, { danger: true }) : Promise.resolve(window.confirm(msg));
+}
+$('a-solve').onclick = async function () {
+  var g = game; if (!g || g.solved) return; if (!(await ask(t('confirm_solve')))) return;
+  if (g !== game) return;
   pushUndo(); for (var i = 0; i < g.cnt; i++) { g.vals[i] = g.P.solution[i]; g.notes[i] = 0; }
   g.solved = true; g.revealed = true; g.wrong.clear(); renderDyn(); save(); setMsg(t('solved_app'), 'good');
 };
-$('a-clear').onclick = function () {
-  var g = game; if (!g || !confirm(t('confirm_clear'))) return; pushUndo(); if (['hardcore', 'duel', 'memory', 'marathon'].indexOf(g.mx && g.mx.id) >= 0) { g.undo = []; g.redo = []; } g.vals.fill(0); g.notes.fill(0); g.solved = false; g.revealed = false; g.elapsed = 0; g.lost = false; g.wrong.clear();
+$('a-clear').onclick = async function () {
+  var g = game; if (!g || !(await ask(t('confirm_clear')))) return; if (g !== game) return; pushUndo(); if (['hardcore', 'duel', 'memory', 'marathon'].indexOf(g.mx && g.mx.id) >= 0) { g.undo = []; g.redo = []; } g.vals.fill(0); g.notes.fill(0); g.solved = false; g.revealed = false; g.elapsed = 0; g.lost = false; g.wrong.clear();
   if (g.mx && ['duel', 'hardcore', 'memory'].indexOf(g.mx.id) >= 0) g.mx = freshMx(g.P);
   afterChange(); setMsg('', '');
 };
@@ -977,7 +981,7 @@ function i18n() {
   $('b-lang').value = lang; $('b-lang').title = t('tt_lang'); $('b-lang').setAttribute('aria-label', t('tt_lang')); $('b-theme').title = t('tt_theme'); $('b-theme').setAttribute('aria-label', t('tt_theme')); $('b-size').title = t('tt_size'); $('b-size').setAttribute('aria-label', t('tt_size'));
   $('atlas-h').textContent = t('atlas_h'); $('atlas-lead').textContent = t('atlas_lead');
   $('q').placeholder = t('search');
-  $('sortby').innerHTML = '<option value="rec">' + t('sort_rec') + '</option><option value="az">' + t('sort_az') + '</option><option value="za">' + t('sort_za') + '</option>';
+  $('sortby').setAttribute('aria-label', t('sort_by')); $('sortby').innerHTML = '<option value="rec">' + t('sort_rec') + '</option><option value="az">' + t('sort_az') + '</option><option value="za">' + t('sort_za') + '</option>';
   $('f-play').textContent = t('custom_btn'); $('b-today').textContent = t('today'); $('b-rand').textContent = t('rand');
   $('b-csv').textContent = t('csv'); $('b-bib').textContent = t('bib'); $('lex-h').textContent = t('lex_h');
   $('l-mode').textContent = t('mode'); var mv = $('sel-mode').value || 'normal'; $('sel-mode').innerHTML = ['normal', 'orb', 'memory', 'marathon', 'duel', 'hardcore', 'daily', 'sound'].map(function (m) { return '<option value="' + m + '">' + t('mode_' + m) + '</option>'; }).join(''); $('sel-mode').value = mv;
