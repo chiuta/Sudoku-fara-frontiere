@@ -1,5 +1,8 @@
 # Istoric versiuni
 
+## 1.6.4
+- fff-kit 1.1.4: ținte tactile și text minim.
+
 ## 1.6.3
 - fff-kit 1.1.2: PBKDF2 600 000 iterații, protecție anti-clickjacking.
 

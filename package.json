@@ -1,6 +1,6 @@
 {
   "name": "sudoku-fara-frontiere",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "Atlas de variante Sudoku cu generator și rezolvator, într-un singur fișier HTML, offline.",
   "license": "MIT",
   "author": "Alexandru-Ionuț Chiuță (Alexio) <alexio@trom.tf>",
