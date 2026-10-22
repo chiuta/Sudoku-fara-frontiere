@@ -1,5 +1,8 @@
 # Istoric versiuni
 
+## 1.6.3
+- fff-kit 1.1.2: PBKDF2 600 000 iterații, protecție anti-clickjacking.
+
 ## 1.6.2
 - Un singur H1 (titlul aplicației), etichetă tradusă în 8 limbi pentru selectul de sortare, text minim 12 px; „Rezolvă” și „Șterge” folosesc dialogul din pagină în loc de `confirm()`; export CSV cu prefix `'` pentru celule care încep cu `=`, `+`, `-`, `@`; `sw.js` + `manifest.webmanifest` + pictograme (instalabil, funcționează offline); CSP actualizat în `build.py` (`manifest-src`, `worker-src 'self'`).
 
