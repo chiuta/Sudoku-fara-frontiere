@@ -1002,7 +1002,7 @@ function i18n() {
   Array.prototype.forEach.call($('custom').querySelectorAll('input'), function (i) { if (checked[i.dataset.m || ('c:' + i.dataset.c)]) i.checked = true; });
   buildSvMods(); renderCats(); renderCards(); renderLex(); renderAbout();
   $('foot').textContent = 'Sudoku fără frontiere v' + SFF.VERSION + ' · ' + L2('un singur fișier, offline, fără urmărire · licență MIT', 'single file, offline, no tracking · MIT licence', ["un seul fichier, hors ligne, sans traçage · licence MIT", "un solo file, offline, senza tracciamento · licenza MIT", "un solo archivo, sin conexión, sin rastreo · licencia MIT", "um só ficheiro, offline, sem rastreamento · licença MIT", "eine einzige Datei, offline, ohne Tracking · MIT-Lizenz", "egyetlen fájl, offline, követés nélkül · MIT-licenc"]);
-  $('ver').textContent = 'v' + SFF.VERSION;
+  $('app-version').textContent = 'v' + SFF.VERSION;
   if (game) { updateStatus(); renderRules(); }
 }
 
