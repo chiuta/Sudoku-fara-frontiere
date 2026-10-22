@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · **Deutsch** · [Magyar](README.hu.md)
 
-**Version:** 1.6.5 · **Zuletzt aktualisiert:** 2026-10-23
+**Version:** 1.6.6 · **Zuletzt aktualisiert:** 2026-10-23
 
 Oberflächensprachen: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -144,7 +144,7 @@ Jede Kategorie hat eine eigene Seite in [`docs/catalog/`](docs/catalog/README.md
 - **Klassischer 9×9-Löser** mit optionalen Zusatzregeln; er sagt, ob die Lösung eindeutig, mehrfach oder nicht vorhanden ist.
 - **Atlas:** Suche, Kategorien, „Variante des Tages“, „Überrasch mich“, Lexikon, CSV-Export, BibTeX-Zitat.
 - Helles/dunkles/automatisches Thema, vergrößerter Text, Oberfläche in 8 Sprachen (RO, EN, FR, IT, ES, PT, DE, HU).
-- Das **Rätsel des Tages** verwendet das UTC-Datum; die Serie aufeinanderfolgender Tage wird lokal gespeichert (`sff_daily`).
+- Das **Rätsel des Tages** verwendet das UTC-Datum; die Serie aufeinanderfolgender Tage wird lokal gespeichert (`sudoku-fara-frontiere.daily`).
 
 ## Wie es erzeugt
 
@@ -156,7 +156,7 @@ Die Engine wählt ein gelöstes Gitter, das die Regeln einhält, leitet daraus d
 - Die Schwierigkeit leicht/mittel/schwer ist nur die Anzahl der beibehaltenen Hinweise. Das Rätsel zeigt auch ein Maß für den Aufwand des Lösers (0 = allein durch Propagation lösbar; sonst die Anzahl der Verzweigungen), das keine Bewertung menschlicher Techniken ist. Dauert die Erzeugung länger als 12 s, sinkt die Schwierigkeit automatisch (nicht jedoch beim „Rätsel des Tages“ oder bei geteilten Codes).
 - In Chromium getestet (auch als file:// geöffnet). Firefox und Safari/iOS konnten in der Entwicklungsumgebung nicht getestet werden; ist der Worker aus einem Blob blockiert, fällt die App auf die Erzeugung im Hauptthread zurück (Oberfläche während der Erzeugung blockiert).
 - Barrierefreiheit: die Tastatur (Pfeile, Ziffern, N, Strg+Z) und die Sprachansage der gewählten Zelle; das Brett ist SVG und kein vollständiges Werkzeug für Screenreader.
-- Der gespeicherte Zustand hat eine Versionsnummer; ein unbekanntes Format wird beiseitegelegt (`sff_game_bad`), nicht gelöscht.
+- Der gespeicherte Zustand hat eine Versionsnummer; ein unbekanntes Format wird beiseitegelegt (`sudoku-fara-frontiere.game_bad`), nicht gelöscht.
 - „Schwer“ entfernt so viele Ziffern wie möglich; bei Varianten mit vielen Hinweisen im Gitter können sehr wenige gegebene Ziffern übrig bleiben.
 - Zusammengesetzte Gitter haben nur die klassischen Regeln; sehr überladene Kombinationen können länger dauern oder scheitern (die App sagt das).
 - 16×16 und 25×25 verwenden die Symbole 1–9 und Buchstaben (A–G bzw. A–P).
@@ -169,7 +169,7 @@ Die Engine wählt ein gelöstes Gitter, das die Regeln einhält, leitet daraus d
 
 ## Datenschutz und Netzwerk
 
-- **Lokaler Speicher:** `localStorage`, Schlüssel `sff_lang`, `sff_theme`, `sff_size`, `sff_game`, `sff_daily` (Sprache, Thema, Textgröße, aktuelles Spiel, Serie des Rätsels des Tages) und `sff_game_bad` (in einem unbekannten Format gespeicherter Zustand, aufbewahrt).
+- **Lokaler Speicher:** `localStorage`, Schlüssel `sudoku-fara-frontiere.lang`, `sudoku-fara-frontiere.theme`, `sudoku-fara-frontiere.size`, `sudoku-fara-frontiere.game`, `sudoku-fara-frontiere.daily` (Sprache, Thema, Textgröße, aktuelles Spiel, Serie des Rätsels des Tages) und `sudoku-fara-frontiere.game_bad` (in einem unbekannten Format gespeicherter Zustand, aufbewahrt).
 - **Netzwerk:** Im Code gibt es weder `fetch` noch `XMLHttpRequest`, noch CDN oder externe Ressourcen. Die einzige URL in der Datei ist der SVG-Namensraum (`http://www.w3.org/2000/svg`), der keine Anfrage auslöst.
 
 ## Struktur des Repositorys

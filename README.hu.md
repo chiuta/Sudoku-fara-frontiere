@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 1.6.5 · **Utolsó frissítés:** 2026-10-23
+**Verzió:** 1.6.6 · **Utolsó frissítés:** 2026-10-23
 
 A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -144,7 +144,7 @@ Minden kategóriának saját oldala van a [`docs/catalog/`](docs/catalog/README.
 - **Klasszikus 9×9-es megoldó** opcionális kiegészítő szabályokkal; megmondja, hogy a megoldás egyértelmű, többszörös vagy nem létezik.
 - **Atlasz:** keresés, kategóriák, „A nap változata”, „Lepj meg”, lexikon, CSV-export, BibTeX-hivatkozás.
 - Világos/sötét/automatikus téma, nagyított szöveg, 8 nyelvű felület (RO, EN, FR, IT, ES, PT, DE, HU).
-- **A nap rejtvénye** az UTC-dátumot használja; az egymást követő napok sorozata helyben marad meg (`sff_daily`).
+- **A nap rejtvénye** az UTC-dátumot használja; az egymást követő napok sorozata helyben marad meg (`sudoku-fara-frontiere.daily`).
 
 ## Hogyan generál
 
@@ -156,7 +156,7 @@ A motor kiválaszt egy megoldott rácsot, amely megfelel a szabályoknak, ebből
 - A könnyű/közepes/nehéz nehézség csupán a megtartott jelzések száma. A rejtvény a megoldó erőfeszítésének mérőszámát is mutatja (0 = csak propagációval megoldható; különben az elágazások száma), amely nem az emberi technikák értékelése. Ha a generálás 12 másodpercnél tovább tart, a nehézség automatikusan csökken (de nem „A nap rejtvényénél” és a megosztott kódoknál).
 - Chromiumban tesztelve (file:// címről megnyitva is). A Firefoxot és a Safari/iOS-t a fejlesztői környezetben nem lehetett tesztelni; ha a Blobból létrehozott Workert letiltják, az alkalmazás a főszálon való generálásra tér át (a felület a generálás alatt blokkolt).
 - Akadálymentesség: a billentyűzet (nyilak, számjegyek, N, Ctrl+Z) és a kijelölt cella felolvasása; a tábla SVG, és nem teljes értékű eszköz képernyőolvasókhoz.
-- A mentett állapot verziószámot tartalmaz; az ismeretlen formátumot félreteszi (`sff_game_bad`), nem törli.
+- A mentett állapot verziószámot tartalmaz; az ismeretlen formátumot félreteszi (`sudoku-fara-frontiere.game_bad`), nem törli.
 - A „Nehéz” annyi számjegyet távolít el, amennyit csak tud; a rácsban sok jelzést tartalmazó változatoknál nagyon kevés megadott számjegy maradhat.
 - Az összetett rácsok csak a klasszikus szabályokat tartalmazzák; a nagyon túlterhelt kombinációk tovább tarthatnak vagy sikertelenek lehetnek (az alkalmazás ezt közli).
 - A 16×16 és a 25×25 az 1–9 szimbólumokat és betűket használ (A–G, illetve A–P).
@@ -169,7 +169,7 @@ A motor kiválaszt egy megoldott rácsot, amely megfelel a szabályoknak, ebből
 
 ## Adatvédelem és hálózat
 
-- **Helyi tárolás:** `localStorage`, `sff_lang`, `sff_theme`, `sff_size`, `sff_game`, `sff_daily` kulcsok (nyelv, téma, szövegméret, az aktuális játék, A nap rejtvényének sorozata) és `sff_game_bad` (ismeretlen formátumban mentett állapot, megőrizve).
+- **Helyi tárolás:** `localStorage`, `sudoku-fara-frontiere.lang`, `sudoku-fara-frontiere.theme`, `sudoku-fara-frontiere.size`, `sudoku-fara-frontiere.game`, `sudoku-fara-frontiere.daily` kulcsok (nyelv, téma, szövegméret, az aktuális játék, A nap rejtvényének sorozata) és `sudoku-fara-frontiere.game_bad` (ismeretlen formátumban mentett állapot, megőrizve).
 - **Hálózat:** a kódban nincs `fetch`, `XMLHttpRequest`, CDN vagy külső erőforrás. A fájlban az egyetlen URL az SVG névtér (`http://www.w3.org/2000/svg`), amely nem generál kérést.
 
 ## A tároló szerkezete

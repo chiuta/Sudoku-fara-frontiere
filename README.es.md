@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 1.6.5 · **Última actualización:** 2026-10-23
+**Versión:** 1.6.6 · **Última actualización:** 2026-10-23
 
 Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -144,7 +144,7 @@ Cada categoría tiene su propia página en [`docs/catalog/`](docs/catalog/README
 - **Resolutor clásico 9×9** con reglas adicionales opcionales; indica si la solución es única, múltiple o inexistente.
 - **Atlas:** búsqueda, categorías, «Variante de hoy», «Sorpréndeme», léxico, exportación CSV, cita BibTeX.
 - Tema claro/oscuro/automático, texto ampliado, interfaz en 8 idiomas (RO, EN, FR, IT, ES, PT, DE, HU).
-- El **Puzle del día** usa la fecha UTC; la racha de días consecutivos se guarda en local (`sff_daily`).
+- El **Puzle del día** usa la fecha UTC; la racha de días consecutivos se guarda en local (`sudoku-fara-frontiere.daily`).
 
 ## Cómo genera
 
@@ -156,7 +156,7 @@ El motor elige una cuadrícula resuelta que respete las reglas, deduce de ella l
 - La dificultad fácil/medio/difícil es solo el número de pistas conservadas. El puzle muestra también una medida del esfuerzo del resolutor (0 = se resuelve solo por propagación; si no, el número de ramificaciones), que no es una evaluación de las técnicas humanas. Si la generación tarda más de 12 s, la dificultad baja automáticamente (pero no en el «Puzle del día» ni en los códigos compartidos).
 - Probado en Chromium (incluso abierto como file://). Firefox y Safari/iOS no pudieron probarse en el entorno de desarrollo; si el Worker desde un Blob está bloqueado, la aplicación recurre a la generación en el hilo principal (interfaz bloqueada durante la generación).
 - Accesibilidad: el teclado (flechas, cifras, N, Ctrl+Z) y el anuncio por voz de la celda seleccionada; el tablero es SVG y no es una herramienta completa para lectores de pantalla.
-- El estado guardado tiene un número de versión; un formato desconocido se aparta (`sff_game_bad`), no se borra.
+- El estado guardado tiene un número de versión; un formato desconocido se aparta (`sudoku-fara-frontiere.game_bad`), no se borra.
 - «Difícil» quita tantas cifras como puede; en variantes con muchas pistas en la cuadrícula pueden quedar muy pocas cifras dadas.
 - Las cuadrículas compuestas solo tienen las reglas clásicas; las combinaciones muy cargadas pueden tardar más o fallar (la aplicación lo indica).
 - 16×16 y 25×25 usan los símbolos 1–9 y letras (A–G y A–P respectivamente).
@@ -169,7 +169,7 @@ El motor elige una cuadrícula resuelta que respete las reglas, deduce de ella l
 
 ## Privacidad y red
 
-- **Almacenamiento local:** `localStorage`, claves `sff_lang`, `sff_theme`, `sff_size`, `sff_game`, `sff_daily` (idioma, tema, tamaño del texto, la partida en curso, la racha del Puzle del día) y `sff_game_bad` (estado guardado en un formato desconocido, conservado).
+- **Almacenamiento local:** `localStorage`, claves `sudoku-fara-frontiere.lang`, `sudoku-fara-frontiere.theme`, `sudoku-fara-frontiere.size`, `sudoku-fara-frontiere.game`, `sudoku-fara-frontiere.daily` (idioma, tema, tamaño del texto, la partida en curso, la racha del Puzle del día) y `sudoku-fara-frontiere.game_bad` (estado guardado en un formato desconocido, conservado).
 - **Red:** en el código no hay `fetch`, `XMLHttpRequest`, CDN ni recursos externos. La única URL del archivo es el espacio de nombres SVG (`http://www.w3.org/2000/svg`), que no genera ninguna solicitud.
 
 ## Estructura del repositorio

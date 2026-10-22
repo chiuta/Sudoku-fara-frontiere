@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 1.6.5 · **Ultima actualizare:** 2026-10-23
+**Versiune:** 1.6.6 · **Ultima actualizare:** 2026-10-23
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -144,7 +144,7 @@ Fiecare categorie are propria pagină în [`docs/catalog/`](docs/catalog/README.
 - **Rezolvator clasic 9×9** cu reguli suplimentare opționale; spune dacă soluția e unică, multiplă sau inexistentă.
 - **Atlas:** căutare, categorii, „Varianta de astăzi”, „Surprinde-mă”, lexicon, export CSV, citare BibTeX.
 - Temă luminoasă/întunecată/automată, text mărit, interfață în 8 limbi (RO, EN, FR, IT, ES, PT, DE, HU).
-- **Puzzle-ul zilei** folosește data UTC; seria de zile consecutive se păstrează local (`sff_daily`).
+- **Puzzle-ul zilei** folosește data UTC; seria de zile consecutive se păstrează local (`sudoku-fara-frontiere.daily`).
 
 ## Cum generează
 
@@ -156,7 +156,7 @@ Motorul alege o grilă rezolvată care respectă regulile, deduce din ea indicii
 - Dificultatea ușor/mediu/greu e doar numărul de indicii păstrate. Puzzle-ul arată și o măsură a efortului solverului (0 = se rezolvă doar prin propagare; altfel numărul de ramificări), care nu e o evaluare a tehnicilor umane. Dacă generarea durează peste 12 s, dificultatea coboară automat (nu și la „Puzzle-ul zilei” sau la coduri partajate).
 - Testat în Chromium (inclusiv deschis ca file://). Firefox și Safari/iOS nu au putut fi testate în mediul de dezvoltare; dacă Worker-ul din Blob e blocat, aplicația cade pe generarea în firul principal (UI blocat în timpul generării).
 - Accesibilitate: tastatura (săgeți, cifre, N, Ctrl+Z) și anunț vocal al celulei selectate; tabla e SVG și nu e un instrument complet pentru cititoare de ecran.
-- Starea salvată are număr de versiune; un format necunoscut este pus deoparte (`sff_game_bad`), nu șters.
+- Starea salvată are număr de versiune; un format necunoscut este pus deoparte (`sudoku-fara-frontiere.game_bad`), nu șters.
 - „Greu” scoate cât de multe cifre poate; la variantele cu multe indicii în grilă pot rămâne foarte puține cifre date.
 - Grilele compuse au doar regulile clasice; combinațiile foarte încărcate pot dura mai mult sau pot eșua (aplicația spune asta).
 - 16×16 și 25×25 folosesc simbolurile 1–9 și litere (A–G, respectiv A–P).
@@ -169,7 +169,7 @@ Motorul alege o grilă rezolvată care respectă regulile, deduce din ea indicii
 
 ## Confidențialitate și rețea
 
-- **Stocare locală:** `localStorage`, chei `sff_lang`, `sff_theme`, `sff_size`, `sff_game`, `sff_daily` (limbă, temă, mărime text, jocul curent, seria Puzzle-ului zilei) și `sff_game_bad` (starea salvată într-un format necunoscut, păstrată).
+- **Stocare locală:** `localStorage`, chei `sudoku-fara-frontiere.lang`, `sudoku-fara-frontiere.theme`, `sudoku-fara-frontiere.size`, `sudoku-fara-frontiere.game`, `sudoku-fara-frontiere.daily` (limbă, temă, mărime text, jocul curent, seria Puzzle-ului zilei) și `sudoku-fara-frontiere.game_bad` (starea salvată într-un format necunoscut, păstrată).
 - **Rețea:** în cod nu există `fetch`, `XMLHttpRequest`, CDN sau resurse externe. Singurul URL din fișier este spațiul de nume SVG (`http://www.w3.org/2000/svg`), care nu generează nicio cerere.
 
 ## Structura depozitului

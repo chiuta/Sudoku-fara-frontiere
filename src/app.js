@@ -1,12 +1,18 @@
 /* SPDX-License-Identifier: MIT · Copyright (c) 2026 Alexandru-Ionuț Chiuță (Alexio) */
-/* Sudoku fără frontiere — interfață. Fără rețea; stocare locală cu prefixul sff_. */
+/* Sudoku fără frontiere — interfață. Fără rețea; stocare locală cu prefixul sudoku-fara-frontiere. (migrare din vechiul sff_). */
 (function () {
 'use strict';
 var SFF = window.SFF;
 var $ = function (id) { return document.getElementById(id); };
+var LSP = 'sudoku-fara-frontiere.';
+/* migrare chei vechi sff_* → sudoku-fara-frontiere.* înainte de orice citire; idempotentă, nu suprascrie.
+   Copiile .fff.json vechi (chei sff_*) se migrează după import. */
+function migrateLS() { try { FFF.store.migrate({ 'sff_*': '*' }); } catch (e) {} }
+migrateLS();
+if (window.FFF && FFF.bus) FFF.bus.on('bundle:imported', migrateLS);
 var LS = {
-  get: function (k, d) { try { var v = localStorage.getItem('sff_' + k); return v === null ? d : v; } catch (e) { return d; } },
-  set: function (k, v) { try { localStorage.setItem('sff_' + k, v); } catch (e) {} }
+  get: function (k, d) { try { var v = localStorage.getItem(LSP + k); return v === null ? d : v; } catch (e) { return d; } },
+  set: function (k, v) { try { localStorage.setItem(LSP + k, v); } catch (e) {} }
 };
 var LANGS = ['ro', 'en', 'fr', 'it', 'es', 'pt', 'de', 'hu'];
 function pickLang() {
@@ -892,7 +898,7 @@ $('a-hint').onclick = function () {
   afterChange(); if (!g.solved) setMsg(logic ? t('hint_logic') : t('hint_rev'), '');
 };
 function ask(msg) {
-  return (window.FFF && FFF.bundle && FFF.bundle.confirm) ? FFF.bundle.confirm(msg, { danger: true }) : Promise.resolve(window.confirm(msg));
+  return FFF.dialog.confirm(msg, { danger: true });
 }
 $('a-solve').onclick = async function () {
   var g = game; if (!g || g.solved) return; if (!(await ask(t('confirm_solve')))) return;

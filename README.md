@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 1.6.5 · **Last updated:** 2026-10-23
+**Version:** 1.6.6 · **Last updated:** 2026-10-23
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -144,7 +144,7 @@ Each category has its own page in [`docs/catalog/`](docs/catalog/README.md) (scr
 - **Classic 9×9 solver** with optional extra rules; it says whether the solution is unique, multiple or nonexistent.
 - **Atlas:** search, categories, “Today's variant”, “Surprise me”, lexicon, CSV export, BibTeX citation.
 - Light/dark/automatic theme, larger text, interface in 8 languages (RO, EN, FR, IT, ES, PT, DE, HU).
-- **Puzzle of the day** uses the UTC date; the streak of consecutive days is kept locally (`sff_daily`).
+- **Puzzle of the day** uses the UTC date; the streak of consecutive days is kept locally (`sudoku-fara-frontiere.daily`).
 
 ## How it generates
 
@@ -156,7 +156,7 @@ The engine picks a solved grid that respects the rules, derives the clues from i
 - The easy/medium/hard difficulty is only the number of clues kept. The puzzle also shows a measure of the solver's effort (0 = solved by propagation alone; otherwise the number of branches), which is not an assessment of human techniques. If generation takes more than 12 s, the difficulty drops automatically (but not for “Puzzle of the day” or shared codes).
 - Tested in Chromium (including opened as file://). Firefox and Safari/iOS could not be tested in the development environment; if the Worker from a Blob is blocked, the app falls back to generating on the main thread (UI blocked during generation).
 - Accessibility: the keyboard (arrows, digits, N, Ctrl+Z) and a spoken announcement of the selected cell; the board is SVG and is not a complete tool for screen readers.
-- The saved state has a version number; an unknown format is set aside (`sff_game_bad`), not deleted.
+- The saved state has a version number; an unknown format is set aside (`sudoku-fara-frontiere.game_bad`), not deleted.
 - “Hard” removes as many digits as it can; in variants with many clues in the grid, very few given digits may remain.
 - Composite grids have only the classic rules; very heavily loaded combinations may take longer or fail (the app says so).
 - 16×16 and 25×25 use the symbols 1–9 and letters (A–G and A–P respectively).
@@ -169,7 +169,7 @@ The engine picks a solved grid that respects the rules, derives the clues from i
 
 ## Privacy and network
 
-- **Local storage:** `localStorage`, keys `sff_lang`, `sff_theme`, `sff_size`, `sff_game`, `sff_daily` (language, theme, text size, the current game, the Puzzle of the day streak) and `sff_game_bad` (saved state in an unknown format, kept).
+- **Local storage:** `localStorage`, keys `sudoku-fara-frontiere.lang`, `sudoku-fara-frontiere.theme`, `sudoku-fara-frontiere.size`, `sudoku-fara-frontiere.game`, `sudoku-fara-frontiere.daily` (language, theme, text size, the current game, the Puzzle of the day streak) and `sudoku-fara-frontiere.game_bad` (saved state in an unknown format, kept).
 - **Network:** in the code there is no `fetch`, `XMLHttpRequest`, CDN or external resources. The only URL in the file is the SVG namespace (`http://www.w3.org/2000/svg`), which generates no request.
 
 ## Repository structure

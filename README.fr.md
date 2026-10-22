@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · **Français** · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version :** 1.6.5 · **Dernière mise à jour :** 2026-10-23
+**Version :** 1.6.6 · **Dernière mise à jour :** 2026-10-23
 
 Langues de l'interface : **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -144,7 +144,7 @@ Chaque catégorie a sa propre page dans [`docs/catalog/`](docs/catalog/README.md
 - **Solveur classique 9×9** avec règles supplémentaires facultatives ; il indique si la solution est unique, multiple ou inexistante.
 - **Atlas :** recherche, catégories, « Variante du jour », « Surprenez-moi », lexique, export CSV, citation BibTeX.
 - Thème clair/sombre/automatique, texte agrandi, interface en 8 langues (RO, EN, FR, IT, ES, PT, DE, HU).
-- Le **Puzzle du jour** utilise la date UTC ; la série de jours consécutifs est conservée en local (`sff_daily`).
+- Le **Puzzle du jour** utilise la date UTC ; la série de jours consécutifs est conservée en local (`sudoku-fara-frontiere.daily`).
 
 ## Comment il génère
 
@@ -156,7 +156,7 @@ Le moteur choisit une grille résolue qui respecte les règles, en déduit les i
 - La difficulté facile/moyen/difficile n'est que le nombre d'indices conservés. Le puzzle affiche aussi une mesure de l'effort du solveur (0 = résolu par la seule propagation ; sinon le nombre de ramifications), qui n'est pas une évaluation des techniques humaines. Si la génération dure plus de 12 s, la difficulté baisse automatiquement (mais pas pour le « Puzzle du jour » ni pour les codes partagés).
 - Testé dans Chromium (y compris ouvert en file://). Firefox et Safari/iOS n'ont pas pu être testés dans l'environnement de développement ; si le Worker issu d'un Blob est bloqué, l'application se rabat sur la génération sur le fil principal (interface bloquée pendant la génération).
 - Accessibilité : le clavier (flèches, chiffres, N, Ctrl+Z) et l'annonce vocale de la cellule sélectionnée ; le plateau est en SVG et n'est pas un outil complet pour les lecteurs d'écran.
-- L'état enregistré a un numéro de version ; un format inconnu est mis de côté (`sff_game_bad`), non supprimé.
+- L'état enregistré a un numéro de version ; un format inconnu est mis de côté (`sudoku-fara-frontiere.game_bad`), non supprimé.
 - « Difficile » retire autant de chiffres qu'il peut ; dans les variantes à nombreux indices dans la grille, il peut ne rester que très peu de chiffres donnés.
 - Les grilles composées n'ont que les règles classiques ; les combinaisons très chargées peuvent prendre plus de temps ou échouer (l'application le signale).
 - 16×16 et 25×25 utilisent les symboles 1–9 et des lettres (A–G, respectivement A–P).
@@ -169,7 +169,7 @@ Le moteur choisit une grille résolue qui respecte les règles, en déduit les i
 
 ## Confidentialité et réseau
 
-- **Stockage local :** `localStorage`, clés `sff_lang`, `sff_theme`, `sff_size`, `sff_game`, `sff_daily` (langue, thème, taille du texte, partie en cours, série du Puzzle du jour) et `sff_game_bad` (état enregistré dans un format inconnu, conservé).
+- **Stockage local :** `localStorage`, clés `sudoku-fara-frontiere.lang`, `sudoku-fara-frontiere.theme`, `sudoku-fara-frontiere.size`, `sudoku-fara-frontiere.game`, `sudoku-fara-frontiere.daily` (langue, thème, taille du texte, partie en cours, série du Puzzle du jour) et `sudoku-fara-frontiere.game_bad` (état enregistré dans un format inconnu, conservé).
 - **Réseau :** dans le code, il n'y a ni `fetch`, ni `XMLHttpRequest`, ni CDN, ni ressources externes. Le seul URL du fichier est l'espace de noms SVG (`http://www.w3.org/2000/svg`), qui ne génère aucune requête.
 
 ## Structure du dépôt
