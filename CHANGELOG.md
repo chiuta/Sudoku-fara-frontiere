@@ -1,5 +1,8 @@
 # Istoric versiuni
 
+## 1.6.7
+- Ținte tactile de cel puțin 44 px pe dispozitive tactile (`pointer:coarse`); desktopul rămâne neschimbat.
+
 ## 1.6.6
 - Dialogurile native `confirm()` au fost înlocuite cu `FFF.dialog` (accesibil, tradus; kit 1.2.0); comportamentul rămâne neschimbat.
 - Cheile din stocarea locală folosesc acum prefixul `sudoku-fara-frontiere.` (`FFF.store.migrate` la pornire, înainte de orice citire): datele existente se păstrează automat, iar copiile `.fff.json` vechi se pot importa în continuare.

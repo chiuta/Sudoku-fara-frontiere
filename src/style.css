@@ -138,3 +138,6 @@ svg#board3d text{font-family:inherit;text-anchor:middle;dominant-baseline:centra
 .ibtn{font:inherit;color:inherit}select.ibtn{max-width:4.2rem;padding:.3rem .25rem}
 
 h1.brand{margin:0}
+
+/* ținte tactile ≥44px pe dispozitive cu cursor grosier (pointer:coarse); desktopul rămâne neschimbat */
+@media (pointer:coarse){button:not(.cell):not([data-no-touch]),select,summary,[role=button],[role=tab],input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=hidden]):not([type=file]):not([type=color]),nav a,.navlink,.navbtn,#app-version[data-fff-label]{min-height:44px!important}button:not(.cell):not([data-no-touch]),[role=button],[role=tab],.navlink,.navbtn{min-width:44px!important}}
