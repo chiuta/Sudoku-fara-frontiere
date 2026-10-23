@@ -19,4 +19,9 @@ finally:
 if norm(rebuilt) != norm(committed):
     print("index.html nu corespunde sursei: rulează 'python3 build.py', apoi 'node fff-kit/build.mjs info index.html --slug sudoku-fara-frontiere', și comite")
     sys.exit(1)
-print("index.html corespunde sursei (fff-info ignorat)")
+import json
+_v = {n: json.load(open(os.path.join(root, n), encoding='utf-8'))['version'] for n in ('package.json', 'app.json')}
+if len(set(_v.values())) != 1:
+    print("versiuni diferite între package.json și app.json:", _v)
+    sys.exit(1)
+print("index.html corespunde sursei (fff-info ignorat); versiuni sincronizate")
