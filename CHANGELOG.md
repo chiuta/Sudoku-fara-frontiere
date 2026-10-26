@@ -1,5 +1,10 @@
 # Istoric versiuni
 
+## 2.0.0
+- **Tehnici explicate pas cu pas** (Sudoku clasic 4×4–16×16): butonul „Tehnică” numește tehnica folosită și o explică în cuvinte, cu celulele-șablon și eliminările evidențiate: single gol/ascuns, candidați blocați (pointing/claiming), perechi și triplete goale/ascunse, X-Wing, XY-Wing, Swordfish. Notițele se completează cu candidații rămași.
+- **Generator după nivel tehnic** (clasic 9×9): t1 (doar singles) … t4 (până la Swordfish). Grila cere exact tehnica maximă a nivelului, are soluție unică și se regenerează identic din cod (`clasic-9-t3-<sămânță>`); dacă nivelul 4 nu se găsește în limita de căutare, se livrează cel mai apropiat nivel, marcat în bara de stare.
+- Bara de stare arată „tehnică maximă” pentru grilele clasice 9×9. Rezolvatorul pe tehnici nu face ipoteze: dacă se blochează, grila e „dincolo de tehnicile din listă”.
+
 ## 1.6.7
 - Ținte tactile de cel puțin 44 px pe dispozitive tactile (`pointer:coarse`); desktopul rămâne neschimbat.
 

@@ -3,7 +3,7 @@
    Fără dependențe, fără rețea. Rulează în browser, în Worker și în Node. */
 (function (root) {
 'use strict';
-var VERSION = '1.6.7';
+var VERSION = '2.0.0';
 
 /* ---------- RNG și utilitare pe biți ---------- */
 function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
@@ -1825,7 +1825,7 @@ var PRESETS = {
   divisible: { sizes: [9], mods: [], clues: ['divisible'], hard: 0.6 },
   primeline: { sizes: [9, 6], mods: [], clues: ['primeline'], hard: 0.6 }
 };
-var DIFF = { easy: 0.52, medium: 0.4, hard: 0 };
+var DIFF = { easy: 0.52, medium: 0.4, hard: 0, t1: 0, t2: 0, t3: 0, t4: 0 };
 
 function checkSpec(spec) {
   var own = Object.prototype.hasOwnProperty, bad = function (m) { throw new Error('specificație invalidă: ' + m); };
@@ -1840,6 +1840,7 @@ function checkSpec(spec) {
 }
 function generate(spec) {
   checkSpec(spec);
+  if (/^t[1-4]$/.test(String(spec.difficulty))) return generateByTier(spec);
   var preset = spec.preset ? PRESETS[spec.preset] : null;
   var def = {
     mods: (spec.mods || (preset && preset.mods) || []).slice(),
@@ -1970,6 +1971,250 @@ function generate(spec) {
   return P;
 }
 
-var API = { fogLit: fogLit, visibleCons: visibleCons, genRegions: genRegions, VERSION: VERSION, makeLayout: makeLayout, makeSolver: makeSolver, generate: generate, PRESETS: PRESETS, RNG: RNG, BOX: BOX };
+/* ---------- tehnici de rezolvare umană (doar grile clasice: rânduri, coloane, regiuni) ----------
+   Un rezolvator "pe hârtie": aplică, în ordinea dificultății, singles, candidați blocați, perechi/triplete, X-Wing, XY-Wing, Swordfish.
+   Nu face ipoteze; dacă se blochează, grila e „dincolo de tehnici” (nivel 5). Pur, fără DOM; rulează în Worker și în Node. */
+var TECH = (function () {
+  var ORDER = ['nakedSingle', 'hiddenSingle', 'pointing', 'claiming', 'nakedPair', 'hiddenPair', 'nakedTriple', 'hiddenTriple', 'xwing', 'xywing', 'swordfish'];
+  var LEVEL = { nakedSingle: 1, hiddenSingle: 1, pointing: 2, claiming: 2, nakedPair: 2, hiddenPair: 2, nakedTriple: 3, hiddenTriple: 3, xwing: 3, xywing: 3, swordfish: 4 };
+  var SIZES = [4, 6, 8, 9, 12, 16];
+  var GEOM = {};
+  function geom(n) {
+    if (GEOM[n]) return GEOM[n];
+    var L = makeLayout({ kind: 'std', n: n }), houses = [], kind = [], idx = [], i;
+    L.rows.forEach(function (g, k) { houses.push(g); kind.push('r'); idx.push(k); });
+    L.cols.forEach(function (g, k) { houses.push(g); kind.push('c'); idx.push(k); });
+    L.boxes.forEach(function (g, k) { houses.push(g); kind.push('b'); idx.push(k); });
+    var cnt = n * n, rowOf = [], colOf = [], boxOf = [], peers = [];
+    for (i = 0; i < cnt; i++) { rowOf.push(L.pos[i][0]); colOf.push(L.pos[i][1]); boxOf.push(L.boxId[i]); }
+    for (i = 0; i < cnt; i++) {
+      var ps = [];
+      for (var j = 0; j < cnt; j++) if (j !== i && (rowOf[j] === rowOf[i] || colOf[j] === colOf[i] || boxOf[j] === boxOf[i])) ps.push(j);
+      peers.push(ps);
+    }
+    return (GEOM[n] = { n: n, cnt: cnt, rows: L.rows, cols: L.cols, boxes: L.boxes, houses: houses, kind: kind, idx: idx, rowOf: rowOf, colOf: colOf, boxOf: boxOf, peers: peers });
+  }
+  function bit(d) { return 1 << (d - 1); }
+  function has(m, d) { return (m >> (d - 1)) & 1; }
+  function digitsOf(m) { var a = []; for (var d = 1; m; d++, m >>>= 1) if (m & 1) a.push(d); return a; }
+  function combos(arr, k) {
+    var out = [], cur = [];
+    (function rec(s) { if (cur.length === k) { out.push(cur.slice()); return; } for (var i = s; i < arr.length; i++) { cur.push(arr[i]); rec(i + 1); cur.pop(); } })(0);
+    return out;
+  }
+  function houseRef(G, h) { return { k: G.kind[h], i: G.idx[h] }; }
+
+  /* stare: vals (0 = gol), cand (mască per celulă; 0 pe celulele umplute). cand0 opțional = eliminări deja făcute. */
+  function create(vals, n, cand0) {
+    var G = geom(n), cnt = G.cnt, FULL = (n >= 31 ? -1 : (1 << n) - 1), v = Int32Array.from(vals), cand = new Int32Array(cnt), i, j;
+    for (i = 0; i < cnt; i++) {
+      if (v[i]) continue;
+      var m = FULL;
+      for (j = 0; j < G.peers[i].length; j++) { var p = G.peers[i][j]; if (v[p]) m &= ~bit(v[p]); }
+      cand[i] = cand0 ? (m & cand0[i]) : m;
+    }
+    var S = { n: n, G: G, vals: v, cand: cand };
+
+    function nakedSingle() {
+      for (var c = 0; c < cnt; c++) if (!v[c] && cand[c] && (cand[c] & (cand[c] - 1)) === 0) {
+        var d = digitsOf(cand[c])[0], seen = [];
+        G.peers[c].forEach(function (p) { if (v[p] === d) return; });
+        var why = [], got = 0;
+        G.peers[c].forEach(function (p) { if (v[p] && !(got & bit(v[p]))) { got |= bit(v[p]); why.push(p); } });
+        return { tech: 'nakedSingle', place: { cell: c, digit: d }, elims: [], cells: [c], digits: [d], houses: [], why: why };
+      }
+      return null;
+    }
+    function hiddenSingle() {
+      for (var h = 0; h < G.houses.length; h++) {
+        var g = G.houses[h];
+        for (var d = 1; d <= n; d++) {
+          var cs = [], placed = false;
+          for (var q = 0; q < g.length; q++) { if (v[g[q]] === d) { placed = true; break; } if (!v[g[q]] && has(cand[g[q]], d)) cs.push(g[q]); }
+          if (!placed && cs.length === 1) return { tech: 'hiddenSingle', place: { cell: cs[0], digit: d }, elims: [], cells: [cs[0]], digits: [d], houses: [houseRef(G, h)], why: [] };
+        }
+      }
+      return null;
+    }
+    function locked() {
+      var out = { pointing: null, claiming: null }, h, d, g, cs, q, t;
+      for (h = 2 * n; h < 3 * n && !out.pointing; h++) { /* cutii → rând/coloană */
+        g = G.houses[h];
+        for (d = 1; d <= n && !out.pointing; d++) {
+          cs = g.filter(function (c) { return !v[c] && has(cand[c], d); });
+          if (cs.length < 2) continue;
+          var sameR = cs.every(function (c) { return G.rowOf[c] === G.rowOf[cs[0]]; }), sameC = cs.every(function (c) { return G.colOf[c] === G.colOf[cs[0]]; });
+          if (!sameR && !sameC) continue;
+          var line = sameR ? G.rows[G.rowOf[cs[0]]] : G.cols[G.colOf[cs[0]]], tg = line.filter(function (c) { return G.boxOf[c] !== G.boxOf[cs[0]] && !v[c] && has(cand[c], d); });
+          if (tg.length) out.pointing = { tech: 'pointing', place: null, elims: tg.map(function (c) { return [c, d]; }), cells: cs, digits: [d], houses: [houseRef(G, h), sameR ? { k: 'r', i: G.rowOf[cs[0]] } : { k: 'c', i: G.colOf[cs[0]] }], why: [] };
+        }
+      }
+      if (out.pointing) return out.pointing;
+      for (h = 0; h < 2 * n && !out.claiming; h++) { /* rând/coloană → cutie */
+        g = G.houses[h];
+        for (d = 1; d <= n && !out.claiming; d++) {
+          cs = g.filter(function (c) { return !v[c] && has(cand[c], d); });
+          if (cs.length < 2) continue;
+          if (!cs.every(function (c) { return G.boxOf[c] === G.boxOf[cs[0]]; })) continue;
+          var bx = G.boxes[G.boxOf[cs[0]]], tg2 = bx.filter(function (c) { return g.indexOf(c) < 0 && !v[c] && has(cand[c], d); });
+          if (tg2.length) out.claiming = { tech: 'claiming', place: null, elims: tg2.map(function (c) { return [c, d]; }), cells: cs, digits: [d], houses: [houseRef(G, h), { k: 'b', i: G.boxOf[cs[0]] }], why: [] };
+        }
+      }
+      return out.claiming;
+    }
+    function nakedSubset(k, name) {
+      for (var h = 0; h < G.houses.length; h++) {
+        var g = G.houses[h], E = g.filter(function (c) { return !v[c] && cand[c] && digitsOf(cand[c]).length <= k; });
+        if (E.length < k) continue;
+        var cb = combos(E, k);
+        for (var a = 0; a < cb.length; a++) {
+          var u = 0; cb[a].forEach(function (c) { u |= cand[c]; });
+          if (digitsOf(u).length !== k) continue;
+          var el = [];
+          g.forEach(function (c) { if (cb[a].indexOf(c) < 0 && !v[c]) digitsOf(cand[c] & u).forEach(function (d) { el.push([c, d]); }); });
+          if (el.length) return { tech: name, place: null, elims: el, cells: cb[a], digits: digitsOf(u), houses: [houseRef(G, h)], why: [] };
+        }
+      }
+      return null;
+    }
+    function hiddenSubset(k, name) {
+      for (var h = 0; h < G.houses.length; h++) {
+        var g = G.houses[h], ds = [], pos = {};
+        for (var d = 1; d <= n; d++) {
+          var cs = [], placed = false;
+          for (var q = 0; q < g.length; q++) { if (v[g[q]] === d) { placed = true; break; } if (!v[g[q]] && has(cand[g[q]], d)) cs.push(g[q]); }
+          if (!placed && cs.length >= 2 && cs.length <= k) { ds.push(d); pos[d] = cs; }
+        }
+        if (ds.length < k) continue;
+        var cb = combos(ds, k);
+        for (var a = 0; a < cb.length; a++) {
+          var cells = [];
+          cb[a].forEach(function (d) { pos[d].forEach(function (c) { if (cells.indexOf(c) < 0) cells.push(c); }); });
+          if (cells.length !== k) continue;
+          var mask = 0; cb[a].forEach(function (d) { mask |= bit(d); });
+          var el = []; cells.forEach(function (c) { digitsOf(cand[c] & ~mask).forEach(function (d) { el.push([c, d]); }); });
+          if (el.length) return { tech: name, place: null, elims: el, cells: cells, digits: cb[a], houses: [houseRef(G, h)], why: [] };
+        }
+      }
+      return null;
+    }
+    function fish(k, name) {
+      for (var d = 1; d <= n; d++) {
+        for (var orient = 0; orient < 2; orient++) {
+          var base = orient ? G.cols : G.rows, cover = orient ? G.rows : G.cols, covOf = orient ? G.rowOf : G.colOf, lines = [], pos = {};
+          for (var b = 0; b < n; b++) {
+            var cs = base[b].filter(function (c) { return !v[c] && has(cand[c], d); }), placed = base[b].some(function (c) { return v[c] === d; });
+            if (!placed && cs.length >= 2 && cs.length <= k) { lines.push(b); pos[b] = cs; }
+          }
+          if (lines.length < k) continue;
+          var cb = combos(lines, k);
+          for (var a = 0; a < cb.length; a++) {
+            var cov = [], cells = [];
+            cb[a].forEach(function (b2) { pos[b2].forEach(function (c) { cells.push(c); if (cov.indexOf(covOf[c]) < 0) cov.push(covOf[c]); }); });
+            if (cov.length !== k) continue;
+            var el = [];
+            cov.forEach(function (ci) { cover[ci].forEach(function (c) { if (!v[c] && has(cand[c], d) && cells.indexOf(c) < 0) el.push([c, d]); }); });
+            if (el.length) return { tech: name, place: null, elims: el, cells: cells, digits: [d], houses: cb[a].map(function (b2) { return { k: orient ? 'c' : 'r', i: b2 }; }).concat(cov.map(function (ci) { return { k: orient ? 'r' : 'c', i: ci }; })), orient: orient ? 'c' : 'r', why: [] };
+          }
+        }
+      }
+      return null;
+    }
+    function xywing() {
+      for (var p = 0; p < cnt; p++) {
+        if (v[p] || digitsOf(cand[p]).length !== 2) continue;
+        var ab = digitsOf(cand[p]), a = ab[0], b = ab[1];
+        var P1 = G.peers[p].filter(function (c) { return !v[c] && digitsOf(cand[c]).length === 2 && has(cand[c], a) && !has(cand[c], b); });
+        var P2 = G.peers[p].filter(function (c) { return !v[c] && digitsOf(cand[c]).length === 2 && has(cand[c], b) && !has(cand[c], a); });
+        for (var i1 = 0; i1 < P1.length; i1++) for (var i2 = 0; i2 < P2.length; i2++) {
+          var c1 = P1[i1], c2 = P2[i2], z1 = cand[c1] & ~bit(a), z2 = cand[c2] & ~bit(b);
+          if (z1 !== z2) continue;
+          var z = digitsOf(z1)[0], el = [];
+          G.peers[c1].forEach(function (c) { if (c !== p && c !== c2 && !v[c] && has(cand[c], z) && G.peers[c2].indexOf(c) >= 0) el.push([c, z]); });
+          if (el.length) return { tech: 'xywing', place: null, elims: el, cells: [p, c1, c2], digits: [a, b, z], houses: [], pivot: p, why: [] };
+        }
+      }
+      return null;
+    }
+    var FIND = {
+      nakedSingle: nakedSingle, hiddenSingle: hiddenSingle,
+      pointing: function () { var s = locked(); return s && s.tech === 'pointing' ? s : null; },
+      claiming: function () { var s = locked(); return s && s.tech === 'claiming' ? s : null; },
+      nakedPair: function () { return nakedSubset(2, 'nakedPair'); }, hiddenPair: function () { return hiddenSubset(2, 'hiddenPair'); },
+      nakedTriple: function () { return nakedSubset(3, 'nakedTriple'); }, hiddenTriple: function () { return hiddenSubset(3, 'hiddenTriple'); },
+      xwing: function () { return fish(2, 'xwing'); }, xywing: xywing, swordfish: function () { return fish(3, 'swordfish'); }
+    };
+    /* primul pas aplicabil, în ordinea dificultății; maxLevel limitează tehnicile permise */
+    S.find = function (maxLevel) {
+      for (var t = 0; t < ORDER.length; t++) {
+        if (maxLevel && LEVEL[ORDER[t]] > maxLevel) continue;
+        var s = FIND[ORDER[t]](); if (s) { s.level = LEVEL[s.tech]; return s; }
+      }
+      return null;
+    };
+    S.apply = function (s) {
+      if (s.place) {
+        var c = s.place.cell, d = s.place.digit; v[c] = d; cand[c] = 0;
+        G.peers[c].forEach(function (p) { cand[p] &= ~bit(d); });
+      }
+      s.elims.forEach(function (e) { cand[e[0]] &= ~bit(e[1]); });
+    };
+    S.try = function (name) { var s = FIND[name] ? FIND[name]() : null; if (s) s.level = LEVEL[name]; return s; };
+    S.stuck = function () { for (var c = 0; c < cnt; c++) if (!v[c] && !cand[c]) return true; return false; };
+    S.done = function () { for (var c = 0; c < cnt; c++) if (!v[c]) return false; return true; };
+    return S;
+  }
+
+  /* analiza completă: pașii, cea mai grea tehnică, nivelul (1..4; 5 = nu se rezolvă doar cu tehnicile de mai sus) */
+  function analyze(vals, n, opts) {
+    opts = opts || {};
+    var S = create(vals, n), steps = [], counts = {}, hardest = null, maxLv = 0, guard = 0;
+    while (!S.done() && !S.stuck() && guard++ < 2000) {
+      var s = S.find(opts.maxLevel); if (!s) break;
+      S.apply(s); counts[s.tech] = (counts[s.tech] || 0) + 1;
+      if (s.level > maxLv || (s.level === maxLv && ORDER.indexOf(s.tech) > ORDER.indexOf(hardest))) { maxLv = s.level; hardest = s.tech; }
+      if (!opts.noSteps) steps.push(s);
+    }
+    var solved = S.done() && !S.stuck();
+    return { solved: solved, tier: solved ? Math.max(1, maxLv) : 5, hardest: hardest, counts: counts, steps: steps, vals: S.vals };
+  }
+  function supported(n) { return SIZES.indexOf(n) >= 0; }
+  return { ORDER: ORDER, LEVEL: LEVEL, SIZES: SIZES, create: create, analyze: analyze, supported: supported, geom: geom };
+})();
+
+/* generator după nivel tehnic: t1 = doar singles ... t4 = până la Swordfish. Pornește de la o grilă ușoară și scoate indicii cât timp soluția
+   rămâne unică ȘI se rezolvă cu tehnicile de nivel ≤ cel cerut; apoi măsoară tehnica cea mai grea. Determinist: aceeași sămânță → aceeași grilă. */
+function generateByTier(spec) {
+  var tier = +String(spec.difficulty).slice(1), best = null, bestTier = 0, k, s2, P, a, giv, i, saved, r, order, rnd;
+  if (!(tier >= 1 && tier <= 4)) throw new Error('nivel tehnic necunoscut');
+  var n = spec.n || 9;
+  if (n !== 9 || (spec.preset && spec.preset !== 'clasic') || (spec.mods && spec.mods.length) || (spec.clues && spec.clues.length) || spec.jigsaw) throw new Error('nivelurile tehnice sunt doar pentru Sudoku clasic 9×9');
+  var S = makeSolver({ layout: { kind: 'std', n: 9 }, mods: [], cons: [] });
+  for (k = 0; k < 60; k++) {
+    s2 = { preset: 'clasic', n: 9, difficulty: 'easy', seed: ((spec.seed >>> 0) + k * 7919) >>> 0 };
+    P = generate(s2);
+    rnd = RNG((s2.seed ^ 0x5bd1e995) >>> 0 || 1);
+    giv = P.givens.slice(); order = rnd.shuffle(range(81));
+    for (var t = 0; t < order.length; t++) {
+      i = order[t]; if (!giv[i]) continue;
+      saved = giv[i]; giv[i] = 0;
+      r = S.solve(giv, { limit: 1, budget: 3000, exclude: [i, saved] });
+      if (!(r.count === 0 && !r.aborted)) { giv[i] = saved; continue; }
+      if (!TECH.analyze(giv, 9, { noSteps: true, maxLevel: tier }).solved) giv[i] = saved;
+    }
+    a = TECH.analyze(giv, 9, { noSteps: true });
+    if (a.solved && a.tier > bestTier) { bestTier = a.tier; best = { P: P, giv: giv.slice() }; }
+    if (a.solved && a.tier === tier) break;
+  }
+  if (!best) throw new Error('nu s-a găsit o grilă pentru acest nivel');
+  P = best.P; P.givens = best.giv; P.clueCount = best.giv.filter(Boolean).length;
+  var rr = S.solve(Int32Array.from(P.givens), { limit: 1, budget: 20000 });
+  P.rating = rr.aborted || rr.count !== 1 ? -1 : (rr.nodes <= 1 ? 0 : rr.nodes - 1);
+  P.difficulty = spec.difficulty; P.seed = (spec.seed >>> 0) || 1; P.techTier = bestTier; P.techWanted = tier;
+  P.code = 'clasic-9-' + spec.difficulty + '-' + P.seed;
+  return P;
+}
+
+var API = { fogLit: fogLit, visibleCons: visibleCons, genRegions: genRegions, VERSION: VERSION, makeLayout: makeLayout, makeSolver: makeSolver, generate: generate, TECH: TECH, PRESETS: PRESETS, RNG: RNG, BOX: BOX };
 if (typeof module !== 'undefined' && module.exports) module.exports = API; else root.SFF = API;
 })(typeof self !== 'undefined' ? self : this);

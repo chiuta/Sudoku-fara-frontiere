@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 1.6.8 · **Ultima actualizare:** 2026-10-26
+**Versiune:** 2.0.0 · **Ultima actualizare:** 2026-10-26
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -34,6 +34,7 @@ Un atlas interactiv de 136 de intrări (≈130 cu reguli distincte: Subsol, Sudo
 - **Tastatură:** săgeți = mută selecția, cifre/litere = completează, `Backspace`/`Delete`/`0` = șterge, `N` = notițe, `Ctrl+Z` / `Ctrl+Y` = anulează / refă.
 - **Notițe:** butonul „Notițe” (sau `N`) trece la candidați mici în celulă; „Auto-notițe” îi calculează din regulile vizibile.
 - **Verificări:** „Arată conflictele”, „Evidențiază aceeași cifră” și „Evidențiază celulele legate” și „Curăță notițele automat” se pot bifa; „Verifică” marchează cifrele greșite.
+- **Tehnică (v2.0.0):** la Sudoku clasic, butonul „Tehnică” aplică următoarea tehnică umană (single, candidați blocați, perechi/triplete, X-Wing, XY-Wing, Swordfish), o numește și o explică, marcând celulele-șablon și eliminările; notițele se actualizează. La „Dificultate” apar nivelurile tehnice 1–4 (clasic 9×9), cu grila garantat rezolvabilă doar cu tehnicile până la nivelul ales.
 - **Indiciu** completează o celulă (prin logică pe candidați; dacă nu există pas direct, cifra vine din soluție). **Arată soluția** completează tot.
 - **Cod:** codul de lângă „Joc nou” regenerează același puzzle în aceeași versiune a aplicației; îl lipești la „Deschide”.
 

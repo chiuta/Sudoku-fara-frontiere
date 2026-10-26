@@ -161,16 +161,24 @@ function refreshSizes() {
   $('sel-size').value = sizes.indexOf(+cur) >= 0 && v === prevVar ? cur : String(def);
   prevVar = v;
   $('wordbox').hidden = !(v === 'wordoku' && +$('sel-size').value === 9);
+  syncTierOptions();
   if (v === 'custom' && !sizes.length) setMsg(t('custom_none'), 'bad'); else if ($('msg').textContent === t('custom_none')) setMsg('', '');
 }
 var prevVar = '';
+/* nivelurile după tehnică (t1..t4) sunt oferite doar la Sudoku clasic 9×9 */
+function syncTierOptions() {
+  var sd = $('sel-diff'), want = $('sel-var').value === 'clasic' && +$('sel-size').value === 9, cur = sd.value;
+  Array.prototype.slice.call(sd.querySelectorAll('option')).forEach(function (o) { if (TIERS.indexOf(o.value) >= 0) o.remove(); });
+  if (want) TIERS.forEach(function (k) { var o = document.createElement('option'); o.value = k; o.textContent = t(k); sd.appendChild(o); });
+  if (!want && TIERS.indexOf(cur) >= 0) sd.value = 'medium'; else if (cur) sd.value = cur;
+}
 function onVariantChange() {
   var v = $('sel-var').value;
   $('custom').hidden = v !== 'custom';
   refreshSizes();
 }
 $('sel-var').onchange = onVariantChange;
-$('sel-size').onchange = function () { $('wordbox').hidden = !($('sel-var').value === 'wordoku' && +$('sel-size').value === 9); };
+$('sel-size').onchange = function () { $('wordbox').hidden = !($('sel-var').value === 'wordoku' && +$('sel-size').value === 9); syncTierOptions(); };
 $('custom').onchange = refreshSizes;
 
 /* ---------- generare (Worker, cu rezervă pe firul principal) ---------- */
@@ -238,7 +246,7 @@ function codeOf(spec, P) {
   return ['c', P.n, P.difficulty, P.seed, (P.mods || []).join('.'), (P.clues || []).join('.'), spec.jigsaw ? 1 : 0].join('~');
 }
 var OWN = Object.prototype.hasOwnProperty;
-var DIFFS = ['easy', 'medium', 'hard'], MODE_IDS = ['orb', 'memory', 'duel', 'hardcore', 'sound', 'marathon'];
+var DIFFS = ['easy', 'medium', 'hard'], TIERS = ['t1', 't2', 't3', 't4'], MODE_IDS = ['orb', 'memory', 'duel', 'hardcore', 'sound', 'marathon'];
 function okSeed(x) { return /^\d{1,10}$/.test(x) && +x <= 4294967295; }
 function parseCode(s) {
   s = String(s || '').trim();
@@ -259,7 +267,7 @@ function parseCode0(s) {
     return { n: +p[1], difficulty: p[2], seed: +p[3] >>> 0, mods: mods, clues: clues, jigsaw: p[6] === '1', hard: 0.7, preset: null, _v: 'custom' };
   }
   p = s.split('-'); if (p.length !== 4 || !OWN.call(PRE, p[0])) return null;
-  if (!/^\d{1,2}$/.test(p[1]) || PRE[p[0]].sizes.indexOf(+p[1]) < 0 || DIFFS.indexOf(p[2]) < 0 || !okSeed(p[3])) return null;
+  if (!/^\d{1,2}$/.test(p[1]) || PRE[p[0]].sizes.indexOf(+p[1]) < 0 || (DIFFS.indexOf(p[2]) < 0 && !(TIERS.indexOf(p[2]) >= 0 && p[0] === 'clasic' && +p[1] === 9)) || !okSeed(p[3])) return null;
   return { preset: p[0], n: +p[1], difficulty: p[2], seed: +p[3] >>> 0, _v: p[0] };
 }
 $('b-new').onclick = function () { newFromUI(); };
@@ -353,6 +361,12 @@ function renderRules() {
   }
   $('rules').innerHTML = h;
 }
+function techInfoTxt() {
+  var g = game; if (!g || !techAvail(g) || g.N > 9) return '';
+  if (g.techA === undefined) { try { g.techA = SFF.TECH.analyze(g.P.givens, g.N, { noSteps: true }); } catch (e) { g.techA = null; } }
+  var a = g.techA; if (!a) return '';
+  return ' · ' + t('tech_max').replace('{t}', a.solved ? t('tn_' + a.hardest) : t('tech_beyond'));
+}
 function ratingTxt(P) {
   if (P.rating === undefined || P.rating === null || P.rating < 0) return '';
   return ' · ' + (P.rating === 0 ? t('rate0') : t('rateN').replace('%', P.rating));
@@ -362,7 +376,7 @@ function updateStatus() {
   var v = VBY[game.P.vid];
   $('st-name').textContent = (v ? vname(v) : t('custom')) + ' · ' + sizeLabel(game.P.n, game.P.vid);
   var cl = game.P.givens.filter(Boolean).length;
-  $('st-info').textContent = cl + '/' + game.cnt + ' ' + t('clues') + ' · ' + t(game.P.difficulty) + ratingTxt(game.P);
+  $('st-info').textContent = cl + '/' + game.cnt + ' ' + t('clues') + ' · ' + t(game.P.difficulty) + (game.P.techTier && game.P.techWanted && game.P.techTier !== game.P.techWanted ? ' (' + t('tech_near').replace('{t}', t('t' + game.P.techTier)) + ')' : '') + ratingTxt(game.P) + techInfoTxt();
   var s = Math.floor(game.elapsed / 1000), m = Math.floor(s / 60);
   $('st-time').textContent = m + ':' + (s % 60 < 10 ? '0' : '') + (s % 60);
   renderModebar();
@@ -868,6 +882,51 @@ function doStep() {
   afterChange(); if (!g.solved) { g.step = st; renderDyn(); setMsg(msg, ''); $('sr').textContent = msg; } else stopPlay();
   return true;
 }
+/* ---------- tehnici explicate: numește tehnica folosită și o explică (Sudoku clasic) ---------- */
+function techAvail(g) {
+  var P = g && g.P; if (!P) return false;
+  return !(P.mods && P.mods.length) && !(P.clues && P.clues.length) && !(P.cons && P.cons.length) && !P.regions && !P.chains && !P.zero && !P.fog &&
+    (!P.layout || !P.layout.kind || P.layout.kind === 'std') && SFF.TECH.supported(g.N);
+}
+function sigOf(vec) { return Array.prototype.join.call(vec, ','); }
+function tcell(g, c) { var p = g.L.pos[c]; return '(' + (p[0] + 1) + ',' + (p[1] + 1) + ')'; }
+function thouse(h) { return t('hw_' + h.k) + '\u00a0' + (h.i + 1); }
+function tsym(g, d) { return g.syms[d - 1] || d; }
+function explainTech(g, s) {
+  var v = { c: s.cells.map(function (c) { return tcell(g, c); }).join(', '), d: s.digits.map(function (d) { return tsym(g, d); }).join(', '), e: s.elims.length }, key;
+  if (s.tech === 'nakedSingle') key = 'tx_nakedSingle';
+  else if (s.tech === 'hiddenSingle') { key = 'tx_hiddenSingle'; v.a = thouse(s.houses[0]); }
+  else if (s.tech === 'pointing' || s.tech === 'claiming') { key = 'tx_locked'; v.a = thouse(s.houses[0]); v.b = thouse(s.houses[1]); }
+  else if (s.tech === 'nakedPair' || s.tech === 'nakedTriple') { key = 'tx_nakedSubset'; v.a = thouse(s.houses[0]); }
+  else if (s.tech === 'hiddenPair' || s.tech === 'hiddenTriple') { key = 'tx_hiddenSubset'; v.a = thouse(s.houses[0]); }
+  else if (s.tech === 'xwing' || s.tech === 'swordfish') {
+    key = 'tx_fish'; var k = s.tech === 'xwing' ? 2 : 3; v.a = s.houses.slice(0, k).map(thouse).join(' · '); v.b = s.houses.slice(k).map(thouse).join(' · ');
+  } else { key = 'tx_xywing'; v.p = tcell(g, s.pivot); v.c = tcell(g, s.cells[1]) + ', ' + tcell(g, s.cells[2]); v.d = s.digits.slice(0, 2).map(function (d) { return tsym(g, d); }).join(', '); v.z = tsym(g, s.digits[2]); }
+  var txt = t(key); Object.keys(v).forEach(function (k2) { txt = txt.split('{' + k2 + '}').join(v[k2]); });
+  return t('tn_' + s.tech) + ': ' + txt;
+}
+function doTech() {
+  var g = game; if (!g || g.solved || g.lost) return;
+  if (noHelp() || !techAvail(g)) { setMsg(t('tech_unavail'), 'bad'); return; }
+  var sol = g.P.solution, i;
+  for (i = 0; i < g.cnt; i++) if (g.vals[i] && !g.P.givens[i] && g.vals[i] !== sol[i]) { doStep(); return; } /* cifră greșită: corecția o face pasul clasic */
+  var vec = curVec(), S = SFF.TECH.create(vec, g.N, g.tcand && g.tcSig === sigOf(vec) ? g.tcand : null);
+  var st = S.find();
+  if (!st) { setMsg(t('tech_stuck'), ''); $('sr').textContent = t('tech_stuck'); return; }
+  S.apply(st);
+  pushUndo();
+  if (st.place) { g.vals[st.place.cell] = st.place.digit; g.sel = new Set([st.place.cell]); }
+  else g.sel = new Set(st.elims.map(function (e) { return e[0]; }));
+  for (i = 0; i < g.cnt; i++) g.notes[i] = (curVal(i) || g.vals[i]) ? 0 : S.cand[i];
+  g.tcand = S.cand; g.tcSig = sigOf(S.vals);
+  var why = {}, grp = {};
+  st.cells.forEach(function (c) { why[c] = 1; }); st.why.forEach(function (c) { why[c] = 1; });
+  st.elims.forEach(function (e) { grp[e[0]] = 1; });
+  var cell = st.place ? st.place.cell : st.elims[0][0], msg = explainTech(g, st) + (st.place ? '' : ' ' + t('tech_notes'));
+  afterChange();
+  if (!g.solved) { g.step = { cell: cell, digit: st.place ? st.place.digit : 0, kind: 'tech', why: why, grp: grp }; renderDyn(); setMsg(msg, ''); $('sr').textContent = msg; }
+}
+$('a-tech').onclick = function () { stopPlay(); doTech(); };
 var playTimer = null;
 function stopPlay() { if (playTimer) { clearInterval(playTimer); playTimer = null; } if ($('a-play')) { $('a-play').textContent = t('autoplay'); $('a-play').setAttribute('aria-pressed', 'false'); } }
 $('a-step').onclick = function () { stopPlay(); doStep(); };
@@ -993,10 +1052,10 @@ function i18n() {
   $('l-mode').textContent = t('mode'); var mv = $('sel-mode').value || 'normal'; $('sel-mode').innerHTML = ['normal', 'orb', 'memory', 'marathon', 'duel', 'hardcore', 'daily', 'sound'].map(function (m) { return '<option value="' + m + '">' + t('mode_' + m) + '</option>'; }).join(''); $('sel-mode').value = mv;
   $('h-new').textContent = t('new_h'); $('l-var').textContent = t('variant'); $('l-size').textContent = t('size'); $('l-diff').textContent = t('diff');
   var d = $('sel-diff').value || 'medium';
-  $('sel-diff').innerHTML = '<option value="easy">' + t('easy') + '</option><option value="medium">' + t('medium') + '</option><option value="hard">' + t('hard') + '</option>'; $('sel-diff').value = d;
+  $('sel-diff').innerHTML = '<option value="easy">' + t('easy') + '</option><option value="medium">' + t('medium') + '</option><option value="hard">' + t('hard') + '</option>'; syncTierOptions(); $('sel-diff').value = d;
   $('custom-h').textContent = t('custom_h'); $('custom-h2').textContent = t('custom_h2'); $('l-word').textContent = t('word');
   $('b-new').textContent = t('newgame'); $('b-print').textContent = t('print'); $('l-code').textContent = t('code'); $('b-copy').textContent = t('copy'); $('b-open').textContent = t('open');
-  [['a-note', 'note'], ['a-erase', 'erase'], ['a-undo', 'undo'], ['a-redo', 'redo'], ['a-hint', 'hint'], ['a-step', 'step'], ['a-play', 'autoplay'], ['a-auto', 'auto'], ['a-check', 'check'], ['a-solve', 'solve'], ['a-clear', 'clear']].forEach(function (p) { $(p[0]).textContent = t(p[1]); });
+  [['a-note', 'note'], ['a-erase', 'erase'], ['a-undo', 'undo'], ['a-redo', 'redo'], ['a-hint', 'hint'], ['a-step', 'step'], ['a-tech', 'tech_btn'], ['a-play', 'autoplay'], ['a-auto', 'auto'], ['a-check', 'check'], ['a-solve', 'solve'], ['a-clear', 'clear']].forEach(function (p) { $(p[0]).textContent = t(p[1]); });
   if (playTimer) $('a-play').textContent = t('pause');
   $('q').setAttribute('aria-label', t('search')); $('word').setAttribute('aria-label', t('word')); $('sv-in').setAttribute('aria-label', t('sv_h'));
   $('v3d').textContent = L2('Vedere 3D', '3D view', ["Vue 3D", "Vista 3D", "Vista 3D", "Vista 3D", "3D-Ansicht", "3D nézet"]);
