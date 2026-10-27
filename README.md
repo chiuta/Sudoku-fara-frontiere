@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 2.1.0 · **Last updated:** 2026-10-27
+**Version:** 2.2.0 · **Last updated:** 2026-10-27
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -11,6 +11,8 @@ An atlas of Sudoku variants, with a generator and solver that run locally — in
 **License:** [MIT](LICENSE) · **Live:** <https://chiuta.github.io/Sudoku-fara-frontiere/> · **Illustrated guide (single page):** <https://chiuta.github.io/Sudoku-fara-frontiere/docs/GHID.en.html>
 
 ![A few variants, after “Step by step”](docs/screenshot.png)
+
+**New in 2.2.0:** a separate mode *Daily 9×9 puzzle (choose difficulty)*: a classic 9×9 puzzle that is the same for everyone on a given day, with the difficulty (easy/medium/hard or technique tiers t1–t4) chosen by the player; its own streak. The existing *Puzzle of the day* is unchanged (same codes as before).
 
 **New in 2.1.0:** printable sheet (the Print button now prints a clean page with the title, size, difficulty, code and rules plus the puzzle with only the given clues; the new "Print with solution" button adds the solution on a second page). The generator with unique solutions and step-by-step technique explanations (2.0.0) and the "Puzzle of the day" mode (deterministic from the date) were already present. See `CHANGELOG.md`.
 
@@ -213,7 +215,7 @@ Not included: Chaos Construction, Deconstruction, hybrids with other puzzles (Lo
 
 ## Status
 
-Stable, version 2.1.0 (2026-10-27). 136 variants; generator with a unique solution verified by the solver; technique-by-technique explanations for classic Sudoku; daily puzzle mode; printable sheet with optional solution page. A unified local multiplayer mode across the games is planned, not implemented. Changes: `CHANGELOG.md`.
+Stable, version 2.2.0 (2026-10-27). 136 variants; generator with a unique solution verified by the solver; technique-by-technique explanations for classic Sudoku; daily puzzle mode; printable sheet with optional solution page. A unified local multiplayer mode across the games is planned, not implemented. Changes: `CHANGELOG.md`.
 
 ## Offline
 

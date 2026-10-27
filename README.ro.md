@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 2.1.0 · **Ultima actualizare:** 2026-10-27
+**Versiune:** 2.2.0 · **Ultima actualizare:** 2026-10-27
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -11,6 +11,8 @@ Atlas de variante Sudoku, cu generator și rezolvator care rulează local — î
 **Licență:** [MIT](LICENSE) · **Live:** <https://chiuta.github.io/Sudoku-fara-frontiere/> · **Ghid ilustrat (o singură pagină):** <https://chiuta.github.io/Sudoku-fara-frontiere/docs/GHID.html>
 
 ![Câteva variante, după „Pas cu pas”](docs/screenshot.png)
+
+**Nou în 2.2.0:** un mod separat *Puzzle zilnic 9×9 (dificultate la alegere)*: puzzle clasic 9×9 identic pentru toți într-o zi dată, cu dificultatea (ușor/mediu/greu sau nivelurile de tehnică t1–t4) aleasă de jucător; serie proprie. *Puzzle-ul zilei* existent rămâne neschimbat (aceleași coduri).
 
 **Nou în 2.1.0:** foaie tipăribilă (butonul „Tipărește” tipărește acum o pagină curată cu titlul, mărimea, dificultatea, codul și regulile, plus puzzle-ul doar cu indiciile date; butonul nou „Tipărește cu soluția” adaugă soluția pe a doua pagină). Generatorul cu soluție unică și explicațiile de tehnici pas cu pas (2.0.0) și modul „Puzzle-ul zilei” (determinist din dată) existau deja. Vezi `CHANGELOG.md`.
 
@@ -214,7 +216,7 @@ Nu sunt incluse: Chaos Construction, Deconstruction, hibrizii cu alte puzzle-uri
 
 ## Stare
 
-Stabil, versiunea 2.1.0 (2026-10-27). 136 de variante; generator cu soluție unică verificată de solver; explicații pe tehnici pentru Sudoku clasic; modul puzzle zilnic; foaie tipăribilă cu pagină de soluție opțională. Un mod multiplayer local unificat între jocuri este planificat, nu implementat. Modificări: `CHANGELOG.md`.
+Stabil, versiunea 2.2.0 (2026-10-27). 136 de variante; generator cu soluție unică verificată de solver; explicații pe tehnici pentru Sudoku clasic; modul puzzle zilnic; foaie tipăribilă cu pagină de soluție opțională. Un mod multiplayer local unificat între jocuri este planificat, nu implementat. Modificări: `CHANGELOG.md`.
 
 ## Offline
 

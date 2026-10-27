@@ -166,7 +166,7 @@ var LEX = [
 ];
 var U = {
 ro: {
-  mode:'Mod de joc', mode_normal:'Normal', mode_orb:'Orb (vedere limitată)', mode_memory:'Memorie', mode_marathon:'Maraton (5 puzzle-uri)', mode_duel:'Duel cu un adversar', mode_hardcore:'Hardcore (3 vieți)', mode_daily:'Puzzle-ul zilei', mode_sound:'Sonor',
+  mode:'Mod de joc', mode_normal:'Normal', mode_orb:'Orb (vedere limitată)', mode_memory:'Memorie', mode_marathon:'Maraton (5 puzzle-uri)', mode_duel:'Duel cu un adversar', mode_hardcore:'Hardcore (3 vieți)', mode_daily:'Puzzle-ul zilei',mode_daily9:'Puzzle zilnic 9×9 (dificultate la alegere)', mode_sound:'Sonor',
   atlas:'Atlas', play:'Joacă', solver:'Rezolvator', about:'Despre',
   atlas_h:'Atlas al variantelor Sudoku', atlas_lead:'Fiecare variantă are o fișă cu reguli și poate fi jucată local: puzzle-urile sunt generate în browser, cu soluție unică demonstrată. Poți combina și reguli în „Combinație proprie”.',
   search:'Caută o variantă…', sort_by:'Sortează', sort_rec:'Ordine recomandată', sort_az:'Titlu A→Z', sort_za:'Titlu Z→A',
@@ -191,7 +191,7 @@ ro: {
   gen_ms:'generat în', lang_name:'RO'
 },
 en: {
-  mode:'Game mode', mode_normal:'Normal', mode_orb:'Orb (limited view)', mode_memory:'Memory', mode_marathon:'Marathon (5 puzzles)', mode_duel:'Duel against an opponent', mode_hardcore:'Hardcore (3 lives)', mode_daily:'Puzzle of the day', mode_sound:'Sound',
+  mode:'Game mode', mode_normal:'Normal', mode_orb:'Orb (limited view)', mode_memory:'Memory', mode_marathon:'Marathon (5 puzzles)', mode_duel:'Duel against an opponent', mode_hardcore:'Hardcore (3 lives)', mode_daily:'Puzzle of the day',mode_daily9:'Daily 9×9 puzzle (choose difficulty)', mode_sound:'Sound',
   atlas:'Atlas', play:'Play', solver:'Solver', about:'About',
   atlas_h:'Atlas of Sudoku variants', atlas_lead:'Every variant has a rules card and can be played locally: puzzles are generated in your browser, with a proven unique solution. You can also combine rules under "Custom mix".',
   search:'Search a variant…', sort_by:'Sort by', sort_rec:'Recommended order', sort_az:'Title A→Z', sort_za:'Title Z→A',
@@ -288,7 +288,7 @@ var CLUEMODS = [
   ['primeline','Linie primă','Prime line','primeline']
 ];
 U.fr = {
-  mode:"Mode de jeu", mode_normal:"Normal", mode_orb:"Orbe (vue limitée)", mode_memory:"Mémoire", mode_marathon:"Marathon (5 grilles)", mode_duel:"Duel contre un adversaire", mode_hardcore:"Hardcore (3 vies)", mode_daily:"Grille du jour", mode_sound:"Sonore",
+  mode:"Mode de jeu", mode_normal:"Normal", mode_orb:"Orbe (vue limitée)", mode_memory:"Mémoire", mode_marathon:"Marathon (5 grilles)", mode_duel:"Duel contre un adversaire", mode_hardcore:"Hardcore (3 vies)", mode_daily:"Grille du jour",mode_daily9:"Grille du jour 9×9 (difficulté au choix)", mode_sound:"Sonore",
   atlas:"Atlas", play:"Jouer", solver:"Résolveur", about:"À propos",
   atlas_h:"Atlas des variantes de Sudoku", atlas_lead:"Chaque variante a une fiche de règles et peut être jouée localement : les grilles sont générées dans votre navigateur, avec une solution unique démontrée. Vous pouvez aussi combiner des règles dans « Combinaison libre ».",
   search:"Rechercher une variante…", sort_by:"Trier par", sort_rec:"Ordre recommandé", sort_az:"Titre A→Z", sort_za:"Titre Z→A",
@@ -313,7 +313,7 @@ U.fr = {
   gen_ms:"généré en", lang_name:"FR"
 };
 U.it = {
-  mode:"Modalità di gioco", mode_normal:"Normale", mode_orb:"Orbe (vista limitata)", mode_memory:"Memoria", mode_marathon:"Maratona (5 schemi)", mode_duel:"Duello con un avversario", mode_hardcore:"Hardcore (3 vite)", mode_daily:"Schema del giorno", mode_sound:"Sonoro",
+  mode:"Modalità di gioco", mode_normal:"Normale", mode_orb:"Orbe (vista limitata)", mode_memory:"Memoria", mode_marathon:"Maratona (5 schemi)", mode_duel:"Duello con un avversario", mode_hardcore:"Hardcore (3 vite)", mode_daily:"Schema del giorno",mode_daily9:"Schema del giorno 9×9 (difficoltà a scelta)", mode_sound:"Sonoro",
   atlas:"Atlante", play:"Gioca", solver:"Risolutore", about:"Info",
   atlas_h:"Atlante delle varianti del Sudoku", atlas_lead:"Ogni variante ha una scheda con le regole e si può giocare in locale: gli schemi vengono generati nel browser, con soluzione unica dimostrata. Puoi anche combinare le regole in «Combinazione personalizzata».",
   search:"Cerca una variante…", sort_by:"Ordina per", sort_rec:"Ordine consigliato", sort_az:"Titolo A→Z", sort_za:"Titolo Z→A",
@@ -338,7 +338,7 @@ U.it = {
   gen_ms:"generato in", lang_name:"IT"
 };
 U.es = {
-  mode:"Modo de juego", mode_normal:"Normal", mode_orb:"Orbe (vista limitada)", mode_memory:"Memoria", mode_marathon:"Maratón (5 puzles)", mode_duel:"Duelo contra un adversario", mode_hardcore:"Hardcore (3 vidas)", mode_daily:"Puzle del día", mode_sound:"Sonoro",
+  mode:"Modo de juego", mode_normal:"Normal", mode_orb:"Orbe (vista limitada)", mode_memory:"Memoria", mode_marathon:"Maratón (5 puzles)", mode_duel:"Duelo contra un adversario", mode_hardcore:"Hardcore (3 vidas)", mode_daily:"Puzle del día",mode_daily9:"Puzle del día 9×9 (dificultad a elegir)", mode_sound:"Sonoro",
   atlas:"Atlas", play:"Jugar", solver:"Resolutor", about:"Acerca de",
   atlas_h:"Atlas de variantes de Sudoku", atlas_lead:"Cada variante tiene una ficha con sus reglas y se puede jugar en local: los puzles se generan en tu navegador, con solución única demostrada. También puedes combinar reglas en «Combinación propia».",
   search:"Buscar una variante…", sort_by:"Ordenar por", sort_rec:"Orden recomendado", sort_az:"Título A→Z", sort_za:"Título Z→A",
@@ -363,7 +363,7 @@ U.es = {
   gen_ms:"generado en", lang_name:"ES"
 };
 U.pt = {
-  mode:"Modo de jogo", mode_normal:"Normal", mode_orb:"Orbe (visão limitada)", mode_memory:"Memória", mode_marathon:"Maratona (5 puzzles)", mode_duel:"Duelo contra um adversário", mode_hardcore:"Hardcore (3 vidas)", mode_daily:"Puzzle do dia", mode_sound:"Sonoro",
+  mode:"Modo de jogo", mode_normal:"Normal", mode_orb:"Orbe (visão limitada)", mode_memory:"Memória", mode_marathon:"Maratona (5 puzzles)", mode_duel:"Duelo contra um adversário", mode_hardcore:"Hardcore (3 vidas)", mode_daily:"Puzzle do dia",mode_daily9:"Puzzle do dia 9×9 (dificuldade à escolha)", mode_sound:"Sonoro",
   atlas:"Atlas", play:"Jogar", solver:"Resolvedor", about:"Sobre",
   atlas_h:"Atlas de variantes de Sudoku", atlas_lead:"Cada variante tem uma ficha com as regras e pode ser jogada localmente: os puzzles são gerados no seu navegador, com solução única demonstrada. Também pode combinar regras em «Combinação própria».",
   search:"Procurar uma variante…", sort_by:"Ordenar por", sort_rec:"Ordem recomendada", sort_az:"Título A→Z", sort_za:"Título Z→A",
@@ -388,7 +388,7 @@ U.pt = {
   gen_ms:"gerado em", lang_name:"PT"
 };
 U.de = {
-  mode:"Spielmodus", mode_normal:"Normal", mode_orb:"Orb (eingeschränkte Sicht)", mode_memory:"Gedächtnis", mode_marathon:"Marathon (5 Rätsel)", mode_duel:"Duell gegen einen Gegner", mode_hardcore:"Hardcore (3 Leben)", mode_daily:"Rätsel des Tages", mode_sound:"Klang",
+  mode:"Spielmodus", mode_normal:"Normal", mode_orb:"Orb (eingeschränkte Sicht)", mode_memory:"Gedächtnis", mode_marathon:"Marathon (5 Rätsel)", mode_duel:"Duell gegen einen Gegner", mode_hardcore:"Hardcore (3 Leben)", mode_daily:"Rätsel des Tages",mode_daily9:"Tagesrätsel 9×9 (Schwierigkeit wählbar)", mode_sound:"Klang",
   atlas:"Atlas", play:"Spielen", solver:"Löser", about:"Info",
   atlas_h:"Atlas der Sudoku-Varianten", atlas_lead:"Jede Variante hat eine Regelkarte und kann lokal gespielt werden: Die Rätsel werden in Ihrem Browser erzeugt, mit nachgewiesen eindeutiger Lösung. Unter „Eigene Kombination“ können Sie auch Regeln kombinieren.",
   search:"Variante suchen…", sort_by:"Sortieren nach", sort_rec:"Empfohlene Reihenfolge", sort_az:"Titel A→Z", sort_za:"Titel Z→A",
@@ -413,7 +413,7 @@ U.de = {
   gen_ms:"erzeugt in", lang_name:"DE"
 };
 U.hu = {
-  mode:"Játékmód", mode_normal:"Normál", mode_orb:"Gömb (korlátozott látótér)", mode_memory:"Memória", mode_marathon:"Maraton (5 rejtvény)", mode_duel:"Párbaj egy ellenfél ellen", mode_hardcore:"Hardcore (3 élet)", mode_daily:"A nap rejtvénye", mode_sound:"Hangalapú",
+  mode:"Játékmód", mode_normal:"Normál", mode_orb:"Gömb (korlátozott látótér)", mode_memory:"Memória", mode_marathon:"Maraton (5 rejtvény)", mode_duel:"Párbaj egy ellenfél ellen", mode_hardcore:"Hardcore (3 élet)", mode_daily:"A nap rejtvénye",mode_daily9:"Napi 9×9-es rejtvény (választható nehézség)", mode_sound:"Hangalapú",
   atlas:"Atlasz", play:"Játék", solver:"Megoldó", about:"Névjegy",
   atlas_h:"A Sudoku-változatok atlasza", atlas_lead:"Minden változathoz tartozik egy szabálykártya, és helyben játszható: a rejtvényeket a böngésző állítja elő, bizonyítottan egyértelmű megoldással. A szabályokat az „Egyéni kombináció” alatt is összeállíthatod.",
   search:"Változat keresése…", sort_by:"Rendezés", sort_rec:"Ajánlott sorrend", sort_az:"Cím A→Z", sort_za:"Cím Z→A",
