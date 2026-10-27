@@ -290,7 +290,50 @@ $('b-copy').onclick = function () {
   var c = $('code').value; if (!c) return;
   try { navigator.clipboard.writeText(c).then(function () { setMsg(t('copied'), 'good'); }, function () { $('code').select(); }); } catch (e) { $('code').select(); }
 };
-$('b-print').onclick = function () { window.print(); };
+/* ---------- foaie tipăribilă (2.1.0) ---------- */
+var printWithSol = false;
+function boardClone(withSol) { // desenează temporar puzzle-ul gol (doar indiciile) sau soluția, clonează SVG-ul, apoi restabilește starea
+  var g = game, keep = { vals: g.vals, notes: g.notes, sel: g.sel, step: g.step, wrong: g.wrong, mx: g.mx, v3d: g.v3d }, c = null, i;
+  var vals = new Int32Array(g.cnt);
+  if (withSol) for (i = 0; i < g.cnt; i++) vals[i] = g.P.givens[i] > 0 ? 0 : (g.P.solution[i] | 0);
+  g.vals = vals; g.notes = new Int32Array(g.cnt); g.sel = new Set(); g.step = null; g.wrong = new Set(); g.mx = { id: 'normal' }; g.v3d = false;
+  try { renderDyn(); c = $('board').cloneNode(true); }
+  finally { g.vals = keep.vals; g.notes = keep.notes; g.sel = keep.sel; g.step = keep.step; g.wrong = keep.wrong; g.mx = keep.mx; g.v3d = keep.v3d; renderDyn(); }
+  c.removeAttribute('id'); c.removeAttribute('tabindex'); c.removeAttribute('role'); c.setAttribute('class', 'pboard'); c.setAttribute('aria-hidden', 'true');
+  Array.prototype.forEach.call(c.querySelectorAll('[id]'), function (e) { e.removeAttribute('id'); });
+  Array.prototype.forEach.call(c.querySelectorAll('[data-i]'), function (e) { e.parentNode.removeChild(e); });
+  return c;
+}
+function psEl(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
+function psPage(withSol) {
+  var P = game.P, v = VBY[P.vid], pg = psEl('section', 'ps-page'), name = v ? vname(v) : t('custom');
+  pg.appendChild(psEl('h1', '', name + (withSol ? ' · ' + t('ps_solution') : '')));
+  var meta = [sizeLabel(game.N, P.vid), t(P.difficulty), game.mx && game.mx.id === 'daily' && game.mx.date ? t('mode_daily') + ' ' + game.mx.date : '', P.ucode ? t('code') + ': ' + P.ucode : ''].filter(Boolean);
+  pg.appendChild(psEl('p', 'ps-meta', meta.join(' · ')));
+  var ru = psEl('div', 'ps-rules'); ru.innerHTML = $('rules').innerHTML; pg.appendChild(ru);
+  pg.appendChild(boardClone(withSol));
+  pg.appendChild(psEl('p', 'ps-foot', t('ps_foot')));
+  return pg;
+}
+function buildPrintSheet(withSol) {
+  var sh = $('print-sheet'); sh.textContent = '';
+  if (!game || curTab !== 'play' || !game.P.solution) return false;
+  try {
+    sh.appendChild(psPage(false));
+    if (withSol) sh.appendChild(psPage(true));
+  } catch (e) { sh.textContent = ''; return false; }
+  return true;
+}
+function doPrint(withSol) {
+  if (!game) { setMsg(t('ps_none'), 'bad'); return; }
+  if (curTab !== 'play') showTab('play');
+  printWithSol = !!withSol; window.print();
+}
+$('b-print').onclick = function () { doPrint(false); };
+$('b-print-sol').onclick = function () { doPrint(true); };
+window.addEventListener('beforeprint', function () { if (buildPrintSheet(printWithSol)) document.body.classList.add('psheet'); });
+window.addEventListener('afterprint', function () { document.body.classList.remove('psheet'); $('print-sheet').textContent = ''; printWithSol = false; });
+if (window.__SFF_TEST) window.__SFF_TEST.print = { build: buildPrintSheet, setSol: function (v) { printWithSol = !!v; } };
 
 /* ---------- starea jocului ---------- */
 var game = null, timerLast = 0, saveTimer = 0;
@@ -1054,7 +1097,7 @@ function i18n() {
   var d = $('sel-diff').value || 'medium';
   $('sel-diff').innerHTML = '<option value="easy">' + t('easy') + '</option><option value="medium">' + t('medium') + '</option><option value="hard">' + t('hard') + '</option>'; syncTierOptions(); $('sel-diff').value = d;
   $('custom-h').textContent = t('custom_h'); $('custom-h2').textContent = t('custom_h2'); $('l-word').textContent = t('word');
-  $('b-new').textContent = t('newgame'); $('b-print').textContent = t('print'); $('l-code').textContent = t('code'); $('b-copy').textContent = t('copy'); $('b-open').textContent = t('open');
+  $('b-new').textContent = t('newgame'); $('b-print').textContent = t('print'); $('b-print-sol').textContent = t('print_sol'); $('l-code').textContent = t('code'); $('b-copy').textContent = t('copy'); $('b-open').textContent = t('open');
   [['a-note', 'note'], ['a-erase', 'erase'], ['a-undo', 'undo'], ['a-redo', 'redo'], ['a-hint', 'hint'], ['a-step', 'step'], ['a-tech', 'tech_btn'], ['a-play', 'autoplay'], ['a-auto', 'auto'], ['a-check', 'check'], ['a-solve', 'solve'], ['a-clear', 'clear']].forEach(function (p) { $(p[0]).textContent = t(p[1]); });
   if (playTimer) $('a-play').textContent = t('pause');
   $('q').setAttribute('aria-label', t('search')); $('word').setAttribute('aria-label', t('word')); $('sv-in').setAttribute('aria-label', t('sv_h'));

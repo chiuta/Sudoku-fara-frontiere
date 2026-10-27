@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 2.0.0 · **Last updated:** 2026-10-26
+**Version:** 2.1.0 · **Last updated:** 2026-10-27
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -11,6 +11,8 @@ An atlas of Sudoku variants, with a generator and solver that run locally — in
 **License:** [MIT](LICENSE) · **Live:** <https://chiuta.github.io/Sudoku-fara-frontiere/> · **Illustrated guide (single page):** <https://chiuta.github.io/Sudoku-fara-frontiere/docs/GHID.en.html>
 
 ![A few variants, after “Step by step”](docs/screenshot.png)
+
+**New in 2.1.0:** printable sheet (the Print button now prints a clean page with the title, size, difficulty, code and rules plus the puzzle with only the given clues; the new "Print with solution" button adds the solution on a second page). The generator with unique solutions and step-by-step technique explanations (2.0.0) and the "Puzzle of the day" mode (deterministic from the date) were already present. See `CHANGELOG.md`.
 
 ## What it is
 
@@ -208,6 +210,14 @@ For each variant and size, at easy and hard level, it checks: the solution respe
 ## What is not implemented from level 3
 
 Not included: Chaos Construction, Deconstruction, hybrids with other puzzles (Loop, Snake, Yin-Yang, Nurikabe, Sudoku Mine), the overlapping Flower/Butterfly grids (Sohei and Kazaguruma exist since 1.3, with a geometry chosen by me), modifier cells, Schrödinger, “liar”, Vudoku, Capsule, Deficit. Some change the game mode or require solvers with a different kind of logic; for others the sources found do not fix the rules or the geometry, and inventing them would mean presenting as a known variant something that is not.
+
+## Status
+
+Stable, version 2.1.0 (2026-10-27). 136 variants; generator with a unique solution verified by the solver; technique-by-technique explanations for classic Sudoku; daily puzzle mode; printable sheet with optional solution page. A unified local multiplayer mode across the games is planned, not implemented. Changes: `CHANGELOG.md`.
+
+## Offline
+
+A single file, `index.html` (built from `src/` and `engine.js` with `python3 build.py`): no CDN, no external fonts or scripts, no tracking, no accounts. A strict CSP (`default-src 'none'`, `connect-src 'none'`) blocks network connections; a service worker caches the app for offline start. Printing uses the browser's own print dialog.
 
 ## License
 

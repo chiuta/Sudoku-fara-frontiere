@@ -1788,8 +1788,8 @@
 <meta name="color-scheme" content="light dark">
 <!--CSP-->
 <title>Sudoku fără frontiere</title>
-<meta name="application-version" content="2.0.0">
-<meta name="last-updated" content="2026-10-26">
+<meta name="application-version" content="2.1.0">
+<meta name="last-updated" content="2026-10-27">
 <meta name="description" content="Atlas de variante Sudoku cu generator și rezolvator local, într-un singur fișier HTML, offline, fără cont și fără urmărire.">
 <style>
 /*CSS*/
@@ -1871,6 +1871,7 @@
           <div class="row" style="margin-top:.6rem">
             <button class="btn" id="b-new"></button>
             <button class="btn alt" id="b-print"></button>
+            <button class="btn alt" id="b-print-sol"></button>
           </div>
           <div class="row" style="margin-top:.6rem">
             <label class="field"><span id="l-code"></span><input type="text" id="code" spellcheck="false"></label>
@@ -1928,6 +1929,7 @@
   </section>
 </main>
 <footer id="foot"></footer>
+<div id="print-sheet" aria-hidden="true"></div>
 <dialog id="dlg"></dialog>
 <script id="engine">
 /*ENGINE*/

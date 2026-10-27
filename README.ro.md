@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 2.0.0 · **Ultima actualizare:** 2026-10-26
+**Versiune:** 2.1.0 · **Ultima actualizare:** 2026-10-27
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -11,6 +11,8 @@ Atlas de variante Sudoku, cu generator și rezolvator care rulează local — î
 **Licență:** [MIT](LICENSE) · **Live:** <https://chiuta.github.io/Sudoku-fara-frontiere/> · **Ghid ilustrat (o singură pagină):** <https://chiuta.github.io/Sudoku-fara-frontiere/docs/GHID.html>
 
 ![Câteva variante, după „Pas cu pas”](docs/screenshot.png)
+
+**Nou în 2.1.0:** foaie tipăribilă (butonul „Tipărește” tipărește acum o pagină curată cu titlul, mărimea, dificultatea, codul și regulile, plus puzzle-ul doar cu indiciile date; butonul nou „Tipărește cu soluția” adaugă soluția pe a doua pagină). Generatorul cu soluție unică și explicațiile de tehnici pas cu pas (2.0.0) și modul „Puzzle-ul zilei” (determinist din dată) existau deja. Vezi `CHANGELOG.md`.
 
 ## Ce este
 
@@ -209,6 +211,14 @@ Pentru fiecare variantă și mărime, la nivel ușor și greu, verifică: soluț
 ## Ce nu e implementat din nivelul 3
 
 Nu sunt incluse: Chaos Construction, Deconstruction, hibrizii cu alte puzzle-uri (Loop, Snake, Yin-Yang, Nurikabe, Sudoku Mine), grilele suprapuse Flower/Butterfly (Sohei și Kazaguruma există din 1.3, cu geometrie aleasă de mine), celulele modificatoare, Schrödinger, „liar”, Vudoku, Capsule, Deficit. Unele schimbă modul de joc sau cer solvere cu alt fel de logică; pentru altele sursele găsite nu fixează regulile sau geometria, iar inventarea lor ar însemna să afișez ca variantă cunoscută ceva ce nu este.
+
+## Stare
+
+Stabil, versiunea 2.1.0 (2026-10-27). 136 de variante; generator cu soluție unică verificată de solver; explicații pe tehnici pentru Sudoku clasic; modul puzzle zilnic; foaie tipăribilă cu pagină de soluție opțională. Un mod multiplayer local unificat între jocuri este planificat, nu implementat. Modificări: `CHANGELOG.md`.
+
+## Offline
+
+Un singur fișier, `index.html` (construit din `src/` și `engine.js` cu `python3 build.py`): fără CDN, fără fonturi sau scripturi externe, fără urmărire, fără conturi. O politică CSP strictă (`default-src 'none'`, `connect-src 'none'`) blochează conexiunile de rețea; un service worker memorează aplicația pentru pornire offline. Tipărirea folosește dialogul propriu al browserului.
 
 ## Licență
 
