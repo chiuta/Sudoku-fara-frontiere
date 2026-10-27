@@ -222,9 +222,17 @@ function dailySpec() {
   var sizes = PRE[id].sizes, n = sizes.indexOf(9) >= 0 ? 9 : sizes[0];
   return { v: id, spec: { preset: id, n: n, difficulty: 'medium', seed: (20000000 + d) >>> 0, _noDegrade: true }, date: new Date(d * 86400000).toISOString().slice(0, 10) };
 }
+/* Puzzle zilnic clasic 9×9 cu dificultate la alegere (2.2.0). Mod SEPARAT: nu atinge „Puzzle-ul zilei” (seed 20000000 + zi),
+   deci codurile zilnice deja generate rămân identice. Seed = 40000000 + 7*zi + indicele dificultății (easy, medium, hard, t1–t4). */
+var D9 = ['easy', 'medium', 'hard', 't1', 't2', 't3', 't4'];
+function dailySpec9(diff) {
+  var d = Math.floor(Date.now() / 86400000), k = D9.indexOf(diff); if (k < 0) { diff = 'medium'; k = 1; }
+  return { v: 'clasic', spec: { preset: 'clasic', n: 9, difficulty: diff, seed: (40000000 + d * 7 + k) >>> 0, _noDegrade: true }, date: new Date(d * 86400000).toISOString().slice(0, 10) };
+}
 function newFromUI(seed) {
   var v = $('sel-var').value, n = +$('sel-size').value, diff = $('sel-diff').value, mode = $('sel-mode').value || 'normal';
   if (mode === 'daily') { var dd = dailySpec(); startSpec(dd.spec, dd.v, 'daily', { id: 'daily', date: dd.date }); return; }
+  if (mode === 'daily9') { var d9 = dailySpec9(diff); startSpec(d9.spec, d9.v, 'daily9', { id: 'daily9', date: d9.date }); return; }
   if (!n) { setMsg(t('custom_none'), 'bad'); return; }
   var spec = { n: n, difficulty: diff, seed: seed || ((Math.random() * 4294967295) >>> 0) };
   if (v === 'custom') { var s = customSel(); spec.mods = s.mods; spec.clues = s.clues; spec.jigsaw = s.jigsaw; spec.hard = 0.7; spec.preset = null; }
@@ -237,7 +245,7 @@ function startSpec(spec, v, mode, mx) {
   clearTimeout(maraTimer); degraded = '';
   runGen(spec, function (r, ms) {
     if (!r.ok) { degraded = ''; setMsg(t('genfail') + ' (' + r.err + ')', 'bad'); return; }
-    var P = r.P; P.mode = mode || 'normal'; P.ucode = codeOf(spec, P) + (P.mode !== 'normal' && P.mode !== 'daily' ? '@' + P.mode : ''); P.ms = ms; P.vid = v || spec.preset || 'custom';
+    var P = r.P; P.mode = mode || 'normal'; P.ucode = codeOf(spec, P) + (P.mode !== 'normal' && P.mode !== 'daily' && P.mode !== 'daily9' ? '@' + P.mode : ''); P.ms = ms; P.vid = v || spec.preset || 'custom';
     loadGame(P, null, mx); setMsg(degraded ? t('degraded').replace('%', degraded) : '', degraded ? 'ok' : ''); degraded = '';
   });
 }
@@ -308,7 +316,7 @@ function psEl(tag, cls, text) { var e = document.createElement(tag); if (cls) e.
 function psPage(withSol) {
   var P = game.P, v = VBY[P.vid], pg = psEl('section', 'ps-page'), name = v ? vname(v) : t('custom');
   pg.appendChild(psEl('h1', '', name + (withSol ? ' · ' + t('ps_solution') : '')));
-  var meta = [sizeLabel(game.N, P.vid), t(P.difficulty), game.mx && game.mx.id === 'daily' && game.mx.date ? t('mode_daily') + ' ' + game.mx.date : '', P.ucode ? t('code') + ': ' + P.ucode : ''].filter(Boolean);
+  var meta = [sizeLabel(game.N, P.vid), t(P.difficulty), game.mx && (game.mx.id === 'daily' || game.mx.id === 'daily9') && game.mx.date ? t(game.mx.id === 'daily9' ? 'mode_daily9' : 'mode_daily') + ' ' + game.mx.date : '', P.ucode ? t('code') + ': ' + P.ucode : ''].filter(Boolean);
   pg.appendChild(psEl('p', 'ps-meta', meta.join(' · ')));
   var ru = psEl('div', 'ps-rules'); ru.innerHTML = $('rules').innerHTML; pg.appendChild(ru);
   pg.appendChild(boardClone(withSol));
@@ -347,7 +355,7 @@ function symsFor(P) {
   if (P.zero) return '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.slice(0, N).split('');
   return BASE_SYMS.slice(0, N).split('');
 }
-var MX_IDS = ['normal', 'orb', 'memory', 'marathon', 'duel', 'hardcore', 'daily', 'sound'];
+var MX_IDS = ['normal', 'orb', 'memory', 'marathon', 'duel', 'hardcore', 'daily', 'daily9', 'sound'];
 function cleanSaved(sv, N) {
   var o = { vals: sv.vals, notes: sv.notes, elapsed: +sv.elapsed || 0, solved: !!sv.solved, revealed: !!sv.revealed, lost: !!sv.lost, syms: null, mx: null };
   if (!sv.notes || sv.notes.length !== sv.vals.length) o.notes = new Array(sv.vals.length).fill(0);
@@ -357,7 +365,7 @@ function cleanSaved(sv, N) {
     var x = { id: m.id };
     ['step', 'of', 'total', 'left', 'peeks', 'done', 'acc', 'per', 'lives'].forEach(function (k) { if (m[k] !== undefined) x[k] = +m[k] || 0; });
     if (m.phase === 'show' || m.phase === 'peek' || m.phase === 'hide') x.phase = m.phase;
-    if (typeof m.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(m.date)) x.date = m.date; else if (m.id === 'daily') x.date = new Date().toISOString().slice(0, 10);
+    if (typeof m.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(m.date)) x.date = m.date; else if (m.id === 'daily' || m.id === 'daily9') x.date = new Date().toISOString().slice(0, 10);
     if (typeof m.v === 'string' && /^[a-z0-9_]{1,30}$/.test(m.v)) x.v = m.v;
     if (m.base && typeof m.base === 'object') x.base = JSON.parse(JSON.stringify(m.base));
     o.mx = x;
@@ -1092,7 +1100,7 @@ function i18n() {
   $('sortby').setAttribute('aria-label', t('sort_by')); $('sortby').innerHTML = '<option value="rec">' + t('sort_rec') + '</option><option value="az">' + t('sort_az') + '</option><option value="za">' + t('sort_za') + '</option>';
   $('f-play').textContent = t('custom_btn'); $('b-today').textContent = t('today'); $('b-rand').textContent = t('rand');
   $('b-csv').textContent = t('csv'); $('b-bib').textContent = t('bib'); $('lex-h').textContent = t('lex_h');
-  $('l-mode').textContent = t('mode'); var mv = $('sel-mode').value || 'normal'; $('sel-mode').innerHTML = ['normal', 'orb', 'memory', 'marathon', 'duel', 'hardcore', 'daily', 'sound'].map(function (m) { return '<option value="' + m + '">' + t('mode_' + m) + '</option>'; }).join(''); $('sel-mode').value = mv;
+  $('l-mode').textContent = t('mode'); var mv = $('sel-mode').value || 'normal'; $('sel-mode').innerHTML = ['normal', 'orb', 'memory', 'marathon', 'duel', 'hardcore', 'daily', 'daily9', 'sound'].map(function (m) { return '<option value="' + m + '">' + t('mode_' + m) + '</option>'; }).join(''); $('sel-mode').value = mv;
   $('h-new').textContent = t('new_h'); $('l-var').textContent = t('variant'); $('l-size').textContent = t('size'); $('l-diff').textContent = t('diff');
   var d = $('sel-diff').value || 'medium';
   $('sel-diff').innerHTML = '<option value="easy">' + t('easy') + '</option><option value="medium">' + t('medium') + '</option><option value="hard">' + t('hard') + '</option>'; syncTierOptions(); $('sel-diff').value = d;
@@ -1137,7 +1145,7 @@ function freshMx(P) {
   }
   if (m === 'hardcore') x.lives = 3;
   if (m === 'marathon') { x.step = 1; x.of = MARA.length; x.total = 0; }
-  if (m === 'daily') x.date = new Date().toISOString().slice(0, 10);
+  if (m === 'daily' || m === 'daily9') x.date = new Date().toISOString().slice(0, 10);
   return x;
 }
 function noHelp() { var m = game && game.mx && game.mx.id; return m === 'hardcore' || m === 'memory'; }
@@ -1174,6 +1182,7 @@ function renderModebar() {
   if (x.id === 'hardcore') h += ' ' + L2('vieți: ', 'lives: ', ["vies : ", "vite: ", "vidas: ", "vidas: ", "Leben: ", "életek: "]) + new Array(Math.max(0, x.lives) + 1).join('♥');
   if (x.id === 'marathon') h += ' ' + x.step + '/' + x.of + ' · ' + L2('timp total ', 'total time ', ["temps total ", "tempo totale ", "tiempo total ", "tempo total ", "Gesamtzeit ", "összidő "]) + fmtT(x.total + g.elapsed);
   if (x.id === 'daily') { var ds = dailyInfo(); h += ' ' + x.date + ' · ' + L2('serie: ', 'streak: ', ["série : ", "serie: ", "racha: ", "sequência: ", "Serie: ", "sorozat: "]) + ds.streak + ' · ' + L2('record: ', 'best: ', ["record : ", "record: ", "récord: ", "recorde: ", "Rekord: ", "rekord: "]) + ds.best; }
+  if (x.id === 'daily9') { var d9i = dailyInfo('daily9'); h += ' ' + x.date + ' · ' + L2('serie: ', 'streak: ', ["série : ", "serie: ", "racha: ", "sequência: ", "Serie: ", "sorozat: "]) + d9i.streak + ' · ' + L2('record: ', 'best: ', ["record : ", "record: ", "récord: ", "recorde: ", "Rekord: ", "rekord: "]) + d9i.best; }
   if (x.id === 'sound') h += ' <button id="mb-row">▶ ' + L2('Ascultă rândul', 'Play the row', ["Écouter la ligne", "Ascolta la riga", "Escuchar la fila", "Ouvir a linha", "Zeile abspielen", "A sor lejátszása"]) + '</button>';
   if (el._h === h) return; el._h = h; el.innerHTML = h;
   var b;
@@ -1186,7 +1195,7 @@ function renderModebar() {
   };
 }
 function fmtT(ms) { var s = Math.floor(ms / 1000); return Math.floor(s / 60) + ':' + (s % 60 < 10 ? '0' : '') + (s % 60); }
-function dailyInfo() { try { var d = JSON.parse(LS.get('daily', '{}')); return { last: typeof d.last === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d.last) ? d.last : '', streak: +d.streak || 0, best: +d.best || 0 }; } catch (e) { return { last: '', streak: 0, best: 0 }; } }
+function dailyInfo(key) { try { var d = JSON.parse(LS.get(key || 'daily', '{}')); return { last: typeof d.last === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d.last) ? d.last : '', streak: +d.streak || 0, best: +d.best || 0 }; } catch (e) { return { last: '', streak: 0, best: 0 }; } }
 function onDigit(d, cells) {
   var g = game, x = g.mx;
   if (x.id === 'sound') {
@@ -1216,6 +1225,11 @@ function onSolved() {
     var d = dailyInfo(), today = x.date, prev = new Date(new Date(today).getTime() - 86400000).toISOString().slice(0, 10);
     if (d.last !== today) { d.streak = d.last === prev ? d.streak + 1 : 1; d.last = today; d.best = Math.max(d.best, d.streak); LS.set('daily', JSON.stringify(d)); }
     setMsg(t('solved') + ' ' + L2('Serie: ', 'Streak: ', ["Série : ", "Serie: ", "Racha: ", "Sequência: ", "Serie: ", "Sorozat: "]) + d.streak, 'good');
+  }
+  if (x.id === 'daily9') {
+    var e9 = dailyInfo('daily9'), t9 = x.date, p9 = new Date(new Date(t9).getTime() - 86400000).toISOString().slice(0, 10);
+    if (e9.last !== t9) { e9.streak = e9.last === p9 ? e9.streak + 1 : 1; e9.last = t9; e9.best = Math.max(e9.best, e9.streak); LS.set('daily9', JSON.stringify(e9)); }
+    setMsg(t('solved') + ' ' + L2('Serie: ', 'Streak: ', ["Série : ", "Serie: ", "Racha: ", "Sequência: ", "Serie: ", "Sorozat: "]) + e9.streak, 'good');
   }
   if (x.id === 'duel') setMsg(L2('Ai câștigat duelul! Adversarul avea ', 'You won the duel! The opponent had ', ["Vous avez gagné le duel ! L’adversaire en était à ", "Hai vinto il duello! L’avversario era a ", "¡Has ganado el duelo! El adversario llevaba ", "Ganhou o duelo! O adversário tinha ", "Sie haben das Duell gewonnen! Der Gegner hatte ", "Megnyerted a párbajt! Az ellenfélnek ennyi volt: "]) + x.done + '/' + x.total + '.', 'good');
   if (x.id === 'marathon') {

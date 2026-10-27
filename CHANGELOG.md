@@ -1,5 +1,11 @@
 # Istoric versiuni
 
+## 2.2.0 — 2026-10-27
+- **Mod nou „Puzzle zilnic 9×9 (dificultate la alegere)”** (`daily9`): sudoku clasic 9×9, determinist din dată (seed 40000000 + 7·zi + indicele dificultății), cu dificultatea aleasă din listă (ușor/mediu/greu și t1–t4); același cod pentru toți în aceeași zi. Serie și record proprii (cheia `daily9`). Modul existent „Puzzle-ul zilei” (seed 20000000 + zi, variantă rotită) **nu s-a schimbat**, deci codurile zilnice deja generate rămân identice.
+- Test nou `tests/daily9.test.mjs` (19 verificări): determinism în aceeași zi, dificultate și cod corecte, soluție validă și indicii consecvente, dificultăți diferite → coduri diferite, modul vechi cu seed-ul vechi, serie, 0 cereri de rețea.
+- Texte în 8 limbi (fr/it/es/pt/hu/de: traducere automată, neverificată nativ).
+- Neimplementat: tipărirea cubelor 3D/hipercuburilor și a variantelor „ceață” cu soluție (foaia se construiește din vederea 2D); „mod multiplayer local unificat” (planificat).
+
 ## 2.1.0 — 2026-10-27
 - **Foaie tipăribilă.** „Tipărește” generează acum o foaie curată (titlu, mărime, dificultate, cod, data la puzzle-ul zilei, regulile variantei) cu puzzle-ul doar cu indiciile date — fără cifrele jucătorului, notițe sau selecții —, iar noul buton **„Tipărește cu soluția”** adaugă soluția pe a doua pagină. Funcționează și cu Ctrl+P din fila Joacă (evenimentele `beforeprint` / `afterprint`); starea jocului se restabilește după construirea foii. Paleta de tipărire este mereu deschisă (alb-negru), indiferent de tema aplicației. Textele sunt în cele 8 limbi (fr/it/es/pt/hu/de: traduceri automate, neverificate nativ).
 - Test nou: `tests/print.test.mjs` (17 verificări: doar indiciile pe pagina 1, soluția completă pe pagina 2, starea restabilită, PDF A4 cu 1 sau 2 pagini, puzzle-ul zilei identic în aceeași zi).
