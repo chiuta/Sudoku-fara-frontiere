@@ -1,5 +1,11 @@
 # Istoric versiuni
 
+## 2.2.0 — 2026-11-02 (reîmprospătare kit)
+
+- Nou (kit): **Sincronizare între dispozitive** (`FFF.sync`) — în dialogul «Transparență» (clic pe versiune → Copie de siguranță): conectezi două dispozitive direct (WebRTC, cod/QR, fără server și fără cont) și își schimbă datele aplicației; cea mai recentă valoare câștigă, secretele (chei API, parole) nu se trimit, ștergerile nu se propagă. Aplicarea trece prin importul kitului (confirmare, chei permise, rollback).
+- Nou (kit): **Istoric local — «mașina timpului»** (`FFF.history`) — instantanee automate ale datelor (IndexedDB, fără secrete), diferență față de starea curentă și restaurare reversibilă; «Șterge datele aplicației» șterge și istoricul.
+- Module adăugate: `qr`, `p2p`, `sync`, `history` (+~140 KB). Versiunea aplicației nu se schimbă.
+
 ## 2.2.0 — 2026-10-27
 - **Mod nou „Puzzle zilnic 9×9 (dificultate la alegere)”** (`daily9`): sudoku clasic 9×9, determinist din dată (seed 40000000 + 7·zi + indicele dificultății), cu dificultatea aleasă din listă (ușor/mediu/greu și t1–t4); același cod pentru toți în aceeași zi. Serie și record proprii (cheia `daily9`). Modul existent „Puzzle-ul zilei” (seed 20000000 + zi, variantă rotită) **nu s-a schimbat**, deci codurile zilnice deja generate rămân identice.
 - Test nou `tests/daily9.test.mjs` (19 verificări): determinism în aceeași zi, dificultate și cod corecte, soluție validă și indicii consecvente, dificultăți diferite → coduri diferite, modul vechi cu seed-ul vechi, serie, 0 cereri de rețea.
