@@ -13,8 +13,8 @@
     "Worker"
   ],
   "storageKeys": [],
-  "sizeBytes": 811397,
-  "sha256": "6fae31f855526c7673fc9732df026c86627b898df490f246993e29a92776d42c",
+  "sizeBytes": 951831,
+  "sha256": "4685ccf6aa6dea859c58a9ee1a2cb486ed123afd6fa8438522e64b13f8887b89",
   "csp": {
     "present": true,
     "directives": {
@@ -53,7 +53,11 @@
       "store",
       "dialog",
       "label",
-      "bundle"
+      "bundle",
+      "qr",
+      "p2p",
+      "sync",
+      "history"
     ]
   },
   "kit": {
@@ -63,7 +67,11 @@
       "store",
       "dialog",
       "label",
-      "bundle"
+      "bundle",
+      "qr",
+      "p2p",
+      "sync",
+      "history"
     ]
   },
   "selfSerializing": false
