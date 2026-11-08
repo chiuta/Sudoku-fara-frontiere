@@ -3,7 +3,7 @@
    Fără dependențe, fără rețea. Rulează în browser, în Worker și în Node. */
 (function (root) {
 'use strict';
-var VERSION = '2.2.0';
+var VERSION = '2.2.3';
 
 /* ---------- RNG și utilitare pe biți ---------- */
 function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
@@ -1967,6 +1967,9 @@ function generate(spec) {
     var rr = S.solve(Int32Array.from(giv), { limit: 1, budget: 20000 });
     P.rating = rr.aborted || rr.count !== 1 ? -1 : Math.max(1, rr.nodes - 1);
   })();
+  /* unicitate verificată efectiv: caută până la 2 soluții cu toate restricțiile; true doar dacă există exact una și căutarea nu a fost întreruptă (fog: nu se afirmă) */
+  P.unique = false;
+  if (!P.fog) try { var uq = S.solve(Int32Array.from(giv), { limit: 2, budget: 50000 }); P.unique = uq.count === 1 && !uq.aborted; } catch (e) { P.unique = false; }
   P.code = (spec.preset || 'custom') + '-' + N + '-' + difficulty + '-' + seed;
   return P;
 }
@@ -2210,6 +2213,8 @@ function generateByTier(spec) {
   P = best.P; P.givens = best.giv; P.clueCount = best.giv.filter(Boolean).length;
   var rr = S.solve(Int32Array.from(P.givens), { limit: 1, budget: 20000 });
   P.rating = rr.aborted || rr.count !== 1 ? -1 : (rr.nodes <= 1 ? 0 : rr.nodes - 1);
+  P.unique = false;
+  try { var uq2 = S.solve(Int32Array.from(P.givens), { limit: 2, budget: 50000 }); P.unique = uq2.count === 1 && !uq2.aborted; } catch (e) { P.unique = false; }
   P.difficulty = spec.difficulty; P.seed = (spec.seed >>> 0) || 1; P.techTier = bestTier; P.techWanted = tier;
   P.code = 'clasic-9-' + spec.difficulty + '-' + P.seed;
   return P;

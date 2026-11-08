@@ -427,7 +427,7 @@ function updateStatus() {
   var v = VBY[game.P.vid];
   $('st-name').textContent = (v ? vname(v) : t('custom')) + ' · ' + sizeLabel(game.P.n, game.P.vid);
   var cl = game.P.givens.filter(Boolean).length;
-  $('st-info').textContent = cl + '/' + game.cnt + ' ' + t('clues') + ' · ' + t(game.P.difficulty) + (game.P.techTier && game.P.techWanted && game.P.techTier !== game.P.techWanted ? ' (' + t('tech_near').replace('{t}', t('t' + game.P.techTier)) + ')' : '') + ratingTxt(game.P) + techInfoTxt();
+  $('st-info').textContent = cl + '/' + game.cnt + ' ' + t('clues') + ' · ' + t(game.P.difficulty) + (game.P.techTier && game.P.techWanted && game.P.techTier !== game.P.techWanted ? ' (' + t('tech_near').replace('{t}', t('t' + game.P.techTier)) + ')' : '') + ratingTxt(game.P) + (game.P.unique === true ? ' · ' + t('uniq') : '') + techInfoTxt();
   var s = Math.floor(game.elapsed / 1000), m = Math.floor(s / 60);
   $('st-time').textContent = m + ':' + (s % 60 < 10 ? '0' : '') + (s % 60);
   renderModebar();

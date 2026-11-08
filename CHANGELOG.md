@@ -1,5 +1,9 @@
 # Istoric versiuni
 
+## 2.2.3 — 2026-11-08
+
+- Insignă „Soluție unică (verificată la generare)” în linia de stare: generatorul face acum o verificare finală cu 2 soluții (`P.unique`), iar insigna apare doar când rezultatul e confirmat (nu la Fog, nu la puzzle-uri importate sau salvate anterior); 8 limbi; test `unic`.
+
 ## 2.2.0 — 2026-11-02 (reîmprospătare kit)
 
 - Nou (kit): **Sincronizare între dispozitive** (`FFF.sync`) — în dialogul «Transparență» (clic pe versiune → Copie de siguranță): conectezi două dispozitive direct (WebRTC, cod/QR, fără server și fără cont) și își schimbă datele aplicației; cea mai recentă valoare câștigă, secretele (chei API, parole) nu se trimit, ștergerile nu se propagă. Aplicarea trece prin importul kitului (confirmare, chei permise, rollback).
