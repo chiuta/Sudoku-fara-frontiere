@@ -1,4 +1,4 @@
-// Teste v2.2.1 — „Puzzle zilnic 9×9 cu dificultate la alegere" (mod separat). Rulare: PW_ROOT=/opt/npm-tools/x.js node tests/daily9.test.mjs
+// Teste v2.2.2 — „Puzzle zilnic 9×9 cu dificultate la alegere" (mod separat). Rulare: PW_ROOT=/opt/npm-tools/x.js node tests/daily9.test.mjs
 import {createRequire} from 'module';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
