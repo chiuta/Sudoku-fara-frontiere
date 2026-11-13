@@ -2,8 +2,8 @@
   "schema": 1,
   "slug": "sudoku-fara-frontiere",
   "name": "Sudoku fără frontiere",
-  "version": "2.2.6",
-  "updated": "2026-11-11",
+  "version": "2.2.7",
+  "updated": "2026-11-13",
   "description": "Atlas de variante Sudoku cu generator și rezolvator local, într-un singur fișier HTML, offline, fără cont și fără urmărire.",
   "egress": [],
   "permissions": [
@@ -13,8 +13,8 @@
     "Worker"
   ],
   "storageKeys": [],
-  "sizeBytes": 993392,
-  "sha256": "be3fddf89e1bd6b5d4c5201a11fe923ec9379ea86f365fc91a0d703911d42157",
+  "sizeBytes": 1006970,
+  "sha256": "0d7fceea25ab93b5ead8af6ef57af97d278f24cc0135bc87d16d864f12df7a1f",
   "csp": {
     "present": true,
     "directives": {
@@ -54,6 +54,7 @@
       "dialog",
       "exit",
       "view",
+      "ux",
       "label",
       "bundle",
       "qr",
@@ -63,13 +64,14 @@
     ]
   },
   "kit": {
-    "version": "1.4.0",
+    "version": "1.5.0",
     "modules": [
       "core",
       "store",
       "dialog",
       "exit",
       "view",
+      "ux",
       "label",
       "bundle",
       "qr",
