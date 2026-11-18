@@ -25,6 +25,11 @@ jobs:
           python3 check_fresh.py
       - name: Teste motor (aprox. 1,5 minute)
         run: node test.js
-      - name: Fără resurse externe în index.html
+      - name: Fără resurse externe în partea aplicației din index.html (kitul comun e verificat separat de fff-check)
         run: |
-          if grep -nE "https?://|[\"'(= ]//[a-z]|fetch|XMLHttpRequest|WebSocket|sendBeacon|importScripts|@import" index.html | grep -v "http://www.w3.org/\(2000/svg\|1999/xhtml\)" | grep -v "href=\"https://buymeacoffee.com/echo.of.the.strings\""; then echo "resursă externă găsită"; exit 1; fi
+          python3 - <<'PY' > "$RUNNER_TEMP/app-part.html"
+          import re
+          h = open('index.html', encoding='utf-8').read()
+          print(re.sub(r'<!--fff:kit:start.*?<!--fff:kit:end-->', '', h, flags=re.S))
+          PY
+          if grep -nE "https?://|[\"'(= ]//[a-z]|fetch|XMLHttpRequest|WebSocket|sendBeacon|importScripts|@import" "$RUNNER_TEMP/app-part.html" | grep -v "http://www.w3.org/\(2000/svg\|1999/xhtml\)" | grep -v "href=\"https://buymeacoffee.com/echo.of.the.strings\""; then echo "resursă externă găsită"; exit 1; fi
