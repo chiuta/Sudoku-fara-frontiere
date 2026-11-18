@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 2.3.2 · **Ultima actualizare:** 2026-11-17
+**Versiune:** 2.3.3 · **Ultima actualizare:** 2026-11-18
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -175,7 +175,7 @@ Motorul alege o grilă rezolvată care respectă regulile, deduce din ea indicii
 ## Confidențialitate și rețea
 
 - **Stocare locală:** `localStorage`, chei `sudoku-fara-frontiere.lang`, `sudoku-fara-frontiere.theme`, `sudoku-fara-frontiere.size`, `sudoku-fara-frontiere.game`, `sudoku-fara-frontiere.daily` (limbă, temă, mărime text, jocul curent, seria Puzzle-ului zilei) și `sudoku-fara-frontiere.game_bad` (starea salvată într-un format necunoscut, păstrată).
-- **Rețea:** în cod nu există `fetch`, `XMLHttpRequest`, CDN sau resurse externe. Singurul URL din fișier este spațiul de nume SVG (`http://www.w3.org/2000/svg`), care nu generează nicio cerere.
+- **Rețea:** codul propriu al aplicației nu conține `fetch`, `XMLHttpRequest`, CDN sau resurse externe, iar CSP (`connect-src 'none'`) blochează conexiunile; la încărcare nu se trimite nimic. Fișierul conține și kitul comun „fără frontiere” (dialogul Transparență, butoane de distribuire, sincronizare opțională între dispozitive). Singurele URL-uri din el sunt spațiile de nume SVG/XHTML (nu generează nicio cerere) și legături simple — butoanele de distribuire (WhatsApp, Telegram, Facebook, X, LinkedIn), `chiuta.ro` și linkul de susținere — care se deschid doar la clic. Sincronizarea între dispozitive folosește WebRTC cu asociere manuală (cod sau QR), fără server, și pornește doar la acțiunea ta.
 
 ## Structura depozitului
 
@@ -208,7 +208,9 @@ node test.js            # toate variantele și mărimile
 node test.js killer     # o singură variantă
 ```
 
-Pentru fiecare variantă și mărime, la nivel ușor și greu, verifică: soluția respectă regulile, puzzle-ul are soluție unică (numărare cu același solver ca generatorul, cu buget mare; enumerările 4×4 și validatorul semanticii sunt scrise separat), soluția supraviețuiește propagării din subseturi aleatoare de indicii (*soundness*). În plus, la 4×4 numărul de soluții fără indicii e comparat cu o enumerare exhaustivă (de ex. 288 pentru clasic), iar câteva combinații proprii sunt verificate. Din versiunea 1.1, fiecare puzzle este verificat și de un validator al semanticii regulilor scris separat de motor, direct din textul fișelor (verifică, de pildă, Zipper, Lockout, săgețile medie/produs/pilulă, Clone, lanțurile Strimko). Din versiunea 1.3, validatorul independent acoperă și topologiile, salturile fairy, regulile globale, indicii pe margine, în celule, cuști, linii și puncte (formule rescrise separat de motor), iar pentru cuburi, hipercuburi și Greco-Latin numărul de soluții fără indicii e comparat cu o enumerare DFS separată (de ex. 21888 la cubul 4×4×4 cu casete 2×2, 72 și 6912 la Greco-Latin 3 și 4). Ultima rulare: 3144 de verificări, toate trecute; validatorul independent acoperă acum și tipurile din 1.0–1.2, iar un test de mutanți (16.506 redenumiri de cifre) arată acord total între motor și validator; 660 de puzzle-uri 4×4 au fost confirmate unice de o enumerare separată; stres suplimentar pe 12 seed-uri per variantă (5652 de puzzle-uri, zero erori); în plus, o probă de stres cu 5 puzzle-uri pe fiecare variantă, mărime minimă și maximă, fără nicio eroare (cea mai lentă generare, la „Greu” pe unele variante cu reguli globale, a durat circa 21 s). Limită: verificarea încrucișată prin enumerare exhaustivă există doar pentru variantele care au mărimea 4×4 (și pentru cuburi/Greco-Latin mici, cum se arată mai sus).
+Pentru fiecare variantă și mărime, la nivel ușor și greu, verifică: soluția respectă regulile, puzzle-ul are soluție unică (numărare cu același solver ca generatorul, cu buget mare; enumerările 4×4 și validatorul semanticii sunt scrise separat), soluția supraviețuiește propagării din subseturi aleatoare de indicii (*soundness*). În plus, la 4×4 numărul de soluții fără indicii e comparat cu o enumerare exhaustivă (de ex. 288 pentru clasic), iar câteva combinații proprii sunt verificate. Din versiunea 1.1, fiecare puzzle este verificat și de un validator al semanticii regulilor scris separat de motor, direct din textul fișelor (verifică, de pildă, Zipper, Lockout, săgețile medie/produs/pilulă, Clone, lanțurile Strimko). Din versiunea 1.3, validatorul independent acoperă și topologiile, salturile fairy, regulile globale, indicii pe margine, în celule, cuști, linii și puncte (formule rescrise separat de motor), iar pentru cuburi, hipercuburi și Greco-Latin numărul de soluții fără indicii e comparat cu o enumerare DFS separată (de ex. 21888 la cubul 4×4×4 cu casete 2×2, 72 și 6912 la Greco-Latin 3 și 4). Ultima rulare: 3167 de verificări, toate trecute; validatorul independent acoperă acum și tipurile din 1.0–1.2, iar un test de mutanți (16.506 redenumiri de cifre) arată acord total între motor și validator; 660 de puzzle-uri 4×4 au fost confirmate unice de o enumerare separată; stres suplimentar pe 12 seed-uri per variantă (5652 de puzzle-uri, zero erori); în plus, o probă de stres cu 5 puzzle-uri pe fiecare variantă, mărime minimă și maximă, fără nicio eroare (cea mai lentă generare, la „Greu” pe unele variante cu reguli globale, a durat circa 21 s). Limită: verificarea încrucișată prin enumerare exhaustivă există doar pentru variantele care au mărimea 4×4 (și pentru cuburi/Greco-Latin mici, cum se arată mai sus).
+
+Din 2.3.3, `test.js` compară și numărul de soluții cu un solver independent (clasic 4×4, 6×6 și 9×9, cu indicii scoase și cu perechi conflictuale; fără diferențe) și dă motorului intrări ostile — cifre în afara intervalului sau fracționare (de ex. 33, pe care o deplasare pe 32 de biți din JavaScript ar citi-o în tăcere ca 2), șiruri de lungime greșită, specificații malformate (modificatori, indicii, tip de grilă, câmpuri numerice): toate sunt respinse cu un mesaj clar, niciodată cu o excepție netratată.
 
 ## Ce nu e implementat din nivelul 3
 
@@ -216,7 +218,7 @@ Nu sunt incluse: Chaos Construction, Deconstruction, hibrizii cu alte puzzle-uri
 
 ## Stare
 
-Stabil, versiunea 2.2.0 (2026-10-27). 136 de variante; generator cu soluție unică verificată de solver; explicații pe tehnici pentru Sudoku clasic; modul puzzle zilnic; foaie tipăribilă cu pagină de soluție opțională. Un mod multiplayer local unificat între jocuri este planificat, nu implementat. Modificări: `CHANGELOG.md`.
+Stabil, versiunea 2.3.3 (2026-11-18). 136 de variante; generator cu soluție unică verificată de solver; explicații pe tehnici pentru Sudoku clasic; modul puzzle zilnic; foaie tipăribilă cu pagină de soluție opțională. Un mod multiplayer local unificat între jocuri este planificat, nu implementat. Modificări: `CHANGELOG.md`.
 
 ## Offline
 

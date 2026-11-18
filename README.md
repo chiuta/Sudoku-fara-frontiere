@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 2.3.2 · **Last updated:** 2026-11-17
+**Version:** 2.3.3 · **Last updated:** 2026-11-18
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -174,7 +174,7 @@ The engine picks a solved grid that respects the rules, derives the clues from i
 ## Privacy and network
 
 - **Local storage:** `localStorage`, keys `sudoku-fara-frontiere.lang`, `sudoku-fara-frontiere.theme`, `sudoku-fara-frontiere.size`, `sudoku-fara-frontiere.game`, `sudoku-fara-frontiere.daily` (language, theme, text size, the current game, the Puzzle of the day streak) and `sudoku-fara-frontiere.game_bad` (saved state in an unknown format, kept).
-- **Network:** in the code there is no `fetch`, `XMLHttpRequest`, CDN or external resources. The only URL in the file is the SVG namespace (`http://www.w3.org/2000/svg`), which generates no request.
+- **Network:** the app's own code has no `fetch`, `XMLHttpRequest`, CDN or external resources, and the CSP (`connect-src 'none'`) blocks connections; nothing is sent on load. The file also contains the shared “fără frontiere” kit (Transparency dialog, share buttons, optional device-to-device sync). Its only URLs are the SVG/XHTML namespaces (they generate no request) and plain links — share buttons (WhatsApp, Telegram, Facebook, X, LinkedIn), `chiuta.ro` and the support link — that open only when you click them. Device-to-device sync uses WebRTC with manual pairing (code or QR), without a server, and starts only on your action.
 
 ## Repository structure
 
@@ -207,7 +207,9 @@ node test.js            # toate variantele și mărimile
 node test.js killer     # o singură variantă
 ```
 
-For each variant and size, at easy and hard level, it checks: the solution respects the rules, the puzzle has a unique solution (counting with the same solver as the generator, with a large budget; the 4×4 enumerations and the semantics validator are written separately), the solution survives propagation from random subsets of clues (*soundness*). In addition, at 4×4 the number of solutions without clues is compared with an exhaustive enumeration (e.g. 288 for classic), and a few custom combinations are verified. Since version 1.1, each puzzle is also verified by a rules-semantics validator written separately from the engine, directly from the text of the sheets (it checks, for example, Zipper, Lockout, the average/product/pill arrows, Clone, the Strimko chains). Since version 1.3, the independent validator also covers topologies, fairy jumps, global rules, edge clues, cell clues, cages, lines and dots (formulas rewritten separately from the engine), and for cubes, hypercubes and Greco-Latin the number of solutions without clues is compared with a separate DFS enumeration (e.g. 21888 for the 4×4×4 cube with 2×2 boxes, 72 and 6912 for Greco-Latin 3 and 4). Last run: 3144 checks, all passed; the independent validator now also covers the types from 1.0–1.2, and a mutant test (16,506 digit renamings) shows total agreement between the engine and the validator; 660 4×4 puzzles were confirmed unique by a separate enumeration; additional stress on 12 seeds per variant (5652 puzzles, zero errors); in addition, a stress run with 5 puzzles on each variant, minimum and maximum size, without any error (the slowest generation, on “Hard” on some variants with global rules, took about 21 s). Limit: cross-checking by exhaustive enumeration exists only for the variants that have a 4×4 size (and for small cubes/Greco-Latin, as shown above).
+For each variant and size, at easy and hard level, it checks: the solution respects the rules, the puzzle has a unique solution (counting with the same solver as the generator, with a large budget; the 4×4 enumerations and the semantics validator are written separately), the solution survives propagation from random subsets of clues (*soundness*). In addition, at 4×4 the number of solutions without clues is compared with an exhaustive enumeration (e.g. 288 for classic), and a few custom combinations are verified. Since version 1.1, each puzzle is also verified by a rules-semantics validator written separately from the engine, directly from the text of the sheets (it checks, for example, Zipper, Lockout, the average/product/pill arrows, Clone, the Strimko chains). Since version 1.3, the independent validator also covers topologies, fairy jumps, global rules, edge clues, cell clues, cages, lines and dots (formulas rewritten separately from the engine), and for cubes, hypercubes and Greco-Latin the number of solutions without clues is compared with a separate DFS enumeration (e.g. 21888 for the 4×4×4 cube with 2×2 boxes, 72 and 6912 for Greco-Latin 3 and 4). Last run: 3167 checks, all passed; the independent validator now also covers the types from 1.0–1.2, and a mutant test (16,506 digit renamings) shows total agreement between the engine and the validator; 660 4×4 puzzles were confirmed unique by a separate enumeration; additional stress on 12 seeds per variant (5652 puzzles, zero errors); in addition, a stress run with 5 puzzles on each variant, minimum and maximum size, without any error (the slowest generation, on “Hard” on some variants with global rules, took about 21 s). Limit: cross-checking by exhaustive enumeration exists only for the variants that have a 4×4 size (and for small cubes/Greco-Latin, as shown above).
+
+Since 2.3.3, `test.js` also compares the solution count with an independent solver (classic 4×4, 6×6 and 9×9, with clues removed and with conflicting pairs; no differences) and feeds the engine hostile inputs — digits out of range or fractional (e.g. 33, which a 32-bit shift in JavaScript would silently read as 2), arrays of the wrong length, malformed specifications (modifiers, clues, grid type, numeric fields): all are rejected with a clear message, never with an unhandled exception.
 
 ## What is not implemented from level 3
 
@@ -215,7 +217,7 @@ Not included: Chaos Construction, Deconstruction, hybrids with other puzzles (Lo
 
 ## Status
 
-Stable, version 2.2.0 (2026-10-27). 136 variants; generator with a unique solution verified by the solver; technique-by-technique explanations for classic Sudoku; daily puzzle mode; printable sheet with optional solution page. A unified local multiplayer mode across the games is planned, not implemented. Changes: `CHANGELOG.md`.
+Stable, version 2.3.3 (2026-11-18). 136 variants; generator with a unique solution verified by the solver; technique-by-technique explanations for classic Sudoku; daily puzzle mode; printable sheet with optional solution page. A unified local multiplayer mode across the games is planned, not implemented. Changes: `CHANGELOG.md`.
 
 ## Offline
 

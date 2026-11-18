@@ -3,7 +3,7 @@
    Fără dependențe, fără rețea. Rulează în browser, în Worker și în Node. */
 (function (root) {
 'use strict';
-var VERSION = '2.3.2';
+var VERSION = '2.3.3';
 
 /* ---------- RNG și utilitare pe biți ---------- */
 function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
@@ -86,7 +86,12 @@ function makeGreco(spec) {
   var layer = new Int32Array(cnt); for (i = 0; i < cnt; i++) layer[i] = i >= N * N ? 1 : 0;
   return { N: N, br: 1, bc: N, R: R, C: C, at: at, pos: pos, count: cnt, rows: rows, cols: [], boxes: [], boxId: boxId, nbr4: nbr4, nbr8: nbr8, composite: false, greco: true, layer: layer, offs: [[0, 0]] };
 }
+var COMPOSITE = { samurai: [[6, 6], [0, 0], [0, 12], [12, 0], [12, 12]], twodoku: [[0, 0], [6, 6]], gattai3: [[0, 0], [6, 6], [12, 12]],
+  sohei: [[0, 6], [6, 12], [12, 6], [6, 0]], kazaguruma: [[9, 9], [3, 12], [12, 15], [15, 6], [6, 3]],
+  tripledoku: [[0, 0], [6, 6], [0, 12]], cross: [[6, 6], [0, 6], [6, 0], [6, 12], [12, 6]] };
+var OWN_KIND = Object.prototype.hasOwnProperty;
 function makeLayout(L) {
+  if (!L || typeof L !== 'object') throw new Error('specificație invalidă: grilă lipsă');
   if (L.kind === 'cube') return makeCube(L);
   if (L.kind === 'greco') return makeGreco(L);
   var N, br, bc, offs;
@@ -94,9 +99,8 @@ function makeLayout(L) {
     N = L.n; var b = BOX[N] || [1, N]; br = L.br || b[0]; bc = L.bc || b[1]; offs = [[0, 0]];
   } else {
     N = 9; br = 3; bc = 3;
-    offs = { samurai: [[6, 6], [0, 0], [0, 12], [12, 0], [12, 12]], twodoku: [[0, 0], [6, 6]], gattai3: [[0, 0], [6, 6], [12, 12]],
-      sohei: [[0, 6], [6, 12], [12, 6], [6, 0]], kazaguruma: [[9, 9], [3, 12], [12, 15], [15, 6], [6, 3]],
-      tripledoku: [[0, 0], [6, 6], [0, 12]], cross: [[6, 6], [0, 6], [6, 0], [6, 12], [12, 6]] }[L.kind];
+    offs = OWN_KIND.call(COMPOSITE, L.kind) ? COMPOSITE[L.kind] : null;
+    if (!offs) throw new Error('specificație invalidă: tip de grilă necunoscut');
   }
   var R = 0, C = 0, i, j, o;
   for (i = 0; i < offs.length; i++) { R = Math.max(R, offs[i][0] + N); C = Math.max(C, offs[i][1] + N); }
@@ -844,7 +848,13 @@ function makeSolver(P) {
   }
   function initDom(givens) {
     var d = new Int32Array(cnt);
-    for (var k = 0; k < cnt; k++) { d[k] = baseMask[k]; if (givens && givens[k] > 0) d[k] &= 1 << (givens[k] - 1); }
+    if (givens && givens.length !== cnt) throw new Error('givens: se așteaptă ' + cnt + ' valori, am primit ' + givens.length);
+    for (var k = 0; k < cnt; k++) {
+      d[k] = baseMask[k];
+      var g = givens ? givens[k] : 0;
+      /* 1 << 98 ar fi 1 << 2 (JS reduce deplasarea la 5 biți): o cifră în afara 1..N sau neîntreagă nu are voie să devină alta, ci face puzzle-ul imposibil */
+      if (g) d[k] &= (typeof g === 'number' && g >= 1 && g <= N && g === Math.floor(g)) ? 1 << (g - 1) : 0;
+    }
     return d;
   }
   function verify(vals) {
@@ -1836,7 +1846,14 @@ function checkSpec(spec) {
   if (pr && spec.n !== undefined && pr.sizes.indexOf(spec.n) < 0) bad('mărime nepermisă pentru această variantă');
   if (spec.difficulty !== undefined && !own.call(DIFF, spec.difficulty)) bad('dificultate');
   if (spec.seed !== undefined && !(typeof spec.seed === 'number' && isFinite(spec.seed))) bad('sămânță');
-  (spec.clues || []).forEach(function (c) { if (!own.call(CLUES, c) && !own.call(PRE, c)) bad('regulă necunoscută: ' + c); });
+  if (spec.clues !== undefined && spec.clues !== null && !Array.isArray(spec.clues)) bad('indicii (listă)');
+  (spec.clues || []).forEach(function (c) { if (typeof c !== 'string' || (!own.call(CLUES, c) && !own.call(PRE, c))) bad('regulă necunoscută: ' + c); });
+  if (spec.mods !== undefined && spec.mods !== null && (!Array.isArray(spec.mods) || spec.mods.some(function (m) { return typeof m !== 'string'; }))) bad('modificatori (listă de nume)');
+  if (spec.layoutKind !== undefined && spec.layoutKind !== null && spec.layoutKind !== 'std' && spec.layoutKind !== 'greco' && spec.layoutKind !== 'cube' && !own.call(COMPOSITE, spec.layoutKind)) bad('tip de grilă necunoscut');
+  var num = function (x, lo, hi, what) { if (x !== undefined && x !== null && !(typeof x === 'number' && isFinite(x) && x >= lo && x <= hi)) bad(what); };
+  num(spec.hard, 0, 2, 'hard'); num(spec.dens, 0.05, 10, 'dens');
+  if (spec.dim !== undefined && spec.dim !== null && !(Number.isInteger(spec.dim) && spec.dim >= 2 && spec.dim <= 5)) bad('dim');
+  ['jigsaw', 'zero', 'fog', 'strimko', 'cubeBoxes'].forEach(function (f) { if (spec[f] !== undefined && spec[f] !== null && typeof spec[f] !== 'boolean') bad(f + ' (boolean)'); });
 }
 function generate(spec) {
   checkSpec(spec);

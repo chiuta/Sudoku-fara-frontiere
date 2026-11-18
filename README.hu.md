@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 2.3.2 · **Utolsó frissítés:** 2026-11-17
+**Verzió:** 2.3.3 · **Utolsó frissítés:** 2026-11-18
 
 A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -170,7 +170,7 @@ A motor kiválaszt egy megoldott rácsot, amely megfelel a szabályoknak, ebből
 ## Adatvédelem és hálózat
 
 - **Helyi tárolás:** `localStorage`, `sudoku-fara-frontiere.lang`, `sudoku-fara-frontiere.theme`, `sudoku-fara-frontiere.size`, `sudoku-fara-frontiere.game`, `sudoku-fara-frontiere.daily` kulcsok (nyelv, téma, szövegméret, az aktuális játék, A nap rejtvényének sorozata) és `sudoku-fara-frontiere.game_bad` (ismeretlen formátumban mentett állapot, megőrizve).
-- **Hálózat:** a kódban nincs `fetch`, `XMLHttpRequest`, CDN vagy külső erőforrás. A fájlban az egyetlen URL az SVG névtér (`http://www.w3.org/2000/svg`), amely nem generál kérést.
+- **Hálózat:** az alkalmazás saját kódja nem tartalmaz `fetch`, `XMLHttpRequest`, CDN vagy külső erőforrás hívást, és a CSP (`connect-src 'none'`) blokkolja a kapcsolatokat; betöltéskor semmi sem kerül elküldésre. A fájl tartalmazza a közös „fără frontiere” készletet is (Átláthatóság párbeszédablak, megosztó gombok, opcionális eszközök közötti szinkronizálás). A benne található URL-ek kizárólag az SVG/XHTML névterek (nem generálnak kérést) és egyszerű hivatkozások — megosztó gombok (WhatsApp, Telegram, Facebook, X, LinkedIn), `chiuta.ro` és a támogatási hivatkozás —, amelyek csak kattintásra nyílnak meg. Az eszközök közötti szinkronizálás WebRTC-t használ kézi párosítással (kód vagy QR), szerver nélkül, és csak a te műveletedre indul.
 
 ## A tároló szerkezete
 
@@ -203,11 +203,21 @@ node test.js            # toate variantele și mărimile
 node test.js killer     # o singură variantă
 ```
 
-Minden változatra és méretre, könnyű és nehéz szinten ellenőrzi: a megoldás megfelel a szabályoknak, a rejtvénynek egyértelmű a megoldása (számlálás ugyanazzal a megoldóval, mint a generátoré, nagy kerettel; a 4×4-es felsorolások és a szemantikavalidátor külön íródtak), a megoldás túléli a propagációt a jelzések véletlen részhalmazaiból kiindulva (*soundness*). Ezenkívül 4×4-ben a jelzések nélküli megoldások számát összevetik egy kimerítő felsorolással (pl. 288 a klasszikusnál), és néhány saját kombinációt is ellenőriznek. Az 1.1-es verzió óta minden rejtvényt a motortól külön megírt szabályszemantika-validátor is ellenőriz, közvetlenül a lapok szövegéből (ellenőrzi például a Zippert, a Lockoutot, az átlag-/szorzat-/pirulanyilakat, a Clone-t, a Strimko-láncokat). Az 1.3-as verzió óta a független validátor a topológiákat, a tündérugrásokat, a globális szabályokat, a szegély- és cellajelzéseket, a ketreceket, a vonalakat és a pontokat is lefedi (a motortól külön újraírt képletek), a kockáknál, hiperkockáknál és a görög-latinnál pedig a jelzések nélküli megoldások számát külön DFS-felsorolással vetik össze (pl. 21888 a 4×4×4-es, 2×2-es dobozokkal ellátott kockánál, 72 és 6912 a görög-latin 3 és 4 esetén). Utolsó futtatás: 3144 ellenőrzés, mind sikeres; a független validátor most már az 1.0–1.2 típusait is lefedi, és egy mutánsteszt (16 506 számjegyátnevezés) teljes egyezést mutat a motor és a validátor között; 660 darab 4×4-es rejtvényt külön felsorolás igazolt egyedinek; kiegészítő terhelés változatonként 12 maggal (5652 rejtvény, nulla hiba); ezenkívül egy terhelési próba minden változatra 5 rejtvénnyel, minimális és maximális méretben, hiba nélkül (a leglassabb generálás, „Nehéz” szinten néhány globális szabályú változatnál, körülbelül 21 másodpercig tartott). Korlát: a kimerítő felsorolással történő keresztellenőrzés csak a 4×4-es mérettel rendelkező változatokra létezik (és a kis kockákra/görög-latinra, ahogy fent látható).
+Minden változatra és méretre, könnyű és nehéz szinten ellenőrzi: a megoldás megfelel a szabályoknak, a rejtvénynek egyértelmű a megoldása (számlálás ugyanazzal a megoldóval, mint a generátoré, nagy kerettel; a 4×4-es felsorolások és a szemantikavalidátor külön íródtak), a megoldás túléli a propagációt a jelzések véletlen részhalmazaiból kiindulva (*soundness*). Ezenkívül 4×4-ben a jelzések nélküli megoldások számát összevetik egy kimerítő felsorolással (pl. 288 a klasszikusnál), és néhány saját kombinációt is ellenőriznek. Az 1.1-es verzió óta minden rejtvényt a motortól külön megírt szabályszemantika-validátor is ellenőriz, közvetlenül a lapok szövegéből (ellenőrzi például a Zippert, a Lockoutot, az átlag-/szorzat-/pirulanyilakat, a Clone-t, a Strimko-láncokat). Az 1.3-as verzió óta a független validátor a topológiákat, a tündérugrásokat, a globális szabályokat, a szegély- és cellajelzéseket, a ketreceket, a vonalakat és a pontokat is lefedi (a motortól külön újraírt képletek), a kockáknál, hiperkockáknál és a görög-latinnál pedig a jelzések nélküli megoldások számát külön DFS-felsorolással vetik össze (pl. 21888 a 4×4×4-es, 2×2-es dobozokkal ellátott kockánál, 72 és 6912 a görög-latin 3 és 4 esetén). Utolsó futtatás: 3167 ellenőrzés, mind sikeres; a független validátor most már az 1.0–1.2 típusait is lefedi, és egy mutánsteszt (16 506 számjegyátnevezés) teljes egyezést mutat a motor és a validátor között; 660 darab 4×4-es rejtvényt külön felsorolás igazolt egyedinek; kiegészítő terhelés változatonként 12 maggal (5652 rejtvény, nulla hiba); ezenkívül egy terhelési próba minden változatra 5 rejtvénnyel, minimális és maximális méretben, hiba nélkül (a leglassabb generálás, „Nehéz” szinten néhány globális szabályú változatnál, körülbelül 21 másodpercig tartott). Korlát: a kimerítő felsorolással történő keresztellenőrzés csak a 4×4-es mérettel rendelkező változatokra létezik (és a kis kockákra/görög-latinra, ahogy fent látható).
+
+A 2.3.3 óta a `test.js` egy független megoldóval is összeveti a megoldások számát (klasszikus 4×4, 6×6 és 9×9, eltávolított nyomokkal és ellentmondó párokkal; eltérés nincs), és ellenséges bemeneteket ad a motornak — tartományon kívüli vagy törtszámjegyek (pl. 33, amelyet a JavaScript 32 bites eltolása csendben 2-nek olvasna), rossz hosszúságú tömbök, hibás specifikációk (módosítók, nyomok, rácstípus, numerikus mezők): mindet érthető üzenettel utasítja el, soha nem kezeletlen kivétellel.
 
 ## Ami a 3. szintből nincs megvalósítva
 
 Nem szerepelnek: Chaos Construction, Deconstruction, más rejtvényekkel alkotott hibridek (Loop, Snake, Yin-Yang, Nurikabe, Sudoku Mine), az egymásra rakódó Flower/Butterfly rácsok (a Sohei és a Kazaguruma az 1.3 óta léteznek, általam választott geometriával), módosító cellák, Schrödinger, „liar”, Vudoku, Capsule, Deficit. Némelyik megváltoztatja a játékmódot, vagy más fajta logikájú megoldókat igényel; másoknál a talált források nem rögzítik a szabályokat vagy a geometriát, és kitalálásuk azt jelentené, hogy ismert változatként tüntetnék fel valamit, ami nem az.
+
+## Állapot
+
+Stabil, 2.3.3-as verzió (2026-11-18). 136 változat; a megoldó által igazolt egyértelmű megoldású generátor; technikánkénti magyarázatok a klasszikus Sudokuhoz; napi rejtvény mód; nyomtatható lap választható megoldásoldallal. A játékok közötti egységes helyi többjátékos mód tervezett, nem megvalósított. Változások: `CHANGELOG.md`.
+
+## Offline
+
+Egyetlen fájl, az `index.html` (a `src/` és az `engine.js` fájlokból épül a `python3 build.py` paranccsal): nincs CDN, nincsenek külső betűtípusok vagy szkriptek, nincs nyomkövetés, nincsenek fiókok. Szigorú CSP (`default-src 'none'`, `connect-src 'none'`) blokkolja a hálózati kapcsolatokat; egy service worker gyorsítótárazza az alkalmazást az offline induláshoz. A nyomtatás a böngésző saját párbeszédablakát használja.
 
 ## Licenc
 

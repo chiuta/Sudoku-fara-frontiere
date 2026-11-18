@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 2.3.2 · **Última actualización:** 2026-11-17
+**Versión:** 2.3.3 · **Última actualización:** 2026-11-18
 
 Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -170,7 +170,7 @@ El motor elige una cuadrícula resuelta que respete las reglas, deduce de ella l
 ## Privacidad y red
 
 - **Almacenamiento local:** `localStorage`, claves `sudoku-fara-frontiere.lang`, `sudoku-fara-frontiere.theme`, `sudoku-fara-frontiere.size`, `sudoku-fara-frontiere.game`, `sudoku-fara-frontiere.daily` (idioma, tema, tamaño del texto, la partida en curso, la racha del Puzle del día) y `sudoku-fara-frontiere.game_bad` (estado guardado en un formato desconocido, conservado).
-- **Red:** en el código no hay `fetch`, `XMLHttpRequest`, CDN ni recursos externos. La única URL del archivo es el espacio de nombres SVG (`http://www.w3.org/2000/svg`), que no genera ninguna solicitud.
+- **Red:** el código propio de la aplicación no contiene `fetch`, `XMLHttpRequest`, CDN ni recursos externos, y la CSP (`connect-src 'none'`) bloquea las conexiones; al cargar no se envía nada. El archivo incluye además el kit común «fără frontiere» (diálogo de Transparencia, botones para compartir, sincronización opcional entre dispositivos). Sus únicas URL son los espacios de nombres SVG/XHTML (no generan ninguna solicitud) y enlaces simples —botones para compartir (WhatsApp, Telegram, Facebook, X, LinkedIn), `chiuta.ro` y el enlace de apoyo— que solo se abren al hacer clic. La sincronización entre dispositivos usa WebRTC con emparejamiento manual (código o QR), sin servidor, y solo empieza por acción tuya.
 
 ## Estructura del repositorio
 
@@ -203,11 +203,21 @@ node test.js            # toate variantele și mărimile
 node test.js killer     # o singură variantă
 ```
 
-Para cada variante y tamaño, en nivel fácil y difícil, comprueba: la solución respeta las reglas, el puzle tiene solución única (recuento con el mismo resolutor que el generador, con un presupuesto amplio; las enumeraciones 4×4 y el validador de semántica están escritos por separado), la solución sobrevive a la propagación a partir de subconjuntos aleatorios de pistas (*soundness*). Además, en 4×4 el número de soluciones sin pistas se compara con una enumeración exhaustiva (p. ej. 288 para el clásico), y se verifican algunas combinaciones personalizadas. Desde la versión 1.1, cada puzle es verificado también por un validador de la semántica de las reglas escrito aparte del motor, directamente a partir del texto de las fichas (comprueba, por ejemplo, Zipper, Lockout, las flechas media/producto/píldora, Clone, las cadenas de Strimko). Desde la versión 1.3, el validador independiente cubre también las topologías, los saltos fairy, las reglas globales, las pistas en el borde, en las celdas, las jaulas, las líneas y los puntos (fórmulas reescritas aparte del motor), y para cubos, hipercubos y grecolatino el número de soluciones sin pistas se compara con una enumeración DFS aparte (p. ej. 21888 para el cubo 4×4×4 con cajas 2×2, 72 y 6912 para el grecolatino 3 y 4). Última ejecución: 3144 comprobaciones, todas superadas; el validador independiente cubre ahora también los tipos de 1.0–1.2, y una prueba de mutantes (16.506 cambios de nombre de cifras) muestra acuerdo total entre el motor y el validador; 660 puzles 4×4 fueron confirmados únicos por una enumeración aparte; estrés adicional con 12 semillas por variante (5652 puzles, cero errores); además, una prueba de estrés con 5 puzles en cada variante, tamaño mínimo y máximo, sin ningún error (la generación más lenta, en «Difícil» en algunas variantes con reglas globales, tardó unos 21 s). Límite: la verificación cruzada por enumeración exhaustiva existe solo para las variantes que tienen tamaño 4×4 (y para cubos/grecolatino pequeños, como se muestra arriba).
+Para cada variante y tamaño, en nivel fácil y difícil, comprueba: la solución respeta las reglas, el puzle tiene solución única (recuento con el mismo resolutor que el generador, con un presupuesto amplio; las enumeraciones 4×4 y el validador de semántica están escritos por separado), la solución sobrevive a la propagación a partir de subconjuntos aleatorios de pistas (*soundness*). Además, en 4×4 el número de soluciones sin pistas se compara con una enumeración exhaustiva (p. ej. 288 para el clásico), y se verifican algunas combinaciones personalizadas. Desde la versión 1.1, cada puzle es verificado también por un validador de la semántica de las reglas escrito aparte del motor, directamente a partir del texto de las fichas (comprueba, por ejemplo, Zipper, Lockout, las flechas media/producto/píldora, Clone, las cadenas de Strimko). Desde la versión 1.3, el validador independiente cubre también las topologías, los saltos fairy, las reglas globales, las pistas en el borde, en las celdas, las jaulas, las líneas y los puntos (fórmulas reescritas aparte del motor), y para cubos, hipercubos y grecolatino el número de soluciones sin pistas se compara con una enumeración DFS aparte (p. ej. 21888 para el cubo 4×4×4 con cajas 2×2, 72 y 6912 para el grecolatino 3 y 4). Última ejecución: 3167 comprobaciones, todas superadas; el validador independiente cubre ahora también los tipos de 1.0–1.2, y una prueba de mutantes (16.506 cambios de nombre de cifras) muestra acuerdo total entre el motor y el validador; 660 puzles 4×4 fueron confirmados únicos por una enumeración aparte; estrés adicional con 12 semillas por variante (5652 puzles, cero errores); además, una prueba de estrés con 5 puzles en cada variante, tamaño mínimo y máximo, sin ningún error (la generación más lenta, en «Difícil» en algunas variantes con reglas globales, tardó unos 21 s). Límite: la verificación cruzada por enumeración exhaustiva existe solo para las variantes que tienen tamaño 4×4 (y para cubos/grecolatino pequeños, como se muestra arriba).
+
+Desde la 2.3.3, `test.js` compara además el número de soluciones con un solucionador independiente (clásico 4×4, 6×6 y 9×9, con pistas quitadas y con pares en conflicto; sin diferencias) y somete el motor a entradas hostiles —cifras fuera de rango o fraccionarias (p. ej. 33, que un desplazamiento de 32 bits en JavaScript leería en silencio como 2), matrices de longitud incorrecta, especificaciones mal formadas (modificadores, pistas, tipo de cuadrícula, campos numéricos)—: todas se rechazan con un mensaje claro, nunca con una excepción sin tratar.
 
 ## Lo que no está implementado del nivel 3
 
 No se incluyen: Chaos Construction, Deconstruction, los híbridos con otros puzles (Loop, Snake, Yin-Yang, Nurikabe, Sudoku Mine), las cuadrículas superpuestas Flower/Butterfly (Sohei y Kazaguruma existen desde 1.3, con una geometría elegida por mí), las celdas modificadoras, Schrödinger, «liar», Vudoku, Capsule, Deficit. Algunas cambian el modo de juego o exigen resolutores con otro tipo de lógica; para otras, las fuentes encontradas no fijan ni las reglas ni la geometría, e inventarlas significaría presentar como variante conocida algo que no lo es.
+
+## Estado
+
+Estable, versión 2.3.3 (2026-11-18). 136 variantes; generador con solución única verificada por el solucionador; explicaciones técnica por técnica para el Sudoku clásico; modo puzle del día; hoja imprimible con página de solución opcional. Un modo multijugador local unificado entre los juegos está previsto, no implementado. Cambios: `CHANGELOG.md`.
+
+## Sin conexión
+
+Un solo archivo, `index.html` (construido a partir de `src/` y `engine.js` con `python3 build.py`): sin CDN, sin fuentes ni scripts externos, sin seguimiento, sin cuentas. Una CSP estricta (`default-src 'none'`, `connect-src 'none'`) bloquea las conexiones de red; un service worker guarda la aplicación para el inicio sin conexión. La impresión usa el cuadro de diálogo propio del navegador.
 
 ## Licencia
 

@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · **Deutsch** · [Magyar](README.hu.md)
 
-**Version:** 2.3.2 · **Zuletzt aktualisiert:** 2026-11-17
+**Version:** 2.3.3 · **Zuletzt aktualisiert:** 2026-11-18
 
 Oberflächensprachen: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -170,7 +170,7 @@ Die Engine wählt ein gelöstes Gitter, das die Regeln einhält, leitet daraus d
 ## Datenschutz und Netzwerk
 
 - **Lokaler Speicher:** `localStorage`, Schlüssel `sudoku-fara-frontiere.lang`, `sudoku-fara-frontiere.theme`, `sudoku-fara-frontiere.size`, `sudoku-fara-frontiere.game`, `sudoku-fara-frontiere.daily` (Sprache, Thema, Textgröße, aktuelles Spiel, Serie des Rätsels des Tages) und `sudoku-fara-frontiere.game_bad` (in einem unbekannten Format gespeicherter Zustand, aufbewahrt).
-- **Netzwerk:** Im Code gibt es weder `fetch` noch `XMLHttpRequest`, noch CDN oder externe Ressourcen. Die einzige URL in der Datei ist der SVG-Namensraum (`http://www.w3.org/2000/svg`), der keine Anfrage auslöst.
+- **Netzwerk:** Der eigene Code der Anwendung enthält weder `fetch` noch `XMLHttpRequest`, CDN oder externe Ressourcen, und die CSP (`connect-src 'none'`) blockiert Verbindungen; beim Laden wird nichts gesendet. Die Datei enthält außerdem das gemeinsame „fără frontiere“-Kit (Transparenz-Dialog, Teilen-Schaltflächen, optionale Synchronisierung zwischen Geräten). Seine einzigen URLs sind die SVG-/XHTML-Namensräume (sie lösen keine Anfrage aus) und einfache Links — Teilen-Schaltflächen (WhatsApp, Telegram, Facebook, X, LinkedIn), `chiuta.ro` und der Unterstützungslink —, die sich nur per Klick öffnen. Die Synchronisierung zwischen Geräten nutzt WebRTC mit manueller Kopplung (Code oder QR), ohne Server, und startet nur auf deine Aktion.
 
 ## Struktur des Repositorys
 
@@ -203,11 +203,21 @@ node test.js            # toate variantele și mărimile
 node test.js killer     # o singură variantă
 ```
 
-Für jede Variante und Größe prüft sie auf den Stufen leicht und schwer: Die Lösung hält die Regeln ein, das Rätsel hat eine eindeutige Lösung (Zählung mit demselben Löser wie der Generator, mit großem Budget; die 4×4-Aufzählungen und der Semantik-Validator sind separat geschrieben), die Lösung übersteht die Propagation aus zufälligen Teilmengen von Hinweisen (*Soundness*). Zusätzlich wird bei 4×4 die Anzahl der Lösungen ohne Hinweise mit einer vollständigen Aufzählung verglichen (z. B. 288 für klassisch), und einige eigene Kombinationen werden geprüft. Seit Version 1.1 wird jedes Rätsel außerdem von einem getrennt von der Engine geschriebenen Validator für die Regelsemantik geprüft, direkt nach dem Text der Datenblätter (er prüft zum Beispiel Zipper, Lockout, die Mittelwert-/Produkt-/Pillen-Pfeile, Clone, die Strimko-Ketten). Seit Version 1.3 deckt der unabhängige Validator auch Topologien, Märchenschach-Sprünge, globale Regeln, Randhinweise, Hinweise in Zellen, Käfige, Linien und Punkte ab (getrennt von der Engine neu geschriebene Formeln), und bei Würfeln, Hyperwürfeln und Graeco-Lateinisch wird die Anzahl der Lösungen ohne Hinweise mit einer separaten DFS-Aufzählung verglichen (z. B. 21888 beim 4×4×4-Würfel mit 2×2-Boxen, 72 und 6912 bei Graeco-Lateinisch 3 und 4). Letzter Lauf: 3144 Prüfungen, alle bestanden; der unabhängige Validator deckt jetzt auch die Typen aus 1.0–1.2 ab, und ein Mutantentest (16.506 Ziffernumbenennungen) zeigt vollständige Übereinstimmung zwischen Engine und Validator; 660 4×4-Rätsel wurden durch eine separate Aufzählung als eindeutig bestätigt; zusätzlicher Stresstest mit 12 Seeds pro Variante (5652 Rätsel, null Fehler); außerdem ein Stresslauf mit 5 Rätseln pro Variante, kleinste und größte Größe, ohne jeden Fehler (die langsamste Erzeugung, bei „Schwer“ in einigen Varianten mit globalen Regeln, dauerte etwa 21 s). Grenze: Die Gegenprüfung durch vollständige Aufzählung gibt es nur für Varianten mit der Größe 4×4 (und für kleine Würfel/Graeco-Lateinisch, wie oben gezeigt).
+Für jede Variante und Größe prüft sie auf den Stufen leicht und schwer: Die Lösung hält die Regeln ein, das Rätsel hat eine eindeutige Lösung (Zählung mit demselben Löser wie der Generator, mit großem Budget; die 4×4-Aufzählungen und der Semantik-Validator sind separat geschrieben), die Lösung übersteht die Propagation aus zufälligen Teilmengen von Hinweisen (*Soundness*). Zusätzlich wird bei 4×4 die Anzahl der Lösungen ohne Hinweise mit einer vollständigen Aufzählung verglichen (z. B. 288 für klassisch), und einige eigene Kombinationen werden geprüft. Seit Version 1.1 wird jedes Rätsel außerdem von einem getrennt von der Engine geschriebenen Validator für die Regelsemantik geprüft, direkt nach dem Text der Datenblätter (er prüft zum Beispiel Zipper, Lockout, die Mittelwert-/Produkt-/Pillen-Pfeile, Clone, die Strimko-Ketten). Seit Version 1.3 deckt der unabhängige Validator auch Topologien, Märchenschach-Sprünge, globale Regeln, Randhinweise, Hinweise in Zellen, Käfige, Linien und Punkte ab (getrennt von der Engine neu geschriebene Formeln), und bei Würfeln, Hyperwürfeln und Graeco-Lateinisch wird die Anzahl der Lösungen ohne Hinweise mit einer separaten DFS-Aufzählung verglichen (z. B. 21888 beim 4×4×4-Würfel mit 2×2-Boxen, 72 und 6912 bei Graeco-Lateinisch 3 und 4). Letzter Lauf: 3167 Prüfungen, alle bestanden; der unabhängige Validator deckt jetzt auch die Typen aus 1.0–1.2 ab, und ein Mutantentest (16.506 Ziffernumbenennungen) zeigt vollständige Übereinstimmung zwischen Engine und Validator; 660 4×4-Rätsel wurden durch eine separate Aufzählung als eindeutig bestätigt; zusätzlicher Stresstest mit 12 Seeds pro Variante (5652 Rätsel, null Fehler); außerdem ein Stresslauf mit 5 Rätseln pro Variante, kleinste und größte Größe, ohne jeden Fehler (die langsamste Erzeugung, bei „Schwer“ in einigen Varianten mit globalen Regeln, dauerte etwa 21 s). Grenze: Die Gegenprüfung durch vollständige Aufzählung gibt es nur für Varianten mit der Größe 4×4 (und für kleine Würfel/Graeco-Lateinisch, wie oben gezeigt).
+
+Seit 2.3.3 vergleicht `test.js` außerdem die Lösungsanzahl mit einem unabhängigen Löser (klassisch 4×4, 6×6 und 9×9, mit entfernten Hinweisen und mit widersprüchlichen Paaren; keine Abweichungen) und füttert die Engine mit feindlichen Eingaben — Ziffern außerhalb des Bereichs oder gebrochen (z. B. 33, die eine 32-Bit-Verschiebung in JavaScript stillschweigend als 2 läse), Arrays falscher Länge, fehlerhafte Spezifikationen (Modifikatoren, Hinweise, Gittertyp, numerische Felder): Alle werden mit einer klaren Meldung abgelehnt, nie mit einer unbehandelten Ausnahme.
 
 ## Was aus Stufe 3 nicht umgesetzt ist
 
 Nicht enthalten sind: Chaos Construction, Deconstruction, Hybride mit anderen Rätseln (Loop, Snake, Yin-Yang, Nurikabe, Sudoku Mine), die überlappenden Gitter Flower/Butterfly (Sohei und Kazaguruma gibt es seit 1.3, mit einer von mir gewählten Geometrie), Modifikatorzellen, Schrödinger, „liar“, Vudoku, Capsule, Deficit. Manche ändern den Spielmodus oder erfordern Löser mit anderer Logik; bei anderen legen die gefundenen Quellen weder Regeln noch Geometrie fest, und sie zu erfinden hieße, als bekannte Variante auszugeben, was keine ist.
+
+## Status
+
+Stabil, Version 2.3.3 (2026-11-18). 136 Varianten; Generator mit einer vom Löser überprüften eindeutigen Lösung; Technik-für-Technik-Erklärungen für klassisches Sudoku; Modus „Rätsel des Tages“; druckbares Blatt mit optionaler Lösungsseite. Ein einheitlicher lokaler Mehrspielermodus über die Spiele hinweg ist geplant, nicht implementiert. Änderungen: `CHANGELOG.md`.
+
+## Offline
+
+Eine einzige Datei, `index.html` (aus `src/` und `engine.js` mit `python3 build.py` erzeugt): kein CDN, keine externen Schriften oder Skripte, kein Tracking, keine Konten. Eine strenge CSP (`default-src 'none'`, `connect-src 'none'`) blockiert Netzwerkverbindungen; ein Service Worker speichert die Anwendung für den Offline-Start. Der Druck nutzt den eigenen Dialog des Browsers.
 
 ## Lizenz
 

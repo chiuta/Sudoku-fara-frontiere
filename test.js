@@ -343,6 +343,82 @@ if (!only) {
   }
 }
 
+/* intrări ostile + diferențial cu un solver independent (scris separat de motor: fără propagare, doar măști pe rând/coloană/cutie) */
+(function () {
+  const BX = { 4: [2, 2], 6: [2, 3], 9: [3, 3] };
+  function indep(n, giv, limit) {
+    const br = BX[n][0], bc = BX[n][1], row = new Array(n).fill(0), col = new Array(n).fill(0), bx = new Array(n).fill(0), v = new Int32Array(n * n), full = (1 << n) - 1;
+    const boxOf = i => Math.floor(((i / n) | 0) / br) * (n / bc) + Math.floor((i % n) / bc);
+    let count = 0, nodes = 0;
+    for (let i = 0; i < n * n; i++) {
+      const d = giv[i]; if (!d) continue;
+      const m = 1 << (d - 1), r = (i / n) | 0, c = i % n, b = boxOf(i);
+      if ((row[r] | col[c] | bx[b]) & m) return 0;
+      row[r] |= m; col[c] |= m; bx[b] |= m; v[i] = d;
+    }
+    (function rec() {
+      if (count >= limit || ++nodes > 4e6) return;
+      let best = -1, bm = 0, bp = 99;
+      for (let i = 0; i < n * n; i++) {
+        if (v[i]) continue;
+        const m = full & ~(row[(i / n) | 0] | col[i % n] | bx[boxOf(i)]); let p = 0; for (let k = m; k; k &= k - 1) p++;
+        if (p < bp) { bp = p; best = i; bm = m; if (p < 2) break; }
+      }
+      if (best < 0) { count++; return; }
+      const r = (best / n) | 0, c = best % n, b = boxOf(best);
+      for (let m = bm; m; m &= m - 1) { const bit = m & -m; v[best] = 32 - Math.clz32(bit); row[r] |= bit; col[c] |= bit; bx[b] |= bit; rec(); v[best] = 0; row[r] &= ~bit; col[c] &= ~bit; bx[b] &= ~bit; }
+    })();
+    return nodes > 4e6 ? -1 : count;
+  }
+  const rg = SFF.RNG(20261118);
+  /* 1) numărul de soluții: motor vs solver independent, pe puzzle-uri generate din care se scot indicii (rămân 0, 1 sau mai multe soluții) și cu perechi conflictuale */
+  let cmp = 0, diff = 0;
+  for (const [n, reps] of [[4, 120], [6, 80], [9, 60]]) {
+    const S = SFF.makeSolver({ layout: { kind: 'std', n: n }, mods: [], cons: [] });
+    for (let k = 0; k < reps; k++) {
+      const P = SFF.generate({ preset: 'clasic', n: n, difficulty: 'easy', seed: 700 + k }), g = Int32Array.from(P.givens);
+      const drop = rg.next() * 0.6; for (let i = 0; i < g.length; i++) if (g[i] && rg.next() < drop) g[i] = 0;
+      if (k % 5 === 4) { const a = Math.floor(rg.next() * g.length), b = Math.floor(rg.next() * g.length); if (a !== b && g[a] && !g[b]) g[b] = g[a]; }
+      const e = S.solve(g, { limit: 3, budget: 2e6 }), r = indep(n, g, 3);
+      if (e.aborted || r < 0) continue;
+      cmp++; if (e.count !== r) { diff++; console.log('  DIFERENȚĂ n=' + n + ' motor=' + e.count + ' independent=' + r + ' givens=' + Array.from(g).join('')); }
+    }
+  }
+  check('diferențial numărare soluții (' + cmp + ' puzzle-uri, 0 diferențe)', cmp > 200 && diff === 0, cmp + ' comparate, ' + diff + ' diferențe');
+
+  /* 2) cifre ostile în solve(): nu au voie să devină alte cifre (1 << 33 e 1 << 1 în JS) și nici să fie ignorate */
+  const S9 = SFF.makeSolver({ layout: { kind: 'std', n: 9 }, mods: [], cons: [] });
+  const base = Int32Array.from(SFF.generate({ preset: 'clasic', n: 9, difficulty: 'easy', seed: 5 }).givens), at = base.findIndex(x => x > 0);
+  check('solve: puzzle valid are o soluție', S9.solve(base, { limit: 2, budget: 1e6 }).count === 1);
+  for (const bad of [10, 33, 34, 65, 1e9, -1, 0.5, 1.5, 2 ** 31, Infinity, '3x', {}, [], true]) {
+    const g = Int32Array.from(base), h = Array.from(base); h[at] = bad; let res;
+    try { res = S9.solve(h, { limit: 2, budget: 1e6 }); } catch (e) { res = { err: e }; }
+    check('solve: cifra ostilă ' + JSON.stringify(bad) + ' nu produce soluții', res.err ? true : res.count === 0, res.err ? '' : 'count=' + res.count);
+    void g;
+  }
+  for (const len of [0, 1, 80, 82, 162]) {
+    let msg = ''; try { S9.solve(new Int32Array(len), { limit: 1, budget: 1000 }); } catch (e) { msg = e.message; }
+    check('solve: lungime greșită (' + len + ') respinsă cu mesaj clar', /givens/.test(msg), msg);
+  }
+
+  /* 3) specificații ostile pentru generate(): fie rezultat coerent, fie eroare de validare — niciodată TypeError sau blocaj */
+  const vals = [undefined, null, NaN, Infinity, -1, 0, 1e9, 0.5, 'x', '', [], {}, true, false, () => 1, 2 ** 40, '9', [1], ['__proto__'], ['nonconsec', 7]];
+  let spec = 0, rejected = 0, coherent = 0, wrong = [];
+  for (const f of ['hard', 'dens', 'dim', 'layoutKind', 'jigsaw', 'zero', 'fog', 'strimko', 'cubeBoxes', 'mods', 'clues', 'seed', 'n', 'difficulty', 'preset']) {
+    for (const v of vals) {
+      const sp = Object.assign({ preset: 'clasic', n: 6, difficulty: 'easy', seed: 3 }, { [f]: v }); spec++;
+      let P = null, err = null, t0 = Date.now();
+      try { P = SFF.generate(sp); } catch (e) { err = e; }
+      if (Date.now() - t0 > 8000) wrong.push(f + ' lent');
+      if (err) { if (/specifica/i.test(err.message)) rejected++; else wrong.push(f + '=' + (typeof v === 'function' ? 'fn' : JSON.stringify(v)) + ' → ' + err.constructor.name + ': ' + err.message.slice(0, 60)); }
+      else if (P && Array.isArray(P.givens) && P.givens.length === P.n * P.n && P.solution && !P.solution.some(x => !(x >= 1 && x <= P.n))) coherent++;
+      else wrong.push(f + '=' + JSON.stringify(v) + ' → rezultat incoerent');
+    }
+  }
+  check('generate: ' + spec + ' specificații ostile (' + rejected + ' respinse, ' + coherent + ' coerente), fără excepții necontrolate', wrong.length === 0, wrong.slice(0, 5).join(' | '));
+  check('makeLayout: tip necunoscut → eroare de validare', (() => { try { SFF.makeLayout({ kind: 'toString' }); } catch (e) { return /specifica/.test(e.message); } return false; })());
+})();
+
 /* chei duplicate în textele interfeței (data.js): ultima ar suprascrie-o pe prima în tăcere */
 (function () {
   const fsx = require('fs'), pth = require('path'); let f = pth.join(__dirname, 'src', 'data.js');
