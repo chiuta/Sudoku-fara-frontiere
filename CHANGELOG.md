@@ -1,5 +1,10 @@
 # Istoric versiuni
 
+## 2.3.4 — 2026-11-20
+
+- fff-kit 1.8.1: când `localStorage`/`sessionStorage` aruncă sau lipsesc (cookie-uri și date de site blocate, WebView fără stocare, `<iframe sandbox>`), kitul pune în loc o stocare în memorie, iar pagina pornește în loc să se oprească; datele nu se păstrează după închiderea paginii
+- fff-kit 1.8.1: ghidajul care mărește controalele mici la 44 px măsoară acum și lățimea corpului paginii și a părintelui, deci un rând de butoane nu mai poate ieși din ecran (grupul rămâne neatins când mărirea l-ar depăși)
+
 ## 2.3.3 — 2026-11-18
 
 Audit comparativ adversarial (motorul comparat cu un solver independent, tehnici verificate pas cu pas, intrări ostile) și remedieri / Adversarial comparative audit (engine vs an independent solver, technique steps checked one by one, hostile inputs) and fixes:
